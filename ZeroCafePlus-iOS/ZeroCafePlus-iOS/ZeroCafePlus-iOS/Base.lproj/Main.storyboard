@@ -43,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="798" y="-1111"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -83,7 +83,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="798" y="-310"/>
+        </scene>
+        <!--Fourth-->
+        <scene sceneID="i6B-gL-a6l">
+            <objects>
+                <viewController id="zxo-87-0tT" customClass="ForuthViewController" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b4A-yS-Bx9"/>
+                        <viewControllerLayoutGuide type="bottom" id="E1k-M5-Wtk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OMk-I0-jD0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Fourth" id="HKp-xZ-TfY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="usK-Ql-71D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="798" y="1192"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -98,11 +117,32 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="H8L-9H-rKP" kind="relationship" relationship="viewControllers" id="yZG-Lc-jN3"/>
+                        <segue destination="zxo-87-0tT" kind="relationship" relationship="viewControllers" id="1K8-3j-imd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Third-->
+        <scene sceneID="sEe-x8-OmB">
+            <objects>
+                <viewController id="H8L-9H-rKP" customClass="ThirdViewController" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9xn-f5-mKT"/>
+                        <viewControllerLayoutGuide type="bottom" id="awt-Dh-cWX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qCL-vv-Tth">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Third" id="NHi-7O-cUn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pX4-aY-wcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="798" y="434"/>
         </scene>
     </scenes>
     <resources>
