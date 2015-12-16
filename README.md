@@ -48,8 +48,8 @@
         let url = "https://zerocafe.herokuapp.com/api/v1/users"
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
         .responseString { response in
-                debugPrint(response.result.value!)
-                //いいよぉ！が返ってくれば成功
+                debugPrint(response.result.value)
+                //"いいよぉ！"が返ってくれば成功
         }
 
 ###### evets
@@ -78,7 +78,7 @@
         let url = "https://zerocafe.herokuapp.com/api/v1/events"
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
             .responseString { response in
-                debugPrint(response.result.value!)
-                //ここでいいよぉ！が返って来れば成功
+                debugPrint(response.result.value)
+                //"いいよぉ！"が返って来れば成功
         }
             
