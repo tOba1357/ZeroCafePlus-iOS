@@ -6,22 +6,28 @@
 
 例...zerocafe-ios-takemoxu-#1
 
-# GET
+# GET,POSTのやり方
 
-###users
+## GET
+
+### users
         let url = "https://zerocafe.herokuapp.com/api/v1/users"
-
         Alamofire.request(.GET, url)
             .responseJSON { response in
                 debugPrint(response.result.value)
-                //ここで
+                //ここでswiftyJsonなりで値を料理する
         }
 
+### evets
+        let url = "https://zerocafe.herokuapp.com/api/v1/events"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                debugPrint(response.result.value)
+                //ここでswiftyJsonなりで値を料理する
+        }
 
+## POST
 
-
-
-# POST
 ### users
 
       let headers = [
@@ -47,4 +53,32 @@
         }
 
 ### evets
+        let headers = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+        
+        let parameters:[String:AnyObject] =
+        [
+            "event": [
+                "title": "Herokuをたべる",
+                "description": "秋を味わう",
+                "belonging":"aaaaa",
+                "entry_fee": 999999,
+                "user_id": 1,
+                "dive_join": true,
+                "start_time": "2015-12-11 T 12:00",
+                "end_time": "2015-12-11 T 20:00",
+                "confirm": true,
+                "categoly_tag": "hasao",
+                "place":"A"
+                ]
+        ]
+
+        let url = "https://zerocafe.herokuapp.com/api/v1/events"
+        Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
+            .responseString { response in
+                debugPrint(response.result.value!)
+                //ここでいいよぉ！が返って来れば成功
+        }
             
