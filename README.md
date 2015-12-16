@@ -6,11 +6,11 @@
 
 例...zerocafe-ios-takemoxu-#1
 
-# GET,POSTのやり方
+## GET,POSTのやり方
 
-## GET
+#### GET
 
-### users
+###### users
         let url = "https://zerocafe.herokuapp.com/api/v1/users"
         Alamofire.request(.GET, url)
             .responseJSON { response in
@@ -18,7 +18,7 @@
                 //ここでswiftyJsonなりで値を料理する
         }
 
-### evets
+###### evets
         let url = "https://zerocafe.herokuapp.com/api/v1/events"
         Alamofire.request(.GET, url)
             .responseJSON { response in
@@ -26,9 +26,9 @@
                 //ここでswiftyJsonなりで値を料理する
         }
 
-## POST
+##### POST
 
-### users
+###### users
 
       let headers = [
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@
                 //いいよぉ！が返ってくれば成功
         }
 
-### evets
+###### evets
         let headers = [
             "Content-Type": "application/json",
             "Accept": "application/json"
