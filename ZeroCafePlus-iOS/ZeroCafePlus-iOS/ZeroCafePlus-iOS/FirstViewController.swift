@@ -52,7 +52,7 @@ class FirstViewController: UIViewController {
 //        
 //        // ボタンをViewに追加する.
 //        self.view.addSubview(koudaiButton)
-//    }
+    }
 //    
 //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
