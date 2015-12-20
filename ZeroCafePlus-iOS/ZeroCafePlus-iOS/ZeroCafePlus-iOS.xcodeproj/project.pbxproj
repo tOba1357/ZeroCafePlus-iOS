@@ -10,6 +10,7 @@
 		5EAB71C6708AEF4777A12E61 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349F285AC7FB4BBFF4B5E51F /* Pods.framework */; };
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
 		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
+		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
 		D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */; };
 		D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */; };
 		D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A626511C1AB359002DCEC6 /* SecondViewController.swift */; };
@@ -45,6 +46,7 @@
 		61556AD9CD680053C6333707 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
+		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
 		D7A6264A1C1AB359002DCEC6 /* ZeroCafePlus-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeroCafePlus-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */,
 				D7A626531C1AB359002DCEC6 /* Main.storyboard */,
 				D7A626561C1AB359002DCEC6 /* Assets.xcassets */,
+				6FCC98971C269ECB009B9C69 /* twitter-icon.png */,
 				D7A626581C1AB359002DCEC6 /* LaunchScreen.storyboard */,
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 			);
@@ -271,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,
 				D7A626551C1AB359002DCEC6 /* Main.storyboard in Resources */,
