@@ -3,6 +3,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--First-->
@@ -17,10 +20,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBV-8Y-XYg">
-                                <rect key="frame" x="20" y="19" width="148" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBV-8Y-XYg">
+                                <rect key="frame" x="20" y="17" width="148" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="工大おすすめ"/>
+                                <state key="normal" title="工大"/>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89h-fW-6zQ">
                                 <rect key="frame" x="0.0" y="57" width="600" height="494"/>
@@ -28,8 +31,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="way-ie-h22">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a79-yf-CAd">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a79-yf-CAd">
                                                 <rect key="frame" x="236" y="150" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="WGa-Qz-f7o"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -37,37 +43,54 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.64313725489999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1200" id="tis-Sc-iXQ"/>
+                                            <constraint firstItem="a79-yf-CAd" firstAttribute="top" secondItem="way-ie-h22" secondAttribute="top" constant="150" id="Y89-QK-W0q"/>
+                                            <constraint firstItem="a79-yf-CAd" firstAttribute="leading" secondItem="way-ie-h22" secondAttribute="leading" constant="236" id="blc-EW-HMc"/>
+                                            <constraint firstAttribute="height" constant="1200" id="hTM-wI-aSA"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="way-ie-h22" firstAttribute="leading" secondItem="89h-fW-6zQ" secondAttribute="leading" id="Erz-5F-bEa"/>
-                                    <constraint firstItem="way-ie-h22" firstAttribute="width" secondItem="89h-fW-6zQ" secondAttribute="width" id="PBv-in-tWl"/>
-                                    <constraint firstItem="way-ie-h22" firstAttribute="top" secondItem="89h-fW-6zQ" secondAttribute="top" id="Ta7-dl-6oG"/>
-                                    <constraint firstAttribute="trailing" secondItem="way-ie-h22" secondAttribute="trailing" id="kj8-fC-gkR"/>
-                                    <constraint firstAttribute="bottom" secondItem="way-ie-h22" secondAttribute="bottom" id="qlV-O4-gcT"/>
+                                    <constraint firstItem="way-ie-h22" firstAttribute="leading" secondItem="89h-fW-6zQ" secondAttribute="leading" id="1TA-Lb-DAu"/>
+                                    <constraint firstAttribute="bottom" secondItem="way-ie-h22" secondAttribute="bottom" constant="-706" id="51v-4S-u1W"/>
+                                    <constraint firstItem="way-ie-h22" firstAttribute="top" secondItem="89h-fW-6zQ" secondAttribute="top" id="8IW-Yv-ji6"/>
+                                    <constraint firstItem="way-ie-h22" firstAttribute="centerX" secondItem="89h-fW-6zQ" secondAttribute="centerX" id="QY0-W5-66x"/>
+                                    <constraint firstAttribute="trailing" secondItem="way-ie-h22" secondAttribute="trailing" id="cgv-8D-B3R"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgw-If-uKS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgw-If-uKS">
                                 <rect key="frame" x="264" y="13" width="72" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="UU5-sd-w7o"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="金大"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7u-h9-4tb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7u-h9-4tb">
                                 <rect key="frame" x="460" y="13" width="120" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="YOk-gX-DFT"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="お気に入り"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.8981167202" blue="0.55714763010000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="Mgw-If-uKS" secondAttribute="bottom" constant="3" id="ALt-LP-Tde"/>
-                            <constraint firstAttribute="trailing" secondItem="89h-fW-6zQ" secondAttribute="trailing" id="O4o-aT-ZyZ"/>
-                            <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="pBV-8Y-XYg" secondAttribute="bottom" constant="8" symbolic="YES" id="Owe-2Z-Ja1"/>
-                            <constraint firstItem="89h-fW-6zQ" firstAttribute="bottom" secondItem="4ug-Mw-9AY" secondAttribute="top" id="bPe-cr-DUe"/>
-                            <constraint firstItem="89h-fW-6zQ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="l01-z7-7os"/>
-                            <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="57" id="vje-lG-VUT"/>
+                            <constraint firstItem="Mgw-If-uKS" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" constant="13" id="3aA-rE-fsH"/>
+                            <constraint firstItem="Mgw-If-uKS" firstAttribute="baseline" secondItem="O7u-h9-4tb" secondAttribute="baseline" id="Dst-hB-7ww"/>
+                            <constraint firstItem="Mgw-If-uKS" firstAttribute="leading" secondItem="pBV-8Y-XYg" secondAttribute="trailing" constant="96" id="IBP-b8-QwZ"/>
+                            <constraint firstItem="Mgw-If-uKS" firstAttribute="baseline" secondItem="O7u-h9-4tb" secondAttribute="firstBaseline" id="OoC-gj-r2a"/>
+                            <constraint firstItem="89h-fW-6zQ" firstAttribute="bottom" secondItem="4ug-Mw-9AY" secondAttribute="top" id="RNt-Uc-2I9"/>
+                            <constraint firstItem="pBV-8Y-XYg" firstAttribute="baseline" secondItem="Mgw-If-uKS" secondAttribute="firstBaseline" id="f48-IC-ogj"/>
+                            <constraint firstItem="O7u-h9-4tb" firstAttribute="top" secondItem="Mgw-If-uKS" secondAttribute="top" id="fS0-Bj-99f"/>
+                            <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="pBV-8Y-XYg" secondAttribute="bottom" constant="7" id="gNQ-3V-VEO"/>
+                            <constraint firstAttribute="trailing" secondItem="89h-fW-6zQ" secondAttribute="trailing" id="gx3-vG-bVg"/>
+                            <constraint firstItem="pBV-8Y-XYg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="h84-Lm-kXG"/>
+                            <constraint firstItem="89h-fW-6zQ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="kO9-qH-bPE"/>
+                            <constraint firstItem="Mgw-If-uKS" firstAttribute="centerX" secondItem="89h-fW-6zQ" secondAttribute="centerX" id="tRc-Oh-aZS"/>
+                            <constraint firstItem="O7u-h9-4tb" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="uwC-N6-r5p"/>
+                            <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="Mgw-If-uKS" secondAttribute="bottom" constant="3" id="vQd-tu-lo7"/>
+                            <constraint firstItem="Mgw-If-uKS" firstAttribute="baseline" secondItem="pBV-8Y-XYg" secondAttribute="firstBaseline" id="yRv-j4-YbY"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
