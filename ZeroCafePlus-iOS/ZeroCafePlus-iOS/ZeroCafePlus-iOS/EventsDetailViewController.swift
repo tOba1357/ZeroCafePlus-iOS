@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventsDetailViewController: UIViewController EventsDetailViewController: UIViewController {
+class EventsDetailViewController: UIViewController {
     
     private var eventTitle: UILabel!
     private var eventDate: UILabel!
