@@ -20,10 +20,15 @@ class ForthViewController: UIViewController {
     private var profileImage: UIImageView!
     private var statusLabel: UILabel!
     private var user_name: String!
+    private var scrollView: UIScrollView!
+    let new_name = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
         self.title = ""
         view.backgroundColor = UIColor.whiteColor()
         //ジェスチャー
@@ -36,6 +41,7 @@ class ForthViewController: UIViewController {
         rightSwipeGesture.direction = UISwipeGestureRecognizerDirection.Right
         rightSwipeGesture.numberOfTouchesRequired = 1
         self.view.addGestureRecognizer(rightSwipeGesture)
+        
         
         //イベント管理
         willJoinButton = UIButton(frame: CGRectMake(0,300,125,50))
@@ -65,19 +71,23 @@ class ForthViewController: UIViewController {
         //プロフィール
         profileLabel = UILabel(frame: CGRectMake(45,200,300,100))
         profileLabel.text = "自己紹介の一例自己紹介の一例僕は竹本だよ〜趣味はなんとかかんとか自己紹介の一例自己紹介の一例"
+        new_name.setObject(profileLabel.text, forKey: "myProfile")
         profileLabel.numberOfLines = 0
         profileLabel.sizeToFit()
         self.view.addSubview(profileLabel)
         
-        nameLabel = UILabel(frame: CGRectMake(190,130,100,100))
+        nameLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/15))
+        nameLabel.layer.position = CGPoint(x: screenWidth/1.7, y: screenHeight/4.9)
         nameLabel.text = "tkmt"
-        nameLabel.numberOfLines = 0
-        nameLabel.sizeToFit()
+        nameLabel.textAlignment = NSTextAlignment.Center
+        
         self.view.addSubview(nameLabel)
         
-        statusLabel = UILabel(frame: CGRectMake(160,160,100,50))
+        statusLabel = UILabel(frame: CGRectMake(0,0,100,50))
+        statusLabel.layer.position = CGPoint(x: screenWidth/1.7, y: screenHeight/3.7)
         statusLabel.text = "金沢工業大学 3年"
         statusLabel.font = UIFont.systemFontOfSize(12)
+        statusLabel.textAlignment = NSTextAlignment.Center
         statusLabel.numberOfLines = 0
         statusLabel.sizeToFit()
         self.view.addSubview(statusLabel)
@@ -87,6 +97,9 @@ class ForthViewController: UIViewController {
         profileImage.layer.cornerRadius = 10.0
         self.view.addSubview(profileImage)
         
+        scrollView = UIScrollView(frame: CGRectMake(0,screenHeight/2,0,0))
+        scrollView.backgroundColor = UIColor.redColor()
+        self.view.addSubview(scrollView)
         
         let myBarButton_1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "clickBarButton:")
         let myBarButton_2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "clickBarButton:")
@@ -117,8 +130,10 @@ class ForthViewController: UIViewController {
                     }
                     
                 }
-                
         }
+        
+        nameLabel.text = new_name.objectForKey("NewName") as? String
+        
         
     }
     

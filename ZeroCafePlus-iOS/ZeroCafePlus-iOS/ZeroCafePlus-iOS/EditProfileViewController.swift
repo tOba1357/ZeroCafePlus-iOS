@@ -8,13 +8,14 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     private var profileImage: UIImageView!
     private var parsefromCameraRoll: UIButton!
     private var currentName: UITextField!
+    private var currentProfile: UITextView!
     private var endChange:UIButton!
-    
+    let user_name = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +40,22 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         currentName = UITextField(frame: CGRectMake(100,50,200,100))
         currentName.placeholder = "新しい名前を入力してください"
         currentName.delegate = self
-        currentName.text = ""
+        currentName.text = user_name.objectForKey("NewName") as? String
         currentName.textColor = UIColor.blackColor()
         currentName.backgroundColor = UIColor.whiteColor()
         currentName.inputAccessoryView = myKeyboard
         self.view.addSubview(currentName)
+        
+        currentProfile = UITextView(frame: CGRectMake(0,0,screenWidth/1.1,screenHeight/4.5))
+        currentProfile.backgroundColor = UIColor.redColor()
+        currentProfile.layer.cornerRadius = 15.0
+        currentProfile.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/1.5)
+        currentProfile.delegate = self
+        currentProfile.font = UIFont.systemFontOfSize(20)
+        currentProfile.textAlignment = NSTextAlignment.Left
+        currentProfile.dataDetectorTypes = UIDataDetectorTypes.All
+        currentProfile.text = user_name.objectForKey("myProfile") as? String
+        self.view.addSubview(currentProfile)
         
         profileImage = UIImageView()
         profileImage.frame = CGRectMake(0, 0, screenWidth/1.1, screenWidth/1.1)
@@ -83,13 +95,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     func clickBarButton(sender: UIButton){
         self.navigationController?.popToRootViewControllerAnimated(true)
+        user_name.setObject(currentName.text, forKey: "NewName")
+        user_name.synchronize()
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo: [String: AnyObject]) {
-        
         if didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] != nil {
             profileImage.image = didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] as? UIImage
-            
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
