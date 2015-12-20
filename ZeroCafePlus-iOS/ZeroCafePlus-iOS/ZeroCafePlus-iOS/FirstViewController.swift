@@ -9,13 +9,15 @@
 import UIKit
 
 class FirstViewController: UIViewController {
-
-    private var koudaiButton: UIButton!
-    private var kindaiButton: UIButton!
+    
+    @IBOutlet var placeView: UIView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var topEventView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 //        // Buttonを生成する.
 //        koudaiButton = UIButton()
 //        kindaiButton = UIButton()
@@ -67,6 +69,8 @@ class FirstViewController: UIViewController {
 //        print("sender.tag:\(sender.tag)")
 //        
 //    }
+    }
+
 
 }
 
