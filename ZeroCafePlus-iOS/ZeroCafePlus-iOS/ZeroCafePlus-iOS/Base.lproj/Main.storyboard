@@ -30,21 +30,8 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="way-ie-h22">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a79-yf-CAd">
-                                                <rect key="frame" x="236" y="150" width="42" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="WGa-Qz-f7o"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.64313725489999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="a79-yf-CAd" firstAttribute="top" secondItem="way-ie-h22" secondAttribute="top" constant="150" id="Y89-QK-W0q"/>
-                                            <constraint firstItem="a79-yf-CAd" firstAttribute="leading" secondItem="way-ie-h22" secondAttribute="leading" constant="236" id="blc-EW-HMc"/>
                                             <constraint firstAttribute="height" constant="1200" id="hTM-wI-aSA"/>
                                         </constraints>
                                     </view>
