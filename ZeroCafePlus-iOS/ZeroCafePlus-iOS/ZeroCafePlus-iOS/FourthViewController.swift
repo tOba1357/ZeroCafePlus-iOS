@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SwityJSON
+import SwiftyJSON
 
 class ForthViewController: UIViewController {
     
