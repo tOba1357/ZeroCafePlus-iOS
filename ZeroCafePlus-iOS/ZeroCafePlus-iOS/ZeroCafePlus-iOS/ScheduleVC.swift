@@ -13,12 +13,11 @@ class ScheduleVC: UIViewController , SheduleAlertDelegate{
     var sheduleAlertView:SheduleAlertView!
     
     var titleLabel:UILabel!
+    var getDate :[String]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var dates = dateData()
-
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         label.textAlignment = NSTextAlignment.Center
         label.adjustsFontSizeToFitWidth = true
@@ -27,11 +26,11 @@ class ScheduleVC: UIViewController , SheduleAlertDelegate{
         self.navigationItem.titleView = label
         
         titleLabel = UILabel(frame: CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height/10))
-        titleLabel.text = "\(dates[0])/\(dates[1])/\(dates[2])"
+        titleLabel.text = "\(getDate[0])/\(getDate[1])/\(getDate[2])"
         titleLabel.layer.position = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/5)
 
         
-        sheduleAlertView = SheduleAlertView(frame: CGRectMake(0,0,self.view.frame.width/10*9, self.view.frame.height/5*3), year: Int(dates[0])!, month: Int(dates[1])!, day: Int(dates[2])!)
+        sheduleAlertView = SheduleAlertView(frame: CGRectMake(0,0,self.view.frame.width/10*9, self.view.frame.height/5*3), year: Int(getDate[0])!, month: Int(getDate[1])!, day: Int(getDate[2])!)
         sheduleAlertView.sheduleAlertDelegate = self
         sheduleAlertView.layer.position = CGPointMake(self.view.frame.width/2, self.view.frame.height/7*4)
         
@@ -41,15 +40,6 @@ class ScheduleVC: UIViewController , SheduleAlertDelegate{
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    func dateData() -> [String]{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        let dateString:String = dateFormatter.stringFromDate(NSDate());
-        let dates:[String] = dateString.componentsSeparatedByString("/")
-        
-        return dates
     }
     
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {

@@ -11,6 +11,7 @@ import UIKit
 class CalenderVC: UIViewController , CalenderViewDelegate{
     
     var yearMonthLabel:UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         var dates:[String] = dateData()
@@ -53,8 +54,12 @@ class CalenderVC: UIViewController , CalenderViewDelegate{
         let checkDateStr = checkMonthStr.substringFromIndex(checkMonthStr.startIndex.advancedBy(2))
         checkMonthStr = checkMonthStr.substringToIndex(checkMonthStr.startIndex.advancedBy(2))
         
-        let checkData :[Int] = [Int(checkYearStr)!,Int(checkMonthStr)!,Int(checkDateStr)!]
+        let checkDate :[String] = [checkYearStr,checkMonthStr,checkDateStr]
         
+        if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC{
+            scheduleVC.getDate = checkDate
+            self.navigationController?.pushViewController(scheduleVC, animated: true)
+        }
         
     }
     func changDateCalender(checkYearInt:Int,checkMonthInt:Int){
