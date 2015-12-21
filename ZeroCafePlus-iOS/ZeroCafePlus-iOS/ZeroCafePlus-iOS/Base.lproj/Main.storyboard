@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -20,10 +20,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBV-8Y-XYg">
-                                <rect key="frame" x="20" y="17" width="148" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgw-If-uKS">
+                                <rect key="frame" x="264" y="13" width="72" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="UU5-sd-w7o"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="工大"/>
+                                <state key="normal" title="金大"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7u-h9-4tb">
+                                <rect key="frame" x="460" y="13" width="120" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="YOk-gX-DFT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="お気に入り"/>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89h-fW-6zQ">
                                 <rect key="frame" x="0.0" y="57" width="600" height="494"/>
@@ -44,40 +55,32 @@
                                     <constraint firstAttribute="trailing" secondItem="way-ie-h22" secondAttribute="trailing" id="cgv-8D-B3R"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgw-If-uKS">
-                                <rect key="frame" x="264" y="13" width="72" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZu-D9-ctx">
+                                <rect key="frame" x="45" y="18" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="72" id="UU5-sd-w7o"/>
+                                    <constraint firstAttribute="width" constant="46" id="4WY-3h-jVQ"/>
+                                    <constraint firstAttribute="height" constant="30" id="Hb0-In-XXU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="金大"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7u-h9-4tb">
-                                <rect key="frame" x="460" y="13" width="120" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="YOk-gX-DFT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="お気に入り"/>
+                                <state key="normal" title="工大"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.8981167202" blue="0.55714763010000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="DZu-D9-ctx" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="25" id="1Fe-Ys-LDM"/>
                             <constraint firstItem="Mgw-If-uKS" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" constant="13" id="3aA-rE-fsH"/>
+                            <constraint firstItem="DZu-D9-ctx" firstAttribute="centerY" secondItem="Mgw-If-uKS" secondAttribute="centerY" id="8hc-gH-Hfn"/>
                             <constraint firstItem="Mgw-If-uKS" firstAttribute="baseline" secondItem="O7u-h9-4tb" secondAttribute="baseline" id="Dst-hB-7ww"/>
-                            <constraint firstItem="Mgw-If-uKS" firstAttribute="leading" secondItem="pBV-8Y-XYg" secondAttribute="trailing" constant="96" id="IBP-b8-QwZ"/>
+                            <constraint firstItem="DZu-D9-ctx" firstAttribute="centerY" secondItem="O7u-h9-4tb" secondAttribute="centerY" id="Gku-S7-y4l"/>
                             <constraint firstItem="Mgw-If-uKS" firstAttribute="baseline" secondItem="O7u-h9-4tb" secondAttribute="firstBaseline" id="OoC-gj-r2a"/>
                             <constraint firstItem="89h-fW-6zQ" firstAttribute="bottom" secondItem="4ug-Mw-9AY" secondAttribute="top" id="RNt-Uc-2I9"/>
-                            <constraint firstItem="pBV-8Y-XYg" firstAttribute="baseline" secondItem="Mgw-If-uKS" secondAttribute="firstBaseline" id="f48-IC-ogj"/>
                             <constraint firstItem="O7u-h9-4tb" firstAttribute="top" secondItem="Mgw-If-uKS" secondAttribute="top" id="fS0-Bj-99f"/>
-                            <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="pBV-8Y-XYg" secondAttribute="bottom" constant="7" id="gNQ-3V-VEO"/>
                             <constraint firstAttribute="trailing" secondItem="89h-fW-6zQ" secondAttribute="trailing" id="gx3-vG-bVg"/>
-                            <constraint firstItem="pBV-8Y-XYg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="h84-Lm-kXG"/>
                             <constraint firstItem="89h-fW-6zQ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="kO9-qH-bPE"/>
                             <constraint firstItem="Mgw-If-uKS" firstAttribute="centerX" secondItem="89h-fW-6zQ" secondAttribute="centerX" id="tRc-Oh-aZS"/>
                             <constraint firstItem="O7u-h9-4tb" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="uwC-N6-r5p"/>
                             <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="Mgw-If-uKS" secondAttribute="bottom" constant="3" id="vQd-tu-lo7"/>
-                            <constraint firstItem="Mgw-If-uKS" firstAttribute="baseline" secondItem="pBV-8Y-XYg" secondAttribute="firstBaseline" id="yRv-j4-YbY"/>
+                            <constraint firstItem="89h-fW-6zQ" firstAttribute="top" secondItem="DZu-D9-ctx" secondAttribute="bottom" constant="9" id="vau-aJ-Ffb"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
