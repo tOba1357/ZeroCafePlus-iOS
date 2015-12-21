@@ -12,6 +12,7 @@ class CreateEventVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         label.textAlignment = NSTextAlignment.Center
         label.adjustsFontSizeToFitWidth = true
