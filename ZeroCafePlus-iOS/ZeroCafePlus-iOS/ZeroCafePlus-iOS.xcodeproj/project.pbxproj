@@ -11,6 +11,8 @@
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
 		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
 		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
+		9DD8BDA61C284E9B002F243D /* EventsAttendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */; };
+		9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */; };
 		BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */; };
 		BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */; };
 		BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B721C26E54300648280 /* DateSheduleView.swift */; };
@@ -67,6 +69,8 @@
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
+		9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAttendViewController.swift; sourceTree = "<group>"; };
+		9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDecideViewController.swift; sourceTree = "<group>"; };
 		BA320C081C2810D100C8262A /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventVC.swift; sourceTree = "<group>"; };
@@ -197,6 +201,8 @@
 				6FCC98971C269ECB009B9C69 /* twitter-icon.png */,
 				D7A626581C1AB359002DCEC6 /* LaunchScreen.storyboard */,
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
+				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
+				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 			files = (
 				BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */,
 				D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */,
+				9DD8BDA61C284E9B002F243D /* EventsAttendViewController.swift in Sources */,
 				BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */,
 				BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */,
 				BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */,
@@ -435,6 +442,7 @@
 				6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */,
 				D7A6267E1C1AD395002DCEC6 /* ThirdViewController.swift in Sources */,
 				D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */,
+				9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */,
 				BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */,
 				6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */,
 				D7A626801C1AD3D6002DCEC6 /* FourthViewController.swift in Sources */,
