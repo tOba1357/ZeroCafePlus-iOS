@@ -67,6 +67,7 @@
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
+		BA320C081C2810D100C8262A /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventVC.swift; sourceTree = "<group>"; };
 		BA5D9B721C26E54300648280 /* DateSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSheduleView.swift; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 				D7A6266E1C1AB359002DCEC6 /* ZeroCafePlus-iOSUITests */,
 				D7A6264B1C1AB359002DCEC6 /* Products */,
 				9B6AAB13E675EDE20D2FA0B6 /* Pods */,
+				BA320C081C2810D100C8262A /* ZeroCafePlus-iOS-Bridging-Header.h */,
 				BA5D9BA91C26E5F000648280 /* CTCheckbox.xcodeproj */,
 				26D6629D751BAA8B65D65B70 /* Frameworks */,
 			);
@@ -584,6 +586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myname.ZeroCafePlus-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ZeroCafePlus-iOS/ZeroCafePlus-iOS-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -600,6 +603,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myname.ZeroCafePlus-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ZeroCafePlus-iOS/ZeroCafePlus-iOS-Bridging-Header.h";
 			};
 			name = Release;
 		};
