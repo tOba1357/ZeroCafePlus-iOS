@@ -204,8 +204,8 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
     }
     
     internal func onClickMyButton(sender: UIButton){
-        if let sheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC {
-            self.navigationController?.pushViewController(sheduleVC, animated: true)
+        if let calenderVC = self.storyboard?.instantiateViewControllerWithIdentifier("CalenderVC") as? CalenderVC {
+            self.navigationController?.pushViewController(calenderVC, animated: true)
         }
     }
     

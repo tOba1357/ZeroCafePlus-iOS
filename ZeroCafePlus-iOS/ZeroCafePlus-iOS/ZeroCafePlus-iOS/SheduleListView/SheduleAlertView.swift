@@ -195,7 +195,7 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
     }
     
     func changeDate(){
-        let myDateStr = String(format:"%04d%02d%02d",currentYear,currentMonth,currentDay)
+        let myDateStr = String(format:"%04d/%02d/%02d",currentYear,currentMonth,currentDay)
         self.sheduleAlertDelegate?.changDateShedule(myDateStr)
         
     }
@@ -203,6 +203,4 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
     func pushDateShedule(checkDateStr:String){
         self.sheduleAlertDelegate?.pushSheduleAlert(checkDateStr)
     }
-
-
 }
