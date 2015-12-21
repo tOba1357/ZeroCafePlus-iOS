@@ -45,7 +45,7 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
         let titleLabel = UILabel(frame: CGRectMake(0,0,self.view.frame.width/4*3,self.view.frame.height/10))
         titleLabel.text = "イベント名（１６文字以内）"
         titleLabel.sizeToFit()
-        titleLabel.layer.position = CGPointMake(self.view.frame.width/2, self.view.frame.height/10)
+        titleLabel.layer.position = CGPointMake(self.view.frame.width/2, scrollView.frame.height/10)
         
         titleTextField = UITextField(frame: CGRectMake(0,0,self.view.frame.width/5*4,self.view.frame.height/10))
         titleTextField.text = ""
@@ -53,7 +53,7 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
         titleTextField.layer.borderColor = UIColor.blackColor().CGColor
         titleTextField.layer.cornerRadius = 15
         titleTextField.delegate = self
-        titleTextField.layer.position = CGPointMake(self.view.frame.width/2, self.view.frame.height/6)
+        titleTextField.layer.position = CGPointMake(self.view.frame.width/2, scrollView.frame.height/5)
         
         titleAlertLabel = UILabel(frame: CGRectMake(0,0,self.view.frame.width/4*3,self.view.frame.height/20))
         titleAlertLabel.text = "⚠️16文字を超えています。"
