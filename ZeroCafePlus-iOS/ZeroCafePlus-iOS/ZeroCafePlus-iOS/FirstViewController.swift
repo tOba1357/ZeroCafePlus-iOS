@@ -21,35 +21,21 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //UIViewController.viewの座標取得
-        let x:CGFloat = self.view.bounds.origin.x
-        let y:CGFloat = self.view.bounds.origin.y
-        
-        //UIViewController.viewの幅と高さを取得
-        let width:CGFloat = self.view.bounds.width
-        let height:CGFloat = self.view.bounds.height
-        
-        //上記より画面ぴったりサイズのフレームを生成する
-        let frame:CGRect = CGRect(x: 6, y: 6, width: 150, height: 200)
+        //フレームを生成する
+        let leftframe:CGRect = CGRect(x: 6, y: 6, width: 150, height: 200)
+        let rightframe:CGRect = CGRect(x: 162, y: 6, width: 150, height: 200)
         
         //カスタマイズViewを生成
-        let eventView:EventView = EventView(frame: frame)
+        let leftEventView:EventView = EventView(frame: leftframe)
+        let rightEventView:EventView = EventView(frame: rightframe)
+        
+        leftEventView.layer.cornerRadius = 15
+        rightEventView.layer.cornerRadius = 15
         
         //カスタマイズViewを追加
-        eventView.layer.cornerRadius = 15
-        scrollView.addSubview(eventView)
-        
+        scrollView.addSubview(leftEventView)
+        scrollView.addSubview(rightEventView)
 
-    }
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        let url = "https://zerocafe.herokuapp.com/api/v1/events"
-        Alamofire.request(.GET, url)
-            .responseJSON { response in debugPrint(response.result.value)
-//    ここでswiftyJsonなりで値を料理する
-
-        }
     }
     
 }
@@ -57,11 +43,29 @@ class FirstViewController: UIViewController {
 class EventView :UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.greenColor()
+        self.backgroundColor = UIColor.whiteColor()
         
+        
+        let titleName: UILabel = UILabel(frame: CGRectMake(10,75,200,50))
+        titleName.text = ""
+        titleName.textColor = UIColor.blackColor()
+        self.addSubview(titleName)
+
+        let url = "https://zerocafe.herokuapp.com/api/v1/events"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                let json = JSON(response.result.value!)
+                debugPrint(response.result.value)
+                let eventArray = json["events"].array! as Array
+                titleName.text = eventArray[0]["event"]["title"].string! as String
+        }
+
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
+
