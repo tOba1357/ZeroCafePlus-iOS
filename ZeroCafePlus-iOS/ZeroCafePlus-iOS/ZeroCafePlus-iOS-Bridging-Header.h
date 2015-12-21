@@ -9,7 +9,6 @@
 #ifndef ZeroCafePlus_iOS_Bridging_Header_h
 #define ZeroCafePlus_iOS_Bridging_Header_h
 
-#import "CTCheckbox.h"
-
+//#import "CTCheckbox.h"
 
 #endif /* ZeroCafePlus_iOS_Bridging_Header_h */

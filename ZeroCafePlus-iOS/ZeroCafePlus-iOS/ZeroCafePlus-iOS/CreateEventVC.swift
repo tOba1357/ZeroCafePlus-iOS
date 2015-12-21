@@ -31,9 +31,14 @@ class CreateEventVC: UIViewController {
         tagLabel.text = "タグ"
         tagLabel.layer.position = CGPointMake(self.view.frame.width/4, self.view.frame.height/2)
         
-        let jumpInLabel = UILabel(frame: CGRectMake(0,0,self.view.frame.width/3,self.view.frame.height/10))
+//        let checkbox = CTCheckbox(frame:CGRectMake(0,0, self.view.frame.height/10,self.view.frame.height/10))
+//        checkbox.checkboxColor = UIColor.blackColor()
+//        checkbox.checkboxSideLength = 22
+//        checkbox.layer.position = CGPointMake(self.view.frame.width/4, self.view.frame.height/3*2)
+//        
+        let jumpInLabel = UILabel(frame: CGRectMake(0,0,self.view.frame.width/2,self.view.frame.height/10))
         jumpInLabel.text = "飛び入れ参加OK"
-        jumpInLabel.layer.position = CGPointMake(self.view.frame.width/4, self.view.frame.height/3*2)
+        jumpInLabel.layer.position = CGPointMake(self.view.frame.width/3*2, self.view.frame.height/3*2)
         
         let makeButton = UIButton (frame: CGRectMake(0,0,self.view.frame.width/5,self.view.frame.height/10))
         makeButton.layer.masksToBounds = true
@@ -46,10 +51,14 @@ class CreateEventVC: UIViewController {
         self.view.addSubview(assetsLabel)
         self.view.addSubview(numLabel)
         self.view.addSubview(tagLabel)
+//        self.view.addSubview(checkbox)
         self.view.addSubview(jumpInLabel)
         self.view.addSubview(makeButton)
         
     }
+//    func checked(sender:CTCheckbox) {
+//        selected[sender.tag] = sender.checked
+//    }
     
     func onClickMakeButton(sender: UIButton){
         let alertController = UIAlertController(title: "確認", message: "これでよろしいですか？", preferredStyle: .Alert)
