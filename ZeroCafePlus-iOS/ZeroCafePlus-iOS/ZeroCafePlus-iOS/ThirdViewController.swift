@@ -60,7 +60,7 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
         titleAlertLabel.sizeToFit()
         titleAlertLabel.backgroundColor = UIColor.redColor()
         titleAlertLabel.hidden = true
-        titleAlertLabel.layer.position = CGPointMake(self.view.frame.width/3*2, titleTextField.layer.position.y + titleAlertLabel.frame.height*2)
+        titleAlertLabel.layer.position = CGPointMake(self.view.frame.width/3*2, scrollView.frame.height/3)
         
         let detailLabel = UILabel(frame: CGRectMake(0,0,self.view.frame.width/4*3,self.view.frame.height/10))
         detailLabel.text = "どんなイベント？（１２０文字以内）"
@@ -74,14 +74,14 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
         detailTextView.text = ""
         detailTextView.textAlignment = NSTextAlignment.Left
         detailTextView.delegate = self
-        detailTextView.layer.position = CGPointMake(self.view.frame.width/2, titleTextField.layer.position.y + titleAlertLabel.frame.height*2 + detailLabel.frame.height*4)
+        detailTextView.layer.position = CGPointMake(self.view.frame.width/2,scrollView.frame.height/2)
         
         detailAlertLabel = UILabel(frame: CGRectMake(0,0,self.view.frame.width/4*3,self.view.frame.height/20))
         detailAlertLabel.text = "⚠️120文字を超えています。"
         detailAlertLabel.sizeToFit()
         detailAlertLabel.backgroundColor = UIColor.redColor()
         detailAlertLabel.hidden = true
-        detailAlertLabel.layer.position = CGPointMake(self.view.frame.width/3*2, titleTextField.layer.position.y + titleAlertLabel.frame.height*2 + detailLabel.frame.height)
+        detailAlertLabel.layer.position = CGPointMake(self.view.frame.width/3*2, scrollView.frame.height/3*2)
         
         let myButton = UIButton(frame: CGRectMake(0,0,self.view.frame.width/5,self.view.frame.height/10))
         myButton.layer.masksToBounds = true
@@ -141,7 +141,7 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
     
     func handleKeyboardWillHideNotification(notification: NSNotification) {
         scrollView.contentSize   = CGSizeMake(self.view.frame.width, 0)
-        scrollView.contentOffset.y = 0
+//         scrollView.contentOffset.y = 0
     }
     
     
