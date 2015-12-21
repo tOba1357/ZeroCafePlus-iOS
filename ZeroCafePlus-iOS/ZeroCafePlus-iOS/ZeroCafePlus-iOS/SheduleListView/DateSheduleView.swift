@@ -28,6 +28,7 @@ class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
         self.layer.borderWidth = 1
         
         self.setUpSheduleList(year,month: month,day: day)
+        
     }
     
     func setUpSheduleList(year:Int,month:Int,day:Int){
@@ -54,6 +55,7 @@ class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
             timeCellPosY += frame.size.height / 27 * 4
             scrollView.addSubview(timeCellView)
         }
+        
     }
     
     func getWeek(year:Int,month:Int,day:Int) ->Int{
