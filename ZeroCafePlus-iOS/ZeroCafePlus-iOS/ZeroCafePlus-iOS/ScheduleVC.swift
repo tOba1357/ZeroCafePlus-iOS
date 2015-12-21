@@ -8,15 +8,36 @@
 
 import UIKit
 
-class ScheduleVC: UIViewController , SheduleAlertDelegate{
+class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIToolbarDelegate, SheduleAlertDelegate{
     
     var sheduleAlertView:SheduleAlertView!
     
     var titleLabel:UILabel!
     var getDate :[String]!
+    var myTextField:UITextField!
+    var hourTextField:UITextField!
+    var minuteTextField:UITextField!
+    
+    var pickHour:[String] = []
+    var pickMinute:[String] = []
+    
+    var alertHour:String!
+    var alertMinute:String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        alertMinute = "00"
+        
+        for i in 8...21{
+            let iStr = String(format:"%2d",i)
+            pickHour.append(iStr)
+        }
+        
+        for i in 0...60{
+            let iStr = String(format:"%02d",i)
+            pickMinute.append(iStr)
+        }
         
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         label.textAlignment = NSTextAlignment.Center
@@ -50,15 +71,83 @@ class ScheduleVC: UIViewController , SheduleAlertDelegate{
             alpha: CGFloat(1.0)
         )
     }
+    
+    //pickerView
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if (component == 0){
+            return pickHour.count
+        }else if (component == 1){
+            return pickMinute.count
+        }
+        return 0
+    }
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if (component == 0){
+            return pickHour[row]
+        }else if (component == 1){
+            return pickMinute[row]
+        }
+        return ""
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        var picHourStr = alertHour
+        var picMinuteStr = alertMinute
+        if (component == 0){
+            picHourStr = pickHour[row] as String
+        }else if (component == 1){
+            picMinuteStr = pickMinute[row]
+        }
+        if pickerView.tag == 1{
+            hourTextField.text = "\(picHourStr):\(picMinuteStr)"
+        }
+        if pickerView.tag == 2{
+            minuteTextField.text = "\(picHourStr):\(picMinuteStr)"
+        }
+        alertHour = picHourStr
+        alertMinute = picMinuteStr
+    }
+    func onClick(sender: UIBarButtonItem) {
+        myTextField.resignFirstResponder()
+    }
+    
     func pushSheduleAlert(checkDateStr:String){
         
-        print("aaa")
+        let checkData = checkDateStr.componentsSeparatedByString("/")
+        alertHour = checkData[3]
+        
+        let myToolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
+        myToolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        myToolBar.backgroundColor = UIColor.blackColor()
+        myToolBar.barStyle = UIBarStyle.Black
+        myToolBar.tintColor = UIColor.whiteColor()
+        
+        let myToolBarButton = UIBarButtonItem(title: "Close", style: .Bordered, target: self, action: "onClick:")
+        myToolBarButton.tag = 1
+        myToolBar.items = [myToolBarButton]
+        
+        let pickerView1 = UIPickerView()
+        pickerView1.delegate = self
+        pickerView1.dataSource = self
+        pickerView1.tag = 1
+
+        let pickerView2 = UIPickerView()
+        pickerView2.delegate = self
+        pickerView2.dataSource = self
+        pickerView2.tag = 2
+        
         let alertController = UIAlertController(title: "確認", message: "これでよろしいですか？", preferredStyle: .Alert)
         alertController.addTextFieldWithConfigurationHandler({(text:UITextField!) -> Void in
             text.placeholder = "first textField"
             let label:UILabel = UILabel(frame: CGRectMake(0, 0, 50, 60))
             label.text = "開始"
             text.leftView = label
+            text.tag = 1
+            self.hourTextField = text
+            text.inputView = pickerView1
+            text.inputAccessoryView = myToolBar
             text.leftViewMode = UITextFieldViewMode.Always
         })
         alertController.addTextFieldWithConfigurationHandler({(text:UITextField!) -> Void in
@@ -66,6 +155,9 @@ class ScheduleVC: UIViewController , SheduleAlertDelegate{
             let label:UILabel = UILabel(frame: CGRectMake(0, 0, 50, 60))
             label.text = "終了"
             text.leftView = label
+            self.minuteTextField = text
+            text.inputView = pickerView2
+            text.inputAccessoryView = myToolBar
             text.leftViewMode = UITextFieldViewMode.Always
             
         })

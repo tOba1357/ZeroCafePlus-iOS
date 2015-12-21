@@ -26,7 +26,7 @@ class TimeSheduleView: UIView {
     init(frame: CGRect,year:Int,month:Int,day:Int,hour:Int) {
         super.init(frame:frame)
         
-        checkDateStr = String(format:"%04d/%02d/%02d",year,month,day)
+        checkDateStr = String(format:"%04d/%02d/%02d/%02d",year,month,day,hour)
         
         let hourLabel = UILabel()
         hourLabel.text = "\(hour):00"
