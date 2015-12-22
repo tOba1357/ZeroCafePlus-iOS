@@ -178,7 +178,6 @@ class ForthViewController: UIViewController {
         
     }
     
-    
     func leftSwipe(sender: UISwipeGestureRecognizer){
         if willJoinButton.backgroundColor == UIColor.grayColor(){
             planedButton.backgroundColor = UIColor.grayColor()
