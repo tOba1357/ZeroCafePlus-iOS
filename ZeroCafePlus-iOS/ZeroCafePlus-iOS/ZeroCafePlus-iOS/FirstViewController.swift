@@ -42,8 +42,6 @@ class FirstViewController: UIViewController {
         scrollView.addSubview(nextEventView)
         
         
-
-
     }
     
 }
@@ -80,10 +78,11 @@ class EventView :UIView{
                 titleName.text = eventArray[0]["event"]["title"].string! as String
                 dateName.text = eventArray[0]["event"]["start_time"].string! as String
                 tagName.text = eventArray[0]["event"]["tags"].string! as String
-                
-                print("中身：",eventArray)
+
                 
                 titleName.textAlignment = NSTextAlignment.Center
+                tagName.numberOfLines = 2
+                tagName.font = UIFont.systemFontOfSize(12)
         }
 
     }
