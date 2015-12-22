@@ -75,9 +75,9 @@ class EventView :UIView{
                 let eventArray = json["events"].array! as Array
                 let eventLastId = eventArray.count
                 
-                titleName.text = eventArray[0]["event"]["title"].string! as String
-                dateName.text = eventArray[0]["event"]["start_time"].string! as String
-                tagName.text = eventArray[0]["event"]["tags"].string! as String
+                titleName.text = eventArray[0]["event"]["title"].string
+                dateName.text = eventArray[0]["event"]["start_time"].string
+                tagName.text = eventArray[0]["event"]["tags"].string
 
                 
                 titleName.textAlignment = NSTextAlignment.Center
