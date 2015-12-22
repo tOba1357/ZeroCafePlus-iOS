@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class FirstViewController: UIViewController {
     
@@ -18,58 +20,77 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        // Buttonを生成する.
-//        koudaiButton = UIButton()
-//        kindaiButton = UIButton()
-//        
-//        // サイズを設定する.
-//        koudaiButton.frame = CGRectMake(0,0,200,40)
-//        kindaiButton.frame = CGRectMake(0,0,300,50)
-//        
-//        // 背景色を設定する.
-//        koudaiButton.backgroundColor = UIColor.redColor()
-//        
-//        // 枠を丸くする.
-//        koudaiButton.layer.masksToBounds = true
-//        
-//        // タイトルを設定する(通常時).
-//        koudaiButton.setTitle("ボタン(通常)", forState: UIControlState.Normal)
-//        koudaiButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-//        
-//        // タイトルを設定する(ボタンがハイライトされた時).
-//        koudaiButton.setTitle("ボタン(押された時)", forState: UIControlState.Highlighted)
-//        koudaiButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
-//        
-//        // コーナーの半径を設定する.
-//        koudaiButton.layer.cornerRadius = 20.0
-//        
-//        // ボタンの位置を指定する.
-//        koudaiButton.layer.position = CGPoint(x: self.view.frame.width/2, y:200)
-//        
-//        // タグを設定する.
-//        koudaiButton.tag = 1
-//        
-//        // イベントを追加する.
-//        koudaiButton.addTarget(self, action: "onClickkoudaiButton:", forControlEvents: .TouchUpInside)
-//        
-//        // ボタンをViewに追加する.
-//        self.view.addSubview(koudaiButton)
+        
+        
+        //フレームを生成する
+        let leftframe:CGRect = CGRect(x: 6, y: 6, width: 150, height: 200)
+        let rightframe:CGRect = CGRect(x: 162, y: 6, width: 150, height: 200)
+        let nextframe:CGRect = CGRect(x: 6, y: 218, width: 150, height: 200)
+
+        //カスタマイズViewを生成
+        let eventViewGenerate:EventView = EventView(frame: leftframe)
+        let rightEventView:EventView = EventView(frame: rightframe)
+        let nextEventView:EventView = EventView(frame: nextframe)
+        
+        eventViewGenerate.layer.cornerRadius = 15
+        rightEventView.layer.cornerRadius = 15
+        nextEventView.layer.cornerRadius = 15
+        
+        //カスタマイズViewを追加
+        scrollView.addSubview(eventViewGenerate)
+        scrollView.addSubview(rightEventView)
+        scrollView.addSubview(nextEventView)
+        
+        
     }
-//    
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//    }
-//    
-//    /*
-//    ボタンのアクション時に設定したメソッド.
-//    */
-//    internal func onClickkoudaiButton(sender: UIButton){
-//        print("onClickkoudaiButton:")
-//        print("sender.currentTitile: \(sender.currentTitle)")
-//        print("sender.tag:\(sender.tag)")
-//        
-//    }
-
-
+    
 }
+
+class EventView :UIView{
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.whiteColor()
+        
+        
+        let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,50))
+        let dateName: UILabel = UILabel(frame: CGRectMake(10,90,130,50))
+        let tagName: UILabel = UILabel(frame: CGRectMake(10,120,130,50))
+        
+        titleName.text = ""
+        dateName.text = ""
+        tagName.text = ""
+        
+        titleName.textColor = UIColor.blackColor()
+        
+        self.addSubview(titleName)
+        self.addSubview(dateName)
+        self.addSubview(tagName)
+
+        let url = "https://zerocafe.herokuapp.com/api/v1/events"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                let json = JSON(response.result.value!)
+                debugPrint(response.result.value)
+                
+                let eventArray = json["events"].array! as Array
+                let eventLastId = eventArray.count
+                
+                titleName.text = eventArray[0]["event"]["title"].string
+                dateName.text = eventArray[0]["event"]["start_time"].string
+                tagName.text = eventArray[0]["event"]["tags"].string
+
+                
+                titleName.textAlignment = NSTextAlignment.Center
+                tagName.numberOfLines = 2
+                tagName.font = UIFont.systemFontOfSize(12)
+        }
+
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 

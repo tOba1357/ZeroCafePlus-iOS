@@ -8,6 +8,16 @@
 
 ## GET,POSTのやり方
 
+#### GET,POST用(URL)
+
+users - https://zerocafe.herokuapp.com/api/v1/users.json
+
+events - https://zerocafe.herokuapp.com/api/v1/events.json
+
+tickets(参加登録) - https://zerocafe.herokuapp.com/api/v1/tickets.json
+
+category_tag - https://zerocafe.herokuapp.com/api/v1/category-tags.json
+
 #### GET
 
 ###### users
