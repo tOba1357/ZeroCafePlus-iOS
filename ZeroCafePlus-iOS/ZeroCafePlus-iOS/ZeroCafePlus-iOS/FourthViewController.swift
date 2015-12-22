@@ -44,7 +44,8 @@ class ForthViewController: UIViewController {
         
         
         //イベント管理
-        willJoinButton = UIButton(frame: CGRectMake(0,300,125,50))
+        willJoinButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        willJoinButton.layer.position = CGPoint(x: screenWidth/5.8, y: screenHeight/2.05)
         willJoinButton.setTitle("参加予定", forState: .Normal)
         willJoinButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
         willJoinButton.backgroundColor = UIColor.grayColor()
@@ -52,7 +53,8 @@ class ForthViewController: UIViewController {
         willJoinButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(willJoinButton)
         
-        planedButton = UIButton(frame: CGRectMake(125,300,125,50))
+        planedButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        planedButton.layer.position = CGPoint(x: screenWidth/1.95, y: screenHeight/2.05)
         planedButton.setTitle("企画", forState: .Normal)
         planedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
         planedButton.backgroundColor = UIColor.whiteColor()
@@ -60,7 +62,8 @@ class ForthViewController: UIViewController {
         planedButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(planedButton)
         
-        joinedButton = UIButton(frame: CGRectMake(250,300,125,50))
+        joinedButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        joinedButton.layer.position = CGPoint(x: screenWidth/1.18, y: screenHeight/2.05)
         joinedButton.setTitle("参加", forState: .Normal)
         joinedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
         joinedButton.backgroundColor = UIColor.whiteColor()
@@ -69,7 +72,8 @@ class ForthViewController: UIViewController {
         self.view.addSubview(joinedButton)
         
         //プロフィール
-        profileLabel = UILabel(frame: CGRectMake(45,200,300,100))
+        profileLabel = UILabel(frame: CGRectMake(0,0,screenWidth/1.2,screenHeight/2.3))
+        profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/1.94)
         profileLabel.text = "自己紹介の一例自己紹介の一例僕は竹本だよ〜趣味はなんとかかんとか自己紹介の一例自己紹介の一例"
         new_name.setObject(profileLabel.text, forKey: "myProfile")
         profileLabel.numberOfLines = 0
@@ -93,7 +97,8 @@ class ForthViewController: UIViewController {
         self.view.addSubview(statusLabel)
         
         profileImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
-        profileImage.frame = CGRectMake(90, 120, 60, 60)
+        profileImage.frame = CGRectMake(0, 0, screenWidth/6.2, screenWidth/6.2)
+        profileImage.layer.position = CGPoint(x: screenWidth/3.0, y: screenHeight/4.6)
         profileImage.layer.cornerRadius = 10.0
         self.view.addSubview(profileImage)
         
@@ -119,21 +124,30 @@ class ForthViewController: UIViewController {
                 print(users)
                 for user in users {
                     
-                    
-                    let user_id = user["id"].int!
+                    let user_id = user["user"]["id"].int!
                     print(user_id)
                     
                     if user_id == 1 {
-                        self.user_name = user["name"].string!
-                        //                        self.nameLabel.text = self.user_name
-                        print(self.user_name)
+                        self.user_name = user["user"]["name"].string!
+                        self.statusLabel.text = user["user"]["major"].string!
+                        self.profileLabel.text = user["user"]["description"].string!
+                        self.nameLabel.text = self.user_name
+                        
                     }
                     
                 }
+                for planning in users {
+                    let planEvent = planning["planning_events"].array! as Array
+                    print(planEvent)
+                    for evData in planEvent{
+                        let evMan = evData["event"]["id"].int!
+                        print(evMan)
+                    }
+                }
+                
+                
         }
-        
         nameLabel.text = new_name.objectForKey("NewName") as? String
-        
         
     }
     
@@ -211,7 +225,6 @@ class ForthViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }
 
 
