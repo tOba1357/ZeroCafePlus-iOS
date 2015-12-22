@@ -17,12 +17,14 @@
 		BA2F0AD71C2858090007A49D /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD41C2858090007A49D /* DayView.swift */; };
 		BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD51C2858090007A49D /* MonthView.swift */; };
 		BA2F0ADC1C28586A0007A49D /* CalenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0ADB1C28586A0007A49D /* CalenderVC.swift */; };
+		BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */; };
 		BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */; };
 		BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */; };
 		BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B721C26E54300648280 /* DateSheduleView.swift */; };
 		BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B731C26E54300648280 /* SheduleAlertView.swift */; };
 		BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B741C26E54300648280 /* TimeSheduleView.swift */; };
 		BA5D9BB21C26E6E300648280 /* libCTCheckbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5D9BAF1C26E5F000648280 /* libCTCheckbox.a */; };
+		BAE34F541C28ED790029D6B9 /* CTCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE34F531C28ED790029D6B9 /* CTCheckbox.m */; };
 		D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */; };
 		D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */; };
 		D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A626511C1AB359002DCEC6 /* SecondViewController.swift */; };
@@ -79,13 +81,16 @@
 		BA2F0AD41C2858090007A49D /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		BA2F0AD51C2858090007A49D /* MonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		BA2F0ADB1C28586A0007A49D /* CalenderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderVC.swift; sourceTree = "<group>"; };
-		BA320C081C2810D100C8262A /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventVC.swift; sourceTree = "<group>"; };
 		BA5D9B721C26E54300648280 /* DateSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9B731C26E54300648280 /* SheduleAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleAlertView.swift; sourceTree = "<group>"; };
 		BA5D9B741C26E54300648280 /* TimeSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9BA91C26E5F000648280 /* CTCheckbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CTCheckbox.xcodeproj; path = "ZeroCafePlus-iOS/CTCheckbox-master/CTCheckbox.xcodeproj"; sourceTree = "<group>"; };
+		BAE34F511C28ED790029D6B9 /* CTCheckbox-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CTCheckbox-Prefix.pch"; path = "CTCheckbox-master/CTCheckbox/CTCheckbox-Prefix.pch"; sourceTree = "<group>"; };
+		BAE34F521C28ED790029D6B9 /* CTCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTCheckbox.h; path = "CTCheckbox-master/CTCheckbox/CTCheckbox.h"; sourceTree = "<group>"; };
+		BAE34F531C28ED790029D6B9 /* CTCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTCheckbox.m; path = "CTCheckbox-master/CTCheckbox/CTCheckbox.m"; sourceTree = "<group>"; };
 		D7A6264A1C1AB359002DCEC6 /* ZeroCafePlus-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeroCafePlus-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +163,16 @@
 			path = Calender;
 			sourceTree = "<group>";
 		};
+		BA2F0AE51C2893EB0007A49D /* CTCheckbox */ = {
+			isa = PBXGroup;
+			children = (
+				BAE34F511C28ED790029D6B9 /* CTCheckbox-Prefix.pch */,
+				BAE34F521C28ED790029D6B9 /* CTCheckbox.h */,
+				BAE34F531C28ED790029D6B9 /* CTCheckbox.m */,
+			);
+			name = CTCheckbox;
+			sourceTree = "<group>";
+		};
 		BA5D9B711C26E54300648280 /* SheduleListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +200,6 @@
 				D7A6266E1C1AB359002DCEC6 /* ZeroCafePlus-iOSUITests */,
 				D7A6264B1C1AB359002DCEC6 /* Products */,
 				9B6AAB13E675EDE20D2FA0B6 /* Pods */,
-				BA320C081C2810D100C8262A /* ZeroCafePlus-iOS-Bridging-Header.h */,
 				BA5D9BA91C26E5F000648280 /* CTCheckbox.xcodeproj */,
 				26D6629D751BAA8B65D65B70 /* Frameworks */,
 			);
@@ -204,6 +218,8 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BA2F0AE51C2893EB0007A49D /* CTCheckbox */,
+				BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */,
 				BA2F0AD21C2858090007A49D /* Calender */,
 				BA5D9B711C26E54300648280 /* SheduleListView */,
 				BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */,
@@ -452,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */,
 				BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */,
 				BA2F0AD71C2858090007A49D /* DayView.swift in Sources */,
 				D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */,
@@ -468,6 +485,7 @@
 				9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */,
 				BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */,
 				6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */,
+				BAE34F541C28ED790029D6B9 /* CTCheckbox.m in Sources */,
 				BA2F0ADC1C28586A0007A49D /* CalenderVC.swift in Sources */,
 				D7A626801C1AD3D6002DCEC6 /* FourthViewController.swift in Sources */,
 			);
@@ -618,7 +636,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myname.ZeroCafePlus-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/ZeroCafePlus-iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/ZeroCafePlus-iOS/ZeroCafePlus-iOS-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -635,7 +653,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myname.ZeroCafePlus-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/ZeroCafePlus-iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/ZeroCafePlus-iOS/ZeroCafePlus-iOS-Bridging-Header.h";
 			};
 			name = Release;
 		};
