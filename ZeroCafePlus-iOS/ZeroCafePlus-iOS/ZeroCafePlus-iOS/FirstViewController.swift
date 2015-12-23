@@ -10,17 +10,18 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+//protocol transAttendDelegate {
+//
+//    func onClickMyButton(sender: UIButton)
+//}
+
 class FirstViewController: UIViewController {
     
-    @IBOutlet var placeView: UIView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var topEventView: UIView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         //フレームを生成する
 //        let leftframe:CGRect = CGRect(x: 6, y: 6, width: 150, height: 200)
@@ -50,6 +51,12 @@ class FirstViewController: UIViewController {
 //                        let tagName = eve["event"]["tags"].string! as String
                         let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),tit: title)
                         eventViewGenerate.layer.cornerRadius = 10
+                        
+//                        eventViewGenerate.addTarget(self, action: "onClickMakeButton:", forControlEvents: .TouchUpInside)
+//                        let attendTransitionVC: UIViewController = EventsAttendViewController()
+//                        attendTransitionVC.modalTransitionStyle = UIModalTransitionStyle.PartialCurl
+//                        self.presentViewController(attendTransitionVC, animated: true, completion: nil)
+                        
                         self.scrollView.addSubview(eventViewGenerate)
                         myX = 162
                     }else{
@@ -93,10 +100,28 @@ class FirstViewController: UIViewController {
         
         
     }
+
+//    func onClickMyButton(sender: UIButton) {
+//        
+//        print("success")
+//        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let eventAttendVC = storyboard.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
+//            self.navigationController!.pushViewController(eventAttendVC, animated: true)
+//        }
+//        else{
+//            print("aaa")
+//        }
+//        
+//    }
+    
     
 }
 
 class EventView :UIView{
+    
+//    var delegate: transAttendDelegate!
+    
     init(frame: CGRect, tit: String) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
@@ -105,21 +130,49 @@ class EventView :UIView{
         let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,50))
         let dateName: UILabel = UILabel(frame: CGRectMake(10,90,130,50))
         let tagName: UILabel = UILabel(frame: CGRectMake(10,120,130,50))
+        let touchButton: UIButton = UIButton(frame: CGRectMake(10,10,130,180))
         
         titleName.text = tit
         dateName.text = ""
         tagName.text = ""
+        
+        touchButton.setTitle("", forState: .Normal)
+        touchButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         
         titleName.textColor = UIColor.blackColor()
         
         self.addSubview(titleName)
         self.addSubview(dateName)
         self.addSubview(tagName)
+        self.addSubview(touchButton)
+    }
+    
+    func onClickMyButton(sender: UIButton) {
+        
+        print("success")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigate = UINavigationController()
+        if let eventAttendVC = storyboard.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
+            navigate.pushViewController(eventAttendVC, animated: true)
+        }
+        else{
+            print("aaa")
+        }
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    func onClickButton(sender: UIButton){
+//    
+//        delegate.onClickMyButton(sender)
+//    }
+    
+
+
 }
 
 
