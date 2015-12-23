@@ -11,7 +11,7 @@
         <!--First View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstViewController" id="9pv-A4-QxB" customClass="FirstViewController" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -85,9 +85,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ecu-2Z-k0f"/>
                     <connections>
-                        <outlet property="placeView" destination="tsR-hK-woN" id="IvV-d9-2Sq"/>
-                        <outlet property="scrollView" destination="89h-fW-6zQ" id="b3m-QI-sB7"/>
-                        <outlet property="topEventView" destination="way-ie-h22" id="XjM-Ae-dYP"/>
+                        <outlet property="scrollView" destination="89h-fW-6zQ" id="z8A-RB-1I6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -220,6 +218,42 @@
             </objects>
             <point key="canvasLocation" x="2054" y="-1067"/>
         </scene>
+        <!--Events Decide View Controller-->
+        <scene sceneID="5Oi-xX-raR">
+            <objects>
+                <viewController id="VgZ-c8-rZl" customClass="EventsDecideViewController" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SBL-0h-SfP"/>
+                        <viewControllerLayoutGuide type="bottom" id="lm1-xd-rkj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tjq-kK-5ba">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vk1-Vf-UR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-178" y="395"/>
+        </scene>
+        <!--Events Attend View Controller-->
+        <scene sceneID="RAY-TM-m65">
+            <objects>
+                <viewController storyboardIdentifier="EventsAttendViewController" id="wtL-9p-15E" customClass="EventsAttendViewController" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iia-e1-NYq"/>
+                        <viewControllerLayoutGuide type="bottom" id="bQ6-bw-aUX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5bh-xx-mEW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tIh-eC-soK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-178" y="-307"/>
+        </scene>
         <!--CalenderVC-->
         <scene sceneID="cRa-2r-mfa">
             <objects>
@@ -236,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7M-n3-ipC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="-307"/>
+            <point key="canvasLocation" x="530" y="-307"/>
         </scene>
         <!--ScheduleVC-->
         <scene sceneID="BCt-o7-OMb">
@@ -317,6 +351,7 @@
         <!--First-->
         <scene sceneID="trS-N6-6tz">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J9Z-fo-BlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pRw-3F-X54" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
@@ -329,7 +364,6 @@
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="pSz-7Z-SYu"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J9Z-fo-BlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-990" y="-1067"/>
         </scene>
