@@ -22,29 +22,24 @@ import SwiftyJSON
 
 class EventsAttendViewController: UIViewController {
     
-    var backButton: UIBarButtonItem!
-    var sanka: UIButton!
-    private var myScrollView: UIScrollView!
-    
-    let eventId = 1
+    private var myScrollView:UIScrollView!
+    private var cancelButton: UIButton!
+    private var name:UILabel!
+    private var date: UILabel!
+    private var time: UILabel!
+    private var tag: UILabel!
+    private var content: UILabel!
+    private var sanka: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = ""
-        
-        
-        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
-        
-        
         myScrollView = UIScrollView()
         myScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
         self.view.addSubview(myScrollView)
         
-        
-        
-        let name: UILabel = UILabel(frame: CGRectMake(0,0,250,200))
+        name = UILabel(frame: CGRectMake(0,0,250,200))
         name.text = ""
         name.textAlignment = NSTextAlignment.Center
         name.font = UIFont.systemFontOfSize(CGFloat(30))
@@ -54,7 +49,7 @@ class EventsAttendViewController: UIViewController {
         self.view.addSubview(name)
         
         
-        let date: UILabel = UILabel(frame: CGRectMake(0,0,250,50))
+        date = UILabel(frame: CGRectMake(0,0,250,50))
         date.text = ""
         date.font = UIFont.systemFontOfSize(CGFloat(20))
         date.textAlignment = NSTextAlignment.Center
@@ -62,7 +57,7 @@ class EventsAttendViewController: UIViewController {
         self.view.addSubview(date)
         
         
-        let time: UILabel = UILabel(frame: CGRectMake(0,0,250,50))
+        time = UILabel(frame: CGRectMake(0,0,250,50))
         time.text = ""
         time.font = UIFont.systemFontOfSize(CGFloat(20))
         time.textAlignment = NSTextAlignment.Center
@@ -70,7 +65,7 @@ class EventsAttendViewController: UIViewController {
         self.view.addSubview(time)
         
         
-        let tag: UILabel = UILabel(frame: CGRectMake(0,0,250,50))
+        tag = UILabel(frame: CGRectMake(0,0,250,50))
         tag.text = ""
         tag.textColor = UIColor.grayColor()
         tag.font = UIFont.systemFontOfSize(CGFloat(18))
@@ -82,7 +77,7 @@ class EventsAttendViewController: UIViewController {
         self.view.addSubview(tag)
         
         
-        let content: UILabel = UILabel(frame: CGRectMake(0,0,300,200))
+        content = UILabel(frame: CGRectMake(0,0,300,200))
         content.text = ""
         content.font = UIFont.systemFontOfSize(CGFloat(15))
         content.textAlignment = NSTextAlignment.Center
@@ -90,6 +85,9 @@ class EventsAttendViewController: UIViewController {
         content.numberOfLines = 0;
         content.lineBreakMode = NSLineBreakMode.ByCharWrapping
         self.view.addSubview(content)
+        
+        self.view.backgroundColor = UIColor.whiteColor()
+
         
         
         sanka = UIButton()
@@ -104,7 +102,9 @@ class EventsAttendViewController: UIViewController {
         self.view.addSubview(sanka)
         
         self.view.backgroundColor = UIColor.whiteColor()
-        
+    }
+    override func viewWillAppear(animated: Bool) {
+        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
                 debugPrint(response.result.value)
@@ -112,21 +112,22 @@ class EventsAttendViewController: UIViewController {
                 let eventAraay = json["events"].array! as Array
                 for events in eventAraay {
                     let id = events["event"]["id"].int! as Int
-                    if self.eventId == id {
-                        name.text = events["event"]["title"].string! as String
+                    if  id == 1 {
+                        self.name.text = events["event"]["title"].string! as String
                         let startTime = events["event"]["start_time"].string! as String
                         let startArray = startTime.componentsSeparatedByString("T")
-                        date.text = startArray[0].stringByReplacingOccurrencesOfString("-", withString: "/")
+                        self.date.text = startArray[0].stringByReplacingOccurrencesOfString("-", withString: "/")
                         let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
                         let endTime = events["event"]["end_time"].string! as String
                         let endArray = endTime.componentsSeparatedByString("T")
                         let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
-                        time.text = "\(startMinute)~\(endMinute)"
-                        tag.text = events["event"]["tags"].string! as String
-                        content.text = events["event"]["description"].string! as String
+                        self.time.text = "\(startMinute)~\(endMinute)"
+                        self.tag.text = events["event"]["category_tag"].string! as String
+                        self.content.text = events["event"]["description"].string! as String
                     }
                 }
         }
+
     }
     
     override func didReceiveMemoryWarning() {
