@@ -91,4 +91,5 @@ category_tag - https://zerocafe.herokuapp.com/api/v1/category-tags.json
                 debugPrint(response.result.value)
                 //"いいよぉ！"が返って来れば成功
         }
-            
+ test
+           
