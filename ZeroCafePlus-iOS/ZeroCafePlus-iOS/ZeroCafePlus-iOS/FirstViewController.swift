@@ -101,19 +101,17 @@ class FirstViewController: UIViewController {
         
     }
 
-//    func onClickMyButton(sender: UIButton) {
-//        
-//        print("success")
-//        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let eventAttendVC = storyboard.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
-//            self.navigationController!.pushViewController(eventAttendVC, animated: true)
-//        }
-//        else{
-//            print("aaa")
-//        }
-//        
-//    }
+    func onClickMyButton(sender: UIButton) {
+        
+        print("success")
+        if let eventAttendVC = self.storyboard?.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
+            self.navigationController!.pushViewController(eventAttendVC, animated: true)
+        }
+        else{
+            print("aaa")
+        }
+        
+    }
     
     
 }
@@ -147,20 +145,20 @@ class EventView :UIView{
         self.addSubview(touchButton)
     }
     
-    func onClickMyButton(sender: UIButton) {
-        
-        print("success")
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navigate = UINavigationController()
-        if let eventAttendVC = storyboard.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
-            navigate.pushViewController(eventAttendVC, animated: true)
-        }
-        else{
-            print("aaa")
-        }
-        
-    }
+//    func onClickMyButton(sender: UIButton) {
+//        
+//        print("success")
+//        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let navigate = UINavigationController()
+//        if let eventAttendVC = storyboard.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
+//            navigate.pushViewController(eventAttendVC, animated: true)
+//        }
+//        else{
+//            print("aaa")
+//        }
+//        
+//    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
