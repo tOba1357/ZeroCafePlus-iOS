@@ -10,15 +10,14 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-//protocol transAttendDelegate {
-//
-//    func onClickMyButton(sender: UIButton)
-//}
+protocol EventViewDelegate {
 
-class FirstViewController: UIViewController {
+    func pushMyButton(myEventID:String)
+}
+
+class FirstViewController: UIViewController, EventViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +45,12 @@ class FirstViewController: UIViewController {
                     let sideDecide = events.index % 2
                     if sideDecide == 0 {
                         let eve = events.element as JSON
+                        let eventID = "1234"
                         let title = eve["event"]["title"].string! as String
 //                        let dateName = eve["event"]["start_time"].string! as String
 //                        let tagName = eve["event"]["tags"].string! as String
-                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),tit: title)
+                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),tit: title,id:eventID)
+                        eventViewGenerate.mydelegate = self
                         eventViewGenerate.layer.cornerRadius = 10
                         
 //                        eventViewGenerate.addTarget(self, action: "onClickMakeButton:", forControlEvents: .TouchUpInside)
@@ -62,8 +63,10 @@ class FirstViewController: UIViewController {
                     }else{
                         
                         let eve = events.element as JSON
+                        let eventID = "1234"
                         let title = eve["event"]["title"].string! as String
-                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),tit: title)
+                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),tit: title,id: eventID)
+                        eventViewGenerate.mydelegate = self
                         eventViewGenerate.layer.cornerRadius = 10
                         self.scrollView.addSubview(eventViewGenerate)
                         
@@ -101,11 +104,12 @@ class FirstViewController: UIViewController {
         
     }
 
-    func onClickMyButton(sender: UIButton) {
+    func pushMyButton(myEventID:String) {
         
         print("success")
-        if let eventAttendVC = self.storyboard?.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
-            self.navigationController!.pushViewController(eventAttendVC, animated: true)
+        if let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
+            eventAttendVC.getID = myEventID
+            self.navigationController?.pushViewController(eventAttendVC, animated: true)
         }
         else{
             print("aaa")
@@ -118,10 +122,12 @@ class FirstViewController: UIViewController {
 
 class EventView :UIView{
     
-//    var delegate: transAttendDelegate!
+    var mydelegate: EventViewDelegate!
+    var myEventID :String!
     
-    init(frame: CGRect, tit: String) {
+    init(frame: CGRect, tit: String, id:String) {
         super.init(frame: frame)
+        myEventID = id
         self.backgroundColor = UIColor.whiteColor()
         
         
@@ -145,10 +151,12 @@ class EventView :UIView{
         self.addSubview(touchButton)
     }
     
-//    func onClickMyButton(sender: UIButton) {
-//        
-//        print("success")
-//        
+    func onClickMyButton(sender: UIButton) {
+        
+        print("success")
+        
+        self.mydelegate?.pushMyButton(myEventID)
+        
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let navigate = UINavigationController()
 //        if let eventAttendVC = storyboard.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
@@ -157,8 +165,8 @@ class EventView :UIView{
 //        else{
 //            print("aaa")
 //        }
-//        
-//    }
+        
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

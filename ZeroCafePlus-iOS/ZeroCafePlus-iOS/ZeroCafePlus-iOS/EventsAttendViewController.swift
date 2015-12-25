@@ -31,6 +31,8 @@ class EventsAttendViewController: UIViewController {
     private var content: UILabel!
     private var sanka: UIButton!
     
+    var getID : String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
