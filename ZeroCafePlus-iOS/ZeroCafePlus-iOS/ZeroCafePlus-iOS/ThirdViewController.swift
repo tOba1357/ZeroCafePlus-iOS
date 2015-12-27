@@ -205,6 +205,8 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
     
     internal func onClickMyButton(sender: UIButton){
         if let calenderVC = self.storyboard?.instantiateViewControllerWithIdentifier("CalenderVC") as? CalenderVC {
+            calenderVC.getTitle = titleTextField.text! as String
+            calenderVC.getDetail = detailTextView.text! as String
             self.navigationController?.pushViewController(calenderVC, animated: true)
         }
     }

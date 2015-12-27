@@ -13,10 +13,13 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     var sheduleAlertView:SheduleAlertView!
     
     var titleLabel:UILabel!
-    var getDate :[String]!
     var myTextField:UITextField!
     var hourTextField:UITextField!
     var minuteTextField:UITextField!
+    
+    var getDate :[String]!
+    var getTitle:String!
+    var getDetail:String!
     
     var pickHour:[String] = []
     var pickMinute:[String] = []
@@ -26,8 +29,6 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        alertMinute = "00"
         
         for i in 8...21{
             let iStr = String(format:"%2d",i)
@@ -106,14 +107,12 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         if pickerView.tag == 2{
             minuteTextField.text = "\(picHourStr):\(picMinuteStr)"
         }
-        alertHour = picHourStr
-        alertMinute = picMinuteStr
     }
     func onClick(sender: UIBarButtonItem) {
         myTextField.resignFirstResponder()
     }
     
-    func pushSheduleAlert(checkDateStr:String){
+    func pushSheduleAlert(checkDateStr:String,myDateArray:[Int]){
         
         let checkData = checkDateStr.componentsSeparatedByString("/")
         alertHour = checkData[3]
@@ -144,6 +143,7 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             let label:UILabel = UILabel(frame: CGRectMake(0, 0, 50, 60))
             label.text = "開始"
             text.leftView = label
+            text.text = "\(checkData[3]):00"
             text.tag = 1
             self.hourTextField = text
             text.inputView = pickerView1
@@ -155,6 +155,7 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             let label:UILabel = UILabel(frame: CGRectMake(0, 0, 50, 60))
             label.text = "終了"
             text.leftView = label
+            text.text = "\(Int(checkData[3])!+1):00"
             self.minuteTextField = text
             text.inputView = pickerView2
             text.inputAccessoryView = myToolBar
@@ -166,6 +167,11 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             action in
             NSLog("はいボタンが押されました")
             if let createEventVC = self.storyboard?.instantiateViewControllerWithIdentifier("CreateEventVC") as? CreateEventVC {
+                createEventVC.getTitle = self.getTitle
+                createEventVC.getDetail = self.getDetail
+                createEventVC.getDateArray = myDateArray
+                createEventVC.getStartTime = self.hourTextField.text
+                createEventVC.getEndTime = self.minuteTextField.text
                 self.navigationController?.pushViewController(createEventVC, animated: true)
             }
         }
