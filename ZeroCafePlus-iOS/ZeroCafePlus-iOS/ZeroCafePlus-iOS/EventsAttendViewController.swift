@@ -31,7 +31,7 @@ class EventsAttendViewController: UIViewController {
     private var content: UILabel!
     private var sanka: UIButton!
     
-    var getID: String!
+    var getID: Int!
     
     
     override func viewDidLoad() {
@@ -68,7 +68,7 @@ class EventsAttendViewController: UIViewController {
         
         
         tag = UILabel(frame: CGRectMake(0,0,250,50))
-        tag.text = ""
+        tag.text? = ""
         tag.textColor = UIColor.grayColor()
         tag.font = UIFont.systemFontOfSize(CGFloat(18))
         tag.textAlignment = NSTextAlignment.Center
@@ -110,10 +110,11 @@ class EventsAttendViewController: UIViewController {
             .responseJSON { response in
                 debugPrint(response.result.value)
                 let json = JSON(response.result.value!)
-                let eventAraay = json["events"].array! as Array
-                for events in eventAraay {
+                let eventArray = json["events"].array! as Array
+                for events in eventArray {
                     let id = events["event"]["id"].int! as Int
-                    if  id == 1 {
+                    if  id == self.getID {
+                        print("成功")
                         self.name.text = events["event"]["title"].string! as String
                         let startTime = events["event"]["start_time"].string! as String
                         let startArray = startTime.componentsSeparatedByString("T")
@@ -123,9 +124,10 @@ class EventsAttendViewController: UIViewController {
                         let endArray = endTime.componentsSeparatedByString("T")
                         let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
                         self.time.text = "\(startMinute)~\(endMinute)"
-                        self.tag.text = events["event"]["category_tag"].string! as String
+                        self.tag.text? = events["event"]["category_tag"].string! as String
                         self.content.text = events["event"]["description"].string! as String
                         print("id =1")
+                       print("\(events["event"]["description"])")
                     }
                     else{
                         print("not id = 1")
