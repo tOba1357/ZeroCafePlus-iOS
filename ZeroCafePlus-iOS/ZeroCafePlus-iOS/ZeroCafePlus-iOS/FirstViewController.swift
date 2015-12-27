@@ -36,6 +36,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                 
                 let eventArray = json["events"].array! as Array
                 let eventLastId = eventArray.count
+                print("持ってきたもの:",eventArray)
                 
                 var myX :CGFloat = 6
                 var myY :CGFloat = 15
@@ -85,22 +86,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
 //                tagName.numberOfLines = 2
 //                tagName.font = UIFont.systemFontOfSize(12)
         }
-
-        
-        //カスタマイズViewを生成
-//        let eventViewGenerate:EventView = EventView(frame: leftframe)
-//        let rightEventView:EventView = EventView(frame: rightframe)
-//        let nextEventView:EventView = EventView(frame: nextframe)
-//        
-//        eventViewGenerate.layer.cornerRadius = 15
-//        rightEventView.layer.cornerRadius = 15
-//        nextEventView.layer.cornerRadius = 15
-//        
-//        //カスタマイズViewを追加
-//        scrollView.addSubview(eventViewGenerate)
-//        scrollView.addSubview(rightEventView)
-//        scrollView.addSubview(nextEventView)
-        
         
     }
 
@@ -157,25 +142,11 @@ class EventView :UIView{
         
         self.mydelegate?.pushMyButton(myEventID)
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let navigate = UINavigationController()
-//        if let eventAttendVC = storyboard.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
-//            navigate.pushViewController(eventAttendVC, animated: true)
-//        }
-//        else{
-//            print("aaa")
-//        }
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    func onClickButton(sender: UIButton){
-//    
-//        delegate.onClickMyButton(sender)
-//    }
     
 
 
