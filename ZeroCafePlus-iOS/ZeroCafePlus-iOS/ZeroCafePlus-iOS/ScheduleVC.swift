@@ -98,8 +98,10 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         var picMinuteStr = alertMinute
         if (component == 0){
             picHourStr = pickHour[row] as String
+            alertHour = pickHour[row] as String
         }else if (component == 1){
-            picMinuteStr = pickMinute[row]
+            picMinuteStr = pickMinute[row] as String
+            alertMinute = pickMinute[row] as String
         }
         if pickerView.tag == 1{
             hourTextField.text = "\(picHourStr):\(picMinuteStr)"
@@ -116,6 +118,7 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         
         let checkData = checkDateStr.componentsSeparatedByString("/")
         alertHour = checkData[3]
+        alertMinute = "00"
         
         let myToolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
         myToolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)

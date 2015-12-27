@@ -204,10 +204,20 @@ class ThirdViewController: UIViewController,UITextFieldDelegate,UITextViewDelega
     }
     
     internal func onClickMyButton(sender: UIButton){
-        if let calenderVC = self.storyboard?.instantiateViewControllerWithIdentifier("CalenderVC") as? CalenderVC {
-            calenderVC.getTitle = titleTextField.text! as String
-            calenderVC.getDetail = detailTextView.text! as String
-            self.navigationController?.pushViewController(calenderVC, animated: true)
+        if titleTextField.text == "" || detailTextView.text == "" {
+            let alertController = UIAlertController(title: "企画名・企画内容がありません。", message: "企画名・企画内容を入力してください。", preferredStyle: .Alert)
+            let otherAction = UIAlertAction(title: "OK", style: .Default){
+                action in
+                NSLog("OKボタンが押されました")
+            }
+            alertController.addAction(otherAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        }else{
+            if let calenderVC = self.storyboard?.instantiateViewControllerWithIdentifier("CalenderVC") as? CalenderVC {
+                calenderVC.getTitle = titleTextField.text! as String
+                calenderVC.getDetail = detailTextView.text! as String
+                self.navigationController?.pushViewController(calenderVC, animated: true)
+            }
         }
     }
     
