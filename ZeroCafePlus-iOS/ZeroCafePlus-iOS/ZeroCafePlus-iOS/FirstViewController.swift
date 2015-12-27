@@ -12,7 +12,7 @@ import SwiftyJSON
 
 protocol EventViewDelegate {
 
-    func pushMyButton(myEventID:String)
+    func pushMyButton(myEventID:Int)
 }
 
 class FirstViewController: UIViewController, EventViewDelegate {
@@ -43,7 +43,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         let sideDecide = events.index % 2
                         if sideDecide == 0 {
                             let eve = events.element as JSON
-                            let eventID = "1234"
+                            let eventID = 28
                             let title = eve["event"]["title"].string! as String
                             let dateName = eve["event"]["start_time"].string! as String
                             let tagName : String? = { ()->(String) in
@@ -63,7 +63,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         }else{
                         
                           let eve = events.element as JSON
-                          let eventID = "1234"
+                          let eventID = 1
                           let title = eve["event"]["title"].string! as String
                           let dateName = eve["event"]["start_time"].string! as String
                             let tagName : String? = { ()->(String) in
@@ -99,7 +99,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         
     }
 
-    func pushMyButton(myEventID:String) {
+    func pushMyButton(myEventID:Int) {
         
         print("success")
         if let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
@@ -118,9 +118,9 @@ class FirstViewController: UIViewController, EventViewDelegate {
 class EventView :UIView{
     
     var mydelegate: EventViewDelegate!
-    var myEventID :String!
+    var myEventID :Int!
     
-    init(frame: CGRect, titleNameString: String, id:String, dateNameString: String, tagNameString: String) {
+    init(frame: CGRect, titleNameString: String, id:Int, dateNameString: String, tagNameString: String) {
         super.init(frame: frame)
         myEventID = id
         self.backgroundColor = UIColor.whiteColor()
