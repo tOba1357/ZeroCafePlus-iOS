@@ -92,7 +92,7 @@ category_tag - https://zerocafe.herokuapp.com/api/v1/category-tags.json
                 //"いいよぉ！"が返って来れば成功
         }
 
-#### 例外処理のやり方
+## 例外処理のやり方
         let url = "https://zerocafe.herokuapp.com/api/v1/events"
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
             .responseString { response in
