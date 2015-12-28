@@ -23,7 +23,6 @@ import SwiftyJSON
 class EventsAttendViewController: UIViewController {
     
     private var myScrollView:UIScrollView!
-    private var cancelButton: UIButton!
     private var name:UILabel!
     private var date: UILabel!
     private var time: UILabel!
@@ -33,9 +32,13 @@ class EventsAttendViewController: UIViewController {
     
     var getID: Int!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(getID)
+
+
+        
         
         myScrollView = UIScrollView()
         myScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
@@ -109,6 +112,10 @@ class EventsAttendViewController: UIViewController {
         Alamofire.request(.GET, url)
             .responseJSON { response in
                 debugPrint(response.result.value)
+                
+                
+                
+                
                 let json = JSON(response.result.value!)
                 let eventArray = json["events"].array! as Array
                 for events in eventArray {
@@ -126,11 +133,6 @@ class EventsAttendViewController: UIViewController {
                         self.time.text = "\(startMinute)~\(endMinute)"
                         self.tag.text? = events["event"]["category_tag"].string! as String
                         self.content.text = events["event"]["description"].string! as String
-                        print("id =1")
-                       print("\(events["event"]["description"])")
-                    }
-                    else{
-                        print("not id = 1")
                     }
                 }
         }
@@ -143,6 +145,7 @@ class EventsAttendViewController: UIViewController {
     
     func onClickMyButton(sender: UIButton){
         let mySecondViewController = EventsDecideViewController()
+        mySecondViewController.MygetID = getID
         self.navigationController?.pushViewController(mySecondViewController, animated: true)
         
         // Dispose of any resources that can be recreated.

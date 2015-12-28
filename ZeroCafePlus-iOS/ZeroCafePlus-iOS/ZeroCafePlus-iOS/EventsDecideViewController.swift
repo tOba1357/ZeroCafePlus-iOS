@@ -13,16 +13,21 @@ import SwiftyJSON
 
 class EventsDecideViewController: UIViewController {
     
+    
+    private var name:UILabel!
+    private var friends: UILabel!
+    private var add: UILabel!
     private var sanka: UIButton!
-    let eventId = 1
+    
+    var MygetID: Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = ""
         
-        
-        let name: UILabel = UILabel(frame: CGRectMake(0,0,200,200))
+        name = UILabel(frame: CGRectMake(0,0,200,200))
         name.text = ""
         name.textAlignment = NSTextAlignment.Center
         name.font = UIFont.systemFontOfSize(CGFloat(25))
@@ -33,7 +38,7 @@ class EventsDecideViewController: UIViewController {
         self.view.addSubview(name)
         
         
-        let friends: UILabel = UILabel(frame: CGRectMake(0,0,250,50))
+        friends = UILabel(frame: CGRectMake(0,0,250,50))
         friends.text = "友達を連れて行く"
         friends.font = UIFont.systemFontOfSize(CGFloat(15))
         friends.textAlignment = NSTextAlignment.Center
@@ -42,7 +47,7 @@ class EventsDecideViewController: UIViewController {
         
         
         
-        let add: UILabel = UILabel(frame: CGRectMake(0,0,250,50))
+        add = UILabel(frame: CGRectMake(0,0,250,50))
         add.text = "カレンダーに追加する"
         add.font = UIFont.systemFontOfSize(CGFloat(15))
         add.textAlignment = NSTextAlignment.Center
@@ -60,21 +65,23 @@ class EventsDecideViewController: UIViewController {
         sanka.layer.position = CGPoint(x: self.view.frame.width/2, y:view.bounds.height/1.25)
         sanka.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(sanka)
-        
-        
-        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
-        Alamofire.request(.GET, url)
-            .responseJSON { response in
-                debugPrint(response.result.value)
-                let json = JSON(response.result.value!)
-                let eventAraay = json["events"].array! as Array
-                for events in eventAraay {
-                    let id = events["event"]["id"].int! as Int
-                    if self.eventId == id {
-                        name.text = events["event"]["title"].string! as String
+    }
+
+        override func viewWillAppear(animated: Bool) {
+            let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+            Alamofire.request(.GET, url)
+                .responseJSON { response in
+                    debugPrint(response.result.value)
+                                        
+                    let json = JSON(response.result.value!)
+                    let eventArray = json["events"].array! as Array
+                    for events in eventArray {
+                        let id = events["event"]["id"].int! as Int
+                        if  id == self.MygetID{
+                        self.name.text = events["event"]["title"].string! as String
+                        }
                     }
                 }
-        }
         
         
         
