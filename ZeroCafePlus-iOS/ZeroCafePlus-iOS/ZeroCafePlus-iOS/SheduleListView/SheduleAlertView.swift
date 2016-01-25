@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SheduleAlertDelegate{
-    func pushSheduleAlert(checkDateStr:String)
+    func pushSheduleAlert(checkDateStr:String,myDateArray:[Int])
     func changDateShedule(myDateStr:String)
 }
 
@@ -40,6 +40,7 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         currentDay = day
         
         avLoadingView = UIAlertView(title: nil, message: "Wait..", delegate: self, cancelButtonTitle: nil)
+
         
         scrollView = UIScrollView(frame: self.bounds)
         scrollView.backgroundColor = UIColor.clearColor()
@@ -197,10 +198,10 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
     func changeDate(){
         let myDateStr = String(format:"%04d/%02d/%02d",currentYear,currentMonth,currentDay)
         self.sheduleAlertDelegate?.changDateShedule(myDateStr)
-        
     }
     
     func pushDateShedule(checkDateStr:String){
-        self.sheduleAlertDelegate?.pushSheduleAlert(checkDateStr)
+        let myDateArray:[Int] = [currentYear,currentMonth,currentDay]
+        self.sheduleAlertDelegate?.pushSheduleAlert(checkDateStr,myDateArray: myDateArray)
     }
 }

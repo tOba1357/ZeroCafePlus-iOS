@@ -13,43 +13,45 @@ import SwiftyJSON
 
 class EventsDecideViewController: UIViewController {
     
+    
+    private var name:UILabel!
+    private var friends: UILabel!
+    private var add: UILabel!
     private var sanka: UIButton!
-    let eventId = 1
+    
+    var MygetID: Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
-        
-        
         self.title = ""
         
-        
-        let name: UILabel = UILabel(frame: CGRectMake(0,0,200,200))
+        name = UILabel(frame: CGRectMake(0,0,200,200))
         name.text = ""
         name.textAlignment = NSTextAlignment.Center
         name.font = UIFont.systemFontOfSize(CGFloat(25))
         self.view.backgroundColor = UIColor.whiteColor()
-        name.layer.position = CGPoint(x: self.view.bounds.width/2, y: 150)
+        name.layer.position = CGPoint(x: self.view.bounds.width/2, y: view.bounds.height/5)
         name.numberOfLines = 0;
         name.lineBreakMode = NSLineBreakMode.ByCharWrapping
         self.view.addSubview(name)
         
         
-        let friends: UILabel = UILabel(frame: CGRectMake(0,0,250,50))
+        friends = UILabel(frame: CGRectMake(0,0,250,50))
         friends.text = "友達を連れて行く"
         friends.font = UIFont.systemFontOfSize(CGFloat(15))
         friends.textAlignment = NSTextAlignment.Center
-        friends.layer.position = CGPoint(x: self.view.bounds.width/2,y: 300)
+        friends.layer.position = CGPoint(x: self.view.bounds.width/2,y: view.bounds.height/2)
         self.view.addSubview(friends)
         
         
         
-        let add: UILabel = UILabel(frame: CGRectMake(0,0,250,50))
+        add = UILabel(frame: CGRectMake(0,0,250,50))
         add.text = "カレンダーに追加する"
         add.font = UIFont.systemFontOfSize(CGFloat(15))
         add.textAlignment = NSTextAlignment.Center
-        add.layer.position = CGPoint(x: self.view.bounds.width/2,y: 400)
+        add.layer.position = CGPoint(x: self.view.bounds.width/2,y: view.bounds.height/1.7)
         self.view.addSubview(add)
         
         
@@ -60,29 +62,55 @@ class EventsDecideViewController: UIViewController {
         sanka.setTitle("参加する", forState: UIControlState.Normal)
         sanka.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         sanka.layer.cornerRadius = 20.0
-        sanka.layer.position = CGPoint(x: self.view.frame.width/2, y:550)
+        sanka.layer.position = CGPoint(x: self.view.frame.width/2, y:view.bounds.height/1.25)
         sanka.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(sanka)
-        
-        
-        Alamofire.request(.GET, url)
-            .responseJSON { response in
-                debugPrint(response.result.value)
-                let json = JSON(response.result.value!)
-                let eventAraay = json["events"].array! as Array
-                for events in eventAraay {
-                    let id = events["event"]["id"].int! as Int
-                    if self.eventId == id {
-                        name.text = events["event"]["title"].string! as String
+    }
+
+        override func viewWillAppear(animated: Bool) {
+            let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+            Alamofire.request(.GET, url)
+                .responseJSON { response in
+                    debugPrint(response.result.value)
+                                        
+                    let json = JSON(response.result.value!)
+                    let eventArray = json["events"].array! as Array
+                    for events in eventArray {
+                        let id = events["event"]["id"].int! as Int
+                        if  id == self.MygetID{
+                        self.name.text = events["event"]["title"].string! as String
+                        }
                     }
                 }
-        }
         
         
         
     }
     
     func onClickMyButton(sender: UIButton){
+        let headers = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+        
+        let parameters:[String:AnyObject] =
+        [
+            "ticket": [
+                "user_id": 2,
+                "event_id": 1
+                
+                
+            ]
+        ]
+        let PostUrl = "https://zerocafe.herokuapp.com/api/v1/tickets.json"
+        
+        Alamofire.request(.POST, PostUrl, parameters: parameters, encoding: .JSON, headers:headers)
+            .responseString { response in
+                debugPrint(response.result.value)
+                //"いいよぉ！"が返って来れば成功
+        }
+        
+
         let kakutei: UIAlertController = UIAlertController(title: "確定しました。", message: "", preferredStyle: .Alert)
         let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
             self.returnTop()

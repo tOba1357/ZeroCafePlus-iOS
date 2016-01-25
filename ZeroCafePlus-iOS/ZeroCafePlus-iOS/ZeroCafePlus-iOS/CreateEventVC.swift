@@ -7,10 +7,21 @@
 //
 
 import UIKit
+import Alamofire
 
 class CreateEventVC: UIViewController,UITextFieldDelegate {
     
-    var addNowBool:Bool = false
+    var assetText :UITextField!
+    var numText :UITextField!
+    var tagText :UITextField!
+    
+    var diveJoinBool:Bool = false
+    
+    var getTitle:String!
+    var getDetail:String!
+    var getDateArray:[Int]!
+    var getStartTime:String!
+    var getEndTime:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +46,8 @@ class CreateEventVC: UIViewController,UITextFieldDelegate {
         assetsLabel.text = "持ち物"
         assetsLabel.layer.position = CGPointMake(self.view.frame.width/4, self.view.frame.height/6)
         
-        let assetText = UITextField(frame: CGRectMake(0,0,self.view.frame.width/3,self.view.frame.height/10))
+        assetText = UITextField(frame: CGRectMake(0,0,self.view.frame.width/3,self.view.frame.height/10))
+        assetText.text = ""
         assetText.placeholder = "例）熱意"
         assetText.layer.cornerRadius = 15
         assetText.delegate = self
@@ -47,7 +59,8 @@ class CreateEventVC: UIViewController,UITextFieldDelegate {
         numLabel.text = "定員"
         numLabel.layer.position = CGPointMake(self.view.frame.width/4, self.view.frame.height/3)
         
-        let numText = UITextField(frame: CGRectMake(0,0,self.view.frame.width/3,self.view.frame.height/10))
+        numText = UITextField(frame: CGRectMake(0,0,self.view.frame.width/3,self.view.frame.height/10))
+        numText.text = ""
         numText.placeholder = "例）15"
         numText.inputAccessoryView = myToolBar
         numText.layer.cornerRadius = 15
@@ -61,7 +74,8 @@ class CreateEventVC: UIViewController,UITextFieldDelegate {
         tagLabel.text = "タグ"
         tagLabel.layer.position = CGPointMake(self.view.frame.width/4, self.view.frame.height/2)
         
-        let tagText = UITextField(frame: CGRectMake(0,0,self.view.frame.width/3,self.view.frame.height/10))
+        tagText = UITextField(frame: CGRectMake(0,0,self.view.frame.width/3,self.view.frame.height/10))
+        tagText.text = ""
         tagText.placeholder = "例）#祭り"
         tagText.layer.cornerRadius = 15
         tagText.delegate = self
@@ -99,27 +113,75 @@ class CreateEventVC: UIViewController,UITextFieldDelegate {
         
     }
     func checked(sender:CTCheckbox) {
-        addNowBool = !addNowBool
+        diveJoinBool = !diveJoinBool
     }
     
     func onClickMakeButton(sender: UIButton){
-        let alertController = UIAlertController(title: "確認", message: "これでよろしいですか？", preferredStyle: .Alert)
         
-        let otherAction = UIAlertAction(title: "はい", style: .Default) {
-            action in
-            NSLog("はいボタンが押されました")
-            self.navigationController?.popToRootViewControllerAnimated(true)
+        if assetText.text == "" || numText.text == "" || tagText.text == ""{
+        
+            let checkAlertController = UIAlertController(title: "持ち物・定員・タグがありません。", message: "持ち物・定員・タグを入力してください。", preferredStyle: .Alert)
+            let checkAction = UIAlertAction(title: "OK", style: .Default){
+                action in
+                NSLog("OKボタンが押されました")
+            }
+            checkAlertController.addAction(checkAction)
+            presentViewController(checkAlertController, animated: true, completion: nil)
+        
+        } else {
+            
+            let alertController = UIAlertController(title: "確認",
+                message: "これでよろしいですか？", preferredStyle: .Alert)
+            
+            let otherAction = UIAlertAction(title: "はい", style: .Default) {
+                action in
+                NSLog("はいボタンが押されました")
+                
+                let headers = [
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                ]
+                
+                let parameters:[String : NSDictionary] =
+                [
+                    "event" : [
+                        "title" : self.getTitle,
+                        "description" : self.getDetail,
+                        "belonging" : "スマート大学",
+                        "entry_fee" : 999,
+                        "owner_id" : 1,
+                        "dive_join" : self.diveJoinBool,
+                        "start_time" : "\(self.getDateArray[0])-\(self.getDateArray[1])-\(self.getDateArray[2])T\(self.getStartTime)",
+                        "end_time" : "\(self.getDateArray[0])-\(self.getDateArray[1])-\(self.getDateArray[2])T\(self.getEndTime)",
+                        "confirm" : true,
+                        "place" : 1,
+                        "capacity" : Int(self.numText.text!)!,
+                        "category_tag" : self.tagText.text!,
+                        "genre" : 1,
+                        "color" : "redBlue"
+                    ]
+                ]
+                
+                let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+                Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
+                    .responseString { response in
+                        debugPrint(response.result.value)
+                        //"いいよぉ！"が返って来れば成功
+                }
+                
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
+            let cancelAction = UIAlertAction(title: "いいえ", style: .Cancel) {
+                action in
+                NSLog("いいえボタンが押されました")
+            }
+            
+            // addActionした順に左から右にボタンが配置されます
+            alertController.addAction(otherAction)
+            alertController.addAction(cancelAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
         }
-        let cancelAction = UIAlertAction(title: "いいえ", style: .Cancel) {
-            action in
-            NSLog("いいえボタンが押されました")
-        }
-        
-        // addActionした順に左から右にボタンが配置されます
-        alertController.addAction(otherAction)
-        alertController.addAction(cancelAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

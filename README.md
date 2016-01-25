@@ -91,4 +91,15 @@ category_tag - https://zerocafe.herokuapp.com/api/v1/category-tags.json
                 debugPrint(response.result.value)
                 //"いいよぉ！"が返って来れば成功
         }
-            
+
+## 例外処理のやり方
+        let url = "https://zerocafe.herokuapp.com/api/v1/events"
+        Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
+            .responseString { response in
+                if response.result.isSuccess {
+                        print("通信成功")
+                         debugPrint(response.result.value)
+                } else {
+                        print("通信失敗")
+                }
+        }

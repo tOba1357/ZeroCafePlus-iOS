@@ -13,10 +13,13 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     var sheduleAlertView:SheduleAlertView!
     
     var titleLabel:UILabel!
-    var getDate :[String]!
     var myTextField:UITextField!
     var hourTextField:UITextField!
     var minuteTextField:UITextField!
+    
+    var getDate :[String]!
+    var getTitle:String!
+    var getDetail:String!
     
     var pickHour:[String] = []
     var pickMinute:[String] = []
@@ -26,8 +29,6 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        alertMinute = "00"
         
         for i in 8...21{
             let iStr = String(format:"%2d",i)
@@ -97,8 +98,10 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         var picMinuteStr = alertMinute
         if (component == 0){
             picHourStr = pickHour[row] as String
+            alertHour = pickHour[row] as String
         }else if (component == 1){
-            picMinuteStr = pickMinute[row]
+            picMinuteStr = pickMinute[row] as String
+            alertMinute = pickMinute[row] as String
         }
         if pickerView.tag == 1{
             hourTextField.text = "\(picHourStr):\(picMinuteStr)"
@@ -106,17 +109,16 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         if pickerView.tag == 2{
             minuteTextField.text = "\(picHourStr):\(picMinuteStr)"
         }
-        alertHour = picHourStr
-        alertMinute = picMinuteStr
     }
     func onClick(sender: UIBarButtonItem) {
         myTextField.resignFirstResponder()
     }
     
-    func pushSheduleAlert(checkDateStr:String){
+    func pushSheduleAlert(checkDateStr:String,myDateArray:[Int]){
         
         let checkData = checkDateStr.componentsSeparatedByString("/")
         alertHour = checkData[3]
+        alertMinute = "00"
         
         let myToolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
         myToolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -144,6 +146,7 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             let label:UILabel = UILabel(frame: CGRectMake(0, 0, 50, 60))
             label.text = "開始"
             text.leftView = label
+            text.text = "\(checkData[3]):00"
             text.tag = 1
             self.hourTextField = text
             text.inputView = pickerView1
@@ -155,6 +158,7 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             let label:UILabel = UILabel(frame: CGRectMake(0, 0, 50, 60))
             label.text = "終了"
             text.leftView = label
+            text.text = "\(Int(checkData[3])!+1):00"
             self.minuteTextField = text
             text.inputView = pickerView2
             text.inputAccessoryView = myToolBar
@@ -166,6 +170,11 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             action in
             NSLog("はいボタンが押されました")
             if let createEventVC = self.storyboard?.instantiateViewControllerWithIdentifier("CreateEventVC") as? CreateEventVC {
+                createEventVC.getTitle = self.getTitle
+                createEventVC.getDetail = self.getDetail
+                createEventVC.getDateArray = myDateArray
+                createEventVC.getStartTime = self.hourTextField.text
+                createEventVC.getEndTime = self.minuteTextField.text
                 self.navigationController?.pushViewController(createEventVC, animated: true)
             }
         }

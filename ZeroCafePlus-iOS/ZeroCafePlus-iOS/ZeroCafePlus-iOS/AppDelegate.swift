@@ -16,11 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-//        let forthViewController: ForthViewController = ForthViewController()
-//        let myNavigationController: UINavigationController = UINavigationController(rootViewController: forthViewController)
-//        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//        window?.rootViewController = myNavigationController
-//        window?.makeKeyAndVisible()
+//        let myFirstViewController: FirstViewController = FirstViewController()
+//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//        self.window?.rootViewController = myFirstViewController
+//        self.window?.makeKeyAndVisible()
 
 //        // Override point for customization after application launch.
         return true
