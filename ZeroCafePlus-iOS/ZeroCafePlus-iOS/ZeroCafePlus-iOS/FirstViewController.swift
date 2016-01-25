@@ -17,10 +17,35 @@ protocol EventViewDelegate {
 
 class FirstViewController: UIViewController, EventViewDelegate {
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet var horizontalSV: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        horizontalSV.pagingEnabled = true
+        horizontalSV.directionalLockEnabled = true
+        horizontalSV.contentSize.width = view.frame.size.width * 3.0
+        horizontalSV.contentSize.height = 1200
+        horizontalSV.backgroundColor = UIColor.hexStr("#F5F5DC", alpha: 1.0) 
+        
+        
+        let kitView = UIView()
+        let kuView = UIView()
+        let favoriteView = UIView()
+        let views = [kitView,kuView, favoriteView]
+        
+        for i in 0...2 {
+            let viewHeight = CGFloat(128)
+            
+            let x = view.frame.width * CGFloat(i)
+            let scrollview = UIScrollView(frame: CGRectMake(x, 0, view.frame.size.width, view.frame.size.height))
+            
+//            scrollview.contentSize.height = 1200
+            horizontalSV.addSubview(scrollview)
+            
+        }
+        
+        
 
         let url = "https://zerocafe.herokuapp.com/api/v1/events"
         Alamofire.request(.GET, url)
@@ -58,7 +83,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                         
-                            self.scrollView.addSubview(eventViewGenerate)
+                            self.horizontalSV.addSubview(eventViewGenerate)
                             myX = 162
                         }else{
                         
@@ -76,7 +101,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                           let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID, dateNameString: dateName, tagNameString: tagName!)
                           eventViewGenerate.mydelegate = self
                           eventViewGenerate.layer.cornerRadius = 10
-                          self.scrollView.addSubview(eventViewGenerate)
+                          self.horizontalSV.addSubview(eventViewGenerate)
                         
                           myX = 6
                           myY += 212
