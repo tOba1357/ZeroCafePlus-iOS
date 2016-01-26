@@ -25,9 +25,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         horizontalSV.pagingEnabled = true
         horizontalSV.directionalLockEnabled = true
         horizontalSV.contentSize.width = view.frame.size.width * 3.0
-        horizontalSV.contentSize.height = 1200
-        horizontalSV.backgroundColor = UIColor.hexStr("#F5F5DC", alpha: 1.0) 
-        
+        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
         let kitView = UIView()
         let kuView = UIView()
@@ -40,7 +38,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
             let x = view.frame.width * CGFloat(i)
             let scrollview = UIScrollView(frame: CGRectMake(x, 0, view.frame.size.width, view.frame.size.height))
             
-//            scrollview.contentSize.height = 1200
+
             horizontalSV.addSubview(scrollview)
             
         }
@@ -106,6 +104,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                           myX = 6
                           myY += 212
                         }
+                        
+                        self.horizontalSV.contentSize.height = CGFloat((eventArray.count / 2) * 212 + 20)
     
                     }
                 
