@@ -6,8 +6,6 @@
 //  Copyright © 2015年 Smartphone.apps.project. All rights reserved.
 //
 
-import Foundation
-
 import UIKit
 
 class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDelegate, CheckCalenderDelegate{
@@ -30,7 +28,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDe
         displayWidth = self.view.frame.width
         displayHeight = self.view.frame.height
         
-        scrollView.frame = CGRectMake(0, barHeight, displayWidth, displayHeight)
+        scrollView.frame = CGRectMake(0, barHeight, displayWidth-69, displayHeight)
         scrollView.delegate = self
         scrollView.contentSize   = CGSizeMake(0, 0)
         scrollView.contentOffset = CGPointMake(0.0 , 0.0)
@@ -43,7 +41,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDe
         label.textColor = UIColorFromRGB(0xFFFFFF)
         label.text = "イベントを企画する"
         
-        createEvetView = CreateEventView(frame: CGRectMake(0, 0, displayWidth,displayHeight))
+        createEvetView = CreateEventView(frame: CGRectMake(0, 0, scrollView.frame.size.width,displayHeight))
         createEvetView.delegate = self
         scrollView.addSubview(createEvetView)
         
@@ -53,10 +51,10 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDe
         super.didReceiveMemoryWarning()
     }
     
-    func createdEventNameExposition(eventName:String,exposition:String){
+    func createEventNameExposition(eventName:String,exposition:String) {
         scrollView.contentSize   = CGSizeMake(0, self.view.frame.height)
         
-        checkCalenderView = CheckCalenderView(frame: CGRectMake(0, displayHeight, displayWidth, displayHeight))
+        checkCalenderView = CheckCalenderView(frame: CGRectMake(0, displayHeight, scrollView.frame.size.width, displayHeight))
         checkCalenderView.checkCalenderDelegate = self
         scrollView.addSubview(checkCalenderView)
         nextScroll(self.view.frame.size.height)

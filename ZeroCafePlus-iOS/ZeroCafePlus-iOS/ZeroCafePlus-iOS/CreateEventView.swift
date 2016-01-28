@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CreateEventDelegate{
+ protocol CreateEventDelegate{
     func createEventNameExposition(eventName:String,exposition:String)
 }
 
