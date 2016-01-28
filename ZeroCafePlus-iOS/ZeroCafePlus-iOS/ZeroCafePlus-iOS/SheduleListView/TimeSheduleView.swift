@@ -63,8 +63,8 @@ class TimeSheduleView: UIView {
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
-//                debugPrint(response.result.value)
-                let json = JSON((response.result.value)!)
+                debugPrint(response.result.value)
+                let json = JSON(response.result.value!)
                 let eventArray = json["events"].array! as Array
                 for events in eventArray{
                     let startTime = events["event"]["start_time"].string! as String
@@ -84,40 +84,39 @@ class TimeSheduleView: UIView {
                     print(endTimeData[0])
                     print(endTimeData[1])
                     print(endTimeData[2])
-
-//                    if Int(startDateData[0])! == year &&
-//                        Int(startDateData[1])! == month &&
-//                        Int(startDateData[2])! == day{
-//                            print("aaa")
-//                            
-//                            if Int(startTimeData[0])! == hour-1 {
-//                                if Int(startTimeData[1])! >= 45{
+                    
+                    if Int(startDateData[0])! == year &&
+                        Int(startDateData[1])! == month &&
+                        Int(startDateData[2])! == day{
+                            print("aaa")
+                            if Int(startTimeData[0])! == hour-1 {
+                                if Int(startTimeData[1])! >= 45{
                                     var i = 45
-//                                    while Int(endTimeData[0])! == hour-1 && Int(endTimeData[1])! == i{
+                                    while Int(endTimeData[0])! == hour-1 && Int(endTimeData[1])! == i{
                                         let eventsLabel = UILabel(frame: CGRectMake(frame.size.width/2,frame.size.height/120+frame.size.height/60*CGFloat(i-45),frame.size.width/10,frame.size.height/60))
                                         eventsLabel.backgroundColor = UIColor.greenColor()
                                         self.addSubview(eventsLabel)
                                         print("a\(Int(startTimeData[1]))")
                                         i++
-//                                    }
-//                                }
-//                            }
-//                            else if Int(startTimeData[0])! == hour{
-//                                
-//                                if Int(startTimeData[1]) < 45{
-//                                    var i = 0
-//                                    while Int(startTimeData[1]) == i{
-//                                        if Int(endTimeData[0])! == hour && Int(endTimeData[1])! == i {
-//                                            break
-//                                        }
-//                                        let eventsLabel = UILabel(frame: CGRectMake(frame.size.width/2,frame.size.height/60*CGFloat(i+15),frame.size.width/10,frame.size.height/60))
-//                                        eventsLabel.backgroundColor = UIColor.greenColor()
-//                                        self.addSubview(eventsLabel)
-//                                        i++
-//                                    }
-//                                }
-//                            }
-//                    }
+                                    }
+                                }
+                            }
+                            else if Int(startTimeData[0])! == hour{
+                                
+                                if Int(startTimeData[1]) < 45{
+                                    var i = 0
+                                    while Int(startTimeData[1]) == i{
+                                        if Int(endTimeData[0])! == hour && Int(endTimeData[1])! == i {
+                                            break
+                                        }
+                                        let eventsLabel = UILabel(frame: CGRectMake(frame.size.width/2,frame.size.height/60*CGFloat(i+15),frame.size.width/10,frame.size.height/60))
+                                        eventsLabel.backgroundColor = UIColor.greenColor()
+                                        self.addSubview(eventsLabel)
+                                        i++
+                                    }
+                                }
+                            }
+                    }
                 }
         }
     }

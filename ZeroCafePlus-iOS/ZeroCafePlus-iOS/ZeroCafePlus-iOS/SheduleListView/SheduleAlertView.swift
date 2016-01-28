@@ -40,7 +40,6 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         currentDay = day
         
         avLoadingView = UIAlertView(title: nil, message: "Wait..", delegate: self, cancelButtonTitle: nil)
-
         
         scrollView = UIScrollView(frame: self.bounds)
         scrollView.backgroundColor = UIColor.clearColor()
