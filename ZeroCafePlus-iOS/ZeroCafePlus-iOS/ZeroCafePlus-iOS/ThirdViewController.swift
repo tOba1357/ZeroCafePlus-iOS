@@ -10,31 +10,19 @@ import Foundation
 
 import UIKit
 
-class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDelegate, CheckCalenderDelegate{
+class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDelegate{
     
     let scrollView = UIScrollView()
+    
     var createEvetView :CreateEventView!
-    var checkCalenderView :CheckCalenderView!
-    var viewCount = 0
-    
-    // Status Barの高さを取得する.
-    let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-    
-    // Viewの高さと幅を取得する.
-    var displayWidth: CGFloat!
-    var displayHeight: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayWidth = self.view.frame.width
-        displayHeight = self.view.frame.height
-        
-        scrollView.frame = CGRectMake(0, barHeight, displayWidth, displayHeight)
-        scrollView.delegate = self
+        scrollView.frame = CGRectMake(0,0,self.view.frame.width,self.view.frame.height/10*8)
+        scrollView.delegate = self;
         scrollView.contentSize   = CGSizeMake(0, 0)
         scrollView.contentOffset = CGPointMake(0.0 , 0.0)
-        scrollView.pagingEnabled = false
         self.view.addSubview(scrollView)
         
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
@@ -43,7 +31,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDe
         label.textColor = UIColorFromRGB(0xFFFFFF)
         label.text = "イベントを企画する"
         
-        createEvetView = CreateEventView(frame: CGRectMake(0, 0, displayWidth,displayHeight))
+        createEvetView = CreateEventView(frame: CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height))
         createEvetView.delegate = self
         scrollView.addSubview(createEvetView)
         
@@ -53,33 +41,10 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDe
         super.didReceiveMemoryWarning()
     }
     
-    func createdEventNameExposition(eventName:String,exposition:String){
+    func createEventNameExposition(eventName:String,exposition:String){
         scrollView.contentSize   = CGSizeMake(0, self.view.frame.height)
-        
-        checkCalenderView = CheckCalenderView(frame: CGRectMake(0, displayHeight, displayWidth, displayHeight))
-        checkCalenderView.checkCalenderDelegate = self
-        scrollView.addSubview(checkCalenderView)
-        nextScroll(self.view.frame.size.height)
+
     }
-    
-    func checkedCalender(checkDate:[String]){
-        nextScroll(self.view.frame.size.height*2)
-    }
-    
-    //    func scrollViewDidScroll(scrollView:UIScrollView)
-    //    {
-    //        let pos:CGFloat  = scrollView.contentOffset.y / scrollView.bounds.size.height
-    //        let deff:CGFloat = pos - 1.0
-    //        if fabs(deff) >= 1.0 {
-    //            if (deff > 0) {
-    //                scrollView.setContentOffset(CGPointMake(0, scrollView.contentOffset.y + displayHeight), animated: true)
-    //            }else{
-    //                if scrollView.contentOffset.y > 0{
-    //                    scrollView.setContentOffset(CGPointMake(0, scrollView.contentOffset.y - displayHeight), animated: true)
-    //                }
-    //            }
-    //        }
-    //    }
     
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
@@ -89,10 +54,4 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate ,CreateEventDe
             alpha: CGFloat(1.0)
         )
     }
-    
-    func nextScroll(nextPosY:CGFloat){
-        scrollView.contentSize = CGSizeMake(0, nextPosY)
-        scrollView.setContentOffset(CGPointMake(0, nextPosY), animated: true)
-    }
-    
 }

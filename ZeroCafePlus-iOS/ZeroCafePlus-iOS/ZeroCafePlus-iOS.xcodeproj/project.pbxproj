@@ -16,6 +16,7 @@
 		BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD31C2858090007A49D /* CalenderView.swift */; };
 		BA2F0AD71C2858090007A49D /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD41C2858090007A49D /* DayView.swift */; };
 		BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD51C2858090007A49D /* MonthView.swift */; };
+		BA2F0ADC1C28586A0007A49D /* CalenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0ADB1C28586A0007A49D /* CalenderVC.swift */; };
 		BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */; };
 		BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */; };
 		BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */; };
@@ -24,8 +25,6 @@
 		BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B741C26E54300648280 /* TimeSheduleView.swift */; };
 		BA5D9BB21C26E6E300648280 /* libCTCheckbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5D9BAF1C26E5F000648280 /* libCTCheckbox.a */; };
 		BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */; };
-		BAFFF4BE1C59D3A600DB5A07 /* CheckCalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFF4BC1C59D3A600DB5A07 /* CheckCalenderView.swift */; };
-		BAFFF4BF1C59D3A600DB5A07 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFF4BD1C59D3A600DB5A07 /* CreateEventView.swift */; };
 		D70161651C288A480036AF92 /* AnotherTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70161641C288A480036AF92 /* AnotherTopVC.swift */; };
 		D70161691C288B3A0036AF92 /* FavoriteTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70161681C288B3A0036AF92 /* FavoriteTopVC.swift */; };
 		D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */; };
@@ -83,6 +82,7 @@
 		BA2F0AD31C2858090007A49D /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		BA2F0AD41C2858090007A49D /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		BA2F0AD51C2858090007A49D /* MonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		BA2F0ADB1C28586A0007A49D /* CalenderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderVC.swift; sourceTree = "<group>"; };
 		BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventVC.swift; sourceTree = "<group>"; };
@@ -93,8 +93,6 @@
 		BAE34F671C28F2DA0029D6B9 /* CTCheckbox-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTCheckbox-Prefix.pch"; sourceTree = "<group>"; };
 		BAE34F681C28F2DA0029D6B9 /* CTCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCheckbox.h; sourceTree = "<group>"; };
 		BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCheckbox.m; sourceTree = "<group>"; };
-		BAFFF4BC1C59D3A600DB5A07 /* CheckCalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCalenderView.swift; sourceTree = "<group>"; };
-		BAFFF4BD1C59D3A600DB5A07 /* CreateEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		D70161641C288A480036AF92 /* AnotherTopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnotherTopVC.swift; sourceTree = "<group>"; };
 		D70161681C288B3A0036AF92 /* FavoriteTopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTopVC.swift; sourceTree = "<group>"; };
 		D7A6264A1C1AB359002DCEC6 /* ZeroCafePlus-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeroCafePlus-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,8 +222,6 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				BAFFF4BC1C59D3A600DB5A07 /* CheckCalenderView.swift */,
-				BAFFF4BD1C59D3A600DB5A07 /* CreateEventView.swift */,
 				BAE34F5A1C28EFBB0029D6B9 /* CTCheckbox */,
 				BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */,
 				BA2F0AD21C2858090007A49D /* Calender */,
@@ -248,6 +244,7 @@
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
+				BA2F0ADB1C28586A0007A49D /* CalenderVC.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
@@ -486,12 +483,10 @@
 				BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */,
 				BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */,
 				BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */,
-				BAFFF4BF1C59D3A600DB5A07 /* CreateEventView.swift in Sources */,
 				D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */,
 				6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */,
 				D70161691C288B3A0036AF92 /* FavoriteTopVC.swift in Sources */,
 				BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */,
-				BAFFF4BE1C59D3A600DB5A07 /* CheckCalenderView.swift in Sources */,
 				D7A6267E1C1AD395002DCEC6 /* ThirdViewController.swift in Sources */,
 				BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */,
 				D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */,
@@ -499,6 +494,7 @@
 				BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */,
 				6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */,
 				BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */,
+				BA2F0ADC1C28586A0007A49D /* CalenderVC.swift in Sources */,
 				D7A626801C1AD3D6002DCEC6 /* FourthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
