@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol CheckCalenderDelegate{
+    func checkedCalender(checkDate:[String])
+}
+
 class CheckCalenderView: UIView , CalenderViewDelegate{
     
     var yearMonthLabel:UILabel!
-
+    
     var getTitle:String!
     var getDetail:String!
+    
+    var checkCalenderDelegate:CheckCalenderDelegate!
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -68,16 +74,15 @@ class CheckCalenderView: UIView , CalenderViewDelegate{
         
         let checkDate :[String] = [checkYearStr,checkMonthStr,checkDateStr]
         
-//        if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC{
-//            scheduleVC.getTitle = getTitle
-//            scheduleVC.getDetail = getDetail
-//            scheduleVC.getDate = checkDate
-//            self.navigationController?.pushViewController(scheduleVC, animated: true)
-//        }
+        //        if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC{
+        //            scheduleVC.getDate = checkDate
+        //            self.navigationController?.pushViewController(scheduleVC, animated: true)
+        //        }
         
     }
     func changDateCalender(checkYearInt:Int,checkMonthInt:Int){
         yearMonthLabel.text = "\(checkYearInt)/\(checkMonthInt)月"
     }
+    
 }
 
