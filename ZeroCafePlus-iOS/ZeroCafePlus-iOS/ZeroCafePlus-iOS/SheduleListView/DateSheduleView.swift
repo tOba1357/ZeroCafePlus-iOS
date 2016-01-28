@@ -21,6 +21,7 @@ class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     init(frame: CGRect,year:Int,month:Int,day:Int) {
         super.init(frame:frame)
         
@@ -48,7 +49,7 @@ class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
         
         var timeCellPosY:CGFloat = frame.size.height/27*2
         for i in 8...21 {
-            timeCellView = TimeSheduleView(frame: CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.height / 27 * 2), year:year,month:month,day:i+1,hour:i)
+            timeCellView = TimeSheduleView(frame: CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.height / 27 * 2), year:year,month:month,day:day,hour:i)
             
             timeCellView.center = CGPointMake(frame.size.width / 2, timeCellPosY)
             timeCellView.hourDelegate = self
@@ -73,5 +74,4 @@ class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
     func pushHour(checkDateStr:String) {
         self.dateSheeduleDelegate?.pushDateShedule(checkDateStr)
     }
-
 }
