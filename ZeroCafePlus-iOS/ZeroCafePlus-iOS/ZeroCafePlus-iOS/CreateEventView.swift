@@ -10,6 +10,7 @@ import UIKit
 
 protocol CreateEventDelegate{
     func createEventNameExposition(eventName:String,exposition:String)
+    func nilAlertAction(title:String,message:String)
 }
 
 class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate {
@@ -22,7 +23,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     var txtActiveView = UITextView()
     var isBoolTextView:Bool!
     
-    var delegate : CreateEventDelegate!
+    var createEventdelegate : CreateEventDelegate!
     
     enum TextFieldType {
         case Title
@@ -34,8 +35,18 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     
     override init(frame:CGRect){
         super.init(frame: frame)
- 
+        
         isBoolTextView = false
+        
+        let myToolBar = UIToolbar(frame: CGRectMake(0, self.frame.size.height/6, self.frame.size.width, 40.0))
+        myToolBar.layer.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height-20.0)
+        myToolBar.backgroundColor = UIColor.blackColor()
+        myToolBar.barStyle = UIBarStyle.Black
+        myToolBar.tintColor = UIColor.whiteColor()
+        
+        let myToolBarButton = UIBarButtonItem(title: "Close", style: .Bordered, target: self, action: "onClick:")
+        myToolBarButton.tag = 1
+        myToolBar.items = [myToolBarButton]
         
         scrollView.frame = CGRectMake(0,0,self.frame.width,self.frame.height/10*8)
         scrollView.delegate = self;
@@ -44,11 +55,11 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         self.addSubview(scrollView)
         
         let titleLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/10))
-        titleLabel.text = "イベント名（１６文字以内）"
+        titleLabel.text = "イベント名(18文字以内)"
         titleLabel.sizeToFit()
         titleLabel.layer.position = CGPointMake(self.frame.width/2, scrollView.frame.height/10)
         
-        titleTextField = UITextField(frame: CGRectMake(0,0,self.frame.width/5*4,self.frame.height/10))
+        titleTextField = UITextField(frame: CGRectMake(0,0,self.frame.width,self.frame.height/10))
         titleTextField.layer.borderWidth = 1
         titleTextField.layer.borderColor = UIColor.blackColor().CGColor
         titleTextField.layer.cornerRadius = 15
@@ -56,7 +67,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         titleTextField.layer.position = CGPointMake(self.frame.width/2, scrollView.frame.height/5)
         
         titleAlertLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/20))
-        titleAlertLabel.text = "⚠️16文字を超えています。"
+        titleAlertLabel.text = "⚠️18文字を超えています。"
         titleAlertLabel.sizeToFit()
         titleAlertLabel.backgroundColor = UIColor.redColor()
         titleAlertLabel.hidden = true
@@ -67,11 +78,12 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         detailLabel.sizeToFit()
         detailLabel.layer.position = CGPointMake(self.frame.width/2, titleTextField.layer.position.y + titleAlertLabel.frame.height*2 + detailLabel.frame.height)
         
-        detailTextView = UITextView(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/5))
+        detailTextView = UITextView(frame: CGRectMake(0,0,self.frame.width,self.frame.height/5))
         detailTextView.layer.borderColor = UIColor.blackColor().CGColor
         detailTextView.layer.borderWidth = 1
         detailTextView.layer.cornerRadius = 15
         detailTextView.textAlignment = NSTextAlignment.Left
+        detailTextView.inputAccessoryView = myToolBar
         detailTextView.delegate = self
         detailTextView.layer.position = CGPointMake(self.frame.width/2,scrollView.frame.height/2)
         
@@ -100,32 +112,34 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     }
     
     func onClickMyButton(sender: UIButton){
-        if titleTextField.text != nil && detailTextView.text != nil {
-            self.delegate.createEventNameExposition(titleTextField.text!, exposition: detailTextView.text)
+        if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 {
+            self.createEventdelegate.createEventNameExposition(titleTextField.text!, exposition: detailTextView.text)
+        } else {
+            self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
         }
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        let notificationCenter = NSNotificationCenter.defaultCenter()
-//        notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
-//        notificationCenter.addObserver(self, selector: "handleKeyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
-//    }
+    //    override func viewWillAppear(animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //
+    //        let notificationCenter = NSNotificationCenter.defaultCenter()
+    //        notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
+    //        notificationCenter.addObserver(self, selector: "handleKeyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
+    //    }
     
     // Viewが非表示になるたびに呼び出されるメソッド
-//    override func viewDidDisappear(animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        
-//        // NSNotificationCenterの解除処理
-//        let notificationCenter = NSNotificationCenter.defaultCenter()
-//        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-//        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-//    }
-//    
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//    }
+    //    override func viewDidDisappear(animated: Bool) {
+    //        super.viewDidDisappear(animated)
+    //
+    //        // NSNotificationCenterの解除処理
+    //        let notificationCenter = NSNotificationCenter.defaultCenter()
+    //        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    //        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    //    }
+    //
+    //    override func didReceiveMemoryWarning() {
+    //        super.didReceiveMemoryWarning()
+    //    }
     
     func handleKeyboardWillShowNotification(notification: NSNotification) {
         
@@ -204,6 +218,10 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         return true
     }
     
+    func onClick(sender: UIBarButtonItem) {
+        self.endEditing(true)
+    }
+
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
