@@ -16,9 +16,6 @@ class CheckCalenderView: UIView , CalenderViewDelegate{
     
     var yearMonthLabel:UILabel!
     
-    var getTitle:String!
-    var getDetail:String!
-    
     var checkCalenderDelegate:CheckCalenderDelegate!
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,13 +28,13 @@ class CheckCalenderView: UIView , CalenderViewDelegate{
         var dates:[String] = dateData()
         
         yearMonthLabel = UILabel(frame: CGRectMake(0, 0, self.frame.width/3, self.frame.height/10))
-        yearMonthLabel.text = "\(dates[0])/\(dates[1])月"
+        yearMonthLabel.text = "\(dates[0])年\(dates[1])月"
         yearMonthLabel.textAlignment = NSTextAlignment.Center
-        yearMonthLabel.layer.position = CGPointMake(self.frame.size.width/3 , self.frame.size.height/5);
+        yearMonthLabel.layer.position = CGPointMake(self.frame.size.width/2 , self.frame.size.height/5);
         
         
         let calenderView:CalenderView = CalenderView(frame: CGRectMake(0, 0,
-            UIScreen.mainScreen().bounds.size.width*0.9, UIScreen.mainScreen().bounds.size.height*0.5))
+            self.frame.size.width, UIScreen.mainScreen().bounds.size.height*0.5))
         calenderView.calenderdelegate = self
         
         calenderView.center = CGPointMake(self.frame.width * 0.5, self.frame.height*0.5)
@@ -73,6 +70,8 @@ class CheckCalenderView: UIView , CalenderViewDelegate{
         checkMonthStr = checkMonthStr.substringToIndex(checkMonthStr.startIndex.advancedBy(2))
         
         let checkDate :[String] = [checkYearStr,checkMonthStr,checkDateStr]
+        
+        self.checkCalenderDelegate.checkedCalender(checkDate)
         
         //        if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC{
         //            scheduleVC.getDate = checkDate

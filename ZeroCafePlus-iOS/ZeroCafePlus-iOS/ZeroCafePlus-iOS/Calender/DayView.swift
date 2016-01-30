@@ -31,7 +31,6 @@ class DayView: UIView {
         let dayButton:UIButton = UIButton()
         //テキストの色
         dayButton.frame = CGRectMake(0, 0, CGFloat(dayWidth/2),CGFloat(dayHeight/2))
-        dayButton.layer.cornerRadius = 15
 //        dayButton.layer.borderColor = UIColor.blackColor().CGColor
 //        dayButton.layer.borderWidth = 1
         dayButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
