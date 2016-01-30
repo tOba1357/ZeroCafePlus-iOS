@@ -112,6 +112,7 @@ class CreateEventVC: UIViewController,UITextFieldDelegate {
         self.view.addSubview(makeButton)
         
     }
+    
     func checked(sender:CTCheckbox) {
         diveJoinBool = !diveJoinBool
     }
