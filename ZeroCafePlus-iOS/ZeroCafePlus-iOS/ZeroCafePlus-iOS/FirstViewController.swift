@@ -21,6 +21,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
     private var kuButton: UIButton!
     private var favoriteButton: UIButton!
     
+    private var myImageView: UIImageView!
+    
     @IBOutlet var horizontalSV: UIScrollView!
     
     override func viewDidLoad() {
@@ -31,12 +33,43 @@ class FirstViewController: UIViewController, EventViewDelegate {
         horizontalSV.contentSize.width = view.frame.size.width * 3.0
         horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
-        let kitView = UIView()
-        let kuView = UIView()
-        let favoriteView = UIView()
-        let views = [kitView,kuView, favoriteView]
+//        let kitView = UIView()
+//        let kuView = UIView()
+//        let favoriteView = UIView()
+//        let views = [kitView,kuView, favoriteView]
         
+        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
         
+        let myImage = UIImage(named: "twitter-icon.png")
+        myImageView = UIImageView(frame: CGRectMake(0,0,78,78))
+        myImageView.image = myImage
+        myImageView.layer.position = CGPoint(x: self.view.bounds.width/2, y: 200.0)
+        
+        kitButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        kitButton.layer.position = CGPoint(x: screenWidth/6, y: screenHeight/12)
+        kitButton.setTitle("工大", forState: .Normal)
+        kitButton.titleLabel?.font = UIFont.systemFontOfSize(24)
+        kitButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
+        kitButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(kitButton)
+        
+        kuButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        kuButton.layer.position = CGPoint(x: screenWidth/2.25, y: screenHeight/12)
+        kuButton.setTitle("金大", forState: .Normal)
+        kuButton.titleLabel?.font = UIFont.systemFontOfSize(24)
+        kuButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
+        kuButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(kuButton)
+        
+        favoriteButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        favoriteButton.layer.position = CGPoint(x: screenWidth/1.4, y: screenHeight/12)
+        favoriteButton.setTitle("お気に入り", forState: .Normal)
+        favoriteButton.titleLabel?.font = UIFont.systemFontOfSize(24)
+        favoriteButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
+        favoriteButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(favoriteButton)
         
         
         for i in 0...2 {
@@ -44,7 +77,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
             
             let x = view.frame.width * CGFloat(i)
             let scrollview = UIScrollView(frame: CGRectMake(x, 0, view.frame.size.width, view.frame.size.height))
-            
             
             horizontalSV.addSubview(scrollview)
             
