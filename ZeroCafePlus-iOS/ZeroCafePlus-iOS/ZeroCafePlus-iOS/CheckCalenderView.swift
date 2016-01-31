@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CheckCalenderDelegate{
+    func checkedCalender(checkDate:[String])
+}
+
 class CheckCalenderView: UIView , CalenderViewDelegate{
     
     var yearMonthLabel:UILabel!
