@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Alamofire
 
-class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate{
+class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate,ScheduleDelegate{
     
     let scrollView = UIScrollView()
     var createEvetView :CreateEventView!
@@ -22,11 +23,11 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     var eventName :String!
     var eventExposition :String!
     var eventDate :[String]!
+    var evrntStartTime :String!
+    var evrntEndTime :String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        scheduleWindow = UIWindow()
         
         scrollView.frame = CGRectMake(34.5, barHeight, self.view.frame.width-69, self.view.frame.height-barHeight)
         scrollView.delegate = self
@@ -67,26 +68,77 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         createSheduleWindow()
     }
     
-    
     func createSheduleWindow(){
         self.view.backgroundColor = UIColor.grayColor()
+        self.view.userInteractionEnabled = false
+
         let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
+
+        scheduleWindow = UIWindow()
         scheduleWindow.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
         scheduleWindow.backgroundColor = UIColor.grayColor()
         scheduleWindow.layer.masksToBounds = true
         scheduleWindow.layer.cornerRadius = 15
         scheduleWindow.hidden = false
+        
         if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC {
             scheduleVC.getDate = eventDate
+            scheduleVC.scheduleDelegate = self
             scheduleWindow.rootViewController = scheduleVC
         }
-        scheduleWindow.makeKeyWindow()
+        
+        makeKeyAndVisible(scheduleWindow)
         self.scheduleWindow.makeKeyAndVisible()
     }
     
+    func closeScheduleWindow(btnTag:Int){
+        self.view.userInteractionEnabled = true
+        self.view.backgroundColor = UIColor.whiteColor()
+
+        switch btnTag{
+        case 1:
+            resignKeyWindow(scheduleWindow)
+        case 2:
+            resignKeyWindow(scheduleWindow)
+            nextScroll(self.view.frame.size.height*3)
+        default:
+            break
+        }
+    }
     
-    func decideStartEndTime(statTime:String,endTime:String){
-        nextScroll(self.view.frame.size.height*2)
+    func pushEventJson(){
+        let headers = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+        
+        let parameters:[String : NSDictionary] =
+        [
+            "event" : [
+                "title" : self.eventName,
+                "description" : self.eventExposition,
+                "belonging" : "スマート大学",
+                "entry_fee" : 999,
+                "owner_id" : 1,
+                "dive_join" : 111,
+//                "start_time" : "\(self.getDateArray[0])-\(self.getDateArray[1])-\(self.getDateArray[2])T\(self.getStartTime)",
+//                "end_time" : "\(self.getDateArray[0])-\(self.getDateArray[1])-\(self.getDateArray[2])T\(self.getEndTime)",
+//                "confirm" : true,
+//                "place" : 1,
+//                "capacity" : Int(self.numText.text!)!,
+//                "category_tag" : self.tagText.text!,
+                "genre" : 1,
+                "color" : "redBlue"
+            ]
+        ]
+        
+        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
+            .responseString { response in
+                debugPrint(response.result.value)
+                //"いいよぉ！"が返って来れば成功
+        }
+
     }
     
     func nilAlertAction(title:String,message:String){
@@ -100,7 +152,24 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         scrollView.contentSize = CGSizeMake(0, nextPosY)
         scrollView.setContentOffset(CGPointMake(0, nextPosY), animated: true)
     }
+
+    func makeKeyAndVisible(myWindow:UIWindow) {
+        myWindow.backgroundColor = UIColor.clearColor()
+        myWindow.alpha = 0
+        UIView.beginAnimations("fade-in", context: nil)
+        myWindow.makeKeyAndVisible()
+        myWindow.alpha = 1
+        UIView.commitAnimations()
+    }
     
+    func resignKeyWindow(myWindow:UIWindow) {
+        myWindow.alpha = 1
+        UIView.beginAnimations("fade-out", context: nil)
+        myWindow.resignKeyWindow()
+        myWindow.alpha = 0
+        UIView.commitAnimations()
+    }
+
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
