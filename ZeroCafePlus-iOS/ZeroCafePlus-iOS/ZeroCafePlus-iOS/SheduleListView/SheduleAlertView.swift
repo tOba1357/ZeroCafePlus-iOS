@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SheduleAlertDelegate{
-    func pushSheduleAlert(checkDateStr:String,myDateArray:[Int])
+    func pushSheduleAlert(checkDateStr:String,myDateArray:[Int],alreadyStertTimeData:[String],alreadyEndTimeData:[String])
     func changDateShedule(myDateStr:String)
 }
 
@@ -40,7 +40,6 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         currentDay = day
         
         avLoadingView = UIAlertView(title: nil, message: "Wait..", delegate: self, cancelButtonTitle: nil)
-
         
         scrollView = UIScrollView(frame: self.bounds)
         scrollView.backgroundColor = UIColor.clearColor()
@@ -72,6 +71,7 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         scrollView.addSubview(prevDayView)
         scrollView.addSubview(currentDayView)
         scrollView.addSubview(nextDayView)
+        
     }
     
     func scrollViewDidScroll(scrollView:UIScrollView)
@@ -195,13 +195,18 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         return nil;
     }
     
+    func createMyTimeSchedule(startTime:String,endTime:String){
+        currentDayView.createMyTime(startTime, endStr: endTime)
+        
+    }
+    
     func changeDate(){
         let myDateStr = String(format:"%04d/%02d/%02d",currentYear,currentMonth,currentDay)
         self.sheduleAlertDelegate?.changDateShedule(myDateStr)
     }
     
-    func pushDateShedule(checkDateStr:String){
+    func pushDateShedule(checkDateStr:String,alreadyStertTimeData:[String],alreadyEndTimeData:[String]){
         let myDateArray:[Int] = [currentYear,currentMonth,currentDay]
-        self.sheduleAlertDelegate?.pushSheduleAlert(checkDateStr,myDateArray: myDateArray)
+        self.sheduleAlertDelegate?.pushSheduleAlert(checkDateStr,myDateArray: myDateArray,alreadyStertTimeData: alreadyStertTimeData,alreadyEndTimeData: alreadyEndTimeData)
     }
 }

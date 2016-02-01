@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class ForthViewController: UIViewController {
     
-    private var willJoinButton: UIButton!
+    private var checkEventsButton: UIButton!
     private var planedButton: UIButton!
     private var joinedButton: UIButton!
     private var profileLabel: UILabel!
@@ -20,8 +20,19 @@ class ForthViewController: UIViewController {
     private var profileImage: UIImageView!
     private var statusLabel: UILabel!
     private var user_name: String!
-    private var scrollView: UIScrollView!
+    private var planningView: UIView!
+    private var attendView: UIView!
+    private var endView: UIView!
     let new_name = NSUserDefaults.standardUserDefaults()
+    private var user_events: UIView!
+    private var events_title: UILabel!
+    private var events_date: UILabel!
+    private var events_tags: UILabel!
+    private var count:Int = 0
+    private var scrollViewHeader: UIScrollView!
+    private var scrollViewMain: UIScrollView!
+    private var pageControl: UIPageControl!
+    private var editProfile: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,199 +42,99 @@ class ForthViewController: UIViewController {
         let screenHeight = screenSize.height
         self.title = ""
         view.backgroundColor = UIColor.whiteColor()
-        //ジェスチャー
-        let leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: "leftSwipe:")
-        leftSwipeGesture.direction = UISwipeGestureRecognizerDirection.Left
-        leftSwipeGesture.numberOfTouchesRequired = 1
-        self.view.addGestureRecognizer(leftSwipeGesture)
+        new_name.removeObjectForKey("NewName");
+        new_name.synchronize()
         
-        let rightSwipeGesture = UISwipeGestureRecognizer(target: self, action: "rightSwipe:")
-        rightSwipeGesture.direction = UISwipeGestureRecognizerDirection.Right
-        rightSwipeGesture.numberOfTouchesRequired = 1
-        self.view.addGestureRecognizer(rightSwipeGesture)
-        
-        
-        //イベント管理
-        willJoinButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        willJoinButton.layer.position = CGPoint(x: screenWidth/5.8, y: screenHeight/2.05)
-        willJoinButton.setTitle("参加予定", forState: .Normal)
-        willJoinButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-        willJoinButton.backgroundColor = UIColor.grayColor()
-        willJoinButton.layer.cornerRadius = 15.0
-        willJoinButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(willJoinButton)
-        
-        planedButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        planedButton.layer.position = CGPoint(x: screenWidth/1.95, y: screenHeight/2.05)
-        planedButton.setTitle("企画", forState: .Normal)
-        planedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-        planedButton.backgroundColor = UIColor.whiteColor()
-        planedButton.layer.cornerRadius = 15.0
-        planedButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(planedButton)
-        
-        joinedButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        joinedButton.layer.position = CGPoint(x: screenWidth/1.18, y: screenHeight/2.05)
-        joinedButton.setTitle("参加", forState: .Normal)
-        joinedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-        joinedButton.backgroundColor = UIColor.whiteColor()
-        joinedButton.layer.cornerRadius = 15.0
-        joinedButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(joinedButton)
-        
-        //プロフィール
         profileLabel = UILabel(frame: CGRectMake(0,0,screenWidth/1.2,screenHeight/2.3))
-        profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/1.94)
-        profileLabel.text = "自己紹介の一例自己紹介の一例僕は竹本だよ〜趣味はなんとかかんとか自己紹介の一例自己紹介の一例"
-        new_name.setObject(profileLabel.text, forKey: "myProfile")
+        profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.34)
+        profileLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
+        profileLabel.text = "金沢大学のtkmtです。プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言"
         profileLabel.numberOfLines = 0
+        profileLabel.backgroundColor = UIColor.redColor()
         profileLabel.sizeToFit()
+        profileLabel.font = UIFont.systemFontOfSize(14)
         self.view.addSubview(profileLabel)
         
         nameLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/15))
-        nameLabel.layer.position = CGPoint(x: screenWidth/1.7, y: screenHeight/4.9)
-        nameLabel.text = "tkmt"
-        nameLabel.textAlignment = NSTextAlignment.Center
-        
+        nameLabel.layer.position = CGPoint(x: screenWidth/2.1, y: screenHeight/6.5)
+        nameLabel.text = ""
+        nameLabel.font = UIFont.systemFontOfSize(27)
+        nameLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
+        nameLabel.textAlignment = NSTextAlignment.Left
         self.view.addSubview(nameLabel)
         
-        statusLabel = UILabel(frame: CGRectMake(0,0,100,50))
-        statusLabel.layer.position = CGPoint(x: screenWidth/1.7, y: screenHeight/3.7)
-        statusLabel.text = "金沢工業大学 3年"
-        statusLabel.font = UIFont.systemFontOfSize(12)
+        statusLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/18))
+        statusLabel.layer.position = CGPoint(x: screenWidth/2.1, y: screenHeight/4.8)
+        statusLabel.text = "金沢工業大学3年"
+        statusLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
+        statusLabel.font = UIFont.systemFontOfSize(14)
         statusLabel.textAlignment = NSTextAlignment.Center
         statusLabel.numberOfLines = 0
         statusLabel.sizeToFit()
         self.view.addSubview(statusLabel)
         
+        editProfile = UIButton(frame: CGRectMake(0,0,screenWidth/5.2, screenHeight/23.6))
+        editProfile.layer.position = CGPoint(x: screenWidth - screenWidth/7.95, y: screenHeight/15.35)
+        editProfile.setImage(UIImage(named: "profile_edit.png"), forState: .Normal)
+        editProfile.addTarget(self, action: "clickBarButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(editProfile)
+        
         profileImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
-        profileImage.frame = CGRectMake(0, 0, screenWidth/6.2, screenWidth/6.2)
-        profileImage.layer.position = CGPoint(x: screenWidth/3.0, y: screenHeight/4.6)
-        profileImage.layer.cornerRadius = 10.0
+        profileImage.frame = CGRectMake(0, 0, screenWidth/5.6, screenWidth/5.6)
+        profileImage.layer.position = CGPoint(x: screenWidth/5.981, y: screenHeight/5.947)
+        profileImage.layer.masksToBounds = true
+        profileImage.layer.cornerRadius = 8.0
         self.view.addSubview(profileImage)
-        
-        scrollView = UIScrollView(frame: CGRectMake(0,screenHeight/2,0,0))
-        scrollView.backgroundColor = UIColor.redColor()
-        self.view.addSubview(scrollView)
-        
-        let myBarButton_1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "clickBarButton:")
-        let myBarButton_2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "clickBarButton:")
-        let myRightButtons  = [myBarButton_1, myBarButton_2]
-        self.navigationController?.navigationBar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationItem.setRightBarButtonItems(myRightButtons, animated:true )
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(animated: Bool) {
         let url = "https://zerocafe.herokuapp.com/api/v1/users"
         Alamofire.request(.GET, url)
             .responseJSON { response in
-                let json = JSON(response.result.value!)
-                
-                let users = json["users"].array! as Array
-                print(users)
-                for user in users {
+                if response.result.isSuccess {
+                    let json = JSON(response.result.value!)
+                    let users = json["users"].array! as Array
                     
-                    let user_id = user["user"]["id"].int!
-                    print(user_id)
-                    
-                    if user_id == 1 {
-                        self.user_name = user["user"]["name"].string!
-                        self.statusLabel.text = user["user"]["major"].string!
-                        self.profileLabel.text = user["user"]["description"].string!
-                        self.nameLabel.text = self.user_name
+                    for user in users {
+                        
+                        let user_id = user["user"]["id"].int!
+                        if user_id == 1 {
+                            self.user_name = user["user"]["name"].string!
+                            //                            self.statusLabel.text = user["user"]["major"].string!
+                            //                            self.profileLabel.text = user["user"]["description"].string!
+                            self.nameLabel.text = self.user_name
+                            print(self.user_name)
+                        }
                         
                     }
                     
+                    
+                } else {
+                    print("通信失敗")
                 }
-                for planning in users {
-                    let planEvent = planning["planning_events"].array! as Array
-                    print(planEvent)
-                    for evData in planEvent{
-                        let evMan = evData["event"]["id"].int!
-                        print(evMan)
-                    }
-                }
-                
                 
         }
         nameLabel.text = new_name.objectForKey("NewName") as? String
         
     }
     
-    func clickProjectButton(sender: UIButton){
-        sender.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-        sender.backgroundColor = UIColor.grayColor()
-        if sender.currentTitle == "参加予定" {
-            planedButton.backgroundColor = UIColor.whiteColor()
-            planedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            joinedButton.backgroundColor = UIColor.whiteColor()
-            joinedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-        }
-        else if sender.currentTitle == "企画"{
-            willJoinButton.backgroundColor = UIColor.whiteColor()
-            willJoinButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            joinedButton.backgroundColor = UIColor.whiteColor()
-            joinedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            
-            
-        }
-        else if sender.currentTitle == "参加" {
-            willJoinButton.backgroundColor = UIColor.whiteColor()
-            willJoinButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            planedButton.backgroundColor = UIColor.whiteColor()
-            planedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            
-        }
-        
+    func pushMyButton(myEventID:String) {
+        let eventsdetails = EventsDetailViewController()
+        eventsdetails.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        presentViewController(self, animated: true, completion: nil)
     }
-    
-    func leftSwipe(sender: UISwipeGestureRecognizer){
-        if willJoinButton.backgroundColor == UIColor.grayColor(){
-            planedButton.backgroundColor = UIColor.grayColor()
-            planedButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-            willJoinButton.backgroundColor = UIColor.whiteColor()
-            willJoinButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            joinedButton.backgroundColor = UIColor.whiteColor()
-            joinedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-        }else {
-            willJoinButton.backgroundColor = UIColor.whiteColor()
-            willJoinButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            planedButton.backgroundColor = UIColor.whiteColor()
-            planedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            joinedButton.backgroundColor = UIColor.grayColor()
-            joinedButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-        }
-    }
-    
-    func rightSwipe(sender: UISwipeGestureRecognizer){
-        if joinedButton.backgroundColor == UIColor.grayColor() {
-            planedButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-            planedButton.backgroundColor = UIColor.grayColor()
-            willJoinButton.backgroundColor = UIColor.whiteColor()
-            willJoinButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            joinedButton.backgroundColor = UIColor.whiteColor()
-            joinedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-        }else {
-            willJoinButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-            willJoinButton.backgroundColor = UIColor.grayColor()
-            planedButton.backgroundColor = UIColor.whiteColor()
-            planedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-            joinedButton.backgroundColor = UIColor.whiteColor()
-            joinedButton.setTitleColor(UIColor.hexStr("#B3B3B3", alpha: 1.0), forState: .Normal)
-        }
-    }
-    
     
     func clickBarButton(sender: UIButton){
-        let secondViewController = EditProfileViewController()
-        self.navigationController?.pushViewController(secondViewController, animated: true)
+        let epv = EditProfileViewController()
+        epv.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        presentViewController(epv, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }
 
 
