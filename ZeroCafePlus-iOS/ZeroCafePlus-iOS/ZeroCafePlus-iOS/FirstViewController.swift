@@ -168,7 +168,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         print("success")
         if let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
             eventAttendVC.getID = myEventID
-            self.navigationController?.pushViewController(eventAttendVC, animated: true)
+            self.presentViewController(eventAttendVC, animated: true ,completion:nil)
         }
         else{
             print("aaa")

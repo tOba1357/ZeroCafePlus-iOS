@@ -11,6 +11,13 @@
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
 		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
 		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
+		9871CBFF1C5B87A800895D66 /* event_detail_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CBFD1C5B87A800895D66 /* event_detail_calendar.png */; };
+		9871CC001C5B87A800895D66 /* event_detail_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CBFE1C5B87A800895D66 /* event_detail_clock.png */; };
+		9871CC021C5C90E900895D66 /* event_detail_tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CC011C5C90E900895D66 /* event_detail_tag.png */; };
+		9871CC041C5CB50500895D66 /* event_detail_rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CC031C5CB50500895D66 /* event_detail_rounded.png */; };
+		98D3BC451C5CC6C00005AD85 /* event_detail_rounded_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D3BC441C5CC6C00005AD85 /* event_detail_rounded_gray.png */; };
+		98D3BC4A1C5EF9AE0005AD85 /* event_detail_add_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D3BC491C5EF9AE0005AD85 /* event_detail_add_friend.png */; };
+		98D3BC4E1C5F23F00005AD85 /* event_detail_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D3BC4D1C5F23F00005AD85 /* event_detail_info.png */; };
 		9DD8BDA61C284E9B002F243D /* EventsAttendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */; };
 		9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */; };
 		BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD31C2858090007A49D /* CalenderView.swift */; };
@@ -18,11 +25,11 @@
 		BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD51C2858090007A49D /* MonthView.swift */; };
 		BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */; };
 		BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */; };
-		BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */; };
 		BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B721C26E54300648280 /* DateSheduleView.swift */; };
 		BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B731C26E54300648280 /* SheduleAlertView.swift */; };
 		BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B741C26E54300648280 /* TimeSheduleView.swift */; };
 		BA5D9BB21C26E6E300648280 /* libCTCheckbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5D9BAF1C26E5F000648280 /* libCTCheckbox.a */; };
+		BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */; };
 		BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */; };
 		D70161651C288A480036AF92 /* AnotherTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70161641C288A480036AF92 /* AnotherTopVC.swift */; };
 		D70161691C288B3A0036AF92 /* FavoriteTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70161681C288B3A0036AF92 /* FavoriteTopVC.swift */; };
@@ -78,6 +85,13 @@
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
+		9871CBFD1C5B87A800895D66 /* event_detail_calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_calendar.png; path = ../../../../../../Desktop/event_detail_calendar.png; sourceTree = "<group>"; };
+		9871CBFE1C5B87A800895D66 /* event_detail_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_clock.png; path = ../../../../../../Desktop/event_detail_clock.png; sourceTree = "<group>"; };
+		9871CC011C5C90E900895D66 /* event_detail_tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_tag.png; path = ../../../../../../Desktop/event_detail_tag.png; sourceTree = "<group>"; };
+		9871CC031C5CB50500895D66 /* event_detail_rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded.png; path = ../../../../../../Desktop/event_detail_rounded.png; sourceTree = "<group>"; };
+		98D3BC441C5CC6C00005AD85 /* event_detail_rounded_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded_gray.png; path = ../../../../../../Desktop/event_detail_rounded_gray.png; sourceTree = "<group>"; };
+		98D3BC491C5EF9AE0005AD85 /* event_detail_add_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_add_friend.png; path = ../../../../../../Desktop/event_detail_add_friend.png; sourceTree = "<group>"; };
+		98D3BC4D1C5F23F00005AD85 /* event_detail_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_info.png; path = ../../../../../../Desktop/event_detail_info.png; sourceTree = "<group>"; };
 		9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAttendViewController.swift; sourceTree = "<group>"; };
 		9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDecideViewController.swift; sourceTree = "<group>"; };
 		BA2F0AD31C2858090007A49D /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
@@ -85,11 +99,11 @@
 		BA2F0AD51C2858090007A49D /* MonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
-		BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventVC.swift; sourceTree = "<group>"; };
 		BA5D9B721C26E54300648280 /* DateSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9B731C26E54300648280 /* SheduleAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleAlertView.swift; sourceTree = "<group>"; };
 		BA5D9B741C26E54300648280 /* TimeSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9BA91C26E5F000648280 /* CTCheckbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CTCheckbox.xcodeproj; path = "ZeroCafePlus-iOS/CTCheckbox-master/CTCheckbox.xcodeproj"; sourceTree = "<group>"; };
+		BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventDetailView.swift; sourceTree = "<group>"; };
 		BAE34F671C28F2DA0029D6B9 /* CTCheckbox-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTCheckbox-Prefix.pch"; sourceTree = "<group>"; };
 		BAE34F681C28F2DA0029D6B9 /* CTCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCheckbox.h; sourceTree = "<group>"; };
 		BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCheckbox.m; sourceTree = "<group>"; };
@@ -224,6 +238,7 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */,
 				D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */,
 				D76B27FD1C5622410090DB73 /* CreateEventView.swift */,
 				BAE34F5A1C28EFBB0029D6B9 /* CTCheckbox */,
@@ -233,7 +248,6 @@
 				D70161641C288A480036AF92 /* AnotherTopVC.swift */,
 				D70161681C288B3A0036AF92 /* FavoriteTopVC.swift */,
 				D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */,
-				BA5D9B6F1C26E32700648280 /* CreateEventVC.swift */,
 				BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */,
 				D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */,
 				D7A626511C1AB359002DCEC6 /* SecondViewController.swift */,
@@ -247,6 +261,13 @@
 				D7A626581C1AB359002DCEC6 /* LaunchScreen.storyboard */,
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
+				9871CBFD1C5B87A800895D66 /* event_detail_calendar.png */,
+				9871CBFE1C5B87A800895D66 /* event_detail_clock.png */,
+				9871CC011C5C90E900895D66 /* event_detail_tag.png */,
+				9871CC031C5CB50500895D66 /* event_detail_rounded.png */,
+				98D3BC441C5CC6C00005AD85 /* event_detail_rounded_gray.png */,
+				98D3BC491C5EF9AE0005AD85 /* event_detail_add_friend.png */,
+				98D3BC4D1C5F23F00005AD85 /* event_detail_info.png */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
@@ -341,7 +362,7 @@
 				TargetAttributes = {
 					D7A626491C1AB359002DCEC6 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 2Q7SS95398;
+						DevelopmentTeam = E3LNEN67RT;
 					};
 					D7A6265F1C1AB359002DCEC6 = {
 						CreatedOnToolsVersion = 7.1;
@@ -401,10 +422,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9871CC001C5B87A800895D66 /* event_detail_clock.png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
+				9871CBFF1C5B87A800895D66 /* event_detail_calendar.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
+				98D3BC4E1C5F23F00005AD85 /* event_detail_info.png in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,
+				98D3BC4A1C5EF9AE0005AD85 /* event_detail_add_friend.png in Resources */,
+				9871CC021C5C90E900895D66 /* event_detail_tag.png in Resources */,
 				D7A626551C1AB359002DCEC6 /* Main.storyboard in Resources */,
+				9871CC041C5CB50500895D66 /* event_detail_rounded.png in Resources */,
+				98D3BC451C5CC6C00005AD85 /* event_detail_rounded_gray.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,9 +524,9 @@
 				BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */,
 				D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */,
 				9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */,
-				BA5D9B701C26E32700648280 /* CreateEventVC.swift in Sources */,
 				6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */,
 				BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */,
+				BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */,
 				D7A626801C1AD3D6002DCEC6 /* FourthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
