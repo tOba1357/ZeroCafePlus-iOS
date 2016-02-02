@@ -51,7 +51,7 @@ class ForthViewController: UIViewController {
         profileLabel.text = "金沢大学のtkmtです。プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言"
         profileLabel.numberOfLines = 4
         profileLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
-        profileLabel.backgroundColor = UIColor.redColor()
+        profileLabel.backgroundColor = UIColor.clearColor()
         profileLabel.sizeToFit()
         profileLabel.font = UIFont.systemFontOfSize(16)
         self.view.addSubview(profileLabel)
