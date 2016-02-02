@@ -53,7 +53,3 @@ class DayView: UIView {
         
     }
 }
-
-extension SheduleAlertView{
-    
-}

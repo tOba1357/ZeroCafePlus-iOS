@@ -30,7 +30,12 @@ public class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
     init(frame: CGRect,year:Int,month:Int,day:Int) {
         super.init(frame:frame)
         
-        print("--cellTime--\(year)-\(month)-\(day)")
+        let subViews:[UIView] = self.subviews as [UIView]
+        for view in subViews {
+            if view.isKindOfClass(TimeSheduleView) {
+                view.removeFromSuperview()
+            }
+        }
         
         var timeCellPosY:CGFloat = (frame.size.height-40)/11+20
         for hour in 11...21 {
@@ -40,43 +45,45 @@ public class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
             timeCellPosY += (frame.size.height-40)/11
         }
         
-        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        let url = "https://zerocafe.herokuapp.com/api/v1/events/\(year)/\(month)/\(day).json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
                 if (response.result.isSuccess){
                     let json = JSON((response.result.value)!)
                     let eventArray = json["events"].array! as Array
-                    for events in eventArray{
-                        let startTime = events["event"]["start_time"].string! as String
-                        let startTimeArray = startTime.componentsSeparatedByString("T")
-                        let startDateData = startTimeArray[0].componentsSeparatedByString("-")
-                        let startTimeData = startTimeArray[1].componentsSeparatedByString(":")
-                        let endTime = events["event"]["end_time"].string! as String
-                        let endTimeArray = endTime.componentsSeparatedByString("T")
-                        let endTimeData = endTimeArray[1].componentsSeparatedByString(":")
-                        
-                        if Int(startDateData[0])! == year && Int(startDateData[1])! == month && Int(startDateData[2])! == day{
+                    if eventArray.count > 0{
+                        for events in eventArray{
+                            let startTime = events["start_time"].string! as String
+                            let startTimeArray = startTime.componentsSeparatedByString("T")
+                            let startDateData = startTimeArray[0].componentsSeparatedByString("-")
+                            let startTimeData = startTimeArray[1].componentsSeparatedByString(":")
+                            let endTime = events["end_time"].string! as String
+                            let endTimeArray = endTime.componentsSeparatedByString("T")
+                            let endTimeData = endTimeArray[1].componentsSeparatedByString(":")
                             
-                            var diffHour = Int(endTimeData[0])!-Int(startTimeData[0])!
-                            var diffMinuts = Int(endTimeData[1])!-Int(startTimeData[1])!
-                            if diffMinuts < 0{
-                                diffHour--
-                                diffMinuts+=60
+                            if Int(startDateData[0])! == year && Int(startDateData[1])! == month && Int(startDateData[2])! == day{
+                                
+                                var diffHour = Int(endTimeData[0])!-Int(startTimeData[0])!
+                                var diffMinuts = Int(endTimeData[1])!-Int(startTimeData[1])!
+                                if diffMinuts < 0{
+                                    diffHour--
+                                    diffMinuts+=60
+                                }
+                                var alreadyTimePosY:CGFloat = (frame.size.height-40)/11+20
+                                alreadyTimePosY += (frame.size.height-40)/11*CGFloat(Int(startTimeData[0])!-11)
+                                alreadyTimePosY += self.timeCellView.frame.size.height*CGFloat(diffMinuts/60)
+                                
+                                self.eventsLabel = UILabel(frame: CGRectMake(frame.size.width/3,alreadyTimePosY,frame.size.width/5*3,self.timeCellView.frame.size.height*CGFloat(60*diffHour+diffMinuts)/60))
+                                self.eventsLabel.backgroundColor = UIColor.grayColor()
+                                self.eventsLabel.text = "予約済み"
+                                self.eventsLabel.textAlignment = NSTextAlignment.Center
+                                self.eventsLabel.textColor = UIColor.whiteColor()
+                                self.addSubview(self.eventsLabel)
+                                self.bringSubviewToFront(self.eventsLabel)
+                                
+                                self.alrStertTimeData.append("\(startTimeData[0]):\(startTimeData[1])")
+                                self.alrEndTimeData.append("\(endTimeData[0]):\(endTimeData[1])")
                             }
-                            var alreadyTimePosY:CGFloat = (frame.size.height-40)/11+20
-                            alreadyTimePosY += (frame.size.height-40)/11*CGFloat(Int(startTimeData[0])!-11)
-                            alreadyTimePosY += self.timeCellView.frame.size.height*CGFloat(diffMinuts/60)
-                            
-                            self.eventsLabel = UILabel(frame: CGRectMake(frame.size.width/3,alreadyTimePosY,frame.size.width/5*3,self.timeCellView.frame.size.height*CGFloat(60*diffHour+diffMinuts)/60))
-                            self.eventsLabel.backgroundColor = UIColor.grayColor()
-                            self.eventsLabel.text = "予約済み"
-                            self.eventsLabel.textAlignment = NSTextAlignment.Center
-                            self.eventsLabel.textColor = UIColor.whiteColor()
-                            self.addSubview(self.eventsLabel)
-                            self.bringSubviewToFront(self.eventsLabel)
-                            
-                            self.alrStertTimeData.append("\(startTimeData[0]):\(startTimeData[1])")
-                            self.alrEndTimeData.append("\(endTimeData[0]):\(endTimeData[1])")
                         }
                     }
                 }else{

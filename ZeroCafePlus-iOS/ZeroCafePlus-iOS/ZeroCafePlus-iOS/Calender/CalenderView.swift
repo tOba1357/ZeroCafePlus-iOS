@@ -126,6 +126,7 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
         
         prevMonthView = MonthView(frame: CGRectMake(0, 0, frame.size.width,frame.size.height),
             year:ret.year,month:ret.month)
+        prevMonthView.monthDelegate = self
         scrollView.addSubview(prevMonthView)
         
         nextMonthView    = tmpView

@@ -7,7 +7,10 @@
 //
 
 import UIKit
-import Alamofire
+
+protocol CreateEventDetailDelegate{
+    func decideEventDetail(assetStr:String,menberNumStr:String,diveJoinBool:Bool,tagStr:String)
+}
 
 class CreateEventDetailView: UIView,UITextFieldDelegate {
     
@@ -16,6 +19,8 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
     var tagText :UITextField!
     
     var diveJoinBool:Bool = false
+    
+    var createEventDetailDelegate:CreateEventDetailDelegate!
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -34,7 +39,7 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         myToolBar.items = [myToolBarButton]
         
         let assetsLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
-        assetsLabel.text = "持ち物"
+        assetsLabel.text = "持ち物（任意）"
         assetsLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/6)
         
         assetText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
@@ -51,7 +56,7 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         numLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/3)
         
         numText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
-        numText.text = ""
+        numText.text = "0"
         numText.placeholder = "例）15"
         numText.inputAccessoryView = myToolBar
         numText.layer.cornerRadius = 15
@@ -61,9 +66,19 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         numText.layer.borderColor = UIColor.blackColor().CGColor
         numText.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3)
 
+        let checkbox = CTCheckbox()
+        checkbox.frame = CGRectMake(0,0,self.frame.width/5,self.frame.height/10)
+        checkbox.checkboxColor = UIColor.blackColor()
+        checkbox.checkboxSideLength = 22
+        checkbox.layer.position = CGPointMake(self.frame.width/4, self.frame.height/2)
+        
+        let jumpInLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/2,self.frame.height/10))
+        jumpInLabel.text = "途中参加ＯＫ"
+        jumpInLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/2)
+        
         let tagLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
-        tagLabel.text = "タグ"
-        tagLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/2)
+        tagLabel.text = "タグ　※検索で引っかかりやすくなるよ！"
+        tagLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/3*2)
         
         tagText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
         tagText.text = ""
@@ -72,17 +87,7 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         tagText.delegate = self
         tagText.layer.borderWidth = 1
         tagText.layer.borderColor = UIColor.blackColor().CGColor
-        tagText.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/2)
-
-        let checkbox = CTCheckbox()
-        checkbox.frame = CGRectMake(0,0,self.frame.width/5,self.frame.height/10)
-        checkbox.checkboxColor = UIColor.blackColor()
-        checkbox.checkboxSideLength = 22
-        checkbox.layer.position = CGPointMake(self.frame.width/4, self.frame.height/3*2)
-        
-        let jumpInLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/2,self.frame.height/10))
-        jumpInLabel.text = "飛び入れ参加OK"
-        jumpInLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3*2)
+        tagText.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3*2)
         
         let makeButton = UIButton (frame: CGRectMake(0,0,self.frame.width/5,self.frame.height/10))
         makeButton.layer.masksToBounds = true
@@ -110,38 +115,15 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
     
     func onClickMakeButton(sender: UIButton){
         
-        if assetText.text == "" || numText.text == "" || tagText.text == ""{
-        
-            let checkAlertController = UIAlertController(title: "持ち物・定員・タグがありません。", message: "持ち物・定員・タグを入力してください。", preferredStyle: .Alert)
-            let checkAction = UIAlertAction(title: "OK", style: .Default){
-                action in
-                NSLog("OKボタンが押されました")
+        if numText.text?.characters.count > 0 || tagText.text?.characters.count > 0{
+            if assetText.text?.characters.count == 0{
+                assetText.text = ""
             }
-            checkAlertController.addAction(checkAction)
-//            presentViewController(checkAlertController, animated: true, completion: nil)
-        
-        } else {
-            
-            let alertController = UIAlertController(title: "確認",
-                message: "これでよろしいですか？", preferredStyle: .Alert)
-            
-            let otherAction = UIAlertAction(title: "はい", style: .Default) {
-                action in
-                NSLog("はいボタンが押されました")
-                
-                
-//                self.navigationController?.popToRootViewControllerAnimated(true)
+            if tagText.text.characters.count == 0{
+                tagText.text = ""
             }
-            let cancelAction = UIAlertAction(title: "いいえ", style: .Cancel) {
-                action in
-                NSLog("いいえボタンが押されました")
-            }
-            
-            // addActionした順に左から右にボタンが配置されます
-            alertController.addAction(otherAction)
-            alertController.addAction(cancelAction)
-            
-//            presentViewController(alertController, animated: true, completion: nil)
+
+        self.createEventDetailDelegate.decideEventDetail(assetText.text!, menberNumStr: numText.text!, diveJoinBool: diveJoinBool, tagStr: tagText.text!)
         }
     }
     

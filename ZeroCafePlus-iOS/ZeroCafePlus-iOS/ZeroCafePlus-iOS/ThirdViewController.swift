@@ -9,11 +9,12 @@
 import UIKit
 import Alamofire
 
-class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate,ScheduleDelegate{
+class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate,ScheduleDelegate,CreateEventDetailDelegate{
     
     let scrollView = UIScrollView()
     var createEvetView :CreateEventView!
     var checkCalenderView :CheckCalenderView!
+    var createEventDetailView :CreateEventDetailView!
     private var scheduleWindow: UIWindow!
     
     let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
@@ -23,13 +24,17 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     var eventName :String!
     var eventExposition :String!
     var eventDate :[String]!
-    var evrntStartTime :String!
-    var evrntEndTime :String!
+    var eventStartTime :String!
+    var eventEndTime :String!
+    var eventBelonging:String!
+    var eventDiveJoin:Bool!
+    var eventMenberNum:Int!
+    var eventTag:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.frame = CGRectMake(34.5, barHeight, self.view.frame.width-69, self.view.frame.height-barHeight)
+        scrollView.frame = CGRectMake(0, barHeight, self.view.frame.width, self.view.frame.height-barHeight)
         scrollView.delegate = self
         
         scrollView.contentSize   = CGSizeMake(0, 0)
@@ -45,7 +50,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         displayWidth = scrollView.frame.size.width
         displayHeight = scrollView.frame.size.height
         
-        createEvetView = CreateEventView(frame: CGRectMake(0, 0, scrollView.frame.size.width,displayHeight))
+        createEvetView = CreateEventView(frame: CGRectMake(34.5, barHeight, self.view.frame.width-69,displayHeight))
         createEvetView.createEventdelegate = self
         scrollView.addSubview(createEvetView)
         
@@ -55,12 +60,11 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         super.didReceiveMemoryWarning()
     }
     
-    func createEventNameExposition(eventName:String,exposition:String) {
-        scrollView.contentSize   = CGSizeMake(0, self.view.frame.height)
-        checkCalenderView = CheckCalenderView(frame: CGRectMake(0, displayHeight, scrollView.frame.size.width, displayHeight))
+    func createEventNameExposition() {
+        checkCalenderView = CheckCalenderView(frame: CGRectMake(34.5, displayHeight+barHeight, scrollView.frame.size.width-69, displayHeight))
         checkCalenderView.checkCalenderDelegate = self
+        nextScroll(self.view.frame.size.height,count: 2)
         scrollView.addSubview(checkCalenderView)
-        nextScroll(self.view.frame.size.height)
     }
     
     func checkedCalender(checkDate:[String]){
@@ -80,6 +84,9 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         scheduleWindow.layer.masksToBounds = true
         scheduleWindow.layer.cornerRadius = 15
         scheduleWindow.hidden = false
+        UIView.animateWithDuration(0.2, animations: {
+            self.tabBarController?.tabBar.hidden = true
+        })
         
         if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC {
             scheduleVC.getDate = eventDate
@@ -91,7 +98,16 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         self.scheduleWindow.makeKeyAndVisible()
     }
     
+    func createMyTime(startTimeStr:String,endTimeStr:String){
+        eventStartTime = startTimeStr
+        eventEndTime = endTimeStr
+    }
+    
     func closeScheduleWindow(btnTag:Int){
+        UIView.animateWithDuration(0.2, animations: {
+            self.tabBarController?.tabBar.hidden = false
+        })
+
         self.view.userInteractionEnabled = true
         self.view.backgroundColor = UIColor.whiteColor()
 
@@ -100,13 +116,30 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
             resignKeyWindow(scheduleWindow)
         case 2:
             resignKeyWindow(scheduleWindow)
-            nextScroll(self.view.frame.size.height*3)
+            nextScroll(self.view.frame.size.height,count: 3)
+            createEventDetailView = CreateEventDetailView(frame: CGRectMake(34.5, displayHeight*2+barHeight, scrollView.frame.size.width-69,displayHeight))
+            createEventDetailView.createEventDetailDelegate = self
+            scrollView.addSubview(createEventDetailView)
         default:
             break
         }
     }
     
-    func pushEventJson(){
+    func decideEventDetail(assetStr:String,menberNumStr:String,diveJoinBool:Bool,tagStr:String){
+        eventBelonging = assetStr
+        eventMenberNum = Int(menberNumStr)
+        eventDiveJoin = diveJoinBool
+        eventTag = tagStr
+        createEvetView.postEventDate()
+    }
+    
+    func getEventNameExposition(name:String,exposition:String){
+        eventName = name
+        eventExposition = exposition
+    }
+    
+    func pushCreateEventJson(){
+    
         let headers = [
             "Content-Type": "application/json",
             "Accept": "application/json"
@@ -117,16 +150,16 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
             "event" : [
                 "title" : self.eventName,
                 "description" : self.eventExposition,
-                "belonging" : "スマート大学",
+                "belonging" : "\(eventBelonging)",
                 "entry_fee" : 999,
                 "owner_id" : 1,
-                "dive_join" : 111,
-//                "start_time" : "\(self.getDateArray[0])-\(self.getDateArray[1])-\(self.getDateArray[2])T\(self.getStartTime)",
-//                "end_time" : "\(self.getDateArray[0])-\(self.getDateArray[1])-\(self.getDateArray[2])T\(self.getEndTime)",
-//                "confirm" : true,
-//                "place" : 1,
-//                "capacity" : Int(self.numText.text!)!,
-//                "category_tag" : self.tagText.text!,
+                "dive_join" : eventDiveJoin,
+                "start_time" : "\(self.eventDate[0])-\(self.eventDate[1])-\(self.eventDate[2])T\(self.eventStartTime)",
+                "end_time" : "\(self.eventDate[0])-\(self.eventDate[1])-\(self.eventDate[2])T\(self.eventEndTime)",
+                "confirm" : true,
+                "place" : 1,
+                "capacity" : eventMenberNum,
+                "category_tag" : "\(eventTag)",
                 "genre" : 1,
                 "color" : "redBlue"
             ]
@@ -148,9 +181,9 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func nextScroll(nextPosY:CGFloat){
-        scrollView.contentSize = CGSizeMake(0, nextPosY)
-        scrollView.setContentOffset(CGPointMake(0, nextPosY), animated: true)
+    func nextScroll(nextPosY:CGFloat,count:CGFloat){
+        scrollView.contentSize = CGSizeMake(0, nextPosY*count)
+        scrollView.setContentOffset(CGPointMake(0, nextPosY*(count-1)), animated: true)
     }
 
     func makeKeyAndVisible(myWindow:UIWindow) {

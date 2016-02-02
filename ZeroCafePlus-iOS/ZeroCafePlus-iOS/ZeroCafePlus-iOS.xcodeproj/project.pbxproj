@@ -18,6 +18,21 @@
 		BA2F0AD71C2858090007A49D /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD41C2858090007A49D /* DayView.swift */; };
 		BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD51C2858090007A49D /* MonthView.swift */; };
 		BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */; };
+		BA31F8441C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA31F8431C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift */; };
+		BA31F85D1C61201400CB0AF7 /* hobby_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F84F1C61201400CB0AF7 /* hobby_light.png */; };
+		BA31F85E1C61201400CB0AF7 /* hobby.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8501C61201400CB0AF7 /* hobby.png */; };
+		BA31F85F1C61201400CB0AF7 /* party_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8511C61201400CB0AF7 /* party_light.png */; };
+		BA31F8601C61201400CB0AF7 /* party.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8521C61201400CB0AF7 /* party.png */; };
+		BA31F8611C61201400CB0AF7 /* readbook_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8531C61201400CB0AF7 /* readbook_light.png */; };
+		BA31F8621C61201400CB0AF7 /* readbook.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8541C61201400CB0AF7 /* readbook.png */; };
+		BA31F8631C61201400CB0AF7 /* sakuru_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8551C61201400CB0AF7 /* sakuru_light.png */; };
+		BA31F8641C61201400CB0AF7 /* sakuru.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8561C61201400CB0AF7 /* sakuru.png */; };
+		BA31F8651C61201400CB0AF7 /* study_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8571C61201400CB0AF7 /* study_light.png */; };
+		BA31F8661C61201400CB0AF7 /* study.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8581C61201400CB0AF7 /* study.png */; };
+		BA31F8671C61201400CB0AF7 /* syukatu_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8591C61201400CB0AF7 /* syukatu_light.png */; };
+		BA31F8681C61201400CB0AF7 /* syukatu.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85A1C61201400CB0AF7 /* syukatu.png */; };
+		BA31F8691C61201400CB0AF7 /* tournament_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85B1C61201400CB0AF7 /* tournament_light.png */; };
+		BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85C1C61201400CB0AF7 /* tournament.png */; };
 		BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */; };
 		BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B721C26E54300648280 /* DateSheduleView.swift */; };
 		BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B731C26E54300648280 /* SheduleAlertView.swift */; };
@@ -93,6 +108,21 @@
 		BA2F0AD41C2858090007A49D /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		BA2F0AD51C2858090007A49D /* MonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		BA31F8431C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDecisionEventAlertVC.swift; sourceTree = "<group>"; };
+		BA31F84F1C61201400CB0AF7 /* hobby_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hobby_light.png; path = imageFile/genre/hobby_light.png; sourceTree = "<group>"; };
+		BA31F8501C61201400CB0AF7 /* hobby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hobby.png; path = imageFile/genre/hobby.png; sourceTree = "<group>"; };
+		BA31F8511C61201400CB0AF7 /* party_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = party_light.png; path = imageFile/genre/party_light.png; sourceTree = "<group>"; };
+		BA31F8521C61201400CB0AF7 /* party.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = party.png; path = imageFile/genre/party.png; sourceTree = "<group>"; };
+		BA31F8531C61201400CB0AF7 /* readbook_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = readbook_light.png; path = imageFile/genre/readbook_light.png; sourceTree = "<group>"; };
+		BA31F8541C61201400CB0AF7 /* readbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = readbook.png; path = imageFile/genre/readbook.png; sourceTree = "<group>"; };
+		BA31F8551C61201400CB0AF7 /* sakuru_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sakuru_light.png; path = imageFile/genre/sakuru_light.png; sourceTree = "<group>"; };
+		BA31F8561C61201400CB0AF7 /* sakuru.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sakuru.png; path = imageFile/genre/sakuru.png; sourceTree = "<group>"; };
+		BA31F8571C61201400CB0AF7 /* study_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = study_light.png; path = imageFile/genre/study_light.png; sourceTree = "<group>"; };
+		BA31F8581C61201400CB0AF7 /* study.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = study.png; path = imageFile/genre/study.png; sourceTree = "<group>"; };
+		BA31F8591C61201400CB0AF7 /* syukatu_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = syukatu_light.png; path = imageFile/genre/syukatu_light.png; sourceTree = "<group>"; };
+		BA31F85A1C61201400CB0AF7 /* syukatu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = syukatu.png; path = imageFile/genre/syukatu.png; sourceTree = "<group>"; };
+		BA31F85B1C61201400CB0AF7 /* tournament_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tournament_light.png; path = imageFile/genre/tournament_light.png; sourceTree = "<group>"; };
+		BA31F85C1C61201400CB0AF7 /* tournament.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tournament.png; path = imageFile/genre/tournament.png; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		BA5D9B721C26E54300648280 /* DateSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9B731C26E54300648280 /* SheduleAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleAlertView.swift; sourceTree = "<group>"; };
@@ -185,6 +215,27 @@
 			path = Calender;
 			sourceTree = "<group>";
 		};
+		BA31F84E1C611FFE00CB0AF7 /* genre */ = {
+			isa = PBXGroup;
+			children = (
+				BA31F84F1C61201400CB0AF7 /* hobby_light.png */,
+				BA31F8501C61201400CB0AF7 /* hobby.png */,
+				BA31F8511C61201400CB0AF7 /* party_light.png */,
+				BA31F8521C61201400CB0AF7 /* party.png */,
+				BA31F8531C61201400CB0AF7 /* readbook_light.png */,
+				BA31F8541C61201400CB0AF7 /* readbook.png */,
+				BA31F8551C61201400CB0AF7 /* sakuru_light.png */,
+				BA31F8561C61201400CB0AF7 /* sakuru.png */,
+				BA31F8571C61201400CB0AF7 /* study_light.png */,
+				BA31F8581C61201400CB0AF7 /* study.png */,
+				BA31F8591C61201400CB0AF7 /* syukatu_light.png */,
+				BA31F85A1C61201400CB0AF7 /* syukatu.png */,
+				BA31F85B1C61201400CB0AF7 /* tournament_light.png */,
+				BA31F85C1C61201400CB0AF7 /* tournament.png */,
+			);
+			name = genre;
+			sourceTree = "<group>";
+		};
 		BA5D9B711C26E54300648280 /* SheduleListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +268,7 @@
 		D76B28341C60A2110090DB73 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				BA31F84E1C611FFE00CB0AF7 /* genre */,
 				6F36351A1C60C18D009401B7 /* profile_edit .png */,
 				D76B28221C60A1F80090DB73 /* event_detail_add_friend.png */,
 				D76B28231C60A1F80090DB73 /* event_detail_calendar.png */,
@@ -280,6 +332,7 @@
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
+				BA31F8431C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
@@ -433,17 +486,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA31F8681C61201400CB0AF7 /* syukatu.png in Resources */,
+				BA31F8651C61201400CB0AF7 /* study_light.png in Resources */,
+				BA31F85E1C61201400CB0AF7 /* hobby.png in Resources */,
+				BA31F8611C61201400CB0AF7 /* readbook_light.png in Resources */,
+				BA31F8621C61201400CB0AF7 /* readbook.png in Resources */,
 				D76B282B1C60A1F80090DB73 /* event_detail_add_friend.png in Resources */,
 				D76B28311C60A1F80090DB73 /* event_detail_rounded.png in Resources */,
+				BA31F85D1C61201400CB0AF7 /* hobby_light.png in Resources */,
 				D76B282C1C60A1F80090DB73 /* event_detail_calendar.png in Resources */,
+				BA31F85F1C61201400CB0AF7 /* party_light.png in Resources */,
 				D76B28301C60A1F80090DB73 /* event_detail_rounded_gray.png in Resources */,
+				BA31F8671C61201400CB0AF7 /* syukatu_light.png in Resources */,
+				BA31F8631C61201400CB0AF7 /* sakuru_light.png in Resources */,
+				BA31F8691C61201400CB0AF7 /* tournament_light.png in Resources */,
 				6F36351B1C60C18D009401B7 /* profile_edit .png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
+				BA31F8661C61201400CB0AF7 /* study.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,
 				D76B282D1C60A1F80090DB73 /* event_detail_clock.png in Resources */,
 				D76B282F1C60A1F80090DB73 /* event_detail_rounded_blue.png in Resources */,
 				D76B28331C60A1F80090DB73 /* star.png in Resources */,
+				BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */,
+				BA31F8601C61201400CB0AF7 /* party.png in Resources */,
+				BA31F8641C61201400CB0AF7 /* sakuru.png in Resources */,
 				D7A626551C1AB359002DCEC6 /* Main.storyboard in Resources */,
 				D76B28321C60A1F80090DB73 /* event_detail_tag.png in Resources */,
 				D76B282E1C60A1F80090DB73 /* event_detail_info.png in Resources */,
@@ -530,6 +597,7 @@
 				BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */,
 				D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */,
 				6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */,
+				BA31F8441C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift in Sources */,
 				D76B28001C56224F0090DB73 /* CheckCalenderView.swift in Sources */,
 				BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */,
 				D7A6267E1C1AD395002DCEC6 /* ThirdViewController.swift in Sources */,
