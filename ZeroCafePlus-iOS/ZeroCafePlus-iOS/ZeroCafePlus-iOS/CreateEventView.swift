@@ -9,8 +9,9 @@
 import UIKit
 
 protocol CreateEventDelegate{
-    func createEventNameExposition(eventName:String,exposition:String)
+    func createEventNameExposition()
     func nilAlertAction(title:String,message:String)
+    func getEventNameExposition(name:String,exposition:String)
 }
 
 class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate {
@@ -19,7 +20,6 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     var titleAlertLabel:UILabel!
     var detailTextView:UITextView!
     var detailAlertLabel:UILabel!
-    let scrollView = UIScrollView()
     var txtActiveView = UITextView()
     var isBoolTextView:Bool!
     
@@ -48,30 +48,25 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         myToolBarButton.tag = 1
         myToolBar.items = [myToolBarButton]
         
-        scrollView.frame = CGRectMake(0,0,self.frame.width,self.frame.height/10*8)
-        scrollView.delegate = self;
-        scrollView.contentSize   = CGSizeMake(self.frame.width, 0);
-        scrollView.contentOffset = CGPointMake(0.0 , 0.0)
-        self.addSubview(scrollView)
         
         let titleLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/10))
         titleLabel.text = "イベント名(18文字以内)"
         titleLabel.sizeToFit()
-        titleLabel.layer.position = CGPointMake(self.frame.width/2, scrollView.frame.height/10)
+        titleLabel.layer.position = CGPointMake(self.frame.width/2,  self.frame.height/10)
         
         titleTextField = UITextField(frame: CGRectMake(0,0,self.frame.width,self.frame.height/10))
         titleTextField.layer.borderWidth = 1
         titleTextField.layer.borderColor = UIColor.blackColor().CGColor
         titleTextField.layer.cornerRadius = 15
         titleTextField.delegate = self
-        titleTextField.layer.position = CGPointMake(self.frame.width/2, scrollView.frame.height/5)
+        titleTextField.layer.position = CGPointMake(self.frame.width/2, self.frame.height/5)
         
         titleAlertLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/20))
         titleAlertLabel.text = "⚠️18文字を超えています。"
         titleAlertLabel.sizeToFit()
         titleAlertLabel.backgroundColor = UIColor.redColor()
         titleAlertLabel.hidden = true
-        titleAlertLabel.layer.position = CGPointMake(self.frame.width/3*2, scrollView.frame.height/3)
+        titleAlertLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3)
         
         let detailLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/10))
         detailLabel.text = "どんなイベント？（１２０文字以内）"
@@ -85,14 +80,14 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         detailTextView.textAlignment = NSTextAlignment.Left
         detailTextView.inputAccessoryView = myToolBar
         detailTextView.delegate = self
-        detailTextView.layer.position = CGPointMake(self.frame.width/2,scrollView.frame.height/2)
+        detailTextView.layer.position = CGPointMake(self.frame.width/2, self.frame.height/2)
         
         detailAlertLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/20))
         detailAlertLabel.text = "⚠️120文字を超えています。"
         detailAlertLabel.sizeToFit()
         detailAlertLabel.backgroundColor = UIColor.redColor()
         detailAlertLabel.hidden = true
-        detailAlertLabel.layer.position = CGPointMake(self.frame.width/3*2, scrollView.frame.height/3*2)
+        detailAlertLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3*2)
         
         let myButton = UIButton(frame: CGRectMake(0,0,self.frame.width/5,self.frame.height/10))
         myButton.layer.masksToBounds = true
@@ -101,66 +96,30 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         myButton.backgroundColor = UIColor.redColor()
         myButton.layer.position = CGPoint(x: self.frame.width/2, y:self.frame.height/5*4)
         
-        scrollView.addSubview(titleLabel)
-        scrollView.addSubview(titleTextField)
-        scrollView.addSubview(titleAlertLabel)
-        scrollView.addSubview(detailLabel)
-        scrollView.addSubview(detailTextView)
-        scrollView.addSubview(detailAlertLabel)
+        self.addSubview(titleLabel)
+        self.addSubview(titleTextField)
+        self.addSubview(titleAlertLabel)
+        self.addSubview(detailLabel)
+        self.addSubview(detailTextView)
+        self.addSubview(detailAlertLabel)
         self.addSubview(myButton)
         
     }
     
     func onClickMyButton(sender: UIButton){
         if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 {
-            self.createEventdelegate.createEventNameExposition(titleTextField.text!, exposition: detailTextView.text)
+            self.createEventdelegate.createEventNameExposition()
         } else {
             self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
         }
     }
     
-    //    override func viewWillAppear(animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //
-    //        let notificationCenter = NSNotificationCenter.defaultCenter()
-    //        notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
-    //        notificationCenter.addObserver(self, selector: "handleKeyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
-    //    }
-    
-    // Viewが非表示になるたびに呼び出されるメソッド
-    //    override func viewDidDisappear(animated: Bool) {
-    //        super.viewDidDisappear(animated)
-    //
-    //        // NSNotificationCenterの解除処理
-    //        let notificationCenter = NSNotificationCenter.defaultCenter()
-    //        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-    //        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-    //    }
-    //
-    //    override func didReceiveMemoryWarning() {
-    //        super.didReceiveMemoryWarning()
-    //    }
-    
-    func handleKeyboardWillShowNotification(notification: NSNotification) {
-        
-        let userInfo = notification.userInfo!
-        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
-        let txtLimit = txtActiveView.frame.origin.y + txtActiveView.frame.height + 8.0
-        let kbdLimit = myBoundSize.height - keyboardScreenEndFrame.size.height
-        
-        
-        print("テキストフィールドの下辺：(\(txtLimit))")
-        print("キーボードの上辺：(\(kbdLimit))")
-        
-        if txtLimit >= kbdLimit {
-            scrollView.contentOffset.y = txtLimit - kbdLimit
+    func postEventDate(){
+        if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 {
+            self.createEventdelegate.getEventNameExposition(titleTextField.text, exposition: detailTextView.text)
+        } else {
+            self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
         }
-    }
-    
-    func handleKeyboardWillHideNotification(notification: NSNotification) {
-        scrollView.contentSize   = CGSizeMake(self.frame.width, 0)
-        //         scrollView.contentOffset.y = 0
     }
     
     //--TextField--
@@ -171,7 +130,6 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         print("textFieldShouldEndEditing:" + textField.text!)
         return true
-        
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
@@ -197,7 +155,6 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         print("textViewShouldBeginEditing : \(textView.text)");
-        scrollView.contentSize = CGSize(width: self.frame.width/2,height: 1000)
         txtActiveView = textView
         return true
     }

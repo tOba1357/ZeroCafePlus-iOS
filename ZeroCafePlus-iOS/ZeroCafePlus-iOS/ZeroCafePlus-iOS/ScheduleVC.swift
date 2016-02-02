@@ -10,6 +10,7 @@ import UIKit
 
 protocol ScheduleDelegate{
     func closeScheduleWindow(btnTag:Int)
+    func createMyTime(startTimeStr:String,endTimeStr:String)
 }
 
 class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIToolbarDelegate, SheduleAlertDelegate{
@@ -227,6 +228,9 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     }
     
     func closeAction(sender: UIButton){
+        if sender.tag == 2{
+            self.scheduleDelegate.createMyTime(self.startTimeTextField.text!, endTimeStr: self.endTimeTextField.text!)
+        }
         self.scheduleDelegate.closeScheduleWindow(sender.tag)
     }
     
