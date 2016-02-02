@@ -61,7 +61,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         myImageView.layer.position = CGPoint(x: self.view.bounds.width/2, y: 200.0)
         
         kitButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        kitButton.layer.position = CGPoint(x: screenWidth/6, y: screenHeight/12)
+        kitButton.layer.position = CGPoint(x: screenWidth/6, y: screenHeight/15)
         kitButton.setTitle("工大", forState: .Normal)
         kitButton.titleLabel?.font = UIFont.systemFontOfSize(24)
         kitButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
@@ -69,15 +69,15 @@ class FirstViewController: UIViewController, EventViewDelegate {
         self.view.addSubview(kitButton)
         
         kuButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        kuButton.layer.position = CGPoint(x: screenWidth/2.25, y: screenHeight/12)
+        kuButton.layer.position = CGPoint(x: screenWidth/2.25, y: screenHeight/15)
         kuButton.setTitle("金大", forState: .Normal)
         kuButton.titleLabel?.font = UIFont.systemFontOfSize(24)
         kuButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
         kuButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(kuButton)
         
-        favoriteButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        favoriteButton.layer.position = CGPoint(x: screenWidth/1.4, y: screenHeight/12)
+        favoriteButton = UIButton(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
+        favoriteButton.layer.position = CGPoint(x: screenWidth/1.3, y: screenHeight/15)
         favoriteButton.setTitle("お気に入り", forState: .Normal)
         favoriteButton.titleLabel?.font = UIFont.systemFontOfSize(24)
         favoriteButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
@@ -208,13 +208,14 @@ class EventView :UIView{
         titleName.numberOfLines = 2
         let dateName: UILabel = UILabel(frame: CGRectMake(10,90,130,50))
         dateName.numberOfLines = 2
-        let tagName: UILabel = UILabel(frame: CGRectMake(10,120,130,50))
+        let tagName: UILabel = UILabel(frame: CGRectMake(10,120,130,70))
         tagName.numberOfLines = 2
         let touchButton: UIButton = UIButton(frame: CGRectMake(10,10,130,180))
         
         titleName.text = titleNameString
         dateName.text = dateText
         tagName.text = tagNameString
+        
         
         
         touchButton.setTitle("", forState: .Normal)
