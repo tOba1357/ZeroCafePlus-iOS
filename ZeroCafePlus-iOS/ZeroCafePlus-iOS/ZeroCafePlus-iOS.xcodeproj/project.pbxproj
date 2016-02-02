@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5EAB71C6708AEF4777A12E61 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349F285AC7FB4BBFF4B5E51F /* Pods.framework */; };
+		6F36351B1C60C18D009401B7 /* profile_edit .png in Resources */ = {isa = PBXBuildFile; fileRef = 6F36351A1C60C18D009401B7 /* profile_edit .png */; };
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
 		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
 		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
@@ -82,6 +83,7 @@
 		349F285AC7FB4BBFF4B5E51F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C1C8695B62FABDFECFECF0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		61556AD9CD680053C6333707 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6F36351A1C60C18D009401B7 /* profile_edit .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_edit .png"; sourceTree = "<group>"; };
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		D76B28341C60A2110090DB73 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				6F36351A1C60C18D009401B7 /* profile_edit .png */,
 				D76B28221C60A1F80090DB73 /* event_detail_add_friend.png */,
 				D76B28231C60A1F80090DB73 /* event_detail_calendar.png */,
 				D76B28241C60A1F80090DB73 /* event_detail_clock.png */,
@@ -224,6 +227,7 @@
 				D76B28281C60A1F80090DB73 /* event_detail_rounded.png */,
 				D76B28291C60A1F80090DB73 /* event_detail_tag.png */,
 				D76B282A1C60A1F80090DB73 /* star.png */,
+				6FCC98971C269ECB009B9C69 /* twitter-icon.png */,
 			);
 			name = image;
 			sourceTree = "<group>";
@@ -272,7 +276,6 @@
 				6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */,
 				D7A626531C1AB359002DCEC6 /* Main.storyboard */,
 				D7A626561C1AB359002DCEC6 /* Assets.xcassets */,
-				6FCC98971C269ECB009B9C69 /* twitter-icon.png */,
 				D7A626581C1AB359002DCEC6 /* LaunchScreen.storyboard */,
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
@@ -434,6 +437,7 @@
 				D76B28311C60A1F80090DB73 /* event_detail_rounded.png in Resources */,
 				D76B282C1C60A1F80090DB73 /* event_detail_calendar.png in Resources */,
 				D76B28301C60A1F80090DB73 /* event_detail_rounded_gray.png in Resources */,
+				6F36351B1C60C18D009401B7 /* profile_edit .png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,

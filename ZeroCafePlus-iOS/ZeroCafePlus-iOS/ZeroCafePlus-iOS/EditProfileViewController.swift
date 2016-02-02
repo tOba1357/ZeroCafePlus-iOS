@@ -55,6 +55,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         countProfile = UILabel(frame: CGRectMake(0,0,screenWidth/10,screenHeight/10))
         countProfile.layer.position = CGPoint(x: screenWidth/1.05, y: screenHeight/2)
         countProfile.text? = String(currentProfile.text.characters.count)
+        countProfile.text = "0/88"
         countProfile.textColor = UIColor.hexStr("#8395a3", alpha: 1.0)
         countProfile.backgroundColor = UIColor.clearColor()
         self.view.addSubview(countProfile)
@@ -184,13 +185,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         let input: NSMutableString = textView.text!.mutableCopy() as! NSMutableString
         now = (input.length)
-        countProfile.text = String(now)
+        countProfile.text = String(now)+String("/88")
         countProfile.setNeedsDisplay()
         let maxLength = 88
-        if now > maxLength {
-            currentProfile.textColor = UIColor.redColor()
+        if now > maxLength - 20 {
+            countProfile.textColor = UIColor.redColor()
         }else {
-            currentProfile.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
+            countProfile.textColor = UIColor.hexStr("#8395a3", alpha: 1.0)
         }
         return true
     }
