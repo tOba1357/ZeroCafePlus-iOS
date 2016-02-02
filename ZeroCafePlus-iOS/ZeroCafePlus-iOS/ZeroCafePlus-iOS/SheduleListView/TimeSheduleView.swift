@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
 protocol TimeSheduleDelegate {
     func pushHour(checkDateStr:String)
@@ -30,82 +28,17 @@ class TimeSheduleView: UIView {
         
         let hourLabel = UILabel()
         hourLabel.text = "\(hour):00"
+        hourLabel.font = UIFont.systemFontOfSize(15)
+        hourLabel.frame = CGRectMake(0,0,frame.size.width/4,frame.size.height)
+        hourLabel.layer.position = CGPointMake(frame.size.width/4,frame.size.height/4)
         
         let hourBar = UILabel()
         hourBar.backgroundColor = UIColor.blackColor()
-        
-        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
-        Alamofire.request(.GET, url)
-            .responseJSON { response in
-                debugPrint(response.result.value)
-                let json = JSON(response.result.value!)
-                let eventArray = json["events"].array! as Array
-                for events in eventArray{
-                    let startTime = events["event"]["start_time"].string! as String
-                    let startTimeArray = startTime.componentsSeparatedByString("T")
-                    let startDateData = startTimeArray[0].componentsSeparatedByString("-")
-                    let startTimeData = startTimeArray[1].componentsSeparatedByString(":")
-                    let endTime = events["event"]["end_time"].string! as String
-                    let endTimeArray = endTime.componentsSeparatedByString("T")
-                    let endTimeData = endTimeArray[1].componentsSeparatedByString(":")
-                    
-                    if Int(startDateData[0]) == year &&
-                        Int(startDateData[1]) == month &&
-                        Int(startDateData[2]) == day{
-                            if Int(startTimeData[0]) == hour-1 {
-                                if Int(startTimeData[1]) >= 45{
-                                    var i = 45
-                                    while Int(startTimeData[1]) == i{
-                                        if Int(endTimeData[0]) == hour-1 && Int(endTimeData[1]) == i {
-                                            break
-                                        }
-                                        let eventsLabel = UILabel(frame: CGRectMake(frame.size.width/2,frame.size.height/120+frame.size.height*CGFloat(i-145),frame.size.width/10,frame.size.height/60))
-                                        eventsLabel.backgroundColor = UIColor.greenColor()
-                                        self.addSubview(eventsLabel)
-                                        i++
-                                    }
-                                }
-                            }
-                            if Int(startTimeData[0]) == hour{
-                                
-                                if Int(startTimeData[1]) < 45{
-                                    var i = 0
-                                    while Int(startTimeData[1]) == i{
-                                        if Int(endTimeData[0]) == hour && Int(endTimeData[1]) == i {
-                                            break
-                                        }
-                                        let eventsLabel = UILabel(frame: CGRectMake(frame.size.width/2,frame.size.height/60*CGFloat(i+45),frame.size.width,frame.size.height))
-                                        eventsLabel.backgroundColor = UIColor.greenColor()
-                                        self.addSubview(eventsLabel)
-                                        i++
-                                    }
-                                }
-                            }
-                    }
-                }
-        }
-        
-        if hour == 21 {
-            
-            hourLabel.frame = CGRectMake(0,0,frame.size.width / 4,frame.size.height)
-            hourLabel.layer.position = CGPointMake(frame.size.width / 4,frame.size.height / 4)
-            
-            hourBar.frame = CGRectMake(0,0,frame.size.width/5*3, 1)
-            hourBar.layer.position = CGPointMake(frame.size.width / 3 * 2,frame.size.height * 0.25)
-            
-        } else {
-            hourLabel.frame = CGRectMake(0,0,frame.size.width / 4,frame.size.height)
-            hourLabel.layer.position = CGPointMake(frame.size.width / 4,frame.size.height / 4)
-            
-            hourBar.frame = CGRectMake(0,0,frame.size.width/5*3, 1)
-            hourBar.layer.position = CGPointMake(frame.size.width / 3 * 2,frame.size.height * 0.25)
-
-        }
+        hourBar.frame = CGRectMake(frame.size.width/3,frame.size.height*0.25,frame.size.width/5*3, 1)
         
         let cellButton = UIButton()
-        cellButton.frame = frame
+        cellButton.frame = CGRectMake(0, 0, frame.size.width,frame.size.height)
         cellButton.addTarget(self, action: "makeAlert:", forControlEvents:.TouchUpInside)
-        cellButton.layer.position = CGPointMake(frame.size.width/2,frame.size.height/2)
         
         self.addSubview(hourLabel)
         self.addSubview(hourBar)

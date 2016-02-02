@@ -7,56 +7,112 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 protocol DateSheduleDlegae{
-    func pushDateShedule(checkDateStr:String)
+    func pushDateShedule(checkDateStr:String,alreadyStertTimeData:[String],alreadyEndTimeData:[String])
 }
 
-class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
+public class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
     
     var timeCellView:TimeSheduleView!
-    var scrollView:UIScrollView!
     var dateSheeduleDelegate:DateSheduleDlegae?
+    var eventsLabel:UILabel!
+    var myEventLavel:UILabel!
+    var alrStertTimeData = [String]()
+    var alrEndTimeData = [String]()
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     init(frame: CGRect,year:Int,month:Int,day:Int) {
         super.init(frame:frame)
         
-        self.layer.borderColor = UIColor.blackColor().CGColor
-        self.layer.borderWidth = 1
+        print("--cellTime--\(year)-\(month)-\(day)")
         
-        self.setUpSheduleList(year,month: month,day: day)
-        
-    }
-    
-    func setUpSheduleList(year:Int,month:Int,day:Int){
-        
-        scrollView = UIScrollView(frame: self.bounds)
-        scrollView.backgroundColor = UIColor.clearColor()
-        scrollView.contentSize   = CGSizeMake(frame.size.width , frame.size.height * 2.0);
-        scrollView.contentOffset = CGPointMake(0.0, 0.0);
-        scrollView.delegate = self;
-        scrollView.bounces = true
-        scrollView.pagingEnabled = true;
-        scrollView.showsHorizontalScrollIndicator = false;
-        scrollView.showsVerticalScrollIndicator = false;
-        scrollView.scrollsToTop = false;
-        
-        self.addSubview(scrollView)
-        
-        var timeCellPosY:CGFloat = frame.size.height/27*2
-        for i in 8...21 {
-            timeCellView = TimeSheduleView(frame: CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.height / 27 * 2), year:year,month:month,day:i+1,hour:i)
-            
-            timeCellView.center = CGPointMake(frame.size.width / 2, timeCellPosY)
+        var timeCellPosY:CGFloat = (frame.size.height-40)/11+20
+        for hour in 11...21 {
+            timeCellView = TimeSheduleView(frame: CGRectMake(0, timeCellPosY, self.frame.size.width, self.frame.size.height/27*2), year:year,month:month,day:day,hour:hour)
             timeCellView.hourDelegate = self
-            timeCellPosY += frame.size.height / 27 * 4
-            scrollView.addSubview(timeCellView)
+            self.addSubview(timeCellView)
+            timeCellPosY += (frame.size.height-40)/11
+        }
+        
+        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                if (response.result.isSuccess){
+                    let json = JSON((response.result.value)!)
+                    let eventArray = json["events"].array! as Array
+                    for events in eventArray{
+                        let startTime = events["event"]["start_time"].string! as String
+                        let startTimeArray = startTime.componentsSeparatedByString("T")
+                        let startDateData = startTimeArray[0].componentsSeparatedByString("-")
+                        let startTimeData = startTimeArray[1].componentsSeparatedByString(":")
+                        let endTime = events["event"]["end_time"].string! as String
+                        let endTimeArray = endTime.componentsSeparatedByString("T")
+                        let endTimeData = endTimeArray[1].componentsSeparatedByString(":")
+                        
+                        if Int(startDateData[0])! == year && Int(startDateData[1])! == month && Int(startDateData[2])! == day{
+                            
+                            var diffHour = Int(endTimeData[0])!-Int(startTimeData[0])!
+                            var diffMinuts = Int(endTimeData[1])!-Int(startTimeData[1])!
+                            if diffMinuts < 0{
+                                diffHour--
+                                diffMinuts+=60
+                            }
+                            var alreadyTimePosY:CGFloat = (frame.size.height-40)/11+20
+                            alreadyTimePosY += (frame.size.height-40)/11*CGFloat(Int(startTimeData[0])!-11)
+                            alreadyTimePosY += self.timeCellView.frame.size.height*CGFloat(diffMinuts/60)
+                            
+                            self.eventsLabel = UILabel(frame: CGRectMake(frame.size.width/3,alreadyTimePosY,frame.size.width/5*3,self.timeCellView.frame.size.height*CGFloat(60*diffHour+diffMinuts)/60))
+                            self.eventsLabel.backgroundColor = UIColor.grayColor()
+                            self.eventsLabel.text = "予約済み"
+                            self.eventsLabel.textAlignment = NSTextAlignment.Center
+                            self.eventsLabel.textColor = UIColor.whiteColor()
+                            self.addSubview(self.eventsLabel)
+                            self.bringSubviewToFront(self.eventsLabel)
+                            
+                            self.alrStertTimeData.append("\(startTimeData[0]):\(startTimeData[1])")
+                            self.alrEndTimeData.append("\(endTimeData[0]):\(endTimeData[1])")
+                        }
+                    }
+                }else{
+                    
+                }
         }
         
     }
+    
+    func createMyTime(startStr:String, endStr:String){
+        
+        if myEventLavel != nil{
+            myEventLavel.removeFromSuperview()
+        }
+        
+        let myStartTimeData = startStr.componentsSeparatedByString(":")
+        let myEndTimeData = endStr.componentsSeparatedByString(":")
+        
+        var diffHour = Int(myEndTimeData[0])!-Int(myStartTimeData[0])!
+        var diffMinuts = Int(myEndTimeData[1])!-Int(myStartTimeData[1])!
+        if diffMinuts < 0{
+            diffHour--
+            diffMinuts+=60
+        }
+        var alreadyTimePosY:CGFloat = (frame.size.height-40)/11+20
+        alreadyTimePosY += (frame.size.height-40)/11*CGFloat(Int(myStartTimeData[0])!-11)
+        alreadyTimePosY += self.timeCellView.frame.size.height*CGFloat(diffMinuts/60)
+        
+        myEventLavel = UILabel(frame: CGRectMake(frame.size.width/3,alreadyTimePosY,frame.size.width/5*3,self.timeCellView.frame.size.height*CGFloat(60*diffHour+diffMinuts)/60))
+        myEventLavel.backgroundColor = UIColor.orangeColor()
+        myEventLavel.text = "ここに追加"
+        myEventLavel.textAlignment = NSTextAlignment.Center
+        myEventLavel.textColor = UIColor.whiteColor()
+        self.addSubview(myEventLavel)
+    }
+    
     
     func getWeek(year:Int,month:Int,day:Int) ->Int{
         let dateFormatter:NSDateFormatter = NSDateFormatter();
@@ -65,13 +121,12 @@ class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
         if date != nil {
             let calendar:NSCalendar = NSCalendar.currentCalendar()
             let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekOfMonthCalendarUnit, fromDate: date!)
-            return dateComp.weekOfMonth;
+            return dateComp.weekOfMonth
         }
         return 0;
     }
     
     func pushHour(checkDateStr:String) {
-        self.dateSheeduleDelegate?.pushDateShedule(checkDateStr)
+        self.dateSheeduleDelegate?.pushDateShedule(checkDateStr,alreadyStertTimeData: alrStertTimeData,alreadyEndTimeData: alrEndTimeData)
     }
-
 }
