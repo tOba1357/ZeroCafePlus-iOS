@@ -77,6 +77,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         currentProfile.layer.cornerRadius = 15.0
         currentProfile.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.75)
         currentProfile.delegate = self
+        
         currentProfile.font = UIFont.systemFontOfSize(20)
         currentProfile.layer.borderColor = UIColor.hexStr("#999999 ", alpha: 1.0).CGColor
         currentProfile.layer.borderWidth = 0.75
@@ -188,6 +189,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let maxLength = 88
         if now > maxLength {
             currentProfile.textColor = UIColor.redColor()
+        }else {
+            currentProfile.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         }
         return true
     }
@@ -225,7 +228,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         return true
         
-        let maxLength: Int = 12
+        let maxLength: Int = 8
         
         let str = textField.text! + string
         
@@ -239,8 +242,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     /*
     // MARK: - Navigation
     
