@@ -33,6 +33,14 @@
 		BA31F8681C61201400CB0AF7 /* syukatu.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85A1C61201400CB0AF7 /* syukatu.png */; };
 		BA31F8691C61201400CB0AF7 /* tournament_light.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85B1C61201400CB0AF7 /* tournament_light.png */; };
 		BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85C1C61201400CB0AF7 /* tournament.png */; };
+		BA31F8741C61274500CB0AF7 /* tabbar_icon-01_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F86C1C61274500CB0AF7 /* tabbar_icon-01_s.png */; };
+		BA31F8751C61274500CB0AF7 /* tabbar_icon-01.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F86D1C61274500CB0AF7 /* tabbar_icon-01.png */; };
+		BA31F8761C61274500CB0AF7 /* tabbar_icon-02_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F86E1C61274500CB0AF7 /* tabbar_icon-02_s.png */; };
+		BA31F8771C61274500CB0AF7 /* tabbar_icon-02.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F86F1C61274500CB0AF7 /* tabbar_icon-02.png */; };
+		BA31F8781C61274500CB0AF7 /* tabbar_icon-03_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8701C61274500CB0AF7 /* tabbar_icon-03_s.png */; };
+		BA31F8791C61274500CB0AF7 /* tabbar_icon-03.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8711C61274500CB0AF7 /* tabbar_icon-03.png */; };
+		BA31F87A1C61274500CB0AF7 /* tabbar_icon-04_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8721C61274500CB0AF7 /* tabbar_icon-04_s.png */; };
+		BA31F87B1C61274500CB0AF7 /* tabbar_icon-04.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8731C61274500CB0AF7 /* tabbar_icon-04.png */; };
 		BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */; };
 		BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B721C26E54300648280 /* DateSheduleView.swift */; };
 		BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B731C26E54300648280 /* SheduleAlertView.swift */; };
@@ -123,6 +131,14 @@
 		BA31F85A1C61201400CB0AF7 /* syukatu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = syukatu.png; path = imageFile/genre/syukatu.png; sourceTree = "<group>"; };
 		BA31F85B1C61201400CB0AF7 /* tournament_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tournament_light.png; path = imageFile/genre/tournament_light.png; sourceTree = "<group>"; };
 		BA31F85C1C61201400CB0AF7 /* tournament.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tournament.png; path = imageFile/genre/tournament.png; sourceTree = "<group>"; };
+		BA31F86C1C61274500CB0AF7 /* tabbar_icon-01_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-01_s.png"; path = "imageFile/tabbar_icon/tabbar_icon-01_s.png"; sourceTree = "<group>"; };
+		BA31F86D1C61274500CB0AF7 /* tabbar_icon-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-01.png"; path = "imageFile/tabbar_icon/tabbar_icon-01.png"; sourceTree = "<group>"; };
+		BA31F86E1C61274500CB0AF7 /* tabbar_icon-02_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-02_s.png"; path = "imageFile/tabbar_icon/tabbar_icon-02_s.png"; sourceTree = "<group>"; };
+		BA31F86F1C61274500CB0AF7 /* tabbar_icon-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-02.png"; path = "imageFile/tabbar_icon/tabbar_icon-02.png"; sourceTree = "<group>"; };
+		BA31F8701C61274500CB0AF7 /* tabbar_icon-03_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-03_s.png"; path = "imageFile/tabbar_icon/tabbar_icon-03_s.png"; sourceTree = "<group>"; };
+		BA31F8711C61274500CB0AF7 /* tabbar_icon-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-03.png"; path = "imageFile/tabbar_icon/tabbar_icon-03.png"; sourceTree = "<group>"; };
+		BA31F8721C61274500CB0AF7 /* tabbar_icon-04_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-04_s.png"; path = "imageFile/tabbar_icon/tabbar_icon-04_s.png"; sourceTree = "<group>"; };
+		BA31F8731C61274500CB0AF7 /* tabbar_icon-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-04.png"; path = "imageFile/tabbar_icon/tabbar_icon-04.png"; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		BA5D9B721C26E54300648280 /* DateSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9B731C26E54300648280 /* SheduleAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleAlertView.swift; sourceTree = "<group>"; };
@@ -236,6 +252,36 @@
 			name = genre;
 			sourceTree = "<group>";
 		};
+		BA31F86B1C61272E00CB0AF7 /* tabbar_icon */ = {
+			isa = PBXGroup;
+			children = (
+				BA31F86C1C61274500CB0AF7 /* tabbar_icon-01_s.png */,
+				BA31F86D1C61274500CB0AF7 /* tabbar_icon-01.png */,
+				BA31F86E1C61274500CB0AF7 /* tabbar_icon-02_s.png */,
+				BA31F86F1C61274500CB0AF7 /* tabbar_icon-02.png */,
+				BA31F8701C61274500CB0AF7 /* tabbar_icon-03_s.png */,
+				BA31F8711C61274500CB0AF7 /* tabbar_icon-03.png */,
+				BA31F8721C61274500CB0AF7 /* tabbar_icon-04_s.png */,
+				BA31F8731C61274500CB0AF7 /* tabbar_icon-04.png */,
+			);
+			name = tabbar_icon;
+			sourceTree = "<group>";
+		};
+		BA31F87C1C61275E00CB0AF7 /* ThirdView_Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */,
+				BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */,
+				D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */,
+				BA31F8431C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift */,
+				D76B27FD1C5622410090DB73 /* CreateEventView.swift */,
+				BA5D9B711C26E54300648280 /* SheduleListView */,
+				BA2F0AD21C2858090007A49D /* Calender */,
+				BAE34F5A1C28EFBB0029D6B9 /* CTCheckbox */,
+			);
+			name = ThirdView_Detail;
+			sourceTree = "<group>";
+		};
 		BA5D9B711C26E54300648280 /* SheduleListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +314,7 @@
 		D76B28341C60A2110090DB73 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				BA31F86B1C61272E00CB0AF7 /* tabbar_icon */,
 				BA31F84E1C611FFE00CB0AF7 /* genre */,
 				6F36351A1C60C18D009401B7 /* profile_edit .png */,
 				D76B28221C60A1F80090DB73 /* event_detail_add_friend.png */,
@@ -310,16 +357,10 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BA31F87C1C61275E00CB0AF7 /* ThirdView_Detail */,
 				D76B28341C60A2110090DB73 /* image */,
-				BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */,
-				D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */,
-				D76B27FD1C5622410090DB73 /* CreateEventView.swift */,
-				BAE34F5A1C28EFBB0029D6B9 /* CTCheckbox */,
 				BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */,
-				BA2F0AD21C2858090007A49D /* Calender */,
-				BA5D9B711C26E54300648280 /* SheduleListView */,
 				D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */,
-				BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */,
 				D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */,
 				D7A626511C1AB359002DCEC6 /* SecondViewController.swift */,
 				D7A6267D1C1AD395002DCEC6 /* ThirdViewController.swift */,
@@ -332,7 +373,6 @@
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
-				BA31F8431C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
@@ -491,8 +531,11 @@
 				BA31F85E1C61201400CB0AF7 /* hobby.png in Resources */,
 				BA31F8611C61201400CB0AF7 /* readbook_light.png in Resources */,
 				BA31F8621C61201400CB0AF7 /* readbook.png in Resources */,
+				BA31F8761C61274500CB0AF7 /* tabbar_icon-02_s.png in Resources */,
 				D76B282B1C60A1F80090DB73 /* event_detail_add_friend.png in Resources */,
 				D76B28311C60A1F80090DB73 /* event_detail_rounded.png in Resources */,
+				BA31F8771C61274500CB0AF7 /* tabbar_icon-02.png in Resources */,
+				BA31F87A1C61274500CB0AF7 /* tabbar_icon-04_s.png in Resources */,
 				BA31F85D1C61201400CB0AF7 /* hobby_light.png in Resources */,
 				D76B282C1C60A1F80090DB73 /* event_detail_calendar.png in Resources */,
 				BA31F85F1C61201400CB0AF7 /* party_light.png in Resources */,
@@ -503,7 +546,10 @@
 				6F36351B1C60C18D009401B7 /* profile_edit .png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
 				BA31F8661C61201400CB0AF7 /* study.png in Resources */,
+				BA31F8741C61274500CB0AF7 /* tabbar_icon-01_s.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
+				BA31F87B1C61274500CB0AF7 /* tabbar_icon-04.png in Resources */,
+				BA31F8751C61274500CB0AF7 /* tabbar_icon-01.png in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,
 				D76B282D1C60A1F80090DB73 /* event_detail_clock.png in Resources */,
 				D76B282F1C60A1F80090DB73 /* event_detail_rounded_blue.png in Resources */,
@@ -511,9 +557,11 @@
 				BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */,
 				BA31F8601C61201400CB0AF7 /* party.png in Resources */,
 				BA31F8641C61201400CB0AF7 /* sakuru.png in Resources */,
+				BA31F8781C61274500CB0AF7 /* tabbar_icon-03_s.png in Resources */,
 				D7A626551C1AB359002DCEC6 /* Main.storyboard in Resources */,
 				D76B28321C60A1F80090DB73 /* event_detail_tag.png in Resources */,
 				D76B282E1C60A1F80090DB73 /* event_detail_info.png in Resources */,
+				BA31F8791C61274500CB0AF7 /* tabbar_icon-03.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
