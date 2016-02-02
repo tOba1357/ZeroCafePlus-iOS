@@ -11,13 +11,6 @@
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
 		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
 		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
-		9871CBFF1C5B87A800895D66 /* event_detail_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CBFD1C5B87A800895D66 /* event_detail_calendar.png */; };
-		9871CC001C5B87A800895D66 /* event_detail_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CBFE1C5B87A800895D66 /* event_detail_clock.png */; };
-		9871CC021C5C90E900895D66 /* event_detail_tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CC011C5C90E900895D66 /* event_detail_tag.png */; };
-		9871CC041C5CB50500895D66 /* event_detail_rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 9871CC031C5CB50500895D66 /* event_detail_rounded.png */; };
-		98D3BC451C5CC6C00005AD85 /* event_detail_rounded_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D3BC441C5CC6C00005AD85 /* event_detail_rounded_gray.png */; };
-		98D3BC4A1C5EF9AE0005AD85 /* event_detail_add_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D3BC491C5EF9AE0005AD85 /* event_detail_add_friend.png */; };
-		98D3BC4E1C5F23F00005AD85 /* event_detail_info.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D3BC4D1C5F23F00005AD85 /* event_detail_info.png */; };
 		9DD8BDA61C284E9B002F243D /* EventsAttendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */; };
 		9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */; };
 		BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD31C2858090007A49D /* CalenderView.swift */; };
@@ -31,10 +24,17 @@
 		BA5D9BB21C26E6E300648280 /* libCTCheckbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5D9BAF1C26E5F000648280 /* libCTCheckbox.a */; };
 		BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */; };
 		BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */; };
-		D70161651C288A480036AF92 /* AnotherTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70161641C288A480036AF92 /* AnotherTopVC.swift */; };
-		D70161691C288B3A0036AF92 /* FavoriteTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70161681C288B3A0036AF92 /* FavoriteTopVC.swift */; };
 		D76B27FE1C5622410090DB73 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B27FD1C5622410090DB73 /* CreateEventView.swift */; };
 		D76B28001C56224F0090DB73 /* CheckCalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */; };
+		D76B282B1C60A1F80090DB73 /* event_detail_add_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28221C60A1F80090DB73 /* event_detail_add_friend.png */; };
+		D76B282C1C60A1F80090DB73 /* event_detail_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28231C60A1F80090DB73 /* event_detail_calendar.png */; };
+		D76B282D1C60A1F80090DB73 /* event_detail_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28241C60A1F80090DB73 /* event_detail_clock.png */; };
+		D76B282E1C60A1F80090DB73 /* event_detail_info.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28251C60A1F80090DB73 /* event_detail_info.png */; };
+		D76B282F1C60A1F80090DB73 /* event_detail_rounded_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28261C60A1F80090DB73 /* event_detail_rounded_blue.png */; };
+		D76B28301C60A1F80090DB73 /* event_detail_rounded_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28271C60A1F80090DB73 /* event_detail_rounded_gray.png */; };
+		D76B28311C60A1F80090DB73 /* event_detail_rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28281C60A1F80090DB73 /* event_detail_rounded.png */; };
+		D76B28321C60A1F80090DB73 /* event_detail_tag.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28291C60A1F80090DB73 /* event_detail_tag.png */; };
+		D76B28331C60A1F80090DB73 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B282A1C60A1F80090DB73 /* star.png */; };
 		D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */; };
 		D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */; };
 		D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A626511C1AB359002DCEC6 /* SecondViewController.swift */; };
@@ -85,13 +85,6 @@
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
-		9871CBFD1C5B87A800895D66 /* event_detail_calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_calendar.png; path = ../../../../../../Desktop/event_detail_calendar.png; sourceTree = "<group>"; };
-		9871CBFE1C5B87A800895D66 /* event_detail_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_clock.png; path = ../../../../../../Desktop/event_detail_clock.png; sourceTree = "<group>"; };
-		9871CC011C5C90E900895D66 /* event_detail_tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_tag.png; path = ../../../../../../Desktop/event_detail_tag.png; sourceTree = "<group>"; };
-		9871CC031C5CB50500895D66 /* event_detail_rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded.png; path = ../../../../../../Desktop/event_detail_rounded.png; sourceTree = "<group>"; };
-		98D3BC441C5CC6C00005AD85 /* event_detail_rounded_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded_gray.png; path = ../../../../../../Desktop/event_detail_rounded_gray.png; sourceTree = "<group>"; };
-		98D3BC491C5EF9AE0005AD85 /* event_detail_add_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_add_friend.png; path = ../../../../../../Desktop/event_detail_add_friend.png; sourceTree = "<group>"; };
-		98D3BC4D1C5F23F00005AD85 /* event_detail_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_info.png; path = ../../../../../../Desktop/event_detail_info.png; sourceTree = "<group>"; };
 		9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAttendViewController.swift; sourceTree = "<group>"; };
 		9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDecideViewController.swift; sourceTree = "<group>"; };
 		BA2F0AD31C2858090007A49D /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
@@ -107,10 +100,17 @@
 		BAE34F671C28F2DA0029D6B9 /* CTCheckbox-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTCheckbox-Prefix.pch"; sourceTree = "<group>"; };
 		BAE34F681C28F2DA0029D6B9 /* CTCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCheckbox.h; sourceTree = "<group>"; };
 		BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCheckbox.m; sourceTree = "<group>"; };
-		D70161641C288A480036AF92 /* AnotherTopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnotherTopVC.swift; sourceTree = "<group>"; };
-		D70161681C288B3A0036AF92 /* FavoriteTopVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTopVC.swift; sourceTree = "<group>"; };
 		D76B27FD1C5622410090DB73 /* CreateEventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckCalenderView.swift; sourceTree = "<group>"; };
+		D76B28221C60A1F80090DB73 /* event_detail_add_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_add_friend.png; path = imageFile/event_detail_add_friend.png; sourceTree = "<group>"; };
+		D76B28231C60A1F80090DB73 /* event_detail_calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_calendar.png; path = imageFile/event_detail_calendar.png; sourceTree = "<group>"; };
+		D76B28241C60A1F80090DB73 /* event_detail_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_clock.png; path = imageFile/event_detail_clock.png; sourceTree = "<group>"; };
+		D76B28251C60A1F80090DB73 /* event_detail_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_info.png; path = imageFile/event_detail_info.png; sourceTree = "<group>"; };
+		D76B28261C60A1F80090DB73 /* event_detail_rounded_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded_blue.png; path = imageFile/event_detail_rounded_blue.png; sourceTree = "<group>"; };
+		D76B28271C60A1F80090DB73 /* event_detail_rounded_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded_gray.png; path = imageFile/event_detail_rounded_gray.png; sourceTree = "<group>"; };
+		D76B28281C60A1F80090DB73 /* event_detail_rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded.png; path = imageFile/event_detail_rounded.png; sourceTree = "<group>"; };
+		D76B28291C60A1F80090DB73 /* event_detail_tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_tag.png; path = imageFile/event_detail_tag.png; sourceTree = "<group>"; };
+		D76B282A1C60A1F80090DB73 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = imageFile/star.png; sourceTree = "<group>"; };
 		D7A6264A1C1AB359002DCEC6 /* ZeroCafePlus-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeroCafePlus-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +212,22 @@
 			path = CTCheckbox;
 			sourceTree = "<group>";
 		};
+		D76B28341C60A2110090DB73 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				D76B28221C60A1F80090DB73 /* event_detail_add_friend.png */,
+				D76B28231C60A1F80090DB73 /* event_detail_calendar.png */,
+				D76B28241C60A1F80090DB73 /* event_detail_clock.png */,
+				D76B28251C60A1F80090DB73 /* event_detail_info.png */,
+				D76B28261C60A1F80090DB73 /* event_detail_rounded_blue.png */,
+				D76B28271C60A1F80090DB73 /* event_detail_rounded_gray.png */,
+				D76B28281C60A1F80090DB73 /* event_detail_rounded.png */,
+				D76B28291C60A1F80090DB73 /* event_detail_tag.png */,
+				D76B282A1C60A1F80090DB73 /* star.png */,
+			);
+			name = image;
+			sourceTree = "<group>";
+		};
 		D7A626411C1AB359002DCEC6 = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +254,7 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D76B28341C60A2110090DB73 /* image */,
 				BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */,
 				D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */,
 				D76B27FD1C5622410090DB73 /* CreateEventView.swift */,
@@ -245,8 +262,6 @@
 				BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */,
 				BA2F0AD21C2858090007A49D /* Calender */,
 				BA5D9B711C26E54300648280 /* SheduleListView */,
-				D70161641C288A480036AF92 /* AnotherTopVC.swift */,
-				D70161681C288B3A0036AF92 /* FavoriteTopVC.swift */,
 				D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */,
 				BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */,
 				D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */,
@@ -261,13 +276,6 @@
 				D7A626581C1AB359002DCEC6 /* LaunchScreen.storyboard */,
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
-				9871CBFD1C5B87A800895D66 /* event_detail_calendar.png */,
-				9871CBFE1C5B87A800895D66 /* event_detail_clock.png */,
-				9871CC011C5C90E900895D66 /* event_detail_tag.png */,
-				9871CC031C5CB50500895D66 /* event_detail_rounded.png */,
-				98D3BC441C5CC6C00005AD85 /* event_detail_rounded_gray.png */,
-				98D3BC491C5EF9AE0005AD85 /* event_detail_add_friend.png */,
-				98D3BC4D1C5F23F00005AD85 /* event_detail_info.png */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
@@ -422,17 +430,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9871CC001C5B87A800895D66 /* event_detail_clock.png in Resources */,
+				D76B282B1C60A1F80090DB73 /* event_detail_add_friend.png in Resources */,
+				D76B28311C60A1F80090DB73 /* event_detail_rounded.png in Resources */,
+				D76B282C1C60A1F80090DB73 /* event_detail_calendar.png in Resources */,
+				D76B28301C60A1F80090DB73 /* event_detail_rounded_gray.png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
-				9871CBFF1C5B87A800895D66 /* event_detail_calendar.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
-				98D3BC4E1C5F23F00005AD85 /* event_detail_info.png in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,
-				98D3BC4A1C5EF9AE0005AD85 /* event_detail_add_friend.png in Resources */,
-				9871CC021C5C90E900895D66 /* event_detail_tag.png in Resources */,
+				D76B282D1C60A1F80090DB73 /* event_detail_clock.png in Resources */,
+				D76B282F1C60A1F80090DB73 /* event_detail_rounded_blue.png in Resources */,
+				D76B28331C60A1F80090DB73 /* star.png in Resources */,
 				D7A626551C1AB359002DCEC6 /* Main.storyboard in Resources */,
-				9871CC041C5CB50500895D66 /* event_detail_rounded.png in Resources */,
-				98D3BC451C5CC6C00005AD85 /* event_detail_rounded_gray.png in Resources */,
+				D76B28321C60A1F80090DB73 /* event_detail_tag.png in Resources */,
+				D76B282E1C60A1F80090DB73 /* event_detail_info.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +516,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */,
-				D70161651C288A480036AF92 /* AnotherTopVC.swift in Sources */,
 				BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */,
 				D76B27FE1C5622410090DB73 /* CreateEventView.swift in Sources */,
 				BA2F0AD71C2858090007A49D /* DayView.swift in Sources */,
@@ -517,7 +526,6 @@
 				BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */,
 				D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */,
 				6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */,
-				D70161691C288B3A0036AF92 /* FavoriteTopVC.swift in Sources */,
 				D76B28001C56224F0090DB73 /* CheckCalenderView.swift in Sources */,
 				BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */,
 				D7A6267E1C1AD395002DCEC6 /* ThirdViewController.swift in Sources */,
