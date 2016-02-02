@@ -46,13 +46,14 @@ class ForthViewController: UIViewController {
         new_name.synchronize()
         
         profileLabel = UILabel(frame: CGRectMake(0,0,screenWidth/1.2,screenHeight/2.3))
-        profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.34)
+        profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.1)
         profileLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         profileLabel.text = "金沢大学のtkmtです。プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言"
-        profileLabel.numberOfLines = 0
-        profileLabel.backgroundColor = UIColor.redColor()
+        profileLabel.numberOfLines = 4
+        profileLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        profileLabel.backgroundColor = UIColor.clearColor()
         profileLabel.sizeToFit()
-        profileLabel.font = UIFont.systemFontOfSize(14)
+        profileLabel.font = UIFont.systemFontOfSize(16)
         self.view.addSubview(profileLabel)
         
         nameLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/15))
@@ -63,7 +64,7 @@ class ForthViewController: UIViewController {
         nameLabel.textAlignment = NSTextAlignment.Left
         self.view.addSubview(nameLabel)
         
-        statusLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/18))
+        statusLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/19))
         statusLabel.layer.position = CGPoint(x: screenWidth/2.1, y: screenHeight/4.8)
         statusLabel.text = "金沢工業大学3年"
         statusLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
@@ -101,7 +102,9 @@ class ForthViewController: UIViewController {
                         if user_id == 1 {
                             self.user_name = user["user"]["name"].string!
                             //                            self.statusLabel.text = user["user"]["major"].string!
+                            //                            self.statusLabel.sizeToFit()
                             //                            self.profileLabel.text = user["user"]["description"].string!
+                            //                            self.profileLabel.sizeToFit()
                             self.nameLabel.text = self.user_name
                             print(self.user_name)
                         }
