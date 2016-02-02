@@ -25,18 +25,31 @@ class FirstViewController: UIViewController, EventViewDelegate {
     
     @IBOutlet var horizontalSV: UIScrollView!
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButtonItem
         
         horizontalSV.pagingEnabled = true
         horizontalSV.directionalLockEnabled = true
         horizontalSV.contentSize.width = view.frame.size.width * 3.0
         horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
-//        let kitView = UIView()
-//        let kuView = UIView()
-//        let favoriteView = UIView()
-//        let views = [kitView,kuView, favoriteView]
+        //        let kitView = UIView()
+        //        let kuView = UIView()
+        //        let favoriteView = UIView()
+        //        let views = [kitView,kuView, favoriteView]
         
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
@@ -105,7 +118,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         let sideDecide = events.index % 2
                         if sideDecide == 0 {
                             let eve = events.element as JSON
-                            let eventID = 28
+                            let eventID = eve["event"]["id"].int
                             let title = eve["event"]["title"].string! as String
                             let dateName = eve["event"]["start_time"].string! as String
                             let tagName : String? = { ()->(String) in
@@ -116,7 +129,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 }
                             }()
                             print(tagName)
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID, dateNameString: dateName, tagNameString: tagName!)
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             
@@ -125,7 +138,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         }else{
                             
                             let eve = events.element as JSON
-                            let eventID = 1
+                            let eventID = eve["event"]["id"].int
                             let title = eve["event"]["title"].string! as String
                             let dateName = eve["event"]["start_time"].string! as String
                             let tagName : String? = { ()->(String) in
@@ -135,7 +148,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                     return eve["event"]["category_tag"].string! as String
                                 }
                             }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID, dateNameString: dateName, tagNameString: tagName!)
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             self.horizontalSV.addSubview(eventViewGenerate)
@@ -168,7 +181,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
         print("success")
         if let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
             eventAttendVC.getID = myEventID
-            self.presentViewController(eventAttendVC, animated: true ,completion:nil)
+            print("")
+            self.navigationController?.pushViewController(eventAttendVC, animated: true)
         }
         else{
             print("aaa")

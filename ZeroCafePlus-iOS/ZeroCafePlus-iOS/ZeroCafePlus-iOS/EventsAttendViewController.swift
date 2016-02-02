@@ -40,11 +40,9 @@ class EventsAttendViewController: UIViewController {
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
         
-        self.title = ""
-
         myScrollView = UIScrollView()
         myScrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.frame.height*1.2)
+        myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.frame.height*1.3)
         myScrollView.contentOffset = CGPointMake(0, 0)
         myScrollView.pagingEnabled = false
         self.view.addSubview(myScrollView)
@@ -88,7 +86,6 @@ class EventsAttendViewController: UIViewController {
         
         
         date = UILabel(frame: CGRectMake(self.view.bounds.width/4.18,self.view.bounds.height/6.01,self.view.bounds.width,self.view.bounds.height/37.86))
-        date.backgroundColor = UIColor.yellowColor()
         date.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         date.text = ""
         date.font = UIFont.systemFontOfSize(CGFloat(self.view.bounds.height/37.86))
@@ -121,7 +118,6 @@ class EventsAttendViewController: UIViewController {
         
         time = UILabel(frame: CGRectMake(self.view.bounds.width/4.2,self.view.bounds.height/4.34,self.view.bounds.width,self.view.bounds.height/37.86))
         time.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
-        time.backgroundColor = UIColor.yellowColor()
         time.text = ""
         time.font = UIFont.systemFontOfSize(CGFloat(self.view.bounds.height/37.86))
         time.lineBreakMode = NSLineBreakMode.ByCharWrapping
@@ -157,7 +153,6 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: content, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.23),
             NSLayoutConstraint(item: content, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/2.25)
             ])
-        content.numberOfLines = 0
         content.sizeToFit()
 
 
@@ -169,6 +164,14 @@ class EventsAttendViewController: UIViewController {
         event_detail_tag.image = detail_tag
         event_detail_tag.layer.position.x = CGFloat(self.view.bounds.width/6.6)
         myScrollView.addSubview(event_detail_tag)
+        event_detail_tag.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraints([
+            NSLayoutConstraint(item: event_detail_tag, attribute: .Top,    relatedBy: .Equal, toItem: content,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+            NSLayoutConstraint(item: event_detail_tag, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/9.14),
+            NSLayoutConstraint(item: event_detail_tag, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/14.22),
+            NSLayoutConstraint(item: event_detail_tag, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/39.17)
+            ])
+
 
         
         tag = UILabel(frame: CGRectMake(self.view.bounds.width/4,self.view.bounds.height/1.13 - self.view.bounds.height/9.47,self.view.bounds.width/1.6,0))
@@ -197,7 +200,7 @@ class EventsAttendViewController: UIViewController {
         sankaButton.setTitle("", forState: UIControlState.Normal)
         sankaButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         sankaButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-        sankaButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
+        sankaButton.addTarget(self, action: "onClickSankaButton:", forControlEvents: .TouchUpInside)
         myScrollView.addSubview(sankaButton)
         sankaButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
@@ -215,7 +218,7 @@ class EventsAttendViewController: UIViewController {
         FriendTellButton.setTitle("友達に教える", forState: UIControlState.Normal)
         FriendTellButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         FriendTellButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-        FriendTellButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
+        FriendTellButton.addTarget(self, action: "onClickTellButton:", forControlEvents: .TouchUpInside)
         myScrollView.addSubview(FriendTellButton)
         FriendTellButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
@@ -226,6 +229,19 @@ class EventsAttendViewController: UIViewController {
             ])
 
 
+        line = UILabel(frame: CGRectMake(0,0,0,0))
+        line.backgroundColor = UIColor.blackColor()
+        self.view.addSubview(line)
+        line.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraints([
+            NSLayoutConstraint(item: line, attribute: .Top,    relatedBy: .Equal, toItem: FriendTellButton,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/32.46),
+            NSLayoutConstraint(item: line, attribute: .Left,   relatedBy: .Equal, toItem: name, attribute: .Left,   multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: line, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.24),
+            NSLayoutConstraint(item: line, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/1136)
+            ])
+
+        
+        
         
         kikaku = UILabel(frame: CGRectMake(0,0,0,0))
         kikaku.text = "企画"
@@ -252,6 +268,7 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: sanka, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/45.44)
             ])
         
+        
         self.view.backgroundColor = UIColor.whiteColor()
                 
     }
@@ -270,11 +287,27 @@ class EventsAttendViewController: UIViewController {
                         print("成功")
                         print(events["event"])
                         print(self.getID)
+                        
+                        // タイトル
                         self.name.text = events["event"]["title"].string! as String
+                        
+                        //日付・時間 配列取得
                         let startTime = events["event"]["start_time"].string! as String
                         let startArray = startTime.componentsSeparatedByString("T")
-                        self.date.text = startArray[0].stringByReplacingOccurrencesOfString("-", withString: " / ")
-                        self.date.sizeToFit()
+                        
+                        // 日付
+                        let date_formatter: NSDateFormatter = NSDateFormatter()
+                        date_formatter.locale     = NSLocale(localeIdentifier: "ja")
+                        date_formatter.dateFormat = "yyyy/MM/dd"
+                        let change_date:NSDate = date_formatter.dateFromString(startArray[0])!
+                        let weekdays: Array  = ["天", "日", "月", "火", "水", "木", "金", "土"]
+                        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+                        let comps = calendar.components([.Year, .Month, .Day, .Weekday] , fromDate:  change_date)
+                        date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
+                        print(date_formatter.stringFromDate(change_date))
+                        self.date.text = date_formatter.stringFromDate(change_date)
+                        
+                        // 時間
                         let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
                         let endTime = events["event"]["end_time"].string! as String
                         let endArray = endTime.componentsSeparatedByString("T")
@@ -282,27 +315,28 @@ class EventsAttendViewController: UIViewController {
                         self.time.text = "\(startMinute) ~ \(endMinute)"
                         self.time.sizeToFit()
                         
+                        // イベント説明
                         self.content.text = events["event"]["description"].string! as String
                         self.content.numberOfLines = 0
                         self.content.sizeToFit()
 
-                        
+                        // タグ
                         let JugementTag: String? = events["event"]["category_tag"].string
                         if var TagText = JugementTag {
                             TagText = TagText.stringByReplacingOccurrencesOfString("#", withString: " #")
                             self.tag.text = TagText
                             self.tag.sizeToFit()
                         }
-                        
+                        // 人数
                         let capacity = events["event"]["capacity"].int! as Int
                         let participant: Int? = events["event"]["participant"].int
                         if let ptcpnt = participant {
                             let reserved = capacity - ptcpnt
-                            if reserved <= 0 {
-                                self.sankaButton.setTitle("参加する   満席ぜよ", forState: UIControlState.Normal)
-                            } else {
+//                            if reserved <= 0 {
+//                                self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
+//                            } else {
                             self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
-                            }
+//                           }
                         } else {
                             self.sankaButton.setTitle("参加する  残り\(capacity)", forState: UIControlState.Normal)
                         }
@@ -316,11 +350,18 @@ class EventsAttendViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func onClickMyButton(sender: UIButton){
+    func onClickSankaButton(sender: UIButton){
         let EventDecideViewController = EventsDecideViewController()
         EventDecideViewController.MygetID = getID
         self.navigationController?.pushViewController(EventDecideViewController, animated: true)
         
     
-}
+    }
+    
+    func onClickTellButton(sender: UIButton){
+        
+        
+    }
+
+    
 }
