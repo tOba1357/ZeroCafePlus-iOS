@@ -25,18 +25,31 @@ class FirstViewController: UIViewController, EventViewDelegate {
     
     @IBOutlet var horizontalSV: UIScrollView!
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButtonItem
         
         horizontalSV.pagingEnabled = true
         horizontalSV.directionalLockEnabled = true
         horizontalSV.contentSize.width = view.frame.size.width * 3.0
         horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
-//        let kitView = UIView()
-//        let kuView = UIView()
-//        let favoriteView = UIView()
-//        let views = [kitView,kuView, favoriteView]
+        //        let kitView = UIView()
+        //        let kuView = UIView()
+        //        let favoriteView = UIView()
+        //        let views = [kitView,kuView, favoriteView]
         
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
@@ -168,7 +181,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         print("success")
         if let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
             eventAttendVC.getID = myEventID
-            self.presentViewController(eventAttendVC, animated: true ,completion:nil)
+            self.navigationController?.pushViewController(eventAttendVC, animated: true)
         }
         else{
             print("aaa")

@@ -16,9 +16,12 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     private var TakeFriends:UILabel!
     private var event_detail_add_friend: UIImageView!
-    private var add: UIPickerView!
+    private var addPicker: UIPickerView!
+    private var myToolBar: UIToolbar!
+    private var addButton: UITextField!
     private let myValues: NSArray = ["0人","1人","2人","3人","4人","5人","6人","7人","8人","9人","10人","11人","12人","13人","14人","15人","16人","17人","18人","19人","20人"]
     private var event_detail_info: UIImageView!
+    private var line: UILabel!
     private var sankaButton: UIButton!
     
     var MygetID: Int!
@@ -26,6 +29,8 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(myValues[3])
         
         self.title = ""
         
@@ -53,24 +58,59 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         self.view.addConstraints([
             NSLayoutConstraint(item: TakeFriends, attribute: .Top,    relatedBy: .Equal, toItem: self.view,   attribute: .Top, multiplier: 1, constant: self.view.bounds.height/4.81),
             NSLayoutConstraint(item: TakeFriends, attribute: .Left,   relatedBy: .Equal, toItem: event_detail_add_friend, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width/10.49),
-            
-            ])
+         ])
 
+        addPicker = UIPickerView()
+        addPicker.delegate = self
+        addPicker.dataSource = self
+        addPicker.showsSelectionIndicator = true
+        
+        
+        addButton = UITextField(frame: CGRectMake(self.view.bounds.width/1.3, self.view.bounds.height/4.75, self.view.bounds.width/9.14, self.view.bounds.height/37.86))
+        addButton.textColor = UIColor.blackColor()
+        addButton.font = UIFont.systemFontOfSize(CGFloat(self.view.bounds.height/37.86))
+        addButton.placeholder = myValues[0] as? String;
+        self.view.addSubview(addButton)
+        self.view.addSubview(addButton)
+        
+       
+        
+        myToolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, self.view.bounds.height/12))
+        myToolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        myToolBar.backgroundColor = UIColor.whiteColor()
+        myToolBar.barStyle = UIBarStyle.Black
+        myToolBar.tintColor = UIColor.whiteColor()
+        
 
+        addButton.inputView = addPicker
+        addButton.inputAccessoryView = myToolBar
         
-        add = UIPickerView()
-        add.frame = CGRectMake(0,0,self.view.bounds.width/6, self.view.bounds.height/9)
-        add.layer.position = CGPoint(x: self.view.bounds.width/1.25,y: self.view.bounds.height/4.52)
-        add.delegate = self
-        add.dataSource = self
-        self.view.addSubview(add)
         
+        let myToolBarButton = UIBarButtonItem(title: "Close", style: .Bordered, target: self, action: "onClick:")
+        myToolBarButton.tag = 1
+        myToolBar.items = [myToolBarButton]
+        
+
         
         event_detail_info = UIImageView(frame: CGRectMake(0,self.view.bounds.height/3.82,self.view.bounds.width/1.27,self.view.bounds.height/12.08))
         let detail_info = UIImage(named: "event_detail_info.png")
         event_detail_info.image = detail_info
         event_detail_info.layer.position.x = CGFloat(self.view.bounds.width/2)
         self.view.addSubview(event_detail_info)
+        
+        
+        
+        line = UILabel(frame: CGRectMake(0,0,0,0))
+        line.backgroundColor = UIColor.blackColor()
+        self.view.addSubview(line)
+        line.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addConstraints([
+            NSLayoutConstraint(item: line, attribute: .Top,    relatedBy: .Equal, toItem: event_detail_info,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/18.93),
+            NSLayoutConstraint(item: line, attribute: .Left,   relatedBy: .Equal, toItem: event_detail_add_friend, attribute: .Left,   multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: line, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.24),
+            NSLayoutConstraint(item: line, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/1136)
+            ])
+
         
         
         let sankaButtonImage: UIImage = UIImage(named: "event_detail_rounded.png")!
@@ -100,15 +140,22 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         return myValues[row] as? String
     }
     
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        addButton.text = myValues[row] as? String;
+    }
+    
+    
     /*
     pickerが選択された際に呼ばれるデリゲートメソッド.
     */
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("row: \(row)")
-        print("value: \(myValues[row])")
-    }
+//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        print("row: \(row)")
+//        print("value: \(myValues[row])")
+//    }
     
-
+    func onClick(sender: UIBarButtonItem) {
+        addButton.resignFirstResponder()
+    }
     
         override func viewWillAppear(animated: Bool) {
             let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
@@ -129,6 +176,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         
     }
+    
     
     func onClickMyButton(sender: UIButton){
         
