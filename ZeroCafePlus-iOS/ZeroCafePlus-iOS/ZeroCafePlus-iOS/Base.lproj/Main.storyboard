@@ -88,7 +88,7 @@
         <!--ScheduleVC-->
         <scene sceneID="g3S-lc-rin">
             <objects>
-                <viewController storyboardIdentifier="ScheduleVC" id="w8f-hy-cZA" customClass="ScheduleVC" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScheduleVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="w8f-hy-cZA" customClass="ScheduleVC" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K7Q-Lt-OpT"/>
                         <viewControllerLayoutGuide type="bottom" id="edZ-MN-UMm"/>
@@ -106,7 +106,7 @@
         <!--Final Decision Event AlertVC-->
         <scene sceneID="JqM-Iu-SmX">
             <objects>
-                <viewController storyboardIdentifier="FinalDecisionEventAlertVC" id="1Ah-LY-nQi" customClass="FinalDecisionEventAlertVC" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FinalDecisionEventAlertVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Ah-LY-nQi" customClass="FinalDecisionEventAlertVC" customModule="ZeroCafePlus_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AuH-BL-AOq"/>
                         <viewControllerLayoutGuide type="bottom" id="8MS-3n-Vg4"/>

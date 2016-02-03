@@ -8,21 +8,12 @@
 
 import UIKit
 
-class FinalDecisionEventAlertVC: UIViewController,UIScrollViewDelegate {
+class FinalDecisionEventAlertVC: UIViewController, UIScrollViewDelegate {
     
     let scrollView = UIScrollView()
-    let nameLabel:UILabel!
-    let expositionLabel:UILabel!
-    let dataLabel:UILabel!
-    let startTimeLabel:UILabel!
-    let endTimeLabel:UILabel!
-    let belongingLabel:UILabel!
-    let diveJoinLabel:UILabel!
-    let MenberNumLabel:UILabel!
-    let tagLabel:UILabel!
     
-    var eventName :String!
-    var eventExposition :String!
+    var eventName : String!
+    var eventExposition : String!
     var eventDate :[String]!
     var eventStartTime :String!
     var eventEndTime :String!
@@ -40,9 +31,9 @@ class FinalDecisionEventAlertVC: UIViewController,UIScrollViewDelegate {
         scrollView.contentOffset = CGPointMake(0.0 , 0.0)
         self.view.addSubview(scrollView)
         
-        
-        
-        
     }
-
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
