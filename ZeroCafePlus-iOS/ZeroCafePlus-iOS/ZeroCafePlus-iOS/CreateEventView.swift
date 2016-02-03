@@ -116,7 +116,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     
     func postEventDate(){
         if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 {
-            self.createEventdelegate.getEventNameExposition(titleTextField.text, exposition: detailTextView.text)
+            self.createEventdelegate.getEventNameExposition(titleTextField.text!, exposition: detailTextView.text)
         } else {
             self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
         }
