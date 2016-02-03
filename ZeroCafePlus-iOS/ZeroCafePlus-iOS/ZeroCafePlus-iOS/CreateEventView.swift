@@ -11,7 +11,7 @@ import UIKit
 protocol CreateEventDelegate{
     func createEventNameExposition()
     func nilAlertAction(title:String,message:String)
-    func getEventNameExposition(name:String,exposition:String)
+    func getEventNameExposition(name:String,exposition:String,genreNum:Int)
 }
 
 class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate {
@@ -21,7 +21,29 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     var detailTextView:UITextView!
     var detailAlertLabel:UILabel!
     var txtActiveView = UITextView()
+    
     var isBoolTextView:Bool!
+    var genreNum :Int!
+    
+    var hobyImg:UIImage!
+    var hoby_sImg:UIImage!
+    var studyImg:UIImage!
+    var study_sImg:UIImage!
+    var sakuruImg:UIImage!
+    var sakuru_sImg:UIImage!
+    var tournamentImg:UIImage!
+    var tournament_sImg:UIImage!
+    var readBookImg:UIImage!
+    var readBook_sImg:UIImage!
+    var partyImg:UIImage!
+    var party_sImg:UIImage!
+    
+    var genreHobyBtn:UIButton!
+    var genreStudyBtn:UIButton!
+    var genreSakuruBtn:UIButton!
+    var genreTournamentBtn:UIButton!
+    var genreReadBookBtn:UIButton!
+    var genrePartyBtn:UIButton!
     
     var createEventdelegate : CreateEventDelegate!
     
@@ -36,6 +58,8 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     override init(frame:CGRect){
         super.init(frame: frame)
         
+        setImage()
+        
         isBoolTextView = false
         
         let myToolBar = UIToolbar(frame: CGRectMake(0, self.frame.size.height/6, self.frame.size.width, 40.0))
@@ -48,53 +72,136 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         myToolBarButton.tag = 1
         myToolBar.items = [myToolBarButton]
         
-        
-        let titleLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/10))
+        let titleLabel = UILabel(frame: CGRectMake(0,self.frame.size.height*(160/1136),self.frame.width/4*3,self.frame.height*(28/1136)))
         titleLabel.text = "イベント名(18文字以内)"
+        titleLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        titleLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         titleLabel.sizeToFit()
-        titleLabel.layer.position = CGPointMake(self.frame.width/2,  self.frame.height/10)
         
-        titleTextField = UITextField(frame: CGRectMake(0,0,self.frame.width,self.frame.height/10))
-        titleTextField.layer.borderWidth = 1
-        titleTextField.layer.borderColor = UIColor.blackColor().CGColor
-        titleTextField.layer.cornerRadius = 15
+        titleTextField = UITextField(frame: CGRectMake(0,self.frame.height*(212/1136),self.frame.width,self.frame.height*(56/1136)))
+        titleTextField.layer.borderWidth = 0.75
+        titleTextField.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
+        titleTextField.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
+        titleTextField.textAlignment = NSTextAlignment.Left
+        titleTextField.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        titleTextField.layer.cornerRadius = 13.5
         titleTextField.delegate = self
-        titleTextField.layer.position = CGPointMake(self.frame.width/2, self.frame.height/5)
         
-        titleAlertLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/20))
-        titleAlertLabel.text = "⚠️18文字を超えています。"
-        titleAlertLabel.sizeToFit()
-        titleAlertLabel.backgroundColor = UIColor.redColor()
-        titleAlertLabel.hidden = true
-        titleAlertLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3)
+        titleAlertLabel = UILabel(frame: CGRectMake(self.frame.width/4*3,self.frame.height*(268/1136)+10,self.frame.width/4,self.frame.height*(20/1136)))
+        titleAlertLabel.text = "/18"
+        titleAlertLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+        titleAlertLabel.textAlignment = NSTextAlignment.Right
         
-        let detailLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/10))
-        detailLabel.text = "どんなイベント？（１２０文字以内）"
-        detailLabel.sizeToFit()
-        detailLabel.layer.position = CGPointMake(self.frame.width/2, titleTextField.layer.position.y + titleAlertLabel.frame.height*2 + detailLabel.frame.height)
+        let detailLabel = UILabel(frame: CGRectMake(0,self.frame.size.height*(324/1136),self.frame.width/4*3,self.frame.height*(28/1136)))
+        detailLabel.text = "内容（１００文字以内）"
+        detailLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         
-        detailTextView = UITextView(frame: CGRectMake(0,0,self.frame.width,self.frame.height/5))
-        detailTextView.layer.borderColor = UIColor.blackColor().CGColor
-        detailTextView.layer.borderWidth = 1
-        detailTextView.layer.cornerRadius = 15
+        detailTextView = UITextView(frame: CGRectMake(0,self.frame.size.height*(376/1136),self.frame.width,self.frame.height*(264/1136)))
+        detailTextView.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
+        detailTextView.layer.borderWidth = 0.75
+        detailTextView.layer.cornerRadius = 27
+        detailTextView.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         detailTextView.textAlignment = NSTextAlignment.Left
         detailTextView.inputAccessoryView = myToolBar
         detailTextView.delegate = self
-        detailTextView.layer.position = CGPointMake(self.frame.width/2, self.frame.height/2)
         
-        detailAlertLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4*3,self.frame.height/20))
-        detailAlertLabel.text = "⚠️120文字を超えています。"
+        detailAlertLabel = UILabel(frame: CGRectMake(self.frame.width/4*3,self.frame.height*(640/1136),self.frame.width/4,self.frame.height*(20/1136)))
+        detailAlertLabel.text = "/100"
         detailAlertLabel.sizeToFit()
         detailAlertLabel.backgroundColor = UIColor.redColor()
         detailAlertLabel.hidden = true
-        detailAlertLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3*2)
+        
+        let genreLabel = UILabel(frame: CGRectMake(0,self.frame.size.height*(696/1136),self.frame.width/4*3,self.frame.height*(28/1136)))
+        genreLabel.text = "ジャンル"
+        genreLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        genreLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
+        genreLabel.sizeToFit()
+        
+        var genreBtnPos:CGFloat = 0
+        
+        genreHobyBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
+        genreHobyBtn.setImage(hobyImg, forState: .Normal)
+        genreHobyBtn.tag = 5
+        genreHobyBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
+        
+        let hobyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
+        hobyLabel.text = "趣味"
+        hobyLabel.textAlignment = NSTextAlignment.Center
+        hobyLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        hobyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+        
+        genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
+        
+        genreStudyBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
+        genreStudyBtn.setImage(studyImg, forState: .Normal)
+        genreStudyBtn.tag = 2
+        genreStudyBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
+
+        let studyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
+        studyLabel.text = "勉強会"
+        studyLabel.textAlignment = NSTextAlignment.Center
+        studyLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        studyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+        
+        genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
+
+        genreSakuruBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
+        genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+        genreSakuruBtn.tag = 4
+        genreSakuruBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
+
+        let sakuruLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
+        sakuruLabel.text = "サークル"
+        sakuruLabel.textAlignment = NSTextAlignment.Center
+        sakuruLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        sakuruLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+ 
+        genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
+
+        genreTournamentBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
+        genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+        genreTournamentBtn.tag = 9
+        genreTournamentBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
+
+        let tournamentLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
+        tournamentLabel.text = "大会"
+        tournamentLabel.textAlignment = NSTextAlignment.Center
+        tournamentLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        tournamentLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+ 
+        genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
+
+        genreReadBookBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
+        genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+        genreReadBookBtn.tag = 6
+        genreReadBookBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
+
+        let readBookLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
+        readBookLabel.text = "読書会"
+        readBookLabel.textAlignment = NSTextAlignment.Center
+        readBookLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        readBookLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+        
+        genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
+
+        genrePartyBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
+        genrePartyBtn.setImage(partyImg, forState: .Normal)
+        genrePartyBtn.tag = 3
+        genrePartyBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
+        
+        let partyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
+        partyLabel.text = "パーティー"
+        partyLabel.textAlignment = NSTextAlignment.Center
+        partyLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        partyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+        partyLabel.sizeToFit()
         
         let myButton = UIButton(frame: CGRectMake(0,0,self.frame.width/5,self.frame.height/10))
         myButton.layer.masksToBounds = true
         myButton.layer.cornerRadius = 20.0
         myButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         myButton.backgroundColor = UIColor.redColor()
-        myButton.layer.position = CGPoint(x: self.frame.width/2, y:self.frame.height/5*4)
+        myButton.layer.position = CGPoint(x: self.frame.width/2, y:self.frame.height/10*8.5)
         
         self.addSubview(titleLabel)
         self.addSubview(titleTextField)
@@ -102,12 +209,82 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         self.addSubview(detailLabel)
         self.addSubview(detailTextView)
         self.addSubview(detailAlertLabel)
+        self.addSubview(genreLabel)
+        self.addSubview(genreHobyBtn)
+        self.addSubview(genreStudyBtn)
+        self.addSubview(genreSakuruBtn)
+        self.addSubview(genreTournamentBtn)
+        self.addSubview(genreReadBookBtn)
+        self.addSubview(genrePartyBtn)
+        self.addSubview(hobyLabel)
+        self.addSubview(studyLabel)
+        self.addSubview(sakuruLabel)
+        self.addSubview(tournamentLabel)
+        self.addSubview(readBookLabel)
+        self.addSubview(partyLabel)
         self.addSubview(myButton)
-        
+        print(genreHobyBtn.frame)
+        print(genreHobyBtn.layer.position.x)
+        print(genreHobyBtn.layer.position.y)
+    }
+    
+    func clickGenre(sender: UIButton){
+        switch sender.tag{
+        case 5:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hoby_sImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+        case 2:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(study_sImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+        case 4:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuru_sImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+        case 9:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournament_sImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+        case 6:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBook_sImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+        case 3:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(party_sImg, forState: .Normal)
+        default:
+            break
+        }
     }
     
     func onClickMyButton(sender: UIButton){
-        if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 {
+        if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 && genreNum != nil{
             self.createEventdelegate.createEventNameExposition()
         } else {
             self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
@@ -116,10 +293,25 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     
     func postEventDate(){
         if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 {
-            self.createEventdelegate.getEventNameExposition(titleTextField.text!, exposition: detailTextView.text)
+            self.createEventdelegate.getEventNameExposition(titleTextField.text!, exposition: detailTextView.text,genreNum: genreNum)
         } else {
             self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
         }
+    }
+    
+    func setImage(){
+        hobyImg = CommonFunction().resizingImage(imageName: "hobby.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        hoby_sImg = CommonFunction().resizingImage(imageName: "hobby_light.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        studyImg = CommonFunction().resizingImage(imageName: "study.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        study_sImg = CommonFunction().resizingImage(imageName: "study_light.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        sakuruImg = CommonFunction().resizingImage(imageName: "sakuru.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        sakuru_sImg = CommonFunction().resizingImage(imageName: "sakuru_light.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        tournamentImg = CommonFunction().resizingImage(imageName: "tournament.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        tournament_sImg = CommonFunction().resizingImage(imageName: "tournament_light.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        readBookImg = CommonFunction().resizingImage(imageName: "readbook.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        readBook_sImg = CommonFunction().resizingImage(imageName: "readbook_light.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        partyImg = CommonFunction().resizingImage(imageName: "party.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        party_sImg = CommonFunction().resizingImage(imageName: "party_light.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
     }
     
     //--TextField--
@@ -178,5 +370,5 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     func onClick(sender: UIBarButtonItem) {
         self.endEditing(true)
     }
-
+    
 }
