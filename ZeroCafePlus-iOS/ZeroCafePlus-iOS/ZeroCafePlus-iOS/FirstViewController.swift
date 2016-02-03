@@ -21,7 +21,13 @@ class FirstViewController: UIViewController, EventViewDelegate {
     private var kuButton: UIButton!
     private var favoriteButton: UIButton!
     
-    private var myImageView: UIImageView!
+    private var kit2Button: UIButton!
+    private var ku2Button: UIButton!
+    private var favorite2Button: UIButton!
+    
+    private var kit3Button: UIButton!
+    private var ku3Button: UIButton!
+    private var favorite3Button: UIButton!
     
     @IBOutlet var horizontalSV: UIScrollView!
     
@@ -55,10 +61,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         
-        let myImage = UIImage(named: "twitter-icon.png")
-        myImageView = UIImageView(frame: CGRectMake(0,0,78,78))
-        myImageView.image = myImage
-        myImageView.layer.position = CGPoint(x: self.view.bounds.width/2, y: 200.0)
+        //1page
         
         kitButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
         kitButton.layer.position = CGPoint(x: screenWidth/6, y: screenHeight/15)
@@ -83,6 +86,58 @@ class FirstViewController: UIViewController, EventViewDelegate {
         favoriteButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
         favoriteButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(favoriteButton)
+        
+        //2page
+        
+        kit2Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        kit2Button.layer.position = CGPoint(x: screenWidth+screenWidth/6, y: screenHeight/15)
+        kit2Button.setTitle("工大", forState: .Normal)
+        kit2Button.titleLabel?.font = UIFont.systemFontOfSize(24)
+        kit2Button.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
+        kit2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(kit2Button)
+        
+        ku2Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        ku2Button.layer.position = CGPoint(x: screenWidth+screenWidth/2.25, y: screenHeight/15)
+        ku2Button.setTitle("金大", forState: .Normal)
+        ku2Button.titleLabel?.font = UIFont.systemFontOfSize(24)
+        ku2Button.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
+        ku2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(ku2Button)
+        
+        favorite2Button = UIButton(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
+        favorite2Button.layer.position = CGPoint(x: screenWidth+screenWidth/1.3, y: screenHeight/15)
+        favorite2Button.setTitle("お気に入り", forState: .Normal)
+        favorite2Button.titleLabel?.font = UIFont.systemFontOfSize(24)
+        favorite2Button.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
+        favorite2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(favorite2Button)
+        
+        //3page
+        
+        kit3Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        kit3Button.layer.position = CGPoint(x: screenWidth*2+screenWidth/6, y: screenHeight/15)
+        kit3Button.setTitle("工大", forState: .Normal)
+        kit3Button.titleLabel?.font = UIFont.systemFontOfSize(24)
+        kit3Button.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
+        kit3Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(kit3Button)
+        
+        kuButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        kuButton.layer.position = CGPoint(x: screenWidth*2+screenWidth/2.25, y: screenHeight/15)
+        kuButton.setTitle("金大", forState: .Normal)
+        kuButton.titleLabel?.font = UIFont.systemFontOfSize(24)
+        kuButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
+        kuButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(kuButton)
+        
+        favorite3Button = UIButton(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
+        favorite3Button.layer.position = CGPoint(x: screenWidth*2+screenWidth/1.3, y: screenHeight/15)
+        favorite3Button.setTitle("お気に入り", forState: .Normal)
+        favorite3Button.titleLabel?.font = UIFont.systemFontOfSize(24)
+        favorite3Button.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
+        favorite3Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(favorite3Button)
         
         
         for i in 0...2 {
@@ -161,14 +216,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         
                     }
                     
-                    //                titleName.text = eventArray[0]["event"]["title"].string
-                    //                dateName.text = eventArray[0]["event"]["start_time"].string
-                    //                tagName.text = eventArray[0]["event"]["tags"].string
-                    //
-                    //
-                    //                titleName.textAlignment = NSTextAlignment.Center
-                    //                tagName.numberOfLines = 2
-                    //                tagName.font = UIFont.systemFontOfSize(12)
                 }else {
                     print("通信失敗")
                 }
@@ -193,6 +240,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
 
 class EventView :UIView{
     
+    private var myImageView: UIImageView!
+    
     var mydelegate: EventViewDelegate!
     var myEventID :Int!
     
@@ -206,10 +255,13 @@ class EventView :UIView{
         
         let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,50))
         titleName.numberOfLines = 2
+        titleName.textAlignment = NSTextAlignment.Center
         let dateName: UILabel = UILabel(frame: CGRectMake(10,90,130,50))
         dateName.numberOfLines = 2
+        dateName.textAlignment = NSTextAlignment.Center
         let tagName: UILabel = UILabel(frame: CGRectMake(10,120,130,70))
         tagName.numberOfLines = 2
+        tagName.textAlignment = NSTextAlignment.Center
         let touchButton: UIButton = UIButton(frame: CGRectMake(10,10,130,180))
         
         titleName.text = titleNameString
@@ -227,6 +279,15 @@ class EventView :UIView{
         self.addSubview(dateName)
         self.addSubview(tagName)
         self.addSubview(touchButton)
+        
+        
+        let myImage = UIImage(named: "party.png")
+        myImageView = UIImageView(frame: CGRectMake(0,0,70,70))
+        myImageView.image = myImage
+        myImageView.layer.position = CGPoint(x: 75, y: 40)
+        myImageView.layer.masksToBounds = true
+        myImageView.layer.cornerRadius = 10.0
+        self.addSubview(myImageView)
     }
     
     func onClickMyButton(sender: UIButton) {

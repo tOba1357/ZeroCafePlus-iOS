@@ -119,7 +119,7 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
             if assetText.text?.characters.count == 0{
                 assetText.text = ""
             }
-            if tagText.text.characters.count == 0{
+            if tagText.text!.characters.count == 0{
                 tagText.text = ""
             }
 
