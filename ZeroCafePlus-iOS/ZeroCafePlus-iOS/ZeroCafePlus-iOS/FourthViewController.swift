@@ -76,7 +76,7 @@ class ForthViewController: UIViewController {
         
         editProfile = UIButton(frame: CGRectMake(0,0,screenWidth/5.2, screenHeight/23.6))
         editProfile.layer.position = CGPoint(x: screenWidth - screenWidth/7.95, y: screenHeight/15.35)
-        editProfile.setImage(UIImage(named: "profile_edit.png"), forState: .Normal)
+        editProfile.setImage(UIImage(named: "profile_edit .png"), forState: .Normal)
         editProfile.addTarget(self, action: "clickBarButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(editProfile)
         
@@ -101,10 +101,10 @@ class ForthViewController: UIViewController {
                         let user_id = user["user"]["id"].int!
                         if user_id == 1 {
                             self.user_name = user["user"]["name"].string!
-                            //                            self.statusLabel.text = user["user"]["major"].string!
-                            //                            self.statusLabel.sizeToFit()
-                            //                            self.profileLabel.text = user["user"]["description"].string!
-                            //                            self.profileLabel.sizeToFit()
+                            self.statusLabel.text = user["user"]["major"].string!
+                            self.statusLabel.sizeToFit()
+                            self.profileLabel.text = user["user"]["description"].string!
+                            self.profileLabel.sizeToFit()
                             self.nameLabel.text = self.user_name
                             print(self.user_name)
                         }
@@ -124,8 +124,7 @@ class ForthViewController: UIViewController {
     func pushMyButton(myEventID:String) {
         let eventsdetails = EventsDetailViewController()
         eventsdetails.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
-        presentViewController(self, animated: true, completion: nil)
-    }
+        dismissViewControllerAnimated(true, completion: nil)    }
     
     func clickBarButton(sender: UIButton){
         let epv = EditProfileViewController()
