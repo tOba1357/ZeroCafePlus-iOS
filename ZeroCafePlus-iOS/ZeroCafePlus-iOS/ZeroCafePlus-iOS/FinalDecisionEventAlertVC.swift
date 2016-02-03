@@ -12,8 +12,9 @@ class FinalDecisionEventAlertVC: UIViewController, UIScrollViewDelegate {
     
     let scrollView = UIScrollView()
     
-    var eventName : String!
-    var eventExposition : String!
+    var eventName :String!
+    var eventExposition :String!
+    var eventGenre:Int!
     var eventDate :[String]!
     var eventStartTime :String!
     var eventEndTime :String!

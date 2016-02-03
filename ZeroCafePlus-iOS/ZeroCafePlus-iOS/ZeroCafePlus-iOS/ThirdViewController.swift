@@ -24,6 +24,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     
     var eventName :String!
     var eventExposition :String!
+    var eventGenre:Int!
     var eventDate :[String]!
     var eventStartTime :String!
     var eventEndTime :String!
@@ -37,7 +38,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.frame = CGRectMake(0, barHeight, self.view.frame.width, self.view.frame.height-barHeight)
+        scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         scrollView.delegate = self
         
         scrollView.contentSize   = CGSizeMake(0, 0)
@@ -46,15 +47,18 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         label.textAlignment = NSTextAlignment.Center
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0xFFFFFF)
+        label.font = UIFont.boldSystemFontOfSize(21)
+        label.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         label.text = "イベントを企画する"
+        label.layer.position = CGPointMake(self.view.frame.size.width/2, barHeight+label.frame.size.height/2)
         
         displayWidth = scrollView.frame.size.width
         displayHeight = scrollView.frame.size.height
         
-        createEvetView = CreateEventView(frame: CGRectMake(34.5, barHeight, self.view.frame.width-69,displayHeight))
+        createEvetView = CreateEventView(frame: CGRectMake(34.5, 0, self.view.frame.width-69,displayHeight))
         createEvetView.createEventdelegate = self
+        
+        scrollView.addSubview(label)
         scrollView.addSubview(createEvetView)
         
     }
@@ -64,7 +68,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     }
     
     func createEventNameExposition() {
-        checkCalenderView = CheckCalenderView(frame: CGRectMake(34.5, displayHeight+barHeight, scrollView.frame.size.width-69, displayHeight))
+        checkCalenderView = CheckCalenderView(frame: CGRectMake(34.5, displayHeight, scrollView.frame.size.width-69, displayHeight))
         checkCalenderView.checkCalenderDelegate = self
         nextScroll(self.view.frame.size.height,count: 2)
         scrollView.addSubview(checkCalenderView)
@@ -118,7 +122,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         case 2:
             resignKeyWindow(scheduleWindow)
             nextScroll(self.view.frame.size.height,count: 3)
-            createEventDetailView = CreateEventDetailView(frame: CGRectMake(34.5, displayHeight*2+barHeight, scrollView.frame.size.width-69,displayHeight))
+            createEventDetailView = CreateEventDetailView(frame: CGRectMake(34.5, displayHeight*2, scrollView.frame.size.width-69,displayHeight))
             createEventDetailView.createEventDetailDelegate = self
             scrollView.addSubview(createEventDetailView)
         default:
@@ -134,9 +138,10 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         createEvetView.postEventDate()
     }
     
-    func getEventNameExposition(name:String,exposition:String){
+    func getEventNameExposition(name:String,exposition:String,genreNum:Int){
         eventName = name
         eventExposition = exposition
+        eventGenre = genreNum
         
         self.view.backgroundColor = UIColor.grayColor()
         self.view.userInteractionEnabled = false
@@ -155,6 +160,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         if let finalDecisionEventAlertVC = self.storyboard?.instantiateViewControllerWithIdentifier("FinalDecisionEventAlertVC") as? FinalDecisionEventAlertVC {
             finalDecisionEventAlertVC.eventName = eventName
             finalDecisionEventAlertVC.eventExposition = eventExposition
+            finalDecisionEventAlertVC.eventGenre = eventGenre
             finalDecisionEventAlertVC.eventDate = eventDate
             finalDecisionEventAlertVC.eventStartTime = eventStartTime
             finalDecisionEventAlertVC.eventEndTime = eventEndTime
@@ -192,7 +198,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
                 "place" : 1,
                 "capacity" : eventMenberNum,
                 "category_tag" : "\(eventTag)",
-                "genre" : 1,
+                "genre" : self.eventGenre,
                 "color" : "redBlue"
             ]
         ]
