@@ -40,10 +40,12 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         
         let assetsLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
         assetsLabel.text = "持ち物（任意）"
+        assetsLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         assetsLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/6)
         
         assetText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
         assetText.text = ""
+        assetText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         assetText.placeholder = "例）熱意"
         assetText.layer.cornerRadius = 15
         assetText.delegate = self
@@ -53,10 +55,12 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         
         let numLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
         numLabel.text = "定員"
+        numLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         numLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/3)
         
         numText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
         numText.text = "0"
+        numText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         numText.placeholder = "例）15"
         numText.inputAccessoryView = myToolBar
         numText.layer.cornerRadius = 15
@@ -65,23 +69,28 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         numText.layer.borderWidth = 1
         numText.layer.borderColor = UIColor.blackColor().CGColor
         numText.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3)
-
+        
         let checkbox = CTCheckbox()
         checkbox.frame = CGRectMake(0,0,self.frame.width/5,self.frame.height/10)
         checkbox.checkboxColor = UIColor.blackColor()
         checkbox.checkboxSideLength = 22
+        checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Normal)
+        checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Disabled)
         checkbox.layer.position = CGPointMake(self.frame.width/4, self.frame.height/2)
         
         let jumpInLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/2,self.frame.height/10))
         jumpInLabel.text = "途中参加ＯＫ"
+        jumpInLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         jumpInLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/2)
         
         let tagLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
         tagLabel.text = "タグ　※検索で引っかかりやすくなるよ！"
+        tagLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         tagLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/3*2)
         
         tagText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
         tagText.text = ""
+        tagText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         tagText.placeholder = "例）#祭り"
         tagText.layer.cornerRadius = 15
         tagText.delegate = self
@@ -95,7 +104,7 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         makeButton.addTarget(self, action: "onClickMakeButton:", forControlEvents: .TouchUpInside)
         makeButton.backgroundColor = UIColor.redColor()
         makeButton.layer.position = CGPointMake(self.frame.width/2, self.frame.height/6*5)
-
+        
         
         self.addSubview(assetsLabel)
         self.addSubview(assetText)
@@ -122,8 +131,8 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
             if tagText.text!.characters.count == 0{
                 tagText.text = ""
             }
-
-        self.createEventDetailDelegate.decideEventDetail(assetText.text!, menberNumStr: numText.text!, diveJoinBool: diveJoinBool, tagStr: tagText.text!)
+            
+            self.createEventDetailDelegate.decideEventDetail(assetText.text!, menberNumStr: numText.text!, diveJoinBool: diveJoinBool, tagStr: tagText.text!)
         }
     }
     

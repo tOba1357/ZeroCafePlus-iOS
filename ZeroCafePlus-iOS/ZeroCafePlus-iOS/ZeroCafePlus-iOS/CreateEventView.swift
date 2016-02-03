@@ -22,6 +22,9 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     var detailAlertLabel:UILabel!
     var txtActiveView = UITextView()
     
+    var titleTextNum :Int = 0
+    var detailTextNum :Int = 0
+    
     var isBoolTextView:Bool!
     var genreNum :Int!
     
@@ -87,8 +90,8 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         titleTextField.layer.cornerRadius = 13.5
         titleTextField.delegate = self
         
-        titleAlertLabel = UILabel(frame: CGRectMake(self.frame.width/4*3,self.frame.height*(268/1136)+10,self.frame.width/4,self.frame.height*(20/1136)))
-        titleAlertLabel.text = "/18"
+        titleAlertLabel = UILabel(frame: CGRectMake(self.frame.width/4*3,self.frame.height*(278/1136),self.frame.width/4,self.frame.height*(20/1136)))
+        titleAlertLabel.text = "\(titleTextNum)/18"
         titleAlertLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         titleAlertLabel.textAlignment = NSTextAlignment.Right
         
@@ -105,11 +108,10 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         detailTextView.inputAccessoryView = myToolBar
         detailTextView.delegate = self
         
-        detailAlertLabel = UILabel(frame: CGRectMake(self.frame.width/4*3,self.frame.height*(640/1136),self.frame.width/4,self.frame.height*(20/1136)))
-        detailAlertLabel.text = "/100"
-        detailAlertLabel.sizeToFit()
-        detailAlertLabel.backgroundColor = UIColor.redColor()
-        detailAlertLabel.hidden = true
+        detailAlertLabel = UILabel(frame: CGRectMake(self.frame.width/4*3,self.frame.height*(650/1136),self.frame.width/4,self.frame.height*(20/1136)))
+        detailAlertLabel.text = "\(detailTextNum)/100"
+        detailAlertLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
+        detailAlertLabel.textAlignment = NSTextAlignment.Right
         
         let genreLabel = UILabel(frame: CGRectMake(0,self.frame.size.height*(696/1136),self.frame.width/4*3,self.frame.height*(28/1136)))
         genreLabel.text = "ジャンル"
@@ -136,7 +138,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         genreStudyBtn.setImage(studyImg, forState: .Normal)
         genreStudyBtn.tag = 2
         genreStudyBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
-
+        
         let studyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         studyLabel.text = "勉強会"
         studyLabel.textAlignment = NSTextAlignment.Center
@@ -144,38 +146,38 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         studyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
-
+        
         genreSakuruBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
         genreSakuruBtn.tag = 4
         genreSakuruBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
-
+        
         let sakuruLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         sakuruLabel.text = "サークル"
         sakuruLabel.textAlignment = NSTextAlignment.Center
         sakuruLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         sakuruLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
- 
+        
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
-
+        
         genreTournamentBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
         genreTournamentBtn.tag = 9
         genreTournamentBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
-
+        
         let tournamentLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         tournamentLabel.text = "大会"
         tournamentLabel.textAlignment = NSTextAlignment.Center
         tournamentLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         tournamentLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
- 
+        
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
-
+        
         genreReadBookBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genreReadBookBtn.setImage(readBookImg, forState: .Normal)
         genreReadBookBtn.tag = 6
         genreReadBookBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
-
+        
         let readBookLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         readBookLabel.text = "読書会"
         readBookLabel.textAlignment = NSTextAlignment.Center
@@ -183,7 +185,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         readBookLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
-
+        
         genrePartyBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genrePartyBtn.setImage(partyImg, forState: .Normal)
         genrePartyBtn.tag = 3
@@ -285,17 +287,25 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     
     func onClickMyButton(sender: UIButton){
         if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 && genreNum != nil{
-            self.createEventdelegate.createEventNameExposition()
+            if titleTextField.text?.characters.count > 18 || detailTextView.text?.characters.count > 100{
+                self.createEventdelegate.nilAlertAction("規定の文字を越えています", message: "イベント名か内容の文字数が越えています")
+            }else{
+                self.createEventdelegate.createEventNameExposition()
+            }
         } else {
-            self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
+            self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力・ジャンルの選択ができていません")
         }
     }
     
     func postEventDate(){
         if titleTextField.text?.characters.count > 0 && detailTextView.text?.characters.count > 0 {
-            self.createEventdelegate.getEventNameExposition(titleTextField.text!, exposition: detailTextView.text,genreNum: genreNum)
+            if titleTextField.text?.characters.count > 18 || detailTextView.text?.characters.count > 100{
+                self.createEventdelegate.nilAlertAction("規定の文字を越えています", message: "イベント名か内容の文字数が越えています")
+            }else{
+                self.createEventdelegate.getEventNameExposition(titleTextField.text!, exposition: detailTextView.text,genreNum: genreNum)
+            }
         } else {
-            self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力してください")
+            self.createEventdelegate.nilAlertAction("必要な情報が入力されていません", message: "イベント名と内容を入力されていません")
         }
     }
     
@@ -328,11 +338,8 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         var tmpStr = textField.text! as NSString
         tmpStr = tmpStr.stringByReplacingCharactersInRange(range, withString: string)
         
-        if tmpStr.length > 16 {
-            titleAlertLabel.hidden = false
-            return false
-        }
-        titleAlertLabel.hidden = true
+        titleTextNum = tmpStr.length
+        titleAlertLabel.text = "\(titleTextNum)/18"
         return true
     }
     
@@ -355,11 +362,8 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         var tmpStr = textView.text! as NSString
         tmpStr = tmpStr.stringByReplacingCharactersInRange(range, withString: text)
         
-        if tmpStr.length > 120 {
-            detailAlertLabel.hidden = false
-            return false
-        }
-        detailAlertLabel.hidden = true
+        detailTextNum = tmpStr.length
+        detailAlertLabel.text = "\(detailTextNum)/100"
         return true
     }
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
