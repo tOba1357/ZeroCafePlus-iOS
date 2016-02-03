@@ -16,6 +16,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     var checkCalenderView :CheckCalenderView!
     var createEventDetailView :CreateEventDetailView!
     private var scheduleWindow: UIWindow!
+    private var lastCheckEventWindoew: UIWindow!
     
     let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
     var displayWidth: CGFloat!
@@ -30,6 +31,8 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     var eventDiveJoin:Bool!
     var eventMenberNum:Int!
     var eventTag:String!
+    
+    let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,8 +78,6 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     func createSheduleWindow(){
         self.view.backgroundColor = UIColor.grayColor()
         self.view.userInteractionEnabled = false
-
-        let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
 
         scheduleWindow = UIWindow()
         scheduleWindow.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
@@ -136,6 +137,37 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     func getEventNameExposition(name:String,exposition:String){
         eventName = name
         eventExposition = exposition
+        
+        self.view.backgroundColor = UIColor.grayColor()
+        self.view.userInteractionEnabled = false
+
+        lastCheckEventWindoew = UIWindow()
+        lastCheckEventWindoew.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
+        lastCheckEventWindoew.backgroundColor = UIColor.grayColor()
+        lastCheckEventWindoew.layer.masksToBounds = true
+        lastCheckEventWindoew.layer.cornerRadius = 15
+        lastCheckEventWindoew.hidden = false
+        
+        UIView.animateWithDuration(0.2, animations: {
+            self.tabBarController?.tabBar.hidden = true
+        })
+        
+        if let finalDecisionEventAlertVC = self.storyboard?.instantiateViewControllerWithIdentifier("FinalDecisionEventAlertVC") as? FinalDecisionEventAlertVC {
+            finalDecisionEventAlertVC.eventName = eventName
+            finalDecisionEventAlertVC.eventExposition = eventExposition
+            finalDecisionEventAlertVC.eventDate = eventDate
+            finalDecisionEventAlertVC.eventStartTime = eventStartTime
+            finalDecisionEventAlertVC.eventEndTime = eventEndTime
+            finalDecisionEventAlertVC.eventBelonging = eventBelonging
+            finalDecisionEventAlertVC.eventDiveJoin
+            finalDecisionEventAlertVC.eventMenberNum
+            finalDecisionEventAlertVC.eventTag
+
+            lastCheckEventWindoew.rootViewController = finalDecisionEventAlertVC
+        }
+        
+        makeKeyAndVisible(lastCheckEventWindoew)
+        self.lastCheckEventWindoew.makeKeyAndVisible()
     }
     
     func pushCreateEventJson(){
@@ -169,9 +201,13 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
             .responseString { response in
                 debugPrint(response.result.value)
-                //"いいよぉ！"が返って来れば成功
         }
-
+        
+        let subviews = self.view.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+        super.viewDidLoad()
     }
     
     func nilAlertAction(title:String,message:String){

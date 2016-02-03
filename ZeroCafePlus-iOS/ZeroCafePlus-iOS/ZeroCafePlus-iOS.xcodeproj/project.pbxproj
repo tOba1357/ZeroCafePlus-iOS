@@ -47,6 +47,7 @@
 		BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B741C26E54300648280 /* TimeSheduleView.swift */; };
 		BA5D9BB21C26E6E300648280 /* libCTCheckbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5D9BAF1C26E5F000648280 /* libCTCheckbox.a */; };
 		BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */; };
+		BABD6E361C61F4010018F456 /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABD6E351C61F4010018F456 /* CommonFunction.swift */; };
 		BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */; };
 		D76B27FE1C5622410090DB73 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B27FD1C5622410090DB73 /* CreateEventView.swift */; };
 		D76B28001C56224F0090DB73 /* CheckCalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */; };
@@ -145,6 +146,7 @@
 		BA5D9B741C26E54300648280 /* TimeSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9BA91C26E5F000648280 /* CTCheckbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CTCheckbox.xcodeproj; path = "ZeroCafePlus-iOS/CTCheckbox-master/CTCheckbox.xcodeproj"; sourceTree = "<group>"; };
 		BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventDetailView.swift; sourceTree = "<group>"; };
+		BABD6E351C61F4010018F456 /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		BAE34F671C28F2DA0029D6B9 /* CTCheckbox-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTCheckbox-Prefix.pch"; sourceTree = "<group>"; };
 		BAE34F681C28F2DA0029D6B9 /* CTCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCheckbox.h; sourceTree = "<group>"; };
 		BAE34F691C28F2DA0029D6B9 /* CTCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCheckbox.m; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
+				BABD6E351C61F4010018F456 /* CommonFunction.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */,
 				D7A6267E1C1AD395002DCEC6 /* ThirdViewController.swift in Sources */,
 				BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */,
+				BABD6E361C61F4010018F456 /* CommonFunction.swift in Sources */,
 				D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */,
 				9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */,
 				6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */,
