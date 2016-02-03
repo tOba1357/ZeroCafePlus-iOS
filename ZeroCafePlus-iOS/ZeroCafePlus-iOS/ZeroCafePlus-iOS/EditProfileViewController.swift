@@ -52,8 +52,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         nameLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         self.view.addSubview(nameLabel)
         
-        countProfile = UILabel(frame: CGRectMake(0,0,screenWidth/10,screenHeight/10))
-        countProfile.layer.position = CGPoint(x: screenWidth/1.05, y: screenHeight/2)
+        countProfile = UILabel(frame: CGRectMake(0,0,screenWidth/7,screenHeight/10))
+        countProfile.layer.position = CGPoint(x: screenWidth/1.1, y: screenHeight/2)
         countProfile.text? = String(currentProfile.text.characters.count)
         countProfile.text = "0/88"
         countProfile.textColor = UIColor.hexStr("#8395a3", alpha: 1.0)
@@ -84,7 +84,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         currentProfile.layer.borderWidth = 0.75
         currentProfile.textAlignment = NSTextAlignment.Left
         currentProfile.dataDetectorTypes = UIDataDetectorTypes.All
-        currentProfile.text = user_name.objectForKey("myProfile") as? String
         self.view.addSubview(currentProfile)
         
         profileImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
@@ -165,7 +164,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             }
             let fv = ForthViewController()
             fv.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
-            presentViewController(fv, animated: true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
         }else {}
     }
     
@@ -186,7 +185,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func clickBarButton(sender: UIButton){
         let fv = ForthViewController()
         fv.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        presentViewController(fv, animated: true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
         user_name.setObject(currentName.text, forKey: "NewName")
         user_name.synchronize()
     }
