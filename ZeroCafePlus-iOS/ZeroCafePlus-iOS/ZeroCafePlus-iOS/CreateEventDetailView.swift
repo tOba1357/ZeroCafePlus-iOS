@@ -38,65 +38,72 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         myToolBarButton.tag = 1
         myToolBar.items = [myToolBarButton]
         
-        let assetsLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
+        let assetsLabel = UILabel(frame: CGRectMake(0,self.frame.height*(110/1136),self.frame.width/4,self.frame.height*(28/1136)))
         assetsLabel.text = "持ち物（任意）"
+        assetsLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
+        assetsLabel.textAlignment = NSTextAlignment.Left
         assetsLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        assetsLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/6)
+        assetsLabel.sizeToFit()
         
-        assetText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
+        assetText = UITextField(frame: CGRectMake(0,self.frame.height*(162/1136),self.frame.width,self.frame.height*(56/1136)))
         assetText.text = ""
+        assetText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         assetText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         assetText.placeholder = "例）熱意"
-        assetText.layer.cornerRadius = 15
+        assetText.layer.cornerRadius = 13.5
         assetText.delegate = self
-        assetText.layer.borderWidth = 1
-        assetText.layer.borderColor = UIColor.blackColor().CGColor
-        assetText.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/6)
+        assetText.layer.borderWidth = 0.75
+        assetText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
         
-        let numLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
+        let numLabel = UILabel(frame: CGRectMake(0,self.frame.height*(286/1136),self.frame.width,self.frame.height*(28/1136)))
         numLabel.text = "定員"
+        numLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
+        numLabel.textAlignment = NSTextAlignment.Left
         numLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        numLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/3)
+        numLabel.sizeToFit()
         
-        numText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
+        numText = UITextField(frame: CGRectMake(0,self.frame.height*(338/1136),self.frame.width,self.frame.height*(56/1136)))
         numText.text = "0"
+        numText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         numText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
         numText.placeholder = "例）15"
         numText.inputAccessoryView = myToolBar
-        numText.layer.cornerRadius = 15
+        numText.layer.cornerRadius = 13.5
         numText.delegate = self
         numText.keyboardType = .NumberPad
-        numText.layer.borderWidth = 1
-        numText.layer.borderColor = UIColor.blackColor().CGColor
-        numText.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3)
+        numText.layer.borderWidth = 0.75
+        numText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
         
         let checkbox = CTCheckbox()
-        checkbox.frame = CGRectMake(0,0,self.frame.width/5,self.frame.height/10)
+        checkbox.frame = CGRectMake(0,self.frame.height*(446/1136),self.frame.width/5,self.frame.height/10)
         checkbox.checkboxColor = UIColor.blackColor()
         checkbox.checkboxSideLength = 22
         checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Normal)
         checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Disabled)
-        checkbox.layer.position = CGPointMake(self.frame.width/4, self.frame.height/2)
         
-        let jumpInLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/2,self.frame.height/10))
+        let jumpInLabel = UILabel(frame: CGRectMake(checkbox.frame.size.width,self.frame.height*(484/1136),self.frame.width/2,self.frame.height*(28/1136)))
         jumpInLabel.text = "途中参加ＯＫ"
+        jumpInLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
+        jumpInLabel.textAlignment = NSTextAlignment.Left
         jumpInLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        jumpInLabel.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/2)
+        jumpInLabel.sizeToFit()
         
-        let tagLabel = UILabel(frame: CGRectMake(0,0,self.frame.width/4,self.frame.height/10))
+        let tagLabel = UILabel(frame: CGRectMake(0,self.frame.height*(602/1136),self.frame.width,self.frame.height*(28/1136)))
         tagLabel.text = "タグ　※検索で引っかかりやすくなるよ！"
+        tagLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
+        tagLabel.textAlignment = NSTextAlignment.Left
         tagLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        tagLabel.layer.position = CGPointMake(self.frame.width/4, self.frame.height/3*2)
+        tagLabel.sizeToFit()
         
-        tagText = UITextField(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/10))
+        tagText = UITextField(frame: CGRectMake(0,self.frame.height*(654/1136),self.frame.width,self.frame.height*(56/1136)))
         tagText.text = ""
+        tagText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         tagText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        tagText.placeholder = "例）#祭り"
-        tagText.layer.cornerRadius = 15
+        tagText.placeholder = "#祭り"
+        tagText.layer.cornerRadius = 13.5
         tagText.delegate = self
-        tagText.layer.borderWidth = 1
-        tagText.layer.borderColor = UIColor.blackColor().CGColor
-        tagText.layer.position = CGPointMake(self.frame.width/3*2, self.frame.height/3*2)
+        tagText.layer.borderWidth = 0.75
+        tagText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
         
         let makeButton = UIButton (frame: CGRectMake(0,0,self.frame.width/5,self.frame.height/10))
         makeButton.layer.masksToBounds = true
