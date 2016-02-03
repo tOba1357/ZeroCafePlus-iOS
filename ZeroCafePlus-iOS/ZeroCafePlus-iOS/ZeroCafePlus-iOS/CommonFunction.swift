@@ -16,8 +16,8 @@ class CommonFunction: AnyObject {
         let image = UIImage(named: imageName)
         let size = CGSize(width: w, height: h)
         UIGraphicsBeginImageContext(size)
-        image.drawInRect(CGRectMake(0, 0, size.width, size.height))
-        var resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+        image!.drawInRect(CGRectMake(0, 0, size.width, size.height))
+        let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return resizeImage
     }

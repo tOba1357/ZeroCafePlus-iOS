@@ -15,8 +15,8 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     var createEvetView :CreateEventView!
     var checkCalenderView :CheckCalenderView!
     var createEventDetailView :CreateEventDetailView!
-    private var scheduleWindow: UIWindow!
-    private var lastCheckEventWindoew: UIWindow!
+    private var scheduleWindow : UIWindow!
+    private var lastCheckEventWindoew : UIWindow!
     
     let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
     var displayWidth: CGFloat!
@@ -47,7 +47,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         label.textAlignment = NSTextAlignment.Center
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColorFromRGB(0xFFFFFF)
+        label.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0xFFFFFF)
         label.text = "イベントを企画する"
         
         displayWidth = scrollView.frame.size.width
@@ -159,9 +159,9 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
             finalDecisionEventAlertVC.eventStartTime = eventStartTime
             finalDecisionEventAlertVC.eventEndTime = eventEndTime
             finalDecisionEventAlertVC.eventBelonging = eventBelonging
-            finalDecisionEventAlertVC.eventDiveJoin
-            finalDecisionEventAlertVC.eventMenberNum
-            finalDecisionEventAlertVC.eventTag
+            finalDecisionEventAlertVC.eventDiveJoin = eventDiveJoin
+            finalDecisionEventAlertVC.eventMenberNum = eventMenberNum
+            finalDecisionEventAlertVC.eventTag = eventTag
 
             lastCheckEventWindoew.rootViewController = finalDecisionEventAlertVC
         }
@@ -237,14 +237,5 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         myWindow.resignKeyWindow()
         myWindow.alpha = 0
         UIView.commitAnimations()
-    }
-
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
     }
 }
