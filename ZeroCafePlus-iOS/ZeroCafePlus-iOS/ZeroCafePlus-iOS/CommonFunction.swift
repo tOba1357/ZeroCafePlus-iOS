@@ -13,7 +13,7 @@ class CommonFunction: AnyObject {
     // imageName : "pngの名前", w or h :サイズ
     func resizingImage(imageName imageName :String, w:CGFloat, h:CGFloat) ->UIImage
     {
-        let image = UIImage(named: imageName)
+        let image = UIImage(named: "\(imageName)")
         let size = CGSize(width: w, height: h)
         UIGraphicsBeginImageContext(size)
         image!.drawInRect(CGRectMake(0, 0, size.width, size.height))
