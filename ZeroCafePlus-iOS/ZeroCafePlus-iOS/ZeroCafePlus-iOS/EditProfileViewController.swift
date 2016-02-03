@@ -118,7 +118,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         saveUpdate.setTitle("Save", forState: .Normal)
         saveUpdate.setTitleColor(UIColor.blueColor(), forState: .Normal)
         saveUpdate.backgroundColor = UIColor.clearColor()
-        saveUpdate.addTarget(self, action: "clickBarButton:", forControlEvents: .TouchUpInside)
+         saveUpdate.addTarget(self, action: "createUserView:", forControlEvents: .TouchUpInside)
         self.view.addSubview(saveUpdate)
         
         titleLabel = UILabel(frame: CGRectMake(0,0,screenWidth/2, screenHeight/15))
@@ -142,46 +142,33 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }
-    func createUserView(){
-        
-        let url = "https://zerocafe.herokuapp.com/api/v1/events"
-        Alamofire.request(.GET, url)
-            .responseJSON { response in
-                let json = JSON(response.result.value!)
-                debugPrint(response.result.value)
-                
-                let eventArray = json["events"].array! as Array
-                let eventLastId = eventArray.count
-                var myX :CGFloat = 6
-                var myY :CGFloat = 15
-                for events in eventArray.enumerate(){
-                    let sideDecide = events.index % 2
-                    if sideDecide == 0 {
-                        let eve = events.element as JSON
-                        let eventID = "1234"
-                        let title = eve["event"]["title"].string! as String
-                        let tagName : String? = { ()->(String) in
-                            if eve["event"]["category_tag"] == nil{
-                                return ""
-                            }else {
-                                return eve["event"]["category_tag"].string! as String
-                            }
-                        }()
-                        
-                        myX = 162
-                    }else{
-                        
-                        let eve = events.element as JSON
-                        let eventID = "1234"
-                        let title = eve["event"]["title"].string! as String
-                        
-                        myX = 6
-                        myY += 212
-                    }
+    func createUserView(sender:UIButton){
+        if currentName.text != "" && currentProfile.text != "" {
+            let headers = [
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            ]
+            //nilのとき落ちるので注意
+            let parameters:[String:AnyObject] =
+            [
+                "user": [
+                    "name": String(UTF8String: currentName.text!)!,
+                    "description": String(currentProfile.text)
+                ]
+            ]
+            let url = "https://zerocafe.herokuapp.com/api/v1/users/1"
+            Alamofire.request(.PUT, url, parameters: parameters, encoding: .JSON, headers:headers)
+                .responseString { response in
+                    debugPrint(response.result.value)
                     
-                }
-        }
+                    //"いいよぉ！"が返ってくれば成功
+            }
+            let fv = ForthViewController()
+            fv.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+            presentViewController(fv, animated: true, completion: nil)
+        }else {}
     }
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         let input: NSMutableString = textView.text!.mutableCopy() as! NSMutableString
         now = (input.length)
