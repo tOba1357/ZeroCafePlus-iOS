@@ -22,7 +22,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     private var cancelUpdate: UIButton!
     private var saveUpdate: UIButton!
     private var titleLabel: UILabel!
-    let user_name = NSUserDefaults.standardUserDefaults()
     var now = 0
     
     override func viewDidLoad() {
@@ -186,8 +185,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let fv = ForthViewController()
         fv.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
         dismissViewControllerAnimated(true, completion: nil)
-        user_name.setObject(currentName.text, forKey: "NewName")
-        user_name.synchronize()
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo: [String: AnyObject]) {
