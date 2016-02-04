@@ -55,7 +55,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         displayWidth = scrollView.frame.size.width
         displayHeight = scrollView.frame.size.height
         
-        createEvetView = CreateEventView(frame: CGRectMake(34.5, 0, self.view.frame.width-69,displayHeight))
+        createEvetView = CreateEventView(frame: CGRectMake(self.view.frame.size.width*(46/640), 0, self.view.frame.width-self.view.frame.size.width*(92/640),displayHeight))
         createEvetView.createEventdelegate = self
         
         scrollView.addSubview(label)
@@ -68,7 +68,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     }
     
     func createEventNameExposition() {
-        checkCalenderView = CheckCalenderView(frame: CGRectMake(34.5, displayHeight, scrollView.frame.size.width-69, displayHeight))
+        checkCalenderView = CheckCalenderView(frame: CGRectMake(self.view.frame.size.width*(46/640), displayHeight, scrollView.frame.size.width-self.view.frame.size.width*(92/640), displayHeight))
         checkCalenderView.checkCalenderDelegate = self
         nextScroll(self.view.frame.size.height,count: 2)
         scrollView.addSubview(checkCalenderView)
@@ -122,7 +122,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         case 2:
             resignKeyWindow(scheduleWindow)
             nextScroll(self.view.frame.size.height,count: 3)
-            createEventDetailView = CreateEventDetailView(frame: CGRectMake(34.5, displayHeight*2, scrollView.frame.size.width-69,displayHeight))
+            createEventDetailView = CreateEventDetailView(frame: CGRectMake(self.view.frame.size.width*(46/640), displayHeight*2, scrollView.frame.size.width-self.view.frame.size.width*(92/640),displayHeight))
             createEventDetailView.createEventDetailDelegate = self
             scrollView.addSubview(createEventDetailView)
         default:

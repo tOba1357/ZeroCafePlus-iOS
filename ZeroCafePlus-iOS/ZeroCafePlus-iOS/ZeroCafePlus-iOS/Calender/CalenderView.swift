@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CalenderViewDelegate {
-    // デリゲートメソッド定義
     func pushCalender(checkNowStr:String)
     func changDateCalender(checkYearInt:Int,checkMonthInt:Int)
 }
@@ -53,7 +52,6 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
         scrollView.scrollsToTop = false;
         
         self.addSubview(scrollView)
-        
         
         currentMonthView = MonthView(frame: CGRectMake(frame.size.width, 0, frame.size.width,frame.size.height),
             year:currentYear,month:currentMonth)
