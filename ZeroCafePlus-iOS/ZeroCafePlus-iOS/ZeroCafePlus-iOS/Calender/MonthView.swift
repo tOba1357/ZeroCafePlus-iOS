@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 protocol MonthViewDelegate {
-    // デリゲートメソッド定義
     func pushMonth(checkDateStr:String)
 }
 
 class MonthView: UIView ,DayViewDelegate{
+    
+    var dayWidth:CGFloat!
+    var dayHeight:CGFloat!
     
     var monthDelegate :MonthViewDelegate?
     
@@ -22,11 +26,9 @@ class MonthView: UIView ,DayViewDelegate{
     }
     init(frame: CGRect,year:Int,month:Int) {
         super.init(frame:frame)
-
-        self.layer.borderColor = UIColor.blackColor().CGColor
-        self.layer.borderWidth = 1
-        
         self.setUpDays(year,month:month,boolLabel: true)
+        self.layer.borderWidth = 1
+        self.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3).CGColor
     }
     
     func setUpDays(year:Int,month:Int,boolLabel:Bool){
@@ -38,22 +40,17 @@ class MonthView: UIView ,DayViewDelegate{
             }
         }
         
-        
         let day:Int? = self.getLastDay(year,month:month);
-        let dayWidth:Int = Int( frame.size.width / 7.0 )
-        let dayHeight:Int = dayWidth + 5
+        dayWidth = frame.size.width / 7.0
+        dayHeight = frame.size.width / 6.0
         if day != nil {
             //初日の曜日を取得
             var weekday:Int = self.getWeekDay(year,month: month,day:1)
             for var i:Int = 0; i < day!;i++ {
                 let week:Int    = self.getWeek(year,month: month,day:i+1)
-                let x:Int       = ((weekday - 1 ) * (dayWidth));
-                let y:Int       = (week-1) * dayHeight + Int(self.frame.height/7/2)
-                let frame:CGRect = CGRectMake(CGFloat(x),
-                    CGFloat(y),
-                    CGFloat(dayWidth),
-                    CGFloat(dayHeight)
-                );
+                let x:CGFloat       = CGFloat(weekday - 1 ) * (dayWidth)
+                let y:CGFloat       = CGFloat(week-1) * dayHeight
+                let frame:CGRect = CGRectMake(x,y,dayWidth,dayHeight)
                 
                 let dayView:DayView = DayView(frame: frame, year:year,month:month,day:i+1,weekday:weekday)
                 self.addSubview(dayView)
@@ -62,9 +59,22 @@ class MonthView: UIView ,DayViewDelegate{
                 if weekday > 7 {
                     weekday = 1
                 }
-                
             }
         }
+        
+        for i in 0...7{
+            let vertLine = UILabel(frame: CGRectMake(frame.size.width/7*CGFloat(i),0,1.5,frame.size.height))
+            vertLine.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3)
+            self.addSubview(vertLine)
+        }
+        
+        for i in 1...5{
+            let horiLine = UILabel(frame: CGRectMake(0,frame.size.width/6*CGFloat(i),frame.size.width,1.5))
+            horiLine.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3)
+            self.addSubview(horiLine)
+        }
+        
+        checkMoreEvents(year,month: month)
     }
     
     //その月の最終日の取得
@@ -110,8 +120,68 @@ class MonthView: UIView ,DayViewDelegate{
             let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekdayCalendarUnit, fromDate: date!)
             return dateComp.weekday;
         }
-        return 0;
+        return 0
     }
+    
+    func checkMoreEvents(year:Int,month:Int){
+        var eveDateData:[String] = dateData()
+        var listeventsData:[String] = []
+        let url = "https://zerocafe.herokuapp.com/api/v1/events/\(year)/\(month).json"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                if (response.result.isSuccess){
+                    let json = JSON((response.result.value)!)
+                    let eventArray = json["events"].array! as Array
+                    if eventArray.count > 0{
+                        for events in eventArray{
+                            let startTime = events["start_time"].string! as String
+                            let startTimeArray = startTime.componentsSeparatedByString("T")
+                            let moreDateData = startTimeArray[0].componentsSeparatedByString("-")
+                            listeventsData.append(moreDateData[2])
+                        }
+                        let day:Int? = self.getLastDay(year,month:month)
+                        if day != nil {
+                            var weekday:Int = self.getWeekDay(year,month: month,day:1)
+                            for var i:Int = 0; i < day!;i++ {
+                                var eventBool = true
+                                for listevent in listeventsData{
+                                    if i == Int(listevent) || i < Int(eveDateData[2]){
+                                        eventBool = false
+                                    }
+                                }
+                                    let week:Int    = self.getWeek(year,month: month,day:i+1)
+                                    let x:CGFloat       = CGFloat(weekday - 1 ) * (self.dayWidth/2)
+                                    let y:CGFloat       = CGFloat(week-1) * self.dayHeight/2
+                                    if (eventBool){
+                                        let cirView = UIView(frame: CGRectMake(x,y,self.frame.width/30,self.frame.height/30))
+                                        self.addSubview(cirView)
+                                        
+                                        let cirShapeLayer = CAShapeLayer()
+                                        cirShapeLayer.fillColor = CommonFunction().UIColorFromRGB(rgbValue: 0x33CCFF).CGColor
+                                        cirShapeLayer.path = UIBezierPath(ovalInRect: CGRect(x: x+self.frame.width/60, y: y+self.frame.width/60, width: self.frame.width/30, height: self.frame.height/30)).CGPath
+                                        cirView.layer.addSublayer(cirShapeLayer)
+                                    }
+                                    weekday++
+                                    if weekday > 7 {
+                                        weekday = 1
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+    }
+    
+    func dateData() -> [String]{
+        let dateFormatter:NSDateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy/MM/dd";
+        let dateString:String = dateFormatter.stringFromDate(NSDate());
+        let dates:[String] = dateString.componentsSeparatedByString("/")
+        
+        return dates
+    }
+    
+    
     func pushDay(checkDateStr:String){
         self.monthDelegate?.pushMonth(checkDateStr)
     }

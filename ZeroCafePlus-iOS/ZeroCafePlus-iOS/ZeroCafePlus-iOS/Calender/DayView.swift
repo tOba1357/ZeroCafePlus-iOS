@@ -9,7 +9,6 @@
 import UIKit
 
 protocol DayViewDelegate {
-    // デリゲートメソッド定義
     func pushDay(checkDateStr:String)
 }
 
@@ -17,33 +16,58 @@ class DayView: UIView {
     
     let checkDateStr:String!
     
-     var dayDelegate :DayViewDelegate?
+    var dayDelegate :DayViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     init(frame:CGRect,year:Int,month:Int,day:Int,weekday:Int){
+        
         checkDateStr = String(format:"%04d%02d%02d",year,month,day)
         super.init(frame: frame)
-        let dayWidth:Int = Int( (UIScreen.mainScreen().bounds.size.width) / 7.0 )
-        let dayHeight: Int = Int((UIScreen.mainScreen().bounds.size.height) / 7.0 )
+        
+        let nowDate = dateData()
+        
+        let dayWidth:CGFloat = frame.size.width
+        let dayHeight:CGFloat = frame.size.height
         let dayButton:UIButton = UIButton()
-        //テキストの色
-        dayButton.frame = CGRectMake(0, 0, CGFloat(dayWidth/2),CGFloat(dayHeight/2))
-//        dayButton.layer.borderColor = UIColor.blackColor().CGColor
-//        dayButton.layer.borderWidth = 1
-        dayButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        dayButton.frame = CGRectMake(0, 0, dayWidth,dayHeight)
         dayButton.addTarget(self, action: "makeAlert:", forControlEvents:.TouchUpInside)
         dayButton.setTitle("\(day)", forState: .Normal)
-        if weekday == 1 {
-            //日曜日は赤
-            dayButton.setTitleColor(UIColor.redColor(), forState: .Normal)
-        } else if weekday == 7 {
-            //土曜日は青
-            dayButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        dayButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        dayButton.titleLabel?.font = UIFont.systemFontOfSize(10)
+        dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3), forState: .Normal)
+        
+        if weekday == 1
+        {
+            //日曜日
+            dayButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xF5F5F5)
+            dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0x808080), forState: .Normal)
+        }
+        else if year > Int(nowDate[0]) ||
+            (year == Int(nowDate[0]) && month > Int(nowDate[1])) ||
+            (year == Int(nowDate[0]) && month == Int(nowDate[1]) && day > Int(nowDate[2]))
+        {
+            //今日以降
+            dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A), forState: .Normal)
+        }else if
+            year == Int(nowDate[0]) && month == Int(nowDate[1]) && day == Int(nowDate[2])
+        {
+            //今日
+            dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A), forState: .Normal)
+            dayButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xFFF8DC)
         }
         self.addSubview(dayButton)
+    }
+    
+    func dateData() -> [String]{
+        let dateFormatter:NSDateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy/MM/dd";
+        let dateString:String = dateFormatter.stringFromDate(NSDate());
+        let dates:[String] = dateString.componentsSeparatedByString("/")
+        
+        return dates
     }
     
     func makeAlert(sender: UIButton){
