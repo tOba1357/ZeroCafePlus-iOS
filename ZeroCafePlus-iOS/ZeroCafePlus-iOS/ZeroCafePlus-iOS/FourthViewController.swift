@@ -49,7 +49,6 @@ class ForthViewController: UIViewController {
         profileLabel.numberOfLines = 4
         profileLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
         profileLabel.backgroundColor = UIColor.clearColor()
-        profileLabel.sizeToFit()
         profileLabel.font = UIFont.systemFontOfSize(16)
         self.view.addSubview(profileLabel)
         
