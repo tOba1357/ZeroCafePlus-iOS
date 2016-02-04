@@ -23,7 +23,6 @@ class ForthViewController: UIViewController {
     private var planningView: UIView!
     private var attendView: UIView!
     private var endView: UIView!
-    let new_name = NSUserDefaults.standardUserDefaults()
     private var user_events: UIView!
     private var events_title: UILabel!
     private var events_date: UILabel!
@@ -42,13 +41,11 @@ class ForthViewController: UIViewController {
         let screenHeight = screenSize.height
         self.title = ""
         view.backgroundColor = UIColor.whiteColor()
-        new_name.removeObjectForKey("NewName");
-        new_name.synchronize()
         
         profileLabel = UILabel(frame: CGRectMake(0,0,screenWidth/1.2,screenHeight/2.3))
         profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.1)
         profileLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
-        profileLabel.text = "金沢大学のtkmtです。プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言プロフィール文言"
+        profileLabel.text = ""
         profileLabel.numberOfLines = 4
         profileLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
         profileLabel.backgroundColor = UIColor.clearColor()
@@ -66,7 +63,7 @@ class ForthViewController: UIViewController {
         
         statusLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/19))
         statusLabel.layer.position = CGPoint(x: screenWidth/2.1, y: screenHeight/4.8)
-        statusLabel.text = "金沢工業大学3年"
+        statusLabel.text = ""
         statusLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         statusLabel.font = UIFont.systemFontOfSize(14)
         statusLabel.textAlignment = NSTextAlignment.Center
@@ -117,11 +114,10 @@ class ForthViewController: UIViewController {
                 }
                 
         }
-        nameLabel.text = new_name.objectForKey("NewName") as? String
         
     }
     
-    func pushMyButton(myEventID:String) {
+    func pushMyButton(myEventID:Int) {
         let eventsdetails = EventsDetailViewController()
         eventsdetails.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
         dismissViewControllerAnimated(true, completion: nil)    }
