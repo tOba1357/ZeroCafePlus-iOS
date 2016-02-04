@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Accounts
+
 
 
 
@@ -24,15 +26,13 @@ class EventsAttendViewController: UIViewController {
     private var FriendTellButton: UIButton!
     private var kikaku: UILabel!
     private var sanka: UILabel!
-    
     private var line: UILabel!
-    
     private var event_detail_calendar: UIImageView!
     private var event_detail_clock: UIImageView!
     private var event_detail_tag: UIImageView!
     
     var getID: Int!
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +42,22 @@ class EventsAttendViewController: UIViewController {
         
         myScrollView = UIScrollView()
         myScrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.frame.height*1.3)
+        myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height*1.3)
         myScrollView.contentOffset = CGPointMake(0, 0)
         myScrollView.pagingEnabled = false
         self.view.addSubview(myScrollView)
+//        myScrollView.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addConstraints([
+//            NSLayoutConstraint(item: myScrollView, attribute: .Width,    relatedBy: .Equal, toItem: nil,   attribute: .Width, multiplier: 1, constant: self.view.bounds.width),
+//            NSLayoutConstraint(item: myScrollView, attribute: .Top,   relatedBy: .Equal, toItem: self.view, attribute: .Top,   multiplier: 1, constant: 0),
+//            NSLayoutConstraint(item: myScrollView, attribute: .Bottom,   relatedBy: .Equal, toItem: sanka, attribute: .Bottom,   multiplier: 1, constant: self.view.bounds.height/21.04),
+//            
+//            ])
+//        
         
         
         name = UILabel(frame: CGRectMake(0,self.view.bounds.height/11.36,self.view.bounds.width/1.24,self.view.bounds.height/35.5))
-        name.text = "世界よ、目覚める刻が来たようだ。"
+        name.text = ""
         name.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         name.textAlignment = NSTextAlignment.Center
         name.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/35.5)
@@ -68,9 +76,9 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: line, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.24),
             NSLayoutConstraint(item: line, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/1136)
             ])
-
         
-
+        
+        
         event_detail_calendar = UIImageView(frame: CGRectMake(0,0,0,0))
         let detail_calendar = UIImage(named: "event_detail_calendar.png")
         event_detail_calendar.frame = CGRectMake(0, 0, 0, 0)
@@ -95,9 +103,9 @@ class EventsAttendViewController: UIViewController {
         self.view.addConstraints([
             NSLayoutConstraint(item: date, attribute: .Top,    relatedBy: .Equal, toItem: line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/22.72),
             NSLayoutConstraint(item: date, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/4.57),
-           
-        ])
-
+            
+            ])
+        
         
         
         event_detail_clock = UIImageView(frame: CGRectMake(0,0,100,120))
@@ -113,7 +121,7 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: event_detail_clock, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/17.78),
             NSLayoutConstraint(item: event_detail_clock, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/31.55)
             ])
-
+        
         
         
         time = UILabel(frame: CGRectMake(self.view.bounds.width/4.2,self.view.bounds.height/4.34,self.view.bounds.width,self.view.bounds.height/37.86))
@@ -127,16 +135,14 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: time, attribute: .Top,    relatedBy: .Equal, toItem: date,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/26.42),
             NSLayoutConstraint(item: time, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/4.57),
             
-        ])
-
+            ])
         
         
-        content = UILabel(frame: CGRectMake(0,self.view.bounds.height/3.23,self.view.bounds.width/1.23,self.view.bounds.height/2.25))
-        content.backgroundColor = UIColor.yellowColor()
-        content.text = "第一の封印:白い馬。勝利の上に更に勝利を得ようとして出て行く(6:1-2)第二の封印:火のように赤い馬。戦争をもたらす(6:3-4)第三の封印:黒い馬。飢饉をもたらす(6:5-6)第四の封印:青ざめた馬。死をもたらす(6:7-8)第五の封印:殉教者が血の復讐を求める(6:9-11)第六の封印:地震と天災(6:12-17)神の刻印を押されたイスラエルの子ら(7:1-8)大患難を通り、子羊の血で洗った白い衣を着た大群衆(7:9-17)第七の封印:しばらく沈黙があり、祈りがささげられる(8:1-5)"
+        
+        content = UILabel(frame: CGRectMake(0,0,0,0))
+        content.text = ""
         content.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         content.font = UIFont.systemFontOfSize(CGFloat(self.view.bounds.height/40.57))
-        content.layer.position.x = CGFloat(self.view.bounds.width/2)
         let attributedText = NSMutableAttributedString(string: self.content.text!)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = self.view.bounds.height/25.24
@@ -151,12 +157,9 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: content, attribute: .Top,    relatedBy: .Equal, toItem: time,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/22.72),
             NSLayoutConstraint(item: content, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
             NSLayoutConstraint(item: content, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.23),
-            NSLayoutConstraint(item: content, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/2.25)
             ])
-        content.sizeToFit()
-
-
-
+        
+        
         
         event_detail_tag = UIImageView(frame: CGRectMake(0,0,100,120))
         let detail_tag = UIImage(named: "event_detail_tag.png")
@@ -171,8 +174,8 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: event_detail_tag, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/14.22),
             NSLayoutConstraint(item: event_detail_tag, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/39.17)
             ])
-
-
+        
+        
         
         tag = UILabel(frame: CGRectMake(self.view.bounds.width/4,self.view.bounds.height/1.13 - self.view.bounds.height/9.47,self.view.bounds.width/1.6,0))
         tag.text = ""
@@ -187,10 +190,10 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: tag, attribute: .Top,    relatedBy: .Equal, toItem: content,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
             NSLayoutConstraint(item: tag, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/4),
             NSLayoutConstraint(item: tag, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.6),
-
-
+            
+            
             ])
-
+        
         
         
         let sankaButtonImage: UIImage = UIImage(named: "event_detail_rounded.png")!
@@ -206,9 +209,9 @@ class EventsAttendViewController: UIViewController {
         self.view.addConstraints([
             NSLayoutConstraint(item: sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
             NSLayoutConstraint(item: sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
-             NSLayoutConstraint(item: sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+            NSLayoutConstraint(item: sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
             NSLayoutConstraint(item: sankaButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
-        ])
+            ])
         
         
         let FriendTellButtonImage: UIImage = UIImage(named: "event_detail_rounded_gray.png")!
@@ -227,8 +230,8 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: FriendTellButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
             NSLayoutConstraint(item: FriendTellButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
             ])
-
-
+        
+        
         line = UILabel(frame: CGRectMake(0,0,0,0))
         line.backgroundColor = UIColor.blackColor()
         self.view.addSubview(line)
@@ -239,7 +242,7 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: line, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.24),
             NSLayoutConstraint(item: line, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/1136)
             ])
-
+        
         
         
         
@@ -270,10 +273,19 @@ class EventsAttendViewController: UIViewController {
         
         
         self.view.backgroundColor = UIColor.whiteColor()
-                
+        
+        print(self.view.bounds.height)
+        print(self.view.frame.height)
+        print("\(self.view.frame.size.height*(91/1136))asdf")
+        print("\(myScrollView.frame.size.height)asdf")
+        print("\(line.layer.position.y)asdf")
+
+
+
+        
     }
-   override func viewWillAppear(animated: Bool) {
-    
+    override func viewWillAppear(animated: Bool) {
+        
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
@@ -319,7 +331,16 @@ class EventsAttendViewController: UIViewController {
                         self.content.text = events["event"]["description"].string! as String
                         self.content.numberOfLines = 0
                         self.content.sizeToFit()
+                        
+                     //   self.myScrollView.contentSize.height = self.line.layer.position.y + self.view.frame.size.height*(91/1136)
+                        
+                        print(self.view.bounds.height)
+                        print(self.view.frame.height)
+                        print("\(self.line.layer.position.y)asdf")
+                        print(self.view.frame.size.height)
+                        print(self.view.frame.size.height*(91/1136))
 
+                        
                         // タグ
                         let JugementTag: String? = events["event"]["category_tag"].string
                         if var TagText = JugementTag {
@@ -329,22 +350,22 @@ class EventsAttendViewController: UIViewController {
                         }
                         // 人数
                         let capacity = events["event"]["capacity"].int! as Int
-                        let participant: Int? = events["event"]["participant"].int
-                        if let ptcpnt = participant {
-                            let reserved = capacity - ptcpnt
-//                            if reserved <= 0 {
-//                                self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
-//                            } else {
-                            self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
-//                           }
-                        } else {
-                            self.sankaButton.setTitle("参加する  残り\(capacity)", forState: UIControlState.Normal)
-                        }
-    
+                        //                        let participant: Int? = events["event"]["participant"].int
+                        //                        if let ptcpnt = participant {
+                        //                            let reserved = capacity - ptcpnt
+                        //                                                        if reserved <= 0 {
+                        //                                                            self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
+                        //                                                        } else {
+                        //                            self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
+                        //                                                       }
+                        //                        } else {
+                        self.sankaButton.setTitle("参加する  残り\(capacity)席", forState: UIControlState.Normal)
+                        
+                        
                     }
                 }
         }
-   }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -355,13 +376,13 @@ class EventsAttendViewController: UIViewController {
         EventDecideViewController.MygetID = getID
         self.navigationController?.pushViewController(EventDecideViewController, animated: true)
         
-    
+        
     }
     
     func onClickTellButton(sender: UIButton){
         
         
     }
-
+    
     
 }

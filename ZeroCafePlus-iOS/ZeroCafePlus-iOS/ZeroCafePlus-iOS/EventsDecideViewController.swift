@@ -58,8 +58,8 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         self.view.addConstraints([
             NSLayoutConstraint(item: TakeFriends, attribute: .Top,    relatedBy: .Equal, toItem: self.view,   attribute: .Top, multiplier: 1, constant: self.view.bounds.height/4.81),
             NSLayoutConstraint(item: TakeFriends, attribute: .Left,   relatedBy: .Equal, toItem: event_detail_add_friend, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width/10.49),
-         ])
-
+            ])
+        
         addPicker = UIPickerView()
         addPicker.delegate = self
         addPicker.dataSource = self
@@ -73,7 +73,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         self.view.addSubview(addButton)
         self.view.addSubview(addButton)
         
-       
+        
         
         myToolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, self.view.bounds.height/12))
         myToolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -81,7 +81,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         myToolBar.barStyle = UIBarStyle.Black
         myToolBar.tintColor = UIColor.whiteColor()
         
-
+        
         addButton.inputView = addPicker
         addButton.inputAccessoryView = myToolBar
         
@@ -90,7 +90,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         myToolBarButton.tag = 1
         myToolBar.items = [myToolBarButton]
         
-
+        
         
         event_detail_info = UIImageView(frame: CGRectMake(0,self.view.bounds.height/3.82,self.view.bounds.width/1.27,self.view.bounds.height/12.08))
         let detail_info = UIImage(named: "event_detail_info.png")
@@ -110,7 +110,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
             NSLayoutConstraint(item: line, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.24),
             NSLayoutConstraint(item: line, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/1136)
             ])
-
+        
         
         
         let sankaButtonImage: UIImage = UIImage(named: "event_detail_rounded.png")!
@@ -123,10 +123,12 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         sankaButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
         sankaButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(sankaButton)
-
+        
+        
+        
         
     }
-
+    
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -148,30 +150,30 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     /*
     pickerが選択された際に呼ばれるデリゲートメソッド.
     */
-//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print("row: \(row)")
-//        print("value: \(myValues[row])")
-//    }
+    //    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    //        print("row: \(row)")
+    //        print("value: \(myValues[row])")
+    //    }
     
     func onClick(sender: UIBarButtonItem) {
         addButton.resignFirstResponder()
     }
     
-        override func viewWillAppear(animated: Bool) {
-            let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
-            Alamofire.request(.GET, url)
-                .responseJSON { response in
-                    debugPrint(response.result.value)
-                                        
-                    let json = JSON(response.result.value!)
-                    let eventArray = json["events"].array! as Array
-                    for events in eventArray {
-                        let id = events["event"]["id"].int! as Int
-                        if  id == self.MygetID{
+    override func viewWillAppear(animated: Bool) {
+        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                debugPrint(response.result.value)
+                
+                let json = JSON(response.result.value!)
+                let eventArray = json["events"].array! as Array
+                for events in eventArray {
+                    let id = events["event"]["id"].int! as Int
+                    if  id == self.MygetID{
                         
-                        }
                     }
                 }
+        }
         
         
         
@@ -205,8 +207,8 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         let myEventsAttendViewController = EventsAttendViewController()
         myEventsAttendViewController.getID = MygetID
         self.navigationController?.pushViewController(myEventsAttendViewController, animated: true)
-
-    
+        
+        
         
         
     }
@@ -224,5 +226,5 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     
-        
+    
 }
