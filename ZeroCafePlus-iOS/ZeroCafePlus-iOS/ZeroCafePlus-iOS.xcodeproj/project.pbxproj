@@ -68,6 +68,8 @@
 		D76B28311C60A1F80090DB73 /* event_detail_rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28281C60A1F80090DB73 /* event_detail_rounded.png */; };
 		D76B28321C60A1F80090DB73 /* event_detail_tag.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B28291C60A1F80090DB73 /* event_detail_tag.png */; };
 		D76B28331C60A1F80090DB73 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B282A1C60A1F80090DB73 /* star.png */; };
+		D76B28421C63D60C0090DB73 /* ViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B28411C63D60C0090DB73 /* ViewPager.swift */; };
+		D76B28461C63D6750090DB73 /* ViewPagerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B28451C63D6750090DB73 /* ViewPagerElement.swift */; };
 		D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */; };
 		D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */; };
 		D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A626511C1AB359002DCEC6 /* SecondViewController.swift */; };
@@ -177,6 +179,8 @@
 		D76B28281C60A1F80090DB73 /* event_detail_rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_rounded.png; path = imageFile/event_detail_rounded.png; sourceTree = "<group>"; };
 		D76B28291C60A1F80090DB73 /* event_detail_tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_detail_tag.png; path = imageFile/event_detail_tag.png; sourceTree = "<group>"; };
 		D76B282A1C60A1F80090DB73 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = imageFile/star.png; sourceTree = "<group>"; };
+		D76B28411C63D60C0090DB73 /* ViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPager.swift; sourceTree = "<group>"; };
+		D76B28451C63D6750090DB73 /* ViewPagerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerElement.swift; sourceTree = "<group>"; };
 		D7A6264A1C1AB359002DCEC6 /* ZeroCafePlus-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeroCafePlus-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -400,6 +404,8 @@
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
 				BABD6E351C61F4010018F456 /* CommonFunction.swift */,
+				D76B28411C63D60C0090DB73 /* ViewPager.swift */,
+				D76B28451C63D6750090DB73 /* ViewPagerElement.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
@@ -683,6 +689,7 @@
 				BA31F8441C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift in Sources */,
 				D76B28001C56224F0090DB73 /* CheckCalenderView.swift in Sources */,
 				BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */,
+				D76B28461C63D6750090DB73 /* ViewPagerElement.swift in Sources */,
 				D7A6267E1C1AD395002DCEC6 /* ThirdViewController.swift in Sources */,
 				BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */,
 				BABD6E361C61F4010018F456 /* CommonFunction.swift in Sources */,
@@ -690,6 +697,7 @@
 				9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */,
 				6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */,
 				BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */,
+				D76B28421C63D60C0090DB73 /* ViewPager.swift in Sources */,
 				BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */,
 				D7A626801C1AD3D6002DCEC6 /* FourthViewController.swift in Sources */,
 			);

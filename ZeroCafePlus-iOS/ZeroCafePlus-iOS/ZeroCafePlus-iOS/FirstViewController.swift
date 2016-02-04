@@ -17,19 +17,16 @@ protocol EventViewDelegate {
 
 class FirstViewController: UIViewController, EventViewDelegate {
     
-    private var kitButton: UIButton!
-    private var kuButton: UIButton!
-    private var favoriteButton: UIButton!
-    
-    private var kit2Button: UIButton!
-    private var ku2Button: UIButton!
-    private var favorite2Button: UIButton!
-    
-    private var kit3Button: UIButton!
-    private var ku3Button: UIButton!
-    private var favorite3Button: UIButton!
-    
-    @IBOutlet var horizontalSV: UIScrollView!
+    private var kitLabel: UILabel!
+    private var kuLabel: UILabel!
+    private var favoriteLabel: UILabel!
+    private var nonSelectedKitLabel: UILabel!
+    private var nonSelectedKuLabel: UILabel!
+    private var nonSelectedFavoriteLabel: UILabel!
+    private var kitVerticalSV: UIScrollView!
+    private var kuVerticalSV: UIScrollView!
+    private var favoriteVerticalSV: UIScrollView!
+    private var horizontalSV: UIScrollView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -44,115 +41,85 @@ class FirstViewController: UIViewController, EventViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backButtonItem
-        
-        horizontalSV.pagingEnabled = true
-        horizontalSV.directionalLockEnabled = true
-        horizontalSV.contentSize.width = view.frame.size.width * 3.0
-        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-        
-        //        let kitView = UIView()
-        //        let kuView = UIView()
-        //        let favoriteView = UIView()
-        //        let views = [kitView,kuView, favoriteView]
-        
+        let kitView = UIView()
+        let kuView = UIView()
+        let favoriteView = UIView()
+        let selectedKitView = UIView()
+        let selectedKuView = UIView()
+        let selectedFavoriteView = UIView()
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         
-        //1page
         
-        kitButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        kitButton.layer.position = CGPoint(x: screenWidth/6, y: screenHeight/15)
-        kitButton.setTitle("工大", forState: .Normal)
-        kitButton.titleLabel?.font = UIFont.systemFontOfSize(24)
-        kitButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-        kitButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(kitButton)
+        let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButtonItem
+
+
+        kitVerticalSV = UIScrollView()
+        kuVerticalSV = UIScrollView()
+        favoriteVerticalSV = UIScrollView()
+        horizontalSV = UIScrollView()
         
-        kuButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        kuButton.layer.position = CGPoint(x: screenWidth/2.25, y: screenHeight/15)
-        kuButton.setTitle("金大", forState: .Normal)
-        kuButton.titleLabel?.font = UIFont.systemFontOfSize(24)
-        kuButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
-        kuButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(kuButton)
+        horizontalSV.pagingEnabled = true
+        horizontalSV.frame = CGRectMake(0, screenHeight/11, self.view.frame.size.width, self.view.frame.size.height)
+        horizontalSV.contentSize = CGSizeMake(self.view.frame.size.width * 3.0,self.view.frame.size.height)
+        horizontalSV.contentOffset = CGPointMake(0, screenHeight/11)
+        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
-        favoriteButton = UIButton(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
-        favoriteButton.layer.position = CGPoint(x: screenWidth/1.3, y: screenHeight/15)
-        favoriteButton.setTitle("お気に入り", forState: .Normal)
-        favoriteButton.titleLabel?.font = UIFont.systemFontOfSize(24)
-        favoriteButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
-        favoriteButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(favoriteButton)
-        
-        //2page
-        
-        kit2Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        kit2Button.layer.position = CGPoint(x: screenWidth+screenWidth/6, y: screenHeight/15)
-        kit2Button.setTitle("工大", forState: .Normal)
-        kit2Button.titleLabel?.font = UIFont.systemFontOfSize(24)
-        kit2Button.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
-        kit2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(kit2Button)
-        
-        ku2Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        ku2Button.layer.position = CGPoint(x: screenWidth+screenWidth/2.25, y: screenHeight/15)
-        ku2Button.setTitle("金大", forState: .Normal)
-        ku2Button.titleLabel?.font = UIFont.systemFontOfSize(24)
-        ku2Button.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-        ku2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(ku2Button)
-        
-        favorite2Button = UIButton(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
-        favorite2Button.layer.position = CGPoint(x: screenWidth+screenWidth/1.3, y: screenHeight/15)
-        favorite2Button.setTitle("お気に入り", forState: .Normal)
-        favorite2Button.titleLabel?.font = UIFont.systemFontOfSize(24)
-        favorite2Button.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
-        favorite2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(favorite2Button)
-        
-        //3page
-        
-        kit3Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        kit3Button.layer.position = CGPoint(x: screenWidth*2+screenWidth/6, y: screenHeight/15)
-        kit3Button.setTitle("工大", forState: .Normal)
-        kit3Button.titleLabel?.font = UIFont.systemFontOfSize(24)
-        kit3Button.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
-        kit3Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(kit3Button)
-        
-        kuButton = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
-        kuButton.layer.position = CGPoint(x: screenWidth*2+screenWidth/2.25, y: screenHeight/15)
-        kuButton.setTitle("金大", forState: .Normal)
-        kuButton.titleLabel?.font = UIFont.systemFontOfSize(24)
-        kuButton.setTitleColor(UIColor.hexStr("B3B3B3", alpha: 1.0), forState: .Normal)
-        kuButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(kuButton)
-        
-        favorite3Button = UIButton(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
-        favorite3Button.layer.position = CGPoint(x: screenWidth*2+screenWidth/1.3, y: screenHeight/15)
-        favorite3Button.setTitle("お気に入り", forState: .Normal)
-        favorite3Button.titleLabel?.font = UIFont.systemFontOfSize(24)
-        favorite3Button.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
-        favorite3Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(favorite3Button)
+        kitVerticalSV.pagingEnabled = false
+        kuVerticalSV.pagingEnabled = false
+        favoriteVerticalSV.pagingEnabled = false
         
         
-        for i in 0...2 {
-            let viewHeight = CGFloat(128)
-            
-            let x = view.frame.width * CGFloat(i)
-            let scrollview = UIScrollView(frame: CGRectMake(x, 0, view.frame.size.width, view.frame.size.height))
-            
-            horizontalSV.addSubview(scrollview)
-            
-        }
+        kitLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        kitLabel.layer.position.x = 80
+        kitLabel.layer.position.y = screenHeight/15
+        kitLabel.text = "工大"
+        kitLabel.font = UIFont.systemFontOfSize(20)
+        kitLabel.textColor = UIColor.hexStr("1A1A1A", alpha: 1.0)
+        kitView.addSubview(kitLabel)
+        
+        nonSelectedKitLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        nonSelectedKitLabel.layer.position.x = 80
+        nonSelectedKitLabel.layer.position.y = screenHeight/15
+        nonSelectedKitLabel.text = "工大"
+        nonSelectedKitLabel.font = UIFont.systemFontOfSize(20)
+        nonSelectedKitLabel.textColor = UIColor.hexStr("B3B3B3", alpha: 1.0)
+        selectedKitView.addSubview(nonSelectedKitLabel)
+        
+        kuLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        kuLabel.layer.position.y = screenHeight/15
+        kuLabel.text = "金大"
+        kuLabel.font = UIFont.systemFontOfSize(20)
+        kuLabel.textColor = UIColor.hexStr("1A1A1A", alpha: 1.0)
+        kuView.addSubview(kuLabel)
+        
+        nonSelectedKuLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
+        nonSelectedKuLabel.layer.position.y = screenHeight/15
+        nonSelectedKuLabel.text = "金大"
+        nonSelectedKuLabel.font = UIFont.systemFontOfSize(20)
+        nonSelectedKuLabel.textColor = UIColor.hexStr("B3B3B3", alpha: 1.0)
+        selectedKuView.addSubview(nonSelectedKuLabel)
+        
+        favoriteLabel = UILabel(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
+        favoriteLabel.layer.position.x = 40
+        favoriteLabel.layer.position.y = screenHeight/15
+        favoriteLabel.text = "お気に入り"
+        favoriteLabel.font = UIFont.systemFontOfSize(20)
+        favoriteLabel.textColor = UIColor.hexStr("1A1A1A", alpha: 1.0)
+        favoriteView.addSubview(favoriteLabel)
+        
+        nonSelectedFavoriteLabel = UILabel(frame: CGRectMake(0,0,screenWidth/2.5,screenHeight/13))
+        nonSelectedFavoriteLabel.layer.position.x = 40
+        nonSelectedFavoriteLabel.layer.position.y = screenHeight/15
+        nonSelectedFavoriteLabel.text = "お気に入り"
+        nonSelectedFavoriteLabel.font = UIFont.systemFontOfSize(20)
+        nonSelectedFavoriteLabel.textColor = UIColor.hexStr("B3B3B3", alpha: 1.0)
+        selectedFavoriteView.addSubview(nonSelectedFavoriteLabel)
         
         
-        
-        let url = "https://zerocafe.herokuapp.com/api/v1/events"
+        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
                 if response.result.isSuccess {
@@ -166,13 +133,13 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     print("持ってきたもの:",eventArray)
                     
                     var myX :CGFloat = 6
-                    var myY :CGFloat = 60
+                    var myY :CGFloat = 6
                     
-                    for events in eventArray.enumerate(){
+                    for event in eventArray.enumerate(){
                         
-                        let sideDecide = events.index % 2
+                        let sideDecide = event.index % 2
                         if sideDecide == 0 {
-                            let eve = events.element as JSON
+                            let eve = event.element as JSON
                             let eventID = eve["event"]["id"].int
                             let title = eve["event"]["title"].string! as String
                             let dateName = eve["event"]["start_time"].string! as String
@@ -188,11 +155,13 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             
-                            self.horizontalSV.addSubview(eventViewGenerate)
+                            self.kitVerticalSV.addSubview(eventViewGenerate)
+//                            self.kuVerticalSV.addSubview(eventViewGenerate)
+//                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
                             myX = 162
                         }else{
                             
-                            let eve = events.element as JSON
+                            let eve = event.element as JSON
                             let eventID = eve["event"]["id"].int
                             let title = eve["event"]["title"].string! as String
                             let dateName = eve["event"]["start_time"].string! as String
@@ -206,16 +175,42 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
-                            self.horizontalSV.addSubview(eventViewGenerate)
+                            self.kitVerticalSV.addSubview(eventViewGenerate)
+//                            self.kuVerticalSV.addSubview(eventViewGenerate)
+//                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
                             
                             myX = 6
-                            myY += 212
+                            myY += 206
                         }
                         
-                        self.horizontalSV.contentSize.height = CGFloat((eventArray.count / 2) * 212 + 150)
+//                        self.verticalSV.contentSize = CGSizeMake(0, CGFloat((eventArray.count / 2) * 212 + 150))
+                        self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                        self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
+                        self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+//                        self.view.addSubview(self.horizontalSV)
+//                        self.horizontalSV.addSubview(self.verticalSV)
+                        
+                        self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                        self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
+                        self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+                        
+                        self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
+                        self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+                        
                         
                     }
-                    
+                    let views = [
+                        ViewPagerElement(selectedTitleView: kitView, noSelectedTitleView: selectedKitView, mainView: self.kitVerticalSV),
+                        ViewPagerElement(selectedTitleView: kuView, noSelectedTitleView: selectedKuView, mainView: self.kuVerticalSV),
+                        ViewPagerElement(selectedTitleView: favoriteView, noSelectedTitleView: selectedFavoriteView, mainView: self.favoriteVerticalSV)
+                    ]
+                    let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
+                    let tabView = ViewPager(frame: frame, tabHeigh: screenHeight/11, views: views)
+                    self.view.addSubview(tabView)
                 }else {
                     print("通信失敗")
                 }
@@ -232,7 +227,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
             self.navigationController?.pushViewController(eventAttendVC, animated: true)
         }
         else{
-            print("aaa")
+            print("error")
         }
         
     }
@@ -253,13 +248,13 @@ class EventView :UIView{
         let dateData = getDateTime(dateNameString)
         let dateText = "\(dateData[1])/\(dateData[2])\n\(dateData[3]):\(dateData[4])~10:00"
         
-        let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,50))
+        let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,70))
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
-        let dateName: UILabel = UILabel(frame: CGRectMake(10,90,130,50))
+        let dateName: UILabel = UILabel(frame: CGRectMake(10,120,130,50))
         dateName.numberOfLines = 2
         dateName.textAlignment = NSTextAlignment.Center
-        let tagName: UILabel = UILabel(frame: CGRectMake(10,120,130,70))
+        let tagName: UILabel = UILabel(frame: CGRectMake(10,150,130,70))
         tagName.numberOfLines = 2
         tagName.textAlignment = NSTextAlignment.Center
         let touchButton: UIButton = UIButton(frame: CGRectMake(10,10,130,180))
