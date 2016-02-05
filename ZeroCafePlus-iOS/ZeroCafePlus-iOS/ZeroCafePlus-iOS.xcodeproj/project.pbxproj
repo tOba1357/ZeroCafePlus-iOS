@@ -12,6 +12,7 @@
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
 		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
 		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
+		98EC0B401C64089500185416 /* star_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 98EC0B3F1C64089500185416 /* star_selected.png */; };
 		9DD8BDA61C284E9B002F243D /* EventsAttendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */; };
 		9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */; };
 		BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD31C2858090007A49D /* CalenderView.swift */; };
@@ -123,6 +124,7 @@
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
+		98EC0B3F1C64089500185416 /* star_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star_selected.png; path = imageFile/star_selected.png; sourceTree = "<group>"; };
 		9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAttendViewController.swift; sourceTree = "<group>"; };
 		9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDecideViewController.swift; sourceTree = "<group>"; };
 		BA2F0AD31C2858090007A49D /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		D76B28341C60A2110090DB73 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				98EC0B3F1C64089500185416 /* star_selected.png */,
 				BA31F86B1C61272E00CB0AF7 /* tabbar_icon */,
 				BA31F84E1C611FFE00CB0AF7 /* genre */,
 				6F36351A1C60C18D009401B7 /* profile_edit .png */,
@@ -513,7 +516,7 @@
 				TargetAttributes = {
 					D7A626491C1AB359002DCEC6 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = E3LNEN67RT;
+						DevelopmentTeam = H3ES9TF7V7;
 					};
 					D7A6265F1C1AB359002DCEC6 = {
 						CreatedOnToolsVersion = 7.1;
@@ -592,6 +595,7 @@
 				BA31F8631C61201400CB0AF7 /* sakuru_light.png in Resources */,
 				BA31F8691C61201400CB0AF7 /* tournament_light.png in Resources */,
 				6F36351B1C60C18D009401B7 /* profile_edit .png in Resources */,
+				98EC0B401C64089500185416 /* star_selected.png in Resources */,
 				BABD6E4E1C6209260018F456 /* tabbar_icon-02@2x.png in Resources */,
 				BABD6E531C6209260018F456 /* tabbar_icon-04_s.png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,

@@ -24,36 +24,58 @@ class EventsAttendViewController: UIViewController {
     private var content: UILabel!
     private var sankaButton: UIButton!
     private var FriendTellButton: UIButton!
+    private var reservedButton: UIButton!
     private var kikaku: UILabel!
     private var sanka: UILabel!
+    private var overLine: UILabel!
     private var line: UILabel!
     private var event_detail_calendar: UIImageView!
     private var event_detail_clock: UIImageView!
     private var event_detail_tag: UIImageView!
+    private var starButton: UIButton!
+    private var starSelectedButton: UIButton!
+    
+    private var genreImg:UIImage!
+    var window :UIWindow!
     
     var getID: Int!
     
+    private var starImage1: UIImage!
+    private var starImage2: UIImage!!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         starImage1 =  CommonFunction().resizingImage(imageName: "star.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)     //UIImage(named: "star.png")
+         starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.cyanColor()
+        
+        
+
+        
+        
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
+     
         
         myScrollView = UIScrollView()
         myScrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height*1.3)
+        myScrollView.contentSize = CGSizeMake(self.view.frame.width, 0)
         myScrollView.contentOffset = CGPointMake(0, 0)
         myScrollView.pagingEnabled = false
         self.view.addSubview(myScrollView)
-//        myScrollView.translatesAutoresizingMaskIntoConstraints = false
-//        self.view.addConstraints([
-//            NSLayoutConstraint(item: myScrollView, attribute: .Width,    relatedBy: .Equal, toItem: nil,   attribute: .Width, multiplier: 1, constant: self.view.bounds.width),
-//            NSLayoutConstraint(item: myScrollView, attribute: .Top,   relatedBy: .Equal, toItem: self.view, attribute: .Top,   multiplier: 1, constant: 0),
-//            NSLayoutConstraint(item: myScrollView, attribute: .Bottom,   relatedBy: .Equal, toItem: sanka, attribute: .Bottom,   multiplier: 1, constant: self.view.bounds.height/21.04),
-//            
-//            ])
-//        
+        
+        
+        starButton = UIButton()
+        starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+        starButton.setBackgroundImage(starImage1, forState: UIControlState.Normal);
+        starButton.setTitle("", forState: UIControlState.Normal)
+        starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+        starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
+        
         
         
         name = UILabel(frame: CGRectMake(0,self.view.bounds.height/11.36,self.view.bounds.width/1.24,self.view.bounds.height/35.5))
@@ -66,15 +88,15 @@ class EventsAttendViewController: UIViewController {
         myScrollView.addSubview(name)
         
         
-        line = UILabel(frame: CGRectMake(0,0,0,0))
-        line.backgroundColor = UIColor.blackColor()
-        myScrollView.addSubview(line)
-        line.translatesAutoresizingMaskIntoConstraints = false
+        overLine = UILabel(frame: CGRectMake(0,0,0,0))
+        overLine.backgroundColor = UIColor.blackColor()
+        myScrollView.addSubview(overLine)
+        overLine.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: line, attribute: .Top,    relatedBy: .Equal, toItem: name,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/71),
-            NSLayoutConstraint(item: line, attribute: .Left,   relatedBy: .Equal, toItem: name, attribute: .Left,   multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: line, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.24),
-            NSLayoutConstraint(item: line, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/1136)
+            NSLayoutConstraint(item: overLine, attribute: .Top,    relatedBy: .Equal, toItem: name,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/71),
+            NSLayoutConstraint(item: overLine, attribute: .Left,   relatedBy: .Equal, toItem: name, attribute: .Left,   multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: overLine, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/1.24),
+            NSLayoutConstraint(item: overLine, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/1136)
             ])
         
         
@@ -86,7 +108,7 @@ class EventsAttendViewController: UIViewController {
         myScrollView.addSubview(event_detail_calendar)
         event_detail_calendar.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: event_detail_calendar, attribute: .Top,    relatedBy: .Equal, toItem: line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/22.72),
+            NSLayoutConstraint(item: event_detail_calendar, attribute: .Top,    relatedBy: .Equal, toItem: overLine,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/22.72),
             NSLayoutConstraint(item: event_detail_calendar, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/9.14),
             NSLayoutConstraint(item: event_detail_calendar, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/18.18),
             NSLayoutConstraint(item: event_detail_calendar, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/32.45)
@@ -101,7 +123,7 @@ class EventsAttendViewController: UIViewController {
         myScrollView.addSubview(date)
         date.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: date, attribute: .Top,    relatedBy: .Equal, toItem: line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/22.72),
+            NSLayoutConstraint(item: date, attribute: .Top,    relatedBy: .Equal, toItem: overLine,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/22.72),
             NSLayoutConstraint(item: date, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/4.57),
             
             ])
@@ -143,14 +165,7 @@ class EventsAttendViewController: UIViewController {
         content.text = ""
         content.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         content.font = UIFont.systemFontOfSize(CGFloat(self.view.bounds.height/40.57))
-        let attributedText = NSMutableAttributedString(string: self.content.text!)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = self.view.bounds.height/25.24
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
-        self.content.attributedText = attributedText
         content.lineBreakMode = NSLineBreakMode.ByCharWrapping
-        content.numberOfLines = 0
-        content.sizeToFit()
         myScrollView.addSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
@@ -207,11 +222,32 @@ class EventsAttendViewController: UIViewController {
         myScrollView.addSubview(sankaButton)
         sankaButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+            NSLayoutConstraint(item: sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: content,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/8.29),
             NSLayoutConstraint(item: sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
             NSLayoutConstraint(item: sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
             NSLayoutConstraint(item: sankaButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
             ])
+        
+        
+        
+        
+        
+        //        let reservedButtonImage: UIImage = UIImage(named: "event_detail_rounded_blue.png")!
+        //        reservedButton = UIButton()
+        //        reservedButton.frame = CGRectMake(0,0,0,0)
+        //        reservedButton.setBackgroundImage(reservedButtonImage, forState: UIControlState.Normal);
+        //        reservedButton.setTitle("予約済み", forState: UIControlState.Normal)
+        //        reservedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        //        reservedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+        //        reservedButton.addTarget(self, action: "onClickrezervedButton:", forControlEvents: .TouchUpInside)
+        //        myScrollView.addSubview(reservedButton)
+        //        reservedButton.translatesAutoresizingMaskIntoConstraints = false
+        //        self.view.addConstraints([
+        //            NSLayoutConstraint(item: reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+        //            NSLayoutConstraint(item: reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+        //            NSLayoutConstraint(item: reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+        //            NSLayoutConstraint(item: reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+        //            ])
         
         
         let FriendTellButtonImage: UIImage = UIImage(named: "event_detail_rounded_gray.png")!
@@ -230,6 +266,9 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: FriendTellButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
             NSLayoutConstraint(item: FriendTellButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
             ])
+        
+        
+        
         
         
         line = UILabel(frame: CGRectMake(0,0,0,0))
@@ -279,14 +318,38 @@ class EventsAttendViewController: UIViewController {
         print("\(self.view.frame.size.height*(91/1136))asdf")
         print("\(myScrollView.frame.size.height)asdf")
         print("\(line.layer.position.y)asdf")
-
-
-
+        
+        
+        
+        print(name.bounds.height)
+        
+        
+        
+        
         
     }
     override func viewWillAppear(animated: Bool) {
         
+        
+        
+        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+        self.window = UIWindow()
+        self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
+        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
+        self.window.backgroundColor = UIColor.clearColor()
+        self.window.makeKeyWindow()
+        self.window.makeKeyAndVisible()
+        
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
+        imgView.image = self.genreImg
+        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
+        self.window.addSubview(imgView)
+
+        
+        
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        let Userurl = "https://zerocafe.herokuapp.com/api/v1/tickets.json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
                 
@@ -318,6 +381,7 @@ class EventsAttendViewController: UIViewController {
                         date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
                         print(date_formatter.stringFromDate(change_date))
                         self.date.text = date_formatter.stringFromDate(change_date)
+                        self.date.sizeToFit()
                         
                         // 時間
                         let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
@@ -328,18 +392,18 @@ class EventsAttendViewController: UIViewController {
                         self.time.sizeToFit()
                         
                         // イベント説明
-                        self.content.text = events["event"]["description"].string! as String
+                        self.content.text = "\(events["event"]["description"].string! as String)"
+                        let attributedText = NSMutableAttributedString(string: self.content.text!)
+                        let paragraphStyle = NSMutableParagraphStyle()
+                        paragraphStyle.lineSpacing = self.view.bounds.height/25.24
+                        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+                        self.content.attributedText = attributedText
+
                         self.content.numberOfLines = 0
                         self.content.sizeToFit()
                         
-                     //   self.myScrollView.contentSize.height = self.line.layer.position.y + self.view.frame.size.height*(91/1136)
+                        //      self.myScrollView.contentSize.height = self.line.layer.position.y + self.view.frame.size.height*(91/1136)
                         
-                        print(self.view.bounds.height)
-                        print(self.view.frame.height)
-                        print("\(self.line.layer.position.y)asdf")
-                        print(self.view.frame.size.height)
-                        print(self.view.frame.size.height*(91/1136))
-
                         
                         // タグ
                         let JugementTag: String? = events["event"]["category_tag"].string
@@ -350,22 +414,38 @@ class EventsAttendViewController: UIViewController {
                         }
                         // 人数
                         let capacity = events["event"]["capacity"].int! as Int
-                        //                        let participant: Int? = events["event"]["participant"].int
-                        //                        if let ptcpnt = participant {
-                        //                            let reserved = capacity - ptcpnt
-                        //                                                        if reserved <= 0 {
-                        //                                                            self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
-                        //                                                        } else {
-                        //                            self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
-                        //                                                       }
-                        //                        } else {
-                        self.sankaButton.setTitle("参加する  残り\(capacity)席", forState: UIControlState.Normal)
+                        let participant: Int? = events["event"]["participant"].int
+                        if let ptcpnt = participant {
+                            let reserved = capacity - ptcpnt
+                            if reserved <= 0 {
+                                self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
+                            } else {
+                                self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
+                            }
+                        } else {
+                            self.sankaButton.setTitle("参加する  残り\(capacity)席", forState: UIControlState.Normal)
+                            
+                            
+                        }
+                     
+                        
+                        self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.sankaButton.bounds.height + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
+
+                        
+                        
+
+                        
                         
                         
                     }
                 }
         }
+        
+        
+        
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -379,8 +459,75 @@ class EventsAttendViewController: UIViewController {
         
     }
     
-    func onClickTellButton(sender: UIButton){
+    
+    func onClickStarButton(sender: UIButton){
         
+        starSelectedButton = UIButton()
+        starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+        starSelectedButton.setBackgroundImage(starImage2, forState: UIControlState.Normal);
+        starSelectedButton.setTitle("", forState: UIControlState.Normal)
+        starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+        starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
+
+        
+    }
+    
+    func onClickStarSelectedButton(sender: UIButton){
+        
+        starButton = UIButton()
+        starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+        starButton.setBackgroundImage(starImage1, forState: UIControlState.Normal);
+        starButton.setTitle("", forState: UIControlState.Normal)
+        starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+        starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
+        
+        
+    }
+
+    
+    override func viewDidDisappear(animated: Bool) {
+        genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.bounds.width/100000000, h: self.view.bounds.height/100000)
+        window = UIWindow()
+        window.frame = CGRectMake(0, 0, 0, 0)
+        window.layer.position = CGPoint(x: 0, y:0)
+        window.backgroundColor = UIColor.clearColor()
+        window.makeKeyWindow()
+        window.makeKeyAndVisible()
+        
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+        imgView.image = genreImg
+        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
+        window.addSubview(imgView)
+        
+
+    }
+    
+    //    func onClickreservedButton(sender: UIButton){
+    //        let EventDecideViewController = EventsDecideViewController()
+    //        EventDecideViewController.MygetID = getID
+    //        self.navigationController?.pushViewController(EventDecideViewController, animated: true)
+    //
+    //
+    //    }
+    
+    
+    
+    func onClickTellButton(sender: UIButton){
+        // 共有する項目
+        let shareText = "Apple - Apple Watch"
+        let shareWebsite = NSURL(string: "https://www.apple.com/jp/watch/")!
+        
+        let activityItems = [shareText, shareWebsite]
+        
+        // 初期化処理
+        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        
+        self.presentViewController(activityVC, animated: true, completion: nil)
         
     }
     
