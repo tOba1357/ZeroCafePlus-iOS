@@ -58,6 +58,7 @@ class EventView :UIView{
         myImageView.layer.masksToBounds = true
         myImageView.layer.cornerRadius = 10.0
         self.addSubview(myImageView)
+        
     }
     
     func onClickMyButton(sender: UIButton) {

@@ -28,11 +28,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
     private var favoriteVerticalSV: UIScrollView!
 //    private var horizontalSV: UIScrollView!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -40,6 +35,12 @@ class FirstViewController: UIViewController, EventViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         let kitView = UIView()
         let kuView = UIView()
@@ -56,17 +57,17 @@ class FirstViewController: UIViewController, EventViewDelegate {
         navigationItem.backBarButtonItem = backButtonItem
         
         self.view.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-
+        
         kitVerticalSV = UIScrollView()
         kuVerticalSV = UIScrollView()
         favoriteVerticalSV = UIScrollView()
-//        horizontalSV = UIScrollView()
-//        
-//        horizontalSV.pagingEnabled = true
-//        horizontalSV.frame = CGRectMake(0, screenHeight/11, self.view.frame.size.width, self.view.frame.size.height)
-//        horizontalSV.contentSize = CGSizeMake(self.view.frame.size.width * 3.0,self.view.frame.size.height)
-//        horizontalSV.contentOffset = CGPointMake(0, screenHeight/11)
-//        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+        //        horizontalSV = UIScrollView()
+        //
+        //        horizontalSV.pagingEnabled = true
+        //        horizontalSV.frame = CGRectMake(0, screenHeight/11, self.view.frame.size.width, self.view.frame.size.height)
+        //        horizontalSV.contentSize = CGSizeMake(self.view.frame.size.width * 3.0,self.view.frame.size.height)
+        //        horizontalSV.contentOffset = CGPointMake(0, screenHeight/11)
+        //        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
         kitVerticalSV.pagingEnabled = false
         kuVerticalSV.pagingEnabled = false
@@ -138,6 +139,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     
                     for event in eventArray.enumerate(){
                         
+                        
                         let sideDecide = event.index % 2
                         if sideDecide == 0 {
                             let eve = event.element as JSON
@@ -152,13 +154,25 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 }
                             }()
                             print(tagName)
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             
                             self.kitVerticalSV.addSubview(eventViewGenerate)
-//                            self.kuVerticalSV.addSubview(eventViewGenerate)
-//                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                            self.kuVerticalSV.addSubview(eventViewGenerate)
+                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                            
+//                            self.view.addConstraints([
+//                                NSLayoutConstraint(
+//                                    item: eventViewGenerate,
+//                                    attribute: .Left,
+//                                    relatedBy: .Equal,
+//                                    attribute: .Left,
+//                                    multiplier: 1.0,
+//                                    constant: 10
+//                                )
+//                            ])
+                            
                             myX = 162
                         }else{
                             
@@ -177,8 +191,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             self.kitVerticalSV.addSubview(eventViewGenerate)
-//                            self.kuVerticalSV.addSubview(eventViewGenerate)
-//                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                            //                            self.kuVerticalSV.addSubview(eventViewGenerate)
+                            //                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
                             
                             myX = 6
                             myY += 206
@@ -188,8 +202,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
                         self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                         self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-//                        self.view.addSubview(self.horizontalSV)
-//                        self.horizontalSV.addSubview(self.kitVerticalSV)
+                        //                        self.view.addSubview(self.horizontalSV)
+                        //                        self.horizontalSV.addSubview(self.kitVerticalSV)
                         
                         self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
                         self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
@@ -215,6 +229,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     print("通信失敗")
                 }
         }
+        
         
     }
     
