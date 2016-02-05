@@ -31,29 +31,40 @@ class ForthViewController: UIViewController, EventViewDelegate {
     private var pageControl: UIPageControl!
     private var editProfile: UIButton!
     
-    private var horizontalSV:UIScrollView!
     
-    private var willJoinButton: UIButton!
-    private var planedButton:UIButton!
-    private var joinedButton:UIButton!
     
-    private var willJoin2Button:UIButton!
-    private var planed2Button:UIButton!
-    private var joined2Button:UIButton!
+    private var willJoinButton: UILabel!
+    private var nonwillJoinButton: UILabel!
+    private var planedButton:UILabel!
+    private var nonplanedButton:UILabel!
+    private var joinedButton:UILabel!
+    private var nonjoinedButton:UILabel!
     
-    private var willJoin3Button: UIButton!
-    private var planed3Button:UIButton!
-    private var joined3Button:UIButton!
-    
+    private var kitVerticalSV: UIScrollView!
+    private var kuVerticalSV: UIScrollView!
+    private var favoriteVerticalSV: UIScrollView!
+    private var kitView: UIView!
+    private var kuView:UIView!
+    private var favoriteView:UIView!
+    private var selectedKitView:UIView!
+    private var selectedKuView:UIView!
+    private var selectedFavoriteView :UIView!
+    private var horizontalSV: UIScrollView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
+        kitView = UIView()
+        kuView = UIView()
+        favoriteView = UIView()
+        selectedKitView = UIView()
+        selectedKuView = UIView()
+        selectedFavoriteView = UIView()
         view.backgroundColor = UIColor.whiteColor()
+        
         
         profileLabel = UILabel(frame: CGRectMake(0,0,screenWidth/1.2,screenHeight/4))
         profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.7)
@@ -95,306 +106,226 @@ class ForthViewController: UIViewController, EventViewDelegate {
         profileImage.layer.cornerRadius = 8.0
         self.view.addSubview(profileImage)
         
-        //        let kitView = UIView()
-        //        let kuView = UIView()
-        //        let favoriteView = UIView()
-        //        let views = [kitView,kuView, favoriteView]
+        kitVerticalSV = UIScrollView()
+        kuVerticalSV = UIScrollView()
+        favoriteVerticalSV = UIScrollView()
         
-        //1page
+        kitVerticalSV.pagingEnabled = false
+        kuVerticalSV.pagingEnabled = false
+        favoriteVerticalSV.pagingEnabled = false
         
-        willJoinButton = UIButton()
+        
+        willJoinButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/19))
+        willJoinButton.textAlignment = NSTextAlignment.Center
         willJoinButton.layer.position = CGPoint(x: screenWidth/5, y: screenHeight/2)
-        willJoinButton.setTitle("参加予定", forState: .Normal)
+        willJoinButton.text = "参加予定"
+        willJoinButton.layer.position.y = screenHeight/15
+        willJoinButton.layer.position.x = 65
         willJoinButton.layer.cornerRadius = 18.0
         willJoinButton.layer.masksToBounds = true
         willJoinButton.backgroundColor = UIColor.hexStr("#ff8010", alpha: 1.0)
-        willJoinButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        willJoinButton.setTitleColor(UIColor.hexStr("#ffffff", alpha: 1.0), forState: .Normal)
-        willJoinButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(willJoinButton)
-        willJoinButton.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addConstraints([
-            
-            // self.veiwの上から0pxの位置に配置
-            NSLayoutConstraint(
-                item: willJoinButton,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: profileLabel,
-                attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: screenWidth/20
-            ),
-            NSLayoutConstraint(
-                item: willJoinButton,
-                attribute: .Left,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Left,
-                multiplier: 1.0,
-                constant:screenWidth/13.913
-            ),
-            // 横（固定）
-            NSLayoutConstraint(
-                item: willJoinButton,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: screenWidth/3.55
-            ),
-            
-            // 縦（固定）
-            NSLayoutConstraint(
-                item: self.willJoinButton,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: screenHeight/19
-                
-            )]
-        )
+        willJoinButton.layer.borderColor = UIColor.hexStr("#ff8010", alpha: 1.0).CGColor
+        willJoinButton.layer.borderWidth = 1.3
+        willJoinButton.font = UIFont.systemFontOfSize(16)
+        willJoinButton.textColor = UIColor.hexStr("#ffffff", alpha: 1.0)
+        kitView.addSubview(willJoinButton)
         
-        planedButton = UIButton()
-        planedButton.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
-        planedButton.setTitle("企画", forState: .Normal)
+        nonwillJoinButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/19))
+        nonwillJoinButton.layer.position = CGPoint(x: screenWidth/5, y: screenHeight/2)
+        nonwillJoinButton.text = "参加予定"
+        nonwillJoinButton.textAlignment = NSTextAlignment.Center
+        nonwillJoinButton.layer.position.x = 70
+        nonwillJoinButton.layer.position.y = screenHeight/15
+        nonwillJoinButton.layer.cornerRadius = 18.0
+        nonwillJoinButton.layer.masksToBounds = true
+        nonwillJoinButton.backgroundColor = UIColor.whiteColor()
+        nonwillJoinButton.font = UIFont.systemFontOfSize(16)
+        nonwillJoinButton.layer.borderColor = UIColor.hexStr("#ff8010", alpha: 1.0).CGColor
+        nonwillJoinButton.layer.borderWidth = 1.3
+        nonwillJoinButton.textColor = UIColor.hexStr("#ff8010", alpha: 1.0)
+        selectedKitView.addSubview(nonwillJoinButton)
+                planedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/19))
+        planedButton.text = "企画"
+        planedButton.textAlignment = NSTextAlignment.Center
+        planedButton.layer.position.y = screenHeight/15
+        planedButton.textColor = UIColor.hexStr("#ffffff", alpha: 1.0)
+        planedButton.backgroundColor = UIColor.hexStr("#ff8010", alpha: 1.0)
         planedButton.layer.cornerRadius = 18.0
         planedButton.layer.borderColor = UIColor.hexStr("#ff8010", alpha: 1.0).CGColor
         planedButton.layer.borderWidth = 1.3
         planedButton.layer.masksToBounds = true
-        planedButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        planedButton.setTitleColor(UIColor.hexStr("#ff8010", alpha: 1.0), forState: .Normal)
-        planedButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(planedButton)
-        planedButton.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addConstraints([
-            
-            // self.veiwの上から0pxの位置に配置
-            NSLayoutConstraint(
-                item: planedButton,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: profileLabel,
-                attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: screenWidth/20
-            ),
-            NSLayoutConstraint(
-                item: planedButton,
-                attribute: .Left,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Left,
-                multiplier: 1.0,
-                constant:screenWidth/2.7
-            ),
-            // 横（固定）
-            NSLayoutConstraint(
-                item: planedButton,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: screenWidth/3.55
-            ),
-            
-            // 縦（固定）
-            NSLayoutConstraint(
-                item: self.planedButton,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: screenHeight/19
-                
-            )]
-        )
-        
-        joinedButton = UIButton()
+        planedButton.font = UIFont.systemFontOfSize(16)
+        kuView.addSubview(planedButton)
+       
+        nonplanedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/19))
+        nonplanedButton.text = "企画"
+        nonplanedButton.textAlignment = NSTextAlignment.Center
+        nonplanedButton.layer.position.y = screenHeight/15
+        nonplanedButton.textColor = UIColor.hexStr("#ff8010", alpha: 1.0)
+        nonplanedButton.backgroundColor = UIColor.whiteColor()
+        nonplanedButton.layer.cornerRadius = 18.0
+        nonplanedButton.layer.borderColor = UIColor.hexStr("#ff8010", alpha: 1.0).CGColor
+        nonplanedButton.layer.borderWidth = 1.3
+        nonplanedButton.layer.masksToBounds = true
+        nonplanedButton.font = UIFont.systemFontOfSize(16)
+        selectedKuView.addSubview(nonplanedButton)
+
+        joinedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/19))
         joinedButton.layer.position = CGPoint(x: screenWidth/1.25, y: screenHeight/2)
-        joinedButton.setTitle("参加", forState: .Normal)
+        joinedButton.text = "参加"
+        joinedButton.textAlignment = NSTextAlignment.Center
+        joinedButton.layer.position.x = 45
+        joinedButton.layer.position.y = screenHeight/15
         joinedButton.layer.cornerRadius = 18.0
+        joinedButton.layer.masksToBounds = true
+        joinedButton.textColor = UIColor.hexStr("#ffffff", alpha: 1.0)
         joinedButton.layer.borderColor = UIColor.hexStr("#ff8010", alpha: 1.0).CGColor
         joinedButton.layer.borderWidth = 1.3
-        joinedButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-        joinedButton.setTitleColor(UIColor.hexStr("#ff8010", alpha: 1.0), forState: .Normal)
-        joinedButton.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(joinedButton)
-        joinedButton.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addConstraints([
-            
-            // self.veiwの上から0pxの位置に配置
-            NSLayoutConstraint(
-                item: joinedButton,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: profileLabel,
-                attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: screenWidth/20
-            ),
-            NSLayoutConstraint(
-                item: joinedButton,
-                attribute: .Left,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Left,
-                multiplier: 1.0,
-                constant:screenWidth/1.502
-            ),
-            // 横（固定）
-            NSLayoutConstraint(
-                item: joinedButton,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: screenWidth/3.55
-            ),
-            
-            // 縦（固定）
-            NSLayoutConstraint(
-                item: joinedButton,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: screenHeight/19
-                
-            )]
-        )
+        joinedButton.font = UIFont.systemFontOfSize(16)
+        joinedButton.backgroundColor = UIColor.hexStr("#ff8010", alpha: 1.0)
+        favoriteView.addSubview(joinedButton)
+        
+        nonjoinedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/19))
+        nonjoinedButton.text = "参加"
+        nonjoinedButton.textAlignment = NSTextAlignment.Center
+        nonjoinedButton.layer.position.x = 45
+        nonjoinedButton.layer.position.y = screenHeight/15
+        nonjoinedButton.layer.cornerRadius = 18.0
+        nonjoinedButton.layer.borderColor = UIColor.hexStr("#ff8010", alpha: 1.0).CGColor
+        nonjoinedButton.layer.borderWidth = 1.3
+        nonjoinedButton.layer.masksToBounds = true
+        nonjoinedButton.font = UIFont.systemFontOfSize(16)
+        nonjoinedButton.textColor = UIColor.hexStr("#ff8010", alpha: 1.0)
+        selectedFavoriteView.addSubview(nonjoinedButton)
+       
         
         
-        //2page
-        
-        willJoin2Button = UIButton(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/18))
-        willJoin2Button.layer.position = CGPoint(x: screenWidth+screenWidth/6, y: screenHeight/2)
-        willJoin2Button.setTitle("参加予定", forState: .Normal)
-        willJoin2Button.layer.cornerRadius = 18.0
-        willJoin2Button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        willJoin2Button.setTitleColor(UIColor.hexStr("#ff8010", alpha: 1.0), forState: .Normal)
-        willJoin2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(willJoin2Button)
-        
-        planed2Button = UIButton(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/18))
-        planed2Button.layer.position = CGPoint(x: screenWidth+screenWidth/2, y: screenHeight/2)
-        planed2Button.setTitle("企画", forState: .Normal)
-        planed2Button.layer.cornerRadius = 18.0
-        planed2Button.backgroundColor = UIColor.hexStr("#ff8010", alpha: 1.0)
-        planed2Button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        planed2Button.setTitleColor(UIColor.hexStr("#ffffff", alpha: 1.0), forState: .Normal)
-        planed2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(planed2Button)
-        
-        joined2Button = UIButton(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/18))
-        joined2Button.layer.position = CGPoint(x: screenWidth+screenWidth/1.3, y: screenHeight/2)
-        joined2Button.setTitle("参加", forState: .Normal)
-        joined2Button.layer.cornerRadius = 18.0
-        joined2Button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        joined2Button.setTitleColor(UIColor.hexStr("#ff8010", alpha: 1.0), forState: .Normal)
-        joined2Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(joined2Button)
-        
-        //3page
-        
-        willJoin3Button = UIButton(frame: CGRectMake(0,0,screenWidth/3.55,screenHeight/18))
-        willJoin3Button.layer.position = CGPoint(x: screenWidth*2+screenWidth/6, y: screenHeight/2)
-        willJoin3Button.setTitle("参加予定", forState: .Normal)
-        willJoin3Button.layer.cornerRadius = 18.0
-        willJoin3Button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        willJoin3Button.setTitleColor(UIColor.hexStr("#ff8010", alpha: 1.0), forState: .Normal)
-        willJoin3Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(willJoin3Button)
-        
-        planed3Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/18))
-        planed3Button.layer.position = CGPoint(x: screenWidth*2+screenWidth/2, y: screenHeight/2)
-        planed3Button.setTitle("企画", forState: .Normal)
-        planed3Button.layer.cornerRadius = 18.0
-        planed3Button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        planed3Button.setTitleColor(UIColor.hexStr("#ff8010", alpha: 1.0), forState: .Normal)
-        planed3Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(planed3Button)
-        
-        joined3Button = UIButton(frame: CGRectMake(0,0,screenWidth/3,screenHeight/18))
-        joined3Button.layer.position = CGPoint(x: screenWidth*2+screenWidth/1.3, y: screenHeight/2)
-        joined3Button.setTitle("参加", forState: .Normal)
-        joined3Button.layer.cornerRadius = 18.0
-        joined3Button.backgroundColor = UIColor.hexStr("#ff8010", alpha: 1.0)
-        joined3Button.titleLabel?.font = UIFont.systemFontOfSize(16)
-        joined3Button.setTitleColor(UIColor.hexStr("#ffffff", alpha: 1.0), forState: .Normal)
-        joined3Button.addTarget(self, action: "clickProjectButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(joined3Button)
-        horizontalSV = UIScrollView()
-        horizontalSV.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/1.2)
-        self.view.addSubview(horizontalSV)
-        horizontalSV.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addConstraints([
-            
-            // self.veiwの上から0pxの位置に配置
-            NSLayoutConstraint(
-                item: horizontalSV,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: willJoinButton,
-                attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: screenWidth/40.57
-            ),
-            // 横（固定）
-            NSLayoutConstraint(
-                item: horizontalSV,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: screenWidth*1.1
-            ),
-            NSLayoutConstraint(
-                item: horizontalSV,
-                attribute: .Left,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Left,
-                multiplier: 1.0,
-                constant: -10
-            ),
-            
-            // 縦（固定）
-            NSLayoutConstraint(
-                item: horizontalSV,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: screenHeight/1.6
-                
-            )]
-        )
-        horizontalSV.pagingEnabled = true
-        horizontalSV.directionalLockEnabled = true
-        horizontalSV.contentSize.width = view.frame.size.width * 3.0
-        horizontalSV.backgroundColor = UIColor.whiteColor()
-        horizontalSV.layer.borderColor = UIColor.hexStr("#1A1A1A", alpha: 1.0).CGColor
-        horizontalSV.layer.borderWidth = 1.5
-        for i in 0...2 {
-            let viewHeight = CGFloat(128)
-            
-            let x = view.frame.width * CGFloat(i)
-            let scrollview = UIScrollView(frame: CGRectMake(x, 0, view.frame.size.width, view.frame.size.height))
-            
-            horizontalSV.addSubview(scrollview)
-            
+        let url2 = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, url2)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    print("通信成功")
+                    
+                    let json = JSON(response.result.value!)
+                    debugPrint(response.result.value)
+                    
+                    let eventArray = json["events"].array! as Array
+                    let eventLastId = eventArray.count
+                    print("持ってきたもの:",eventArray)
+                    
+                    var myX :CGFloat = 6
+                    var myY :CGFloat = 6
+                    
+                    for event in eventArray.enumerate(){
+                        
+                        let sideDecide = event.index % 2
+                        if sideDecide == 0 {
+                            let eve = event.element as JSON
+                            let eventID = eve["event"]["id"].int
+                            let title = eve["event"]["title"].string! as String
+                            let dateName = eve["event"]["start_time"].string! as String
+                            let tagName : String? = { ()->(String) in
+                                if eve["event"]["category_tag"] == nil{
+                                    return ""
+                                }else {
+                                    return eve["event"]["category_tag"].string! as String
+                                }
+                            }()
+                            print(tagName)
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
+                            eventViewGenerate.mydelegate = self
+                            eventViewGenerate.layer.cornerRadius = 10
+                            self.kitVerticalSV.addSubview(eventViewGenerate)
+                            
+                            myX = 162
+                        }else{
+                            
+                            let eve = event.element as JSON
+                            let eventID = eve["event"]["id"].int
+                            let title = eve["event"]["title"].string! as String
+                            let dateName = eve["event"]["start_time"].string! as String
+                            let tagName : String? = { ()->(String) in
+                                if eve["event"]["category_tag"] == nil{
+                                    return ""
+                                }else {
+                                    return eve["event"]["category_tag"].string! as String
+                                }
+                            }()
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
+                            eventViewGenerate.mydelegate = self
+                            eventViewGenerate.layer.cornerRadius = 10
+                            self.kitVerticalSV.addSubview(eventViewGenerate)
+                            
+                            myX = 6
+                            myY += 206
+                        }
+                        
+                        self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                        self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
+                        self.kitVerticalSV.backgroundColor = UIColor.whiteColor()
+                        
+                        self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                        self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
+                        self.kuVerticalSV.backgroundColor = UIColor.whiteColor()
+                        
+                        self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
+                        self.favoriteVerticalSV.backgroundColor = UIColor.whiteColor()
+                        
+                        
+                    }
+                    let views = [
+                        ViewPagerElement2(selectedTitleView: self.kitView, noSelectedTitleView: self.selectedKitView, mainView: self.kitVerticalSV),
+                        ViewPagerElement2(selectedTitleView: self.kuView, noSelectedTitleView: self.selectedKuView, mainView: self.kuVerticalSV),
+                        ViewPagerElement2(selectedTitleView: self.favoriteView, noSelectedTitleView: self.selectedFavoriteView, mainView: self.favoriteVerticalSV)
+                    ]
+                    let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
+                    let tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: views)
+                    
+                    self.view.addSubview(tabView)
+                    tabView.translatesAutoresizingMaskIntoConstraints = false
+                    self.view.addConstraints([
+                        
+                        NSLayoutConstraint(
+                            item: tabView,
+                            attribute: NSLayoutAttribute.Top,
+                            relatedBy: NSLayoutRelation.Equal,
+                            toItem: self.profileLabel,
+                            attribute: NSLayoutAttribute.Bottom,
+                            multiplier: 1.0,
+                            constant: screenWidth/40.57
+                        ),
+                        // 横（固定）
+                        NSLayoutConstraint(
+                            item: tabView,
+                            attribute: .Width,
+                            relatedBy: .Equal,
+                            toItem: nil,
+                            attribute: .Width,
+                            multiplier: 1.0,
+                            constant: screenWidth*1.1
+                        ),
+                        
+                        // 縦（固定）
+                        NSLayoutConstraint(
+                            item: tabView,
+                            attribute: .Height,
+                            relatedBy: .Equal,
+                            toItem: nil,
+                            attribute: .Height,
+                            multiplier: 1.0,
+                            constant: screenHeight/1.6
+                            
+                        )]
+                    )
+                    
+                }else {
+                    print("通信失敗")
+                }
         }
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(animated: Bool) {
@@ -430,73 +361,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                 
         }
         
-        let url2 = "https://zerocafe.herokuapp.com/api/v1/events"
-        Alamofire.request(.GET, url2)
-            .responseJSON { response in
-                if response.result.isSuccess {
-                    let json = JSON(response.result.value!)
-                    let eventArray = json["events"].array! as Array
-                    let eventLastId = eventArray.count
-                    print("持ってきたもの:",eventArray)
-                    
-                    var myX :CGFloat = 6
-                    var myY :CGFloat = 60
-                    
-                    for events in eventArray.enumerate(){
-                        
-                        let sideDecide = events.index % 2
-                        if sideDecide == 0 {
-                            let eve = events.element as JSON
-                            let eventID = eve["event"]["id"].int
-                            let title = eve["event"]["title"].string! as String
-                            let dateName = eve["event"]["start_time"].string! as String
-                            let tagName : String? = { ()->(String) in
-                                if eve["event"]["category_tag"] == nil{
-                                    return ""
-                                }else {
-                                    return eve["event"]["category_tag"].string! as String
-                                }
-                            }()
-                            print(tagName)
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
-                            eventViewGenerate.mydelegate = self
-                            eventViewGenerate.layer.cornerRadius = 10
-                            eventViewGenerate.layer.borderColor = UIColor.hexStr("#1A1A1A", alpha: 1.0).CGColor
-                            eventViewGenerate.layer.borderWidth = 1.5
-                            self.horizontalSV.addSubview(eventViewGenerate)
-                            myX = 162
-                        }else{
-                            
-                            let eve = events.element as JSON
-                            let eventID = eve["event"]["id"].int
-                            let title = eve["event"]["title"].string! as String
-                            let dateName = eve["event"]["start_time"].string! as String
-                            let tagName : String? = { ()->(String) in
-                                if eve["event"]["category_tag"] == nil{
-                                    return ""
-                                }else {
-                                    return eve["event"]["category_tag"].string! as String
-                                }
-                            }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
-                            eventViewGenerate.mydelegate = self
-                            eventViewGenerate.layer.cornerRadius = 10
-                            eventViewGenerate.layer.borderColor = UIColor.hexStr("#1A1A1A", alpha: 1.0).CGColor
-                            eventViewGenerate.layer.borderWidth = 1.5
-                            self.horizontalSV.addSubview(eventViewGenerate)
-                            
-                            myX = 6
-                            myY += 212
-                        }
-                        
-                        self.horizontalSV.contentSize.height = CGFloat((eventArray.count / 2) * 212 + 150)
-                        
-                    }
-                    
-                }else {
-                    print("通信失敗")
-                }
-        }
+        
     }
     
     func pushMyButton(myEventID:Int) {
