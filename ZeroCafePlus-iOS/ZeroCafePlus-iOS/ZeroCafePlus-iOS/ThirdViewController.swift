@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate,ScheduleDelegate,CreateEventDetailDelegate{
+class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate,ScheduleDelegate,CreateEventDetailDelegate,FinalDecisionEventAlertDelegate{
     
     let scrollView = UIScrollView()
     var createEvetView :CreateEventView!
@@ -158,6 +158,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         })
         
         if let finalDecisionEventAlertVC = self.storyboard?.instantiateViewControllerWithIdentifier("FinalDecisionEventAlertVC") as? FinalDecisionEventAlertVC {
+            finalDecisionEventAlertVC.lastCheckEventDelegate = self
             finalDecisionEventAlertVC.eventName = eventName
             finalDecisionEventAlertVC.eventExposition = eventExposition
             finalDecisionEventAlertVC.eventGenre = eventGenre
@@ -175,6 +176,26 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         makeKeyAndVisible(lastCheckEventWindoew)
         self.lastCheckEventWindoew.makeKeyAndVisible()
     }
+    
+    func closeDecisionEventWindow(btnTag:Int){
+        UIView.animateWithDuration(0.2, animations: {
+            self.tabBarController?.tabBar.hidden = false
+        })
+        
+        self.view.userInteractionEnabled = true
+        self.view.backgroundColor = UIColor.whiteColor()
+        
+        switch btnTag{
+        case 1:
+            resignKeyWindow(lastCheckEventWindoew)
+        case 2:
+            resignKeyWindow(lastCheckEventWindoew)
+            pushCreateEventJson()
+        default:
+            break
+        }
+    }
+
     
     func pushCreateEventJson(){
     
@@ -209,10 +230,6 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
                 debugPrint(response.result.value)
         }
         
-        let subviews = self.view.subviews
-        for subview in subviews {
-            subview.removeFromSuperview()
-        }
         super.viewDidLoad()
     }
     
