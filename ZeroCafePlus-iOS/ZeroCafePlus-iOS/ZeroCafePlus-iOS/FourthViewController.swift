@@ -232,7 +232,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                 }
                             }()
                             print(tagName)
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
+                            let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             self.kitVerticalSV.addSubview(eventViewGenerate)
@@ -251,7 +251,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     return eve["event"]["category_tag"].string! as String
                                 }
                             }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
+                            let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
                             eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             self.kitVerticalSV.addSubview(eventViewGenerate)
