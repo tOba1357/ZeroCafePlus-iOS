@@ -178,45 +178,51 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
                 let startTimeData = self.startTimeTextField.text!.componentsSeparatedByString(":")
                 let endTimeData = self.endTimeTextField.text!.componentsSeparatedByString(":")
                 
-//                for aStartTimeStr in alreadyStertTimeData.enumerate() {
-//                    let aStartTimeData = aStartTimeStr.element.componentsSeparatedByString(":")
-//                    let aEndTimeData = alreadyEndTimeData[aStartTimeStr.index].componentsSeparatedByString(":")
-//                    if Int(aStartTimeData[0]) < Int(startTimeData[0]) || (Int(aStartTimeData[0]) == Int(startTimeData[0]) && Int(aStartTimeData[1]) <  Int(startTimeData[1])){
-//                        
-//                        if Int(startTimeData[0]) < Int(aEndTimeData[0]) || (Int(startTimeData[0]) == Int(aEndTimeData[0]) && Int(startTimeData[1]) < Int(aEndTimeData[1])){
-//                            timeBool = false
-//                        }
-//                    }
-//                    if Int(aStartTimeData[0]) < Int(endTimeData[0]) || (Int(aStartTimeData[0]) == Int(endTimeData[0]) && Int(aStartTimeData[1]) <  Int(endTimeData[1])){
-//                        
-//                        if Int(endTimeData[0]) > Int(aStartTimeData[0]) || (Int(endTimeData[0]) == Int(aStartTimeData[0]) && Int(endTimeData[1]) > Int(aStartTimeData[1])){
-//                            timeBool = false
-//                        }
-//                    }
-//                }
-                print(timeBool)
-                if timeBool{
-                    print("aaaaa")
-                    self.sheduleAlertView.createMyTimeSchedule(self.startTimeTextField.text!, endTime:self.endTimeTextField.text!)
+                
+                if Int(endTimeData[0]) <= Int(startTimeData[0]){
+                    timeBool = false
+                }
+                
+                for aStartTimeStr in alreadyStertTimeData.enumerate() {
+                    let aStartTimeData = aStartTimeStr.element.componentsSeparatedByString(":")
+                    let aEndTimeData = alreadyEndTimeData[aStartTimeStr.index].componentsSeparatedByString(":")
                     
-                    self.nextButton = UIButton(frame: CGRectMake(0, 0, 150, 50))
-                    self.nextButton.backgroundColor = UIColor.orangeColor()
-                    self.nextButton.tag = 2
-                    self.nextButton.setTitle("決定する", forState: UIControlState.Normal)
-                    self.nextButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-                    self.nextButton.addTarget(self, action: "closeAction:", forControlEvents: .TouchUpInside)
-                    self.nextButton.layer.position = CGPoint(x: self.view.frame.width/4*3, y:self.view.frame.size.height/10*9)
-                    self.view.addSubview(self.nextButton)
-                    
-                    self.closeButton.frame = CGRectMake(0, 0, 150, 50)
-                    self.closeButton.layer.position = CGPoint(x: self.view.frame.width/4, y:self.view.frame.size.height/10*9)
-                    self.view.addSubview(self.closeButton)
-                    
-                }else{
-                    
+                    //                    }|| (Int(aStartTimeData[0]) == Int(startTimeData[0]) && Int(aStartTimeData[1]) <  Int(startTimeData[1])){
+                    //
+                    //                        if Int(startTimeData[0]) < Int(aEndTimeData[0]) || (Int(startTimeData[0]) == Int(aEndTimeData[0]) && Int(startTimeData[1]) < Int(aEndTimeData[1])){
+                    //                            timeBool = false
+                    //                        }
+                    //                    }
+                    //                    if Int(aStartTimeData[0]) < Int(endTimeData[0]) || (Int(aStartTimeData[0]) == Int(endTimeData[0]) && Int(aStartTimeData[1]) <  Int(endTimeData[1])){
+                    //
+                    //                        if Int(endTimeData[0]) > Int(aStartTimeData[0]) || (Int(endTimeData[0]) == Int(aStartTimeData[0]) && Int(endTimeData[1]) > Int(aStartTimeData[1])){
+                    //                            timeBool = false
+                    //                        }
                 }
             }
+            print(timeBool)
+            if timeBool{
+                print("aaaaa")
+                self.sheduleAlertView.createMyTimeSchedule(self.startTimeTextField.text!, endTime:self.endTimeTextField.text!)
+                
+                self.nextButton = UIButton(frame: CGRectMake(0, 0, 150, 50))
+                self.nextButton.backgroundColor = UIColor.orangeColor()
+                self.nextButton.tag = 2
+                self.nextButton.setTitle("決定する", forState: UIControlState.Normal)
+                self.nextButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                self.nextButton.addTarget(self, action: "closeAction:", forControlEvents: .TouchUpInside)
+                self.nextButton.layer.position = CGPoint(x: self.view.frame.width/4*3, y:self.view.frame.size.height/10*9)
+                self.view.addSubview(self.nextButton)
+                
+                self.closeButton.frame = CGRectMake(0, 0, 150, 50)
+                self.closeButton.layer.position = CGPoint(x: self.view.frame.width/4, y:self.view.frame.size.height/10*9)
+                self.view.addSubview(self.closeButton)
+                
+            }else{
+                
+            }
         }
+        
         
         let cancelAction = UIAlertAction(title: "いいえ", style: .Cancel, handler:nil)
         
