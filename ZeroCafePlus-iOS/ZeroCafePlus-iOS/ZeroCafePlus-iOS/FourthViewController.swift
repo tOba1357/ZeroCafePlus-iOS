@@ -95,7 +95,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         
         editProfile = UIButton(frame: CGRectMake(0,0,screenWidth/5.2, screenHeight/23.6))
         editProfile.layer.position = CGPoint(x: screenWidth - screenWidth/7.95, y: screenHeight/15.35)
-        editProfile.setImage(UIImage(named: "profile_edit.png"), forState: .Normal)
+        editProfile.setImage(UIImage(named: "profile_edit .png"), forState: .Normal)
         editProfile.addTarget(self, action: "clickBarButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(editProfile)
         
