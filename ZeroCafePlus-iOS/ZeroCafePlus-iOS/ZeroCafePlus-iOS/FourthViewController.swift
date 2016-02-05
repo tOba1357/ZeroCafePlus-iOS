@@ -72,7 +72,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         profileLabel.text = ""
         profileLabel.numberOfLines = 0
         profileLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping
-        profileLabel.backgroundColor = UIColor.redColor()
+        profileLabel.backgroundColor = UIColor.whiteColor()
         profileLabel.font = UIFont.systemFontOfSize(16)
         self.view.addSubview(profileLabel)
         
@@ -134,7 +134,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         nonwillJoinButton.layer.position = CGPoint(x: screenWidth/5, y: screenHeight/2)
         nonwillJoinButton.text = "参加予定"
         nonwillJoinButton.textAlignment = NSTextAlignment.Center
-        nonwillJoinButton.layer.position.x = 70
+        nonwillJoinButton.layer.position.x = 65
         nonwillJoinButton.layer.position.y = screenHeight/15
         nonwillJoinButton.layer.cornerRadius = 18.0
         nonwillJoinButton.layer.masksToBounds = true
@@ -306,7 +306,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                             toItem: nil,
                             attribute: .Width,
                             multiplier: 1.0,
-                            constant: screenWidth*1.1
+                            constant: screenWidth
                         ),
                         
                         // 縦（固定）
