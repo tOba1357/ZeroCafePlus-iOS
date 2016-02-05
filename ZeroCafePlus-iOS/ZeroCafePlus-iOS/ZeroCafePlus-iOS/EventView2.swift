@@ -19,7 +19,7 @@ class EventView2: UIView {
         super.init(frame: frame)
         myEventID = id
         self.backgroundColor = UIColor.whiteColor()
-        self.layer.borderColor = UIColor.hexStr("#1A1A1A", alpha: 1.0).CGColor
+        self.layer.borderColor = UIColor.hexStr("#BABABA", alpha: 1.0).CGColor
         self.layer.borderWidth = 1.3
         
         let dateData = getDateTime(dateNameString)

@@ -349,6 +349,11 @@ class ForthViewController: UIViewController, EventViewDelegate {
                             self.profileLabel.frame = CGRectMake(0,0,screenWidth/1.2,screenHeight/4)
                             self.profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.7)
                             self.profileLabel.text = user["user"]["description"].string!
+                            let attributedText = NSMutableAttributedString(string: self.profileLabel.text!)
+                            let paragraphStyle = NSMutableParagraphStyle()
+                            paragraphStyle.lineSpacing = self.view.bounds.height/90
+                            attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+                            self.profileLabel.attributedText = attributedText
                             self.profileLabel.sizeToFit()
                             self.nameLabel.text = self.user_name
                         }
