@@ -38,6 +38,8 @@ class EventsAttendViewController: UIViewController {
     private var genreImg:UIImage!
     var window :UIWindow!
     
+    var EventGenre: Int!
+    
     var getID: Int!
     
     private var starImage1: UIImage!
@@ -46,18 +48,19 @@ class EventsAttendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         starImage1 =  CommonFunction().resizingImage(imageName: "star.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)     //UIImage(named: "star.png")
-         starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.cyanColor()
+        starImage1 =  CommonFunction().resizingImage(imageName: "star.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)     //UIImage(named: "star.png")
+        starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
         
         
-
+//        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
+        
+        
+        
         
         
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
-     
+        
         
         myScrollView = UIScrollView()
         myScrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
@@ -332,20 +335,9 @@ class EventsAttendViewController: UIViewController {
         
         
         
-        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-        self.window = UIWindow()
-        self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
-        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
-        self.window.backgroundColor = UIColor.clearColor()
-        self.window.makeKeyWindow()
-        self.window.makeKeyAndVisible()
         
         
-        let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
-        imgView.image = self.genreImg
-        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
-        self.window.addSubview(imgView)
-
+       
         
         
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
@@ -362,6 +354,52 @@ class EventsAttendViewController: UIViewController {
                         print("成功")
                         print(events["event"])
                         print(self.getID)
+                        
+                        self.EventGenre = events["event"]["genre"].int! as Int
+                        if self.EventGenre == 0 {
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "syukatu.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            
+
+                        } else if self.EventGenre == 1 {
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#AF2E84", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+
+                        } else if self.EventGenre == 2 {
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#22B573", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+
+                        } else if self.EventGenre == 3 {
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "sakuru.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+
+                        } else if self.EventGenre == 4 {
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+
+                        } else if self.EventGenre == 5 {
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("##EFEDE8", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+
+                        } else if self.EventGenre == 6 {
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFDA3E", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+
+                        }
+
+                        //        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                        self.window = UIWindow()
+                        self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
+                        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
+                        self.window.backgroundColor = UIColor.clearColor()
+                        self.window.makeKeyWindow()
+                        self.window.makeKeyAndVisible()
+                        let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
+                        imgView.image = self.genreImg
+                        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
+                        self.window.addSubview(imgView)
+                        
+
                         
                         // タイトル
                         self.name.text = events["event"]["title"].string! as String
@@ -398,7 +436,7 @@ class EventsAttendViewController: UIViewController {
                         paragraphStyle.lineSpacing = self.view.bounds.height/25.24
                         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
                         self.content.attributedText = attributedText
-
+                        
                         self.content.numberOfLines = 0
                         self.content.sizeToFit()
                         
@@ -427,18 +465,17 @@ class EventsAttendViewController: UIViewController {
                             
                             
                         }
-                     
+                        
+                        
+                        
                         
                         self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.sankaButton.bounds.height + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
-
-                        
-                        
-
                         
                         
                         
                     }
                 }
+                
         }
         
         
@@ -447,9 +484,6 @@ class EventsAttendViewController: UIViewController {
     
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     func onClickSankaButton(sender: UIButton){
         let EventDecideViewController = EventsDecideViewController()
@@ -459,20 +493,6 @@ class EventsAttendViewController: UIViewController {
         
     }
     
-    
-    func onClickStarButton(sender: UIButton){
-        
-        starSelectedButton = UIButton()
-        starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
-        starSelectedButton.setBackgroundImage(starImage2, forState: UIControlState.Normal);
-        starSelectedButton.setTitle("", forState: UIControlState.Normal)
-        starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-        starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
-
-        
-    }
     
     func onClickStarSelectedButton(sender: UIButton){
         
@@ -489,6 +509,22 @@ class EventsAttendViewController: UIViewController {
     }
 
     
+    func onClickStarButton(sender: UIButton){
+        
+        starSelectedButton = UIButton()
+        starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+        starSelectedButton.setBackgroundImage(starImage2, forState: UIControlState.Normal);
+        starSelectedButton.setTitle("", forState: UIControlState.Normal)
+        starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+        starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
+        
+    }
+    
+    
+    
+    
     override func viewDidDisappear(animated: Bool) {
         genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.bounds.width/100000000, h: self.view.bounds.height/100000)
         window = UIWindow()
@@ -504,7 +540,7 @@ class EventsAttendViewController: UIViewController {
         //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
         window.addSubview(imgView)
         
-
+        
     }
     
     //    func onClickreservedButton(sender: UIButton){
@@ -528,8 +564,14 @@ class EventsAttendViewController: UIViewController {
         let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
         self.presentViewController(activityVC, animated: true, completion: nil)
-        
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
     
 }
+
+
+
