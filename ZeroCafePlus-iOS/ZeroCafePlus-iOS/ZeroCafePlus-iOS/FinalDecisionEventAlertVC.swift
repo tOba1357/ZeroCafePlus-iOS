@@ -126,15 +126,15 @@ class FinalDecisionEventAlertVC: UIViewController, UIScrollViewDelegate {
         switch eventGenre{
         case 5:
             eventGenreStr = "趣味"
-        case 2:
+        case 1:
             eventGenreStr = "勉強会"
-        case 4:
+        case 3:
             eventGenreStr = "サークル"
-        case 9:
+        case 4:
             eventGenreStr = "大会"
         case 6:
             eventGenreStr = "読書会"
-        case 3:
+        case 2:
             eventGenreStr = "パーティー"
         default:
             break
