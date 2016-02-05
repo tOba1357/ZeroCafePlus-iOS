@@ -26,10 +26,10 @@ class EventView :UIView{
         let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,70))
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
-        let dateName: UILabel = UILabel(frame: CGRectMake(10,120,130,50))
+        let dateName: UILabel = UILabel(frame: CGRectMake(10,110,130,50))
         dateName.numberOfLines = 2
         dateName.textAlignment = NSTextAlignment.Center
-        let tagName: UILabel = UILabel(frame: CGRectMake(10,150,130,70))
+        let tagName: UILabel = UILabel(frame: CGRectMake(10,140,130,70))
         tagName.numberOfLines = 2
         tagName.textAlignment = NSTextAlignment.Center
         let touchButton: UIButton = UIButton(frame: CGRectMake(10,10,130,180))
