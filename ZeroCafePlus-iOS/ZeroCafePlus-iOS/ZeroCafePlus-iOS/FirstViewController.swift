@@ -189,7 +189,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                         self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
 //                        self.view.addSubview(self.horizontalSV)
-//                        self.horizontalSV.addSubview(self.verticalSV)
+//                        self.horizontalSV.addSubview(self.kitVerticalSV)
                         
                         self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
                         self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))

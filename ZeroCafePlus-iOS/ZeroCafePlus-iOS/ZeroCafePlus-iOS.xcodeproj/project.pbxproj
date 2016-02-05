@@ -70,6 +70,7 @@
 		D76B28331C60A1F80090DB73 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = D76B282A1C60A1F80090DB73 /* star.png */; };
 		D76B28421C63D60C0090DB73 /* ViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B28411C63D60C0090DB73 /* ViewPager.swift */; };
 		D76B28461C63D6750090DB73 /* ViewPagerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B28451C63D6750090DB73 /* ViewPagerElement.swift */; };
+		D76B284A1C6468510090DB73 /* ViewPagerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B28491C6468510090DB73 /* ViewPagerTab.swift */; };
 		D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */; };
 		D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */; };
 		D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A626511C1AB359002DCEC6 /* SecondViewController.swift */; };
@@ -181,6 +182,7 @@
 		D76B282A1C60A1F80090DB73 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = imageFile/star.png; sourceTree = "<group>"; };
 		D76B28411C63D60C0090DB73 /* ViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPager.swift; sourceTree = "<group>"; };
 		D76B28451C63D6750090DB73 /* ViewPagerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerElement.swift; sourceTree = "<group>"; };
+		D76B28491C6468510090DB73 /* ViewPagerTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerTab.swift; sourceTree = "<group>"; };
 		D7A6264A1C1AB359002DCEC6 /* ZeroCafePlus-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZeroCafePlus-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				BABD6E351C61F4010018F456 /* CommonFunction.swift */,
 				D76B28411C63D60C0090DB73 /* ViewPager.swift */,
 				D76B28451C63D6750090DB73 /* ViewPagerElement.swift */,
+				D76B28491C6468510090DB73 /* ViewPagerTab.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */,
 				D76B28421C63D60C0090DB73 /* ViewPager.swift in Sources */,
 				BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */,
+				D76B284A1C6468510090DB73 /* ViewPagerTab.swift in Sources */,
 				D7A626801C1AD3D6002DCEC6 /* FourthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
