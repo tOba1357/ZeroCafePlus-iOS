@@ -536,7 +536,7 @@
 				TargetAttributes = {
 					D7A626491C1AB359002DCEC6 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = H3ES9TF7V7;
+						DevelopmentTeam = 2Q7SS95398;
 					};
 					D7A6265F1C1AB359002DCEC6 = {
 						CreatedOnToolsVersion = 7.1;
@@ -889,7 +889,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ZeroCafePlus-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myname.ZeroCafePlus-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "test.ZeroCafePlus-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/ZeroCafePlus-iOS/ZeroCafePlus-iOS-Bridging-Header.h";
@@ -906,7 +906,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "ZeroCafePlus-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myname.ZeroCafePlus-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "test.ZeroCafePlus-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/ZeroCafePlus-iOS/ZeroCafePlus-iOS-Bridging-Header.h";
