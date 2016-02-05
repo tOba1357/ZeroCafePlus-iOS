@@ -26,7 +26,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
     private var kitVerticalSV: UIScrollView!
     private var kuVerticalSV: UIScrollView!
     private var favoriteVerticalSV: UIScrollView!
-    private var horizontalSV: UIScrollView!
+//    private var horizontalSV: UIScrollView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -54,18 +54,19 @@ class FirstViewController: UIViewController, EventViewDelegate {
         
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
-
+        
+        self.view.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
 
         kitVerticalSV = UIScrollView()
         kuVerticalSV = UIScrollView()
         favoriteVerticalSV = UIScrollView()
-        horizontalSV = UIScrollView()
-        
-        horizontalSV.pagingEnabled = true
-        horizontalSV.frame = CGRectMake(0, screenHeight/11, self.view.frame.size.width, self.view.frame.size.height)
-        horizontalSV.contentSize = CGSizeMake(self.view.frame.size.width * 3.0,self.view.frame.size.height)
-        horizontalSV.contentOffset = CGPointMake(0, screenHeight/11)
-        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+//        horizontalSV = UIScrollView()
+//        
+//        horizontalSV.pagingEnabled = true
+//        horizontalSV.frame = CGRectMake(0, screenHeight/11, self.view.frame.size.width, self.view.frame.size.height)
+//        horizontalSV.contentSize = CGSizeMake(self.view.frame.size.width * 3.0,self.view.frame.size.height)
+//        horizontalSV.contentOffset = CGPointMake(0, screenHeight/11)
+//        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
         kitVerticalSV.pagingEnabled = false
         kuVerticalSV.pagingEnabled = false
@@ -183,21 +184,20 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             myY += 206
                         }
                         
-//                        self.verticalSV.contentSize = CGSizeMake(0, CGFloat((eventArray.count / 2) * 212 + 150))
                         self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
                         self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                         self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
 //                        self.view.addSubview(self.horizontalSV)
 //                        self.horizontalSV.addSubview(self.kitVerticalSV)
                         
                         self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
                         self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
                         self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                         
                         self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 77))
+                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
                         self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
                         self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                         

@@ -365,6 +365,18 @@
 			name = image;
 			sourceTree = "<group>";
 		};
+		D76B28511C6470F40090DB73 /* FirstView_Detail */ = {
+			isa = PBXGroup;
+			children = (
+				D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */,
+				D76B284D1C6469050090DB73 /* EventView.swift */,
+				D76B28451C63D6750090DB73 /* ViewPagerElement.swift */,
+				D76B28411C63D60C0090DB73 /* ViewPager.swift */,
+				D76B28491C6468510090DB73 /* ViewPagerTab.swift */,
+			);
+			name = FirstView_Detail;
+			sourceTree = "<group>";
+		};
 		D7A626411C1AB359002DCEC6 = {
 			isa = PBXGroup;
 			children = (
@@ -394,7 +406,7 @@
 				BA31F87C1C61275E00CB0AF7 /* ThirdView_Detail */,
 				D76B28341C60A2110090DB73 /* image */,
 				BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */,
-				D7A6264F1C1AB359002DCEC6 /* FirstViewController.swift */,
+				D76B28511C6470F40090DB73 /* FirstView_Detail */,
 				D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */,
 				D7A626511C1AB359002DCEC6 /* SecondViewController.swift */,
 				D7A6267D1C1AD395002DCEC6 /* ThirdViewController.swift */,
@@ -408,10 +420,6 @@
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
 				BABD6E351C61F4010018F456 /* CommonFunction.swift */,
-				D76B28411C63D60C0090DB73 /* ViewPager.swift */,
-				D76B28451C63D6750090DB73 /* ViewPagerElement.swift */,
-				D76B28491C6468510090DB73 /* ViewPagerTab.swift */,
-				D76B284D1C6469050090DB73 /* EventView.swift */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";
