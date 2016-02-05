@@ -24,14 +24,17 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     private var line: UILabel!
     private var sankaButton: UIButton!
     
+    private var genreImg:UIImage!
+    var window :UIWindow!
+
+    
     var MygetID: Int!
+    var Myrow: Int?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(myValues[3])
-        
+                
         self.title = ""
         
         self.view.backgroundColor = UIColor.whiteColor()
@@ -64,6 +67,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         addPicker.delegate = self
         addPicker.dataSource = self
         addPicker.showsSelectionIndicator = true
+        addPicker.selectRow(0, inComponent: 0, animated: false);
         
         
         addButton = UITextField(frame: CGRectMake(self.view.bounds.width/1.3, self.view.bounds.height/4.75, self.view.bounds.width/9.14, self.view.bounds.height/37.86))
@@ -130,6 +134,8 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     
+    
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -142,29 +148,45 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         return myValues[row] as? String
     }
     
+    
+    
+    
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         addButton.text = myValues[row] as? String;
+        print("row: \(row)")
+        print("value: \(myValues[row])")
+        Myrow = row
     }
     
     
-    /*
-    pickerが選択された際に呼ばれるデリゲートメソッド.
-    */
-    //    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    //        print("row: \(row)")
-    //        print("value: \(myValues[row])")
-    //    }
     
     func onClick(sender: UIBarButtonItem) {
         addButton.resignFirstResponder()
     }
     
+    
+    
     override func viewWillAppear(animated: Bool) {
+        
+        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+        self.window = UIWindow()
+        self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
+        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
+        self.window.backgroundColor = UIColor.clearColor()
+        self.window.makeKeyWindow()
+        self.window.makeKeyAndVisible()
+        
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
+        imgView.image = self.genreImg
+        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
+        self.window.addSubview(imgView)
+
+        
+        
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
-                debugPrint(response.result.value)
-                
                 let json = JSON(response.result.value!)
                 let eventArray = json["events"].array! as Array
                 for events in eventArray {
@@ -179,8 +201,34 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.bounds.width/100000000, h: self.view.bounds.height/100000)
+        window = UIWindow()
+        window.frame = CGRectMake(0, 0, 0, 0)
+        window.layer.position = CGPoint(x: 0, y:0)
+        window.backgroundColor = UIColor.clearColor()
+        window.makeKeyWindow()
+        window.makeKeyAndVisible()
+        
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+        imgView.image = genreImg
+        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
+        window.addSubview(imgView)
+        
+        
+    }
+
+    
     
     func onClickMyButton(sender: UIButton){
+        
+        if let varow: Int = Myrow {
+            Myrow = varow
+        } else {
+            Myrow = 0
+        }
+
         
         let headers = [
             "Content-Type": "application/json",
@@ -191,7 +239,8 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         [
             "ticket": [
                 "user_id": 2,
-                "event_id": 1
+                "event_id": MygetID,
+                "other_participant": Myrow
                 
                 
             ]
