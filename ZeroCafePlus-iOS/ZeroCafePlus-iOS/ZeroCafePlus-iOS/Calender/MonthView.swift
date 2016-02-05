@@ -149,21 +149,21 @@ class MonthView: UIView ,DayViewDelegate{
                                         eventBool = false
                                     }
                                 }
-                                    let week:Int    = self.getWeek(year,month: month,day:i+1)
-                                    let x:CGFloat       = CGFloat(weekday - 1 ) * (self.dayWidth/2)
-                                    let y:CGFloat       = CGFloat(week-1) * self.dayHeight/2
-                                    if (eventBool){
-                                        let cirView = UIView(frame: CGRectMake(x,y,self.frame.width/30,self.frame.height/30))
-                                        self.addSubview(cirView)
-                                        
-                                        let cirShapeLayer = CAShapeLayer()
-                                        cirShapeLayer.fillColor = CommonFunction().UIColorFromRGB(rgbValue: 0x33CCFF).CGColor
-                                        cirShapeLayer.path = UIBezierPath(ovalInRect: CGRect(x: x+self.frame.width/60, y: y+self.frame.width/60, width: self.frame.width/30, height: self.frame.height/30)).CGPath
-                                        cirView.layer.addSublayer(cirShapeLayer)
-                                    }
-                                    weekday++
-                                    if weekday > 7 {
-                                        weekday = 1
+                                let week:Int    = self.getWeek(year,month: month,day:i+1)
+                                let x:CGFloat       = CGFloat(weekday - 1 ) * (self.dayWidth/2)
+                                let y:CGFloat       = CGFloat(week-1) * self.dayHeight/2
+                                if (eventBool){
+                                    let cirView = UIView(frame: CGRectMake(x,y,self.frame.width/30,self.frame.height/30))
+                                    self.addSubview(cirView)
+                                    
+                                    let cirShapeLayer = CAShapeLayer()
+                                    cirShapeLayer.fillColor = CommonFunction().UIColorFromRGB(rgbValue: 0x33CCFF).CGColor
+                                    cirShapeLayer.path = UIBezierPath(ovalInRect: CGRect(x: x+self.frame.width/60, y: y+self.frame.width/60, width: self.frame.width/30, height: self.frame.height/30)).CGPath
+                                    cirView.layer.addSublayer(cirShapeLayer)
+                                }
+                                weekday++
+                                if weekday > 7 {
+                                    weekday = 1
                                 }
                             }
                         }

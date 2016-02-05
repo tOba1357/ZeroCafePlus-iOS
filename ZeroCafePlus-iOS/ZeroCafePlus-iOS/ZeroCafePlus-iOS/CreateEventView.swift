@@ -136,7 +136,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         genreStudyBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genreStudyBtn.setImage(studyImg, forState: .Normal)
-        genreStudyBtn.tag = 2
+        genreStudyBtn.tag = 1
         genreStudyBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
         
         let studyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
@@ -149,7 +149,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         genreSakuruBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
-        genreSakuruBtn.tag = 4
+        genreSakuruBtn.tag = 3
         genreSakuruBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
         
         let sakuruLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
@@ -162,7 +162,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         genreTournamentBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
-        genreTournamentBtn.tag = 9
+        genreTournamentBtn.tag = 4
         genreTournamentBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
         
         let tournamentLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
@@ -188,7 +188,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         genrePartyBtn = UIButton(frame: CGRectMake(genreBtnPos,self.frame.size.height*(748/1136),(self.frame.size.width-self.frame.size.width*(100/1136))/6,(self.frame.size.width-self.frame.size.width*(100/1136))/6))
         genrePartyBtn.setImage(partyImg, forState: .Normal)
-        genrePartyBtn.tag = 3
+        genrePartyBtn.tag = 2
         genrePartyBtn.addTarget(self, action: "clickGenre:", forControlEvents:.TouchUpInside)
         
         let partyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
@@ -240,7 +240,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
             genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
             genreReadBookBtn.setImage(readBookImg, forState: .Normal)
             genrePartyBtn.setImage(partyImg, forState: .Normal)
-        case 2:
+        case 1:
             genreNum = sender.tag
             genreHobyBtn.setImage(hobyImg, forState: .Normal)
             genreStudyBtn.setImage(study_sImg, forState: .Normal)
@@ -248,7 +248,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
             genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
             genreReadBookBtn.setImage(readBookImg, forState: .Normal)
             genrePartyBtn.setImage(partyImg, forState: .Normal)
-        case 4:
+        case 3:
             genreNum = sender.tag
             genreHobyBtn.setImage(hobyImg, forState: .Normal)
             genreStudyBtn.setImage(studyImg, forState: .Normal)
@@ -256,7 +256,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
             genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
             genreReadBookBtn.setImage(readBookImg, forState: .Normal)
             genrePartyBtn.setImage(partyImg, forState: .Normal)
-        case 9:
+        case 4:
             genreNum = sender.tag
             genreHobyBtn.setImage(hobyImg, forState: .Normal)
             genreStudyBtn.setImage(studyImg, forState: .Normal)
@@ -272,7 +272,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
             genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
             genreReadBookBtn.setImage(readBook_sImg, forState: .Normal)
             genrePartyBtn.setImage(partyImg, forState: .Normal)
-        case 3:
+        case 2:
             genreNum = sender.tag
             genreHobyBtn.setImage(hobyImg, forState: .Normal)
             genreStudyBtn.setImage(studyImg, forState: .Normal)
