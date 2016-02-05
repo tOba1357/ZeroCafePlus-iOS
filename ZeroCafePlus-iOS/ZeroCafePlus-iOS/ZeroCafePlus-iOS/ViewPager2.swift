@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ViewPager2: UIView, UIScrollViewDelegate {
+class ViewPager2: UIView, UIScrollViewDelegate, ViewPagerTabDelegate {
     
     
     private let tabButtonView = UIView()
     private let scrollView = UIScrollView()
     private let uiPageController = UIPageControl()
     private var tabHeigh:CGFloat = 0
+    private var viewPageTab: ViewPagerTab!
     private var views: [ViewPagerElement2] = []
     private var viewNum = 3
     private var selectView = 0
@@ -117,6 +118,10 @@ class ViewPager2: UIView, UIScrollViewDelegate {
             subview.removeFromSuperview()
         }
     }
+    func onClickTabButton(index: Int) {
+        self.changePage(index)
+    }
+
 
     /*
     // Only override drawRect: if you perform custom drawing.
