@@ -30,4 +30,51 @@ class CommonFunction: AnyObject {
             alpha: CGFloat(1.0)
         )
     }
+    
+    //月の最終日の取得
+    func getLastDay(var year:Int,var month:Int) -> Int?{
+        let dateFormatter:NSDateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy/MM/dd";
+        if month == 12 {
+            month = 0
+            year++
+        }
+        let targetDate:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/01",year,month+1));
+        if targetDate != nil {
+            //To calculate the one day before from the beginning of the month, get the date of the end of the month
+            let orgDate = NSDate(timeInterval:(24*60*60)*(-1), sinceDate: targetDate!)
+            let str:String = dateFormatter.stringFromDate(orgDate)
+            return Int((str as NSString).lastPathComponent);
+        }
+        
+        return nil;
+    }
+    
+    
+    //第何週の取得
+    func getWeek(year:Int,month:Int,day:Int) ->Int{
+        let dateFormatter:NSDateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy/MM/dd";
+        let date:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,day));
+        if date != nil {
+            let calendar:NSCalendar = NSCalendar.currentCalendar()
+            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekOfMonthCalendarUnit, fromDate: date!)
+            return dateComp.weekOfMonth;
+        }
+        return 0;
+    }
+    
+    //曜日の取得
+    func getWeekDay(year:Int,month:Int,day:Int) ->Int{
+        let dateFormatter:NSDateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy/MM/dd";
+        let date:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,day));
+        if date != nil {
+            let calendar:NSCalendar = NSCalendar.currentCalendar()
+            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekdayCalendarUnit, fromDate: date!)
+            return dateComp.weekday;
+        }
+        return 0
+    }
+
 }

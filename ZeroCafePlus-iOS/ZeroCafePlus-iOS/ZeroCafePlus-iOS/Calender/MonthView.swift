@@ -40,14 +40,14 @@ class MonthView: UIView ,DayViewDelegate{
             }
         }
         
-        let day:Int? = self.getLastDay(year,month:month);
+        let day:Int? = CommonFunction().getLastDay(year,month:month);
         dayWidth = frame.size.width / 7.0
         dayHeight = frame.size.width / 6.0
         if day != nil {
             //初日の曜日を取得
-            var weekday:Int = self.getWeekDay(year,month: month,day:1)
+            var weekday:Int = CommonFunction().getWeekDay(year,month: month,day:1)
             for var i:Int = 0; i < day!;i++ {
-                let week:Int    = self.getWeek(year,month: month,day:i+1)
+                let week:Int    = CommonFunction().getWeek(year,month: month,day:i+1)
                 let x:CGFloat       = CGFloat(weekday - 1 ) * (dayWidth)
                 let y:CGFloat       = CGFloat(week-1) * dayHeight
                 let frame:CGRect = CGRectMake(x,y,dayWidth,dayHeight)
@@ -77,50 +77,6 @@ class MonthView: UIView ,DayViewDelegate{
         checkMoreEvents(year,month: month)
     }
     
-    //The acquisition of the last day of the month
-    func getLastDay(var year:Int,var month:Int) -> Int?{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        if month == 12 {
-            month = 0
-            year++
-        }
-        let targetDate:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/01",year,month+1));
-        if targetDate != nil {
-            //To calculate the one day before from the beginning of the month, get the date of the end of the month
-            let orgDate = NSDate(timeInterval:(24*60*60)*(-1), sinceDate: targetDate!)
-            let str:String = dateFormatter.stringFromDate(orgDate)
-            return Int((str as NSString).lastPathComponent);
-        }
-        
-        return nil;
-    }
-    
-    //曜日の取得
-    func getWeek(year:Int,month:Int,day:Int) ->Int{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        let date:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,day));
-        if date != nil {
-            let calendar:NSCalendar = NSCalendar.currentCalendar()
-            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekOfMonthCalendarUnit, fromDate: date!)
-            return dateComp.weekOfMonth;
-        }
-        return 0;
-    }
-    
-    //第何週の取得
-    func getWeekDay(year:Int,month:Int,day:Int) ->Int{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        let date:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,day));
-        if date != nil {
-            let calendar:NSCalendar = NSCalendar.currentCalendar()
-            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekdayCalendarUnit, fromDate: date!)
-            return dateComp.weekday;
-        }
-        return 0
-    }
     
     func checkMoreEvents(year:Int,month:Int){
         var eveDateData:[String] = dateData()
@@ -138,9 +94,9 @@ class MonthView: UIView ,DayViewDelegate{
                             let moreDateData = startTimeArray[0].componentsSeparatedByString("-")
                             listeventsData.append(moreDateData[2])
                         }
-                        let day:Int? = self.getLastDay(year,month:month)
+                        let day:Int? = CommonFunction().getLastDay(year,month:month)
                         if day != nil {
-                            var weekday:Int = self.getWeekDay(year,month: month,day:1)
+                            var weekday:Int = CommonFunction().getWeekDay(year,month: month,day:1)
                             for var i:Int = 0; i < day!;i++ {
                                 var eventBool = true
                                 for listevent in listeventsData{
@@ -151,7 +107,7 @@ class MonthView: UIView ,DayViewDelegate{
                                     }
                                     
                                 }
-                                let week:Int    = self.getWeek(year,month: month,day:i+1)
+                                let week:Int    = CommonFunction().getWeek(year,month: month,day:i+1)
                                 let x:CGFloat       = CGFloat(weekday-1) * (self.dayWidth/2)
                                 let y:CGFloat       = CGFloat(week-1) * self.dayHeight/2
                                 if weekday == 1{
