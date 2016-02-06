@@ -15,8 +15,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     var createEvetView :CreateEventView!
     var checkCalenderView :CheckCalenderView!
     var createEventDetailView :CreateEventDetailView!
-    private var scheduleWindow : UIWindow!
-    private var lastCheckEventWindoew : UIWindow!
+    private var alertWindow : UIWindow!
     
     let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
     var displayWidth: CGFloat!
@@ -32,6 +31,8 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     var eventDiveJoin:Bool!
     var eventMenberNum:Int!
     var eventTag:String!
+    
+    var waitAC:UIAlertController!
     
     let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
     
@@ -83,12 +84,12 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         self.view.backgroundColor = UIColor.grayColor()
         self.view.userInteractionEnabled = false
 
-        scheduleWindow = UIWindow()
-        scheduleWindow.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
-        scheduleWindow.backgroundColor = UIColor.grayColor()
-        scheduleWindow.layer.masksToBounds = true
-        scheduleWindow.layer.cornerRadius = 15
-        scheduleWindow.hidden = false
+        alertWindow = UIWindow()
+        alertWindow.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
+        alertWindow.backgroundColor = UIColor.grayColor()
+        alertWindow.layer.masksToBounds = true
+        alertWindow.layer.cornerRadius = 15
+        alertWindow.hidden = false
         UIView.animateWithDuration(0.2, animations: {
             self.tabBarController?.tabBar.hidden = true
         })
@@ -96,11 +97,11 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC {
             scheduleVC.getDate = eventDate
             scheduleVC.scheduleDelegate = self
-            scheduleWindow.rootViewController = scheduleVC
+            alertWindow.rootViewController = scheduleVC
         }
         
-        makeKeyAndVisible(scheduleWindow)
-        self.scheduleWindow.makeKeyAndVisible()
+        makeKeyAndVisible(alertWindow)
+        self.alertWindow.makeKeyAndVisible()
     }
     
     func createMyTime(startTimeStr:String,endTimeStr:String){
@@ -118,9 +119,9 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
 
         switch btnTag{
         case 1:
-            resignKeyWindow(scheduleWindow)
+            resignKeyWindow(alertWindow)
         case 2:
-            resignKeyWindow(scheduleWindow)
+            resignKeyWindow(alertWindow)
             nextScroll(self.view.frame.size.height,count: 3)
             createEventDetailView = CreateEventDetailView(frame: CGRectMake(self.view.frame.size.width*(46/640), displayHeight*2, scrollView.frame.size.width-self.view.frame.size.width*(92/640),displayHeight))
             createEventDetailView.createEventDetailDelegate = self
@@ -146,18 +147,19 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         self.view.backgroundColor = UIColor.grayColor()
         self.view.userInteractionEnabled = false
 
-        lastCheckEventWindoew = UIWindow()
-        lastCheckEventWindoew.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
-        lastCheckEventWindoew.backgroundColor = UIColor.grayColor()
-        lastCheckEventWindoew.layer.masksToBounds = true
-        lastCheckEventWindoew.layer.cornerRadius = 15
-        lastCheckEventWindoew.hidden = false
+        alertWindow = UIWindow()
+        alertWindow.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
+        alertWindow.backgroundColor = UIColor.grayColor()
+        alertWindow.layer.masksToBounds = true
+        alertWindow.layer.cornerRadius = 15
+        alertWindow.hidden = false
         
         UIView.animateWithDuration(0.2, animations: {
             self.tabBarController?.tabBar.hidden = true
         })
         
         if let finalDecisionEventAlertVC = self.storyboard?.instantiateViewControllerWithIdentifier("FinalDecisionEventAlertVC") as? FinalDecisionEventAlertVC {
+            
             finalDecisionEventAlertVC.lastCheckEventDelegate = self
             finalDecisionEventAlertVC.eventName = eventName
             finalDecisionEventAlertVC.eventExposition = eventExposition
@@ -170,11 +172,11 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
             finalDecisionEventAlertVC.eventMenberNum = eventMenberNum
             finalDecisionEventAlertVC.eventTag = eventTag
 
-            lastCheckEventWindoew.rootViewController = finalDecisionEventAlertVC
+            alertWindow.rootViewController = finalDecisionEventAlertVC
         }
         
-        makeKeyAndVisible(lastCheckEventWindoew)
-        self.lastCheckEventWindoew.makeKeyAndVisible()
+        makeKeyAndVisible(alertWindow)
+        self.alertWindow.makeKeyAndVisible()
     }
     
     func closeDecisionEventWindow(btnTag:Int){
@@ -187,9 +189,9 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         
         switch btnTag{
         case 1:
-            resignKeyWindow(lastCheckEventWindoew)
+            resignKeyWindow(alertWindow)
         case 2:
-            resignKeyWindow(lastCheckEventWindoew)
+            resignKeyWindow(alertWindow)
             pushCreateEventJson()
         default:
             break
@@ -231,6 +233,15 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         }
         
         super.viewDidLoad()
+    }
+    
+    func presentWaitAlertAction(){
+        waitAC = AlertFunction().displayPendingAlert()
+        self.presentViewController(waitAC, animated: true, completion: nil)
+    }
+
+    func dismissWaitAlertAction(){
+        AlertFunction().hidePendingAlert(waitAC)
     }
     
     func nilAlertAction(title:String,message:String){

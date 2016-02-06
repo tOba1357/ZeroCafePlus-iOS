@@ -11,6 +11,8 @@ import UIKit
 protocol CalenderViewDelegate {
     func pushCalender(checkNowStr:String)
     func changDateCalender(checkYearInt:Int,checkMonthInt:Int)
+    func presentWaitAlert()
+    func dismisWaitAlert()
 }
 
 class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
@@ -22,7 +24,6 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
     var prevMonthView:MonthView!
     var currentMonthView:MonthView!
     var nextMonthView:MonthView!
-    var avLoadingView:UIAlertView!
     
     var calenderdelegate: CalenderViewDelegate?
     
@@ -32,8 +33,6 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
     
     override init(frame:CGRect){
         super.init(frame: frame)
-    
-        avLoadingView = UIAlertView(title: nil, message: "Wait..", delegate: self, cancelButtonTitle: nil)
         
         var nowDate:[String] = CommonFunction().nowDateData()
         
@@ -79,13 +78,13 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
         let pos:CGFloat  = scrollView.contentOffset.x / scrollView.bounds.size.width
         let deff:CGFloat = pos - 1.0
         if fabs(deff) >= 1.0 {
-            avLoadingView.show()
+            makeWaitAlert()
             if (deff > 0) {
                 self.showNextView()
-                avLoadingView.dismissWithClickedButtonIndex(0, animated: true)
+                removeWaitAlert()
             } else {
                 self.showPrevView()
-                avLoadingView.dismissWithClickedButtonIndex(0, animated: true)
+                removeWaitAlert()
             }
             changeMonth()
         }
@@ -132,7 +131,7 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
         //position調整
         self.resetContentOffSet()
     }
-        
+    
     
     func resetContentOffSet () {
         
@@ -182,9 +181,18 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
         return (prev_year,prev_month)
     }
     
+    func makeWaitAlert(){
+        self.calenderdelegate?.presentWaitAlert()
+    }
+
+    func removeWaitAlert(){
+        self.calenderdelegate?.dismisWaitAlert()
+    }
+
     func pushMonth(checkDateStr:String){
         self.calenderdelegate?.pushCalender(checkDateStr)
     }
+    
     func changeMonth(){
         self.calenderdelegate?.changDateCalender(currentYear,checkMonthInt: currentMonth)
     }

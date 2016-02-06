@@ -34,6 +34,8 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     
     var scheduleDelegate:ScheduleDelegate!
     
+    var waitAC:UIAlertController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -253,6 +255,15 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         
         presentViewController(alertController, animated: true, completion: nil)
         
+    }
+    
+    func presentWaitAlertAction(){
+        waitAC = AlertFunction().displayPendingAlert()
+        self.presentViewController(waitAC, animated: true, completion: nil)
+    }
+    
+    func dismissWaitAlertAction(){
+        AlertFunction().hidePendingAlert(waitAC)
     }
     
     func closeAction(sender: UIButton){
