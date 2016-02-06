@@ -10,12 +10,15 @@ import UIKit
 
 protocol CheckCalenderDelegate{
     func checkedCalender(checkDate:[String])
+    func presentWaitAlertAction()
+    func dismissWaitAlertAction()
 }
 
 class CheckCalenderView: UIView , CalenderViewDelegate{
     
     var yearMonthLabel:UILabel!
     let cirShapeLayer = CAShapeLayer()
+    var selfVC:UIViewController!
     
     var checkCalenderDelegate:CheckCalenderDelegate!
     
@@ -137,6 +140,15 @@ class CheckCalenderView: UIView , CalenderViewDelegate{
         //        }
         
     }
+    
+    func presentWaitAlert(){
+        self.checkCalenderDelegate.presentWaitAlertAction()
+    }
+    
+    func dismisWaitAlert(){
+        self.checkCalenderDelegate.dismissWaitAlertAction()
+    }
+    
     func changDateCalender(checkYearInt:Int,checkMonthInt:Int){
         yearMonthLabel.text = "\(checkYearInt)/\(checkMonthInt)月"
     }

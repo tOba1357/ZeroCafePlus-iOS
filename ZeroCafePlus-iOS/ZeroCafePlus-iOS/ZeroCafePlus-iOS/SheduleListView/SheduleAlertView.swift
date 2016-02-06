@@ -11,6 +11,9 @@ import UIKit
 protocol SheduleAlertDelegate{
     func pushSheduleAlert(checkDateStr:String,myDateArray:[Int],alreadyStertTimeData:[String],alreadyEndTimeData:[String])
     func changDateShedule(myDateStr:String)
+    func presentWaitAlertAction()
+    func dismissWaitAlertAction()
+    
 }
 
 class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
@@ -25,10 +28,8 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
     var currentDayView:DateSheduleView!
     var nextDayView:DateSheduleView!
     
-    var avLoadingView:UIAlertView!
-    
     var sheduleAlertDelegate :SheduleAlertDelegate?
-
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -38,8 +39,6 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         currentYear = year
         currentMonth = month
         currentDay = day
-        
-        avLoadingView = UIAlertView(title: nil, message: "Wait..", delegate: self, cancelButtonTitle: nil)
         
         scrollView = UIScrollView(frame: self.bounds)
         scrollView.backgroundColor = UIColor.clearColor()
@@ -79,14 +78,13 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         let pos:CGFloat  = scrollView.contentOffset.x / scrollView.bounds.size.width
         let deff:CGFloat = pos - 1.0
         if fabs(deff) >= 1.0 {
-            avLoadingView.show()
+            presentWaitAlert()
             if (deff > 0) {
                 self.showNextView()
-                avLoadingView.dismissWithClickedButtonIndex(0, animated: true)
+                dismissWaitAlert()
             } else {
                 self.showPrevView()
-                avLoadingView.dismissWithClickedButtonIndex(0, animated: true)
-            }
+                dismissWaitAlert()            }
             changeDate()
         }
     }
@@ -190,4 +188,13 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         let myDateArray:[Int] = [currentYear,currentMonth,currentDay]
         self.sheduleAlertDelegate?.pushSheduleAlert(checkDateStr,myDateArray: myDateArray,alreadyStertTimeData: alreadyStertTimeData,alreadyEndTimeData: alreadyEndTimeData)
     }
+    
+    func presentWaitAlert(){
+        self.sheduleAlertDelegate?.presentWaitAlertAction()
+    }
+    
+    func dismissWaitAlert(){
+        self.sheduleAlertDelegate?.dismissWaitAlertAction()
+    }
+    
 }
