@@ -17,7 +17,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     private var TakeFriends:UILabel!
     private var event_detail_add_friend: UIImageView!
     private var addPicker: UIPickerView!
-    private var myToolBar: UIToolbar!
+    private var toolBar: UIToolbar!
     private var addButton: UITextField!
     private let myValues: NSArray = ["0人","1人","2人","3人","4人","5人","6人","7人","8人","9人","10人","11人","12人","13人","14人","15人","16人","17人","18人","19人","20人"]
     private var event_detail_info: UIImageView!
@@ -68,33 +68,27 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         addPicker.dataSource = self
         addPicker.showsSelectionIndicator = true
         addPicker.selectRow(0, inComponent: 0, animated: false);
+
+        let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
+        toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        toolBar.backgroundColor = UIColor.blackColor()
+        toolBar.barStyle = UIBarStyle.Black
+        toolBar.tintColor = UIColor.whiteColor()
         
+        let spaceBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace,target: self,action: "")
+        
+        let toolBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "onClick:")
+        toolBar.items = [spaceBarBtn,toolBarButton]
         
         addButton = UITextField(frame: CGRectMake(self.view.bounds.width/1.3, self.view.bounds.height/4.75, self.view.bounds.width/9.14, self.view.bounds.height/37.86))
         addButton.textColor = UIColor.blackColor()
         addButton.font = UIFont.systemFontOfSize(CGFloat(self.view.bounds.height/37.86))
         addButton.placeholder = myValues[0] as? String;
-        self.view.addSubview(addButton)
-        self.view.addSubview(addButton)
-        
-        
-        
-        myToolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, self.view.bounds.height/12))
-        myToolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
-        myToolBar.backgroundColor = UIColor.whiteColor()
-        myToolBar.barStyle = UIBarStyle.Black
-        myToolBar.tintColor = UIColor.whiteColor()
-        
-        
         addButton.inputView = addPicker
-        addButton.inputAccessoryView = myToolBar
-        
-        
-        let myToolBarButton = UIBarButtonItem(title: "Close", style: .Bordered, target: self, action: "onClick:")
-        myToolBarButton.tag = 1
-        myToolBar.items = [myToolBarButton]
-        
-        
+        addButton.inputAccessoryView = toolBar
+
+        self.view.addSubview(addButton)
+        self.view.addSubview(addButton)
         
         event_detail_info = UIImageView(frame: CGRectMake(0,self.view.bounds.height/3.82,self.view.bounds.width/1.27,self.view.bounds.height/12.08))
         let detail_info = UIImage(named: "event_detail_info.png")
@@ -158,13 +152,9 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         Myrow = row
     }
     
-    
-    
     func onClick(sender: UIBarButtonItem) {
         addButton.resignFirstResponder()
     }
-    
-    
     
     override func viewWillAppear(animated: Bool) {
 //        
