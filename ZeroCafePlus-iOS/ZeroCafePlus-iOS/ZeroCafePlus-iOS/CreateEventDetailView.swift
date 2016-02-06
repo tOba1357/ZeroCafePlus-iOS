@@ -12,13 +12,16 @@ protocol CreateEventDetailDelegate{
     func decideEventDetail(assetStr:String,menberNumStr:String,diveJoinBool:Bool,tagStr:String)
 }
 
-class CreateEventDetailView: UIView,UITextFieldDelegate {
+class CreateEventDetailView: UIView,UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate {
     
     var assetText :UITextField!
     var numText :UITextField!
     var tagText :UITextField!
     
     var diveJoinBool:Bool = false
+    
+    var MenberNumStr:[String] = []
+    var MenberNumInt:Int = 2
     
     var createEventDetailDelegate:CreateEventDetailDelegate!
     
@@ -28,15 +31,27 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
     
     override init(frame:CGRect){
         super.init(frame: frame)
-        let myToolBar = UIToolbar(frame: CGRectMake(0, self.frame.size.height/6, self.frame.size.width, 40.0))
-        myToolBar.layer.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height-20.0)
-        myToolBar.backgroundColor = UIColor.blackColor()
-        myToolBar.barStyle = UIBarStyle.Black
-        myToolBar.tintColor = UIColor.whiteColor()
         
-        let myToolBarButton = UIBarButtonItem(title: "Close", style: .Bordered, target: self, action: "onClick:")
-        myToolBarButton.tag = 1
-        myToolBar.items = [myToolBarButton]
+        for i in 2...23{
+            
+            MenberNumStr.append("\(i)人")
+        }
+        let toolBar = UIToolbar(frame: CGRectMake(0, self.frame.size.height/6, self.frame.size.width, 40.0))
+        toolBar.layer.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height-20.0)
+        toolBar.backgroundColor = UIColor.blackColor()
+        toolBar.barStyle = UIBarStyle.Black
+        toolBar.tintColor = UIColor.whiteColor()
+        
+        let spaceBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace,target: self,action: "")
+      
+        let toolBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "onClick:")
+        toolBar.items = [spaceBarBtn,toolBarButton]
+        
+
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+
         
         let assetsLabel = UILabel(frame: CGRectMake(0,self.frame.height*(110/1136),self.frame.width/4,self.frame.height*(28/1136)))
         assetsLabel.text = "持ち物（任意）"
@@ -63,14 +78,13 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         numLabel.sizeToFit()
         
         numText = UITextField(frame: CGRectMake(0,self.frame.height*(338/1136),self.frame.width,self.frame.height*(56/1136)))
-        numText.text = "0"
+        numText.text = "2人"
         numText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         numText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        numText.placeholder = "例）15"
-        numText.inputAccessoryView = myToolBar
         numText.layer.cornerRadius = 13.5
+        numText.inputView = pickerView
+        numText.inputAccessoryView = toolBar
         numText.delegate = self
-        numText.keyboardType = .NumberPad
         numText.layer.borderWidth = 0.75
         numText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
         
@@ -99,7 +113,7 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         tagText.text = ""
         tagText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         tagText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        tagText.placeholder = "#祭り"
+        tagText.placeholder = "　#祭り #花火"
         tagText.layer.cornerRadius = 13.5
         tagText.delegate = self
         tagText.layer.borderWidth = 0.75
@@ -139,17 +153,24 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
                 tagText.text = ""
             }
             
-            self.createEventDetailDelegate.decideEventDetail(assetText.text!, menberNumStr: numText.text!, diveJoinBool: diveJoinBool, tagStr: tagText.text!)
+            self.createEventDetailDelegate.decideEventDetail(assetText.text!, menberNumStr: String(MenberNumInt), diveJoinBool: diveJoinBool, tagStr: tagText.text!)
         }
     }
     
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
+    //pickerView
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            return MenberNumStr.count
+    }
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        MenberNumInt = row+2
+        return MenberNumStr[row]
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        numText.text = "\(MenberNumStr[row])"
     }
     //--TextField--
     func textFieldDidBeginEditing(textField: UITextField){
@@ -166,7 +187,9 @@ class CreateEventDetailView: UIView,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
     func onClick(sender: UIBarButtonItem) {
         self.endEditing(true)
     }
+
 }

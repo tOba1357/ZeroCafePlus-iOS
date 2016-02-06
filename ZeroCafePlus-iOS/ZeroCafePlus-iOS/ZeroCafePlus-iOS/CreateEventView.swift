@@ -65,15 +65,18 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         isBoolTextView = false
         
-        let myToolBar = UIToolbar(frame: CGRectMake(0, self.frame.size.height/6, self.frame.size.width, 40.0))
-        myToolBar.layer.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height-20.0)
-        myToolBar.backgroundColor = UIColor.blackColor()
-        myToolBar.barStyle = UIBarStyle.Black
-        myToolBar.tintColor = UIColor.whiteColor()
+        let toolBar = UIToolbar(frame: CGRectMake(0, self.frame.size.height/6, self.frame.size.width, 40.0))
+        toolBar.layer.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height-20.0)
+        toolBar.backgroundColor = UIColor.blackColor()
+        toolBar.barStyle = UIBarStyle.Black
+        toolBar.tintColor = UIColor.whiteColor()
         
-        let myToolBarButton = UIBarButtonItem(title: "Close", style: .Bordered, target: self, action: "onClick:")
-        myToolBarButton.tag = 1
-        myToolBar.items = [myToolBarButton]
+        let spaceBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace,target: self,action: "")
+
+        let toolBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "onClick:")
+        
+        toolBarButton.tag = 1
+        toolBar.items = [spaceBarBtn,toolBarButton]
         
         let titleLabel = UILabel(frame: CGRectMake(0,self.frame.size.height*(160/1136),self.frame.width/4*3,self.frame.height*(28/1136)))
         titleLabel.text = "イベント名(18文字以内)"
@@ -105,7 +108,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         detailTextView.layer.cornerRadius = 27
         detailTextView.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         detailTextView.textAlignment = NSTextAlignment.Left
-        detailTextView.inputAccessoryView = myToolBar
+        detailTextView.inputAccessoryView = toolBar
         detailTextView.delegate = self
         
         detailAlertLabel = UILabel(frame: CGRectMake(self.frame.width/4*3,self.frame.height*(650/1136),self.frame.width/4,self.frame.height*(20/1136)))
