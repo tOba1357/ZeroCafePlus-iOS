@@ -35,7 +35,7 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
     
         avLoadingView = UIAlertView(title: nil, message: "Wait..", delegate: self, cancelButtonTitle: nil)
         
-        var dates:[String] = dateData()
+        var dates:[String] = nowDateData()
         
         currentYear  = Int(dates[0])!
         currentMonth = Int(dates[1])!
@@ -182,7 +182,7 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
         return (prev_year,prev_month)
     }
     
-    func dateData() -> [String]{
+    func nowDateData() -> [String]{
         let dateFormatter:NSDateFormatter = NSDateFormatter();
         dateFormatter.dateFormat = "yyyy/MM/dd";
         let dateString:String = dateFormatter.stringFromDate(NSDate());

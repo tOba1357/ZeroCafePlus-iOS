@@ -93,7 +93,7 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
     
     func showNextView(){
         currentDay++
-        if currentDay > getLastDay(currentYear,month: currentMonth){
+        if currentDay > CommonFunction().getLastDay(currentYear,month: currentMonth){
             currentDay = 1
             currentMonth++
             if( currentMonth > 12 ){
@@ -117,7 +117,7 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         currentDay--
         if currentDay < 1 {
             currentMonth--
-            currentDay = getLastDay(currentYear,month: currentMonth)!
+            currentDay = CommonFunction().getLastDay(currentYear,month: currentMonth)!
             if currentMonth < 1{
                 currentYear--
                 currentMonth = 12
@@ -150,7 +150,7 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         var next_year:Int = currentYear
         var next_month:Int = currentMonth
         var next_date:Int = currentDay + 1
-        if next_date > getLastDay(next_year,month: next_month){
+        if next_date > CommonFunction().getLastDay(next_year,month: next_month){
             next_date = 1
             next_month++
             if next_month > 12{
@@ -167,32 +167,13 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         var prev_date:Int = currentDay - 1
         if prev_date < 1{
             prev_month--
-            prev_date = getLastDay(prev_year,month: prev_month)!
+            prev_date = CommonFunction().getLastDay(prev_year,month: prev_month)!
             if prev_month < 1{
                 prev_year--
                 prev_month = 12
             }
         }
         return (prev_year,prev_month,prev_date)
-    }
-
-    func getLastDay(var year:Int,var month:Int) -> Int?{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        if month == 12 {
-            month = 0
-            year++
-        }
-        let targetDate:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/01",year,month+1));
-        if targetDate != nil {
-            //月初から一日前を計算し、月末の日付を取得
-            let orgDate = NSDate(timeInterval:(24*60*60)*(-1), sinceDate: targetDate!)
-            let str:String = dateFormatter.stringFromDate(orgDate)
-            //lastPathComponentを利用するのは目的として違う気も。。
-            return Int((str as NSString).lastPathComponent);
-        }
-        
-        return nil;
     }
     
     func createMyTimeSchedule(startTime:String,endTime:String){

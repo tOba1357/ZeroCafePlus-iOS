@@ -120,19 +120,6 @@ public class DateSheduleView: UIView, UIScrollViewDelegate,TimeSheduleDelegate{
         self.addSubview(myEventLavel)
     }
     
-    
-    func getWeek(year:Int,month:Int,day:Int) ->Int{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        let date:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,day));
-        if date != nil {
-            let calendar:NSCalendar = NSCalendar.currentCalendar()
-            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekOfMonthCalendarUnit, fromDate: date!)
-            return dateComp.weekOfMonth
-        }
-        return 0;
-    }
-    
     func pushHour(checkDateStr:String) {
         self.dateSheeduleDelegate?.pushDateShedule(checkDateStr,alreadyStertTimeData: alrStertTimeData,alreadyEndTimeData: alrEndTimeData)
     }
