@@ -17,22 +17,20 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     
     var sheduleAlertView:SheduleAlertView!
     
-    var titleLabel:UILabel!
-    var myTextField:UITextField!
-    var startTimeTextField:UITextField!
-    var endTimeTextField:UITextField!
-    var nextButton :UIButton!
-    var closeButton :UIButton!
+    private var titleLabel:UILabel!
+    private var myTextField:UITextField!
+    private var startTimeTextField:UITextField!
+    private var endTimeTextField:UITextField!
+    private var nextButton :UIButton!
+    private var closeButton :UIButton!
     
     var getDate :[String]!
-    var getTitle:String!
-    var getDetail:String!
     
-    var pickHour:[String] = []
-    var pickMinute:[String] = []
+    private var pickHour:[String] = []
+    private var pickMinute:[String] = []
     
-    var alertHour:String!
-    var alertMinute:String!
+    private var alertHour:String!
+    private var alertMinute:String!
     
     var scheduleDelegate:ScheduleDelegate!
     

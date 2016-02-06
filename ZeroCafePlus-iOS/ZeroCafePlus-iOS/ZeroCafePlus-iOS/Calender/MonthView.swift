@@ -79,7 +79,7 @@ class MonthView: UIView ,DayViewDelegate{
     
     
     func checkMoreEvents(year:Int,month:Int){
-        var eveDateData:[String] = dateData()
+        var nowDate:[String] = CommonFunction().nowDateData()
         var listeventsData:[String] = []
         let url = "https://zerocafe.herokuapp.com/api/v1/events/\(year)/\(month).json"
         Alamofire.request(.GET, url)
@@ -101,7 +101,7 @@ class MonthView: UIView ,DayViewDelegate{
                                 var eventBool = true
                                 for listevent in listeventsData{
                                     if i == Int(listevent) ||
-                                        i < Int(eveDateData[2])
+                                        i < Int(nowDate[2])
                                     {
                                         eventBool = false
                                     }
@@ -132,16 +132,6 @@ class MonthView: UIView ,DayViewDelegate{
                 }
         }
     }
-    
-    func dateData() -> [String]{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        let dateString:String = dateFormatter.stringFromDate(NSDate());
-        let dates:[String] = dateString.componentsSeparatedByString("/")
-        
-        return dates
-    }
-    
     
     func pushDay(checkDateStr:String){
         self.monthDelegate?.pushMonth(checkDateStr)

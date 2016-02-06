@@ -27,7 +27,7 @@ class DayView: UIView {
         checkDateStr = String(format:"%04d%02d%02d",year,month,day)
         super.init(frame: frame)
         
-        let nowDate = dateData()
+        let nowDate = CommonFunction().nowDateData()
         
         let dayWidth:CGFloat = frame.size.width
         let dayHeight:CGFloat = frame.size.height
@@ -59,15 +59,6 @@ class DayView: UIView {
             dayButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xFFF8DC)
         }
         self.addSubview(dayButton)
-    }
-    
-    func dateData() -> [String]{
-        let dateFormatter:NSDateFormatter = NSDateFormatter();
-        dateFormatter.dateFormat = "yyyy/MM/dd";
-        let dateString:String = dateFormatter.stringFromDate(NSDate());
-        let dates:[String] = dateString.componentsSeparatedByString("/")
-        
-        return dates
     }
     
     func makeAlert(sender: UIButton){

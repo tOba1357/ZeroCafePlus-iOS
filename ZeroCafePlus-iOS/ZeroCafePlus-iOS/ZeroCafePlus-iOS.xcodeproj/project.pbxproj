@@ -328,6 +328,7 @@
 		BA31F87C1C61275E00CB0AF7 /* ThirdView_Detail */ = {
 			isa = PBXGroup;
 			children = (
+				D7A6267D1C1AD395002DCEC6 /* ThirdViewController.swift */,
 				BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */,
 				BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */,
 				D76B27FF1C56224F0090DB73 /* CheckCalenderView.swift */,
@@ -434,7 +435,6 @@
 				D76B28511C6470F40090DB73 /* FirstView_Detail */,
 				D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */,
 				D7A626511C1AB359002DCEC6 /* SecondViewController.swift */,
-				D7A6267D1C1AD395002DCEC6 /* ThirdViewController.swift */,
 				6FD54C581C6485AC00A6EC41 /* FourthView_Detail */,
 				D7A626531C1AB359002DCEC6 /* Main.storyboard */,
 				D7A626561C1AB359002DCEC6 /* Assets.xcassets */,
