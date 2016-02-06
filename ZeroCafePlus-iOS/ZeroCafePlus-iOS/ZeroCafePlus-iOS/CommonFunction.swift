@@ -76,5 +76,15 @@ class CommonFunction: AnyObject {
         }
         return 0
     }
+    
+    func nowDateData() -> [String]{
+        let dateFormatter:NSDateFormatter = NSDateFormatter();
+        dateFormatter.dateFormat = "yyyy/MM/dd";
+        let dateString:String = dateFormatter.stringFromDate(NSDate());
+        let dates:[String] = dateString.componentsSeparatedByString("/")
+        
+        return dates
+    }
+
 
 }
