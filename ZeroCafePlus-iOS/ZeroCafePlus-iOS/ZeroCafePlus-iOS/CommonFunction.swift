@@ -10,7 +10,7 @@ import UIKit
 
 class CommonFunction: AnyObject {
     
-    // imageName : "pngの名前", w or h :サイズ
+    // imageName = "aaa:png", w or h : CGFloat
     func resizingImage(imageName imageName :String, w:CGFloat, h:CGFloat) ->UIImage
     {
         let image = UIImage(named: "\(imageName)")
@@ -21,7 +21,7 @@ class CommonFunction: AnyObject {
         UIGraphicsEndImageContext()
         return resizeImage
     }
-    // rgbValue = 色のやつ
+    // rgbValue = 0xXXXXXX
     func UIColorFromRGB(rgbValue rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,

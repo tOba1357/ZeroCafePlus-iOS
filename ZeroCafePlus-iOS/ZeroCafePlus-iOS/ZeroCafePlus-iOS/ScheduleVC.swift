@@ -178,31 +178,64 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
                 let startTimeData = self.startTimeTextField.text!.componentsSeparatedByString(":")
                 let endTimeData = self.endTimeTextField.text!.componentsSeparatedByString(":")
                 
-                
-                if Int(endTimeData[0]) <= Int(startTimeData[0]){
+                if Int(endTimeData[0]) <= Int(startTimeData[0]) || (Int(endTimeData[0]) == Int(startTimeData[0]) && Int(endTimeData[1]) <= Int(startTimeData[1])){
                     timeBool = false
                 }
                 
                 for aStartTimeStr in alreadyStertTimeData.enumerate() {
+                    
                     let aStartTimeData = aStartTimeStr.element.componentsSeparatedByString(":")
                     let aEndTimeData = alreadyEndTimeData[aStartTimeStr.index].componentsSeparatedByString(":")
                     
-                    //                    }|| (Int(aStartTimeData[0]) == Int(startTimeData[0]) && Int(aStartTimeData[1]) <  Int(startTimeData[1])){
-                    //
-                    //                        if Int(startTimeData[0]) < Int(aEndTimeData[0]) || (Int(startTimeData[0]) == Int(aEndTimeData[0]) && Int(startTimeData[1]) < Int(aEndTimeData[1])){
-                    //                            timeBool = false
-                    //                        }
-                    //                    }
-                    //                    if Int(aStartTimeData[0]) < Int(endTimeData[0]) || (Int(aStartTimeData[0]) == Int(endTimeData[0]) && Int(aStartTimeData[1]) <  Int(endTimeData[1])){
-                    //
-                    //                        if Int(endTimeData[0]) > Int(aStartTimeData[0]) || (Int(endTimeData[0]) == Int(aStartTimeData[0]) && Int(endTimeData[1]) > Int(aStartTimeData[1])){
-                    //                            timeBool = false
-                    //                        }
+                    //timeCheck
+                    //Hour Conflict
+                    if (Int(aStartTimeData[0]) > Int(startTimeData[0]) && Int(aStartTimeData[0]) < Int(endTimeData[0])) ||
+                        (Int(aEndTimeData[0]) > Int(startTimeData[0]) && Int(aEndTimeData[0]) <  Int(endTimeData[0]))
+                    {
+                        timeBool = false
+                    }
+                    
+                    //Start Minuts Conflict
+                    if Int(startTimeData[0]) == Int(aStartTimeData[0])
+                    {
+                        if Int(aStartTimeData[1]) >= Int(startTimeData[1]) &&
+                            (Int(aEndTimeData[0]) < Int(endTimeData[0]) ||
+                                (Int(aEndTimeData[0]) == Int(endTimeData[0]) && Int(aEndTimeData[1]) <= Int(endTimeData[1])))
+                        {
+                            timeBool = false
+                        }
+                    }
+                    
+                    //End Minuts Conflict
+                    if Int(endTimeData[0]) == Int(aEndTimeData[0])
+                    {
+                        if Int(aEndTimeData[1]) <= Int(endTimeData[1]) &&
+                            (Int(aStartTimeData[0]) > Int(startTimeData[0]) ||
+                                (Int(aStartTimeData[0]) == Int(startTimeData[0]) && Int(aStartTimeData[1]) >= Int(startTimeData[1])))
+                        {
+                            timeBool = false
+                        }
+                    }
+                    
+                    //Start aEnd Minuts Conflict
+                    if (Int(aEndTimeData[0]) == Int(startTimeData[0]) && Int(aEndTimeData[1]) > Int(startTimeData[1])) &&
+                        (Int(aEndTimeData[0]) < Int(endTimeData[0]) ||
+                            (Int(aEndTimeData[0]) == Int(endTimeData[0]) && Int(aEndTimeData[1]) <= Int(endTimeData[1])))
+                    {
+                        timeBool = false
+                    }
+                    
+                    //aStart End Minuts Conflict
+                    if (Int(aStartTimeData[0]) == Int(endTimeData[0]) && Int(aStartTimeData[1]) > Int(endTimeData[1])) &&
+                        (Int(aEndTimeData[0]) > Int(endTimeData[0]) ||
+                            (Int(aEndTimeData[0]) == Int(endTimeData[0]) && Int(aEndTimeData[1]) >= Int(endTimeData[1])))
+                    {
+                        timeBool = false
+                    }
+                    
                 }
             }
-            print(timeBool)
             if timeBool{
-                print("aaaaa")
                 self.sheduleAlertView.createMyTimeSchedule(self.startTimeTextField.text!, endTime:self.endTimeTextField.text!)
                 
                 self.nextButton = UIButton(frame: CGRectMake(0, 0, 150, 50))
@@ -219,7 +252,7 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
                 self.view.addSubview(self.closeButton)
                 
             }else{
-                
+                print("miss time")
             }
         }
         

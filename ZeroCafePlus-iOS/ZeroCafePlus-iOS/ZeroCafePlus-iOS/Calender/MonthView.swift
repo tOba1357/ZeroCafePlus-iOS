@@ -77,7 +77,7 @@ class MonthView: UIView ,DayViewDelegate{
         checkMoreEvents(year,month: month)
     }
     
-    //その月の最終日の取得
+    //The acquisition of the last day of the month
     func getLastDay(var year:Int,var month:Int) -> Int?{
         let dateFormatter:NSDateFormatter = NSDateFormatter();
         dateFormatter.dateFormat = "yyyy/MM/dd";
@@ -87,10 +87,9 @@ class MonthView: UIView ,DayViewDelegate{
         }
         let targetDate:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/01",year,month+1));
         if targetDate != nil {
-            //月初から一日前を計算し、月末の日付を取得
+            //To calculate the one day before from the beginning of the month, get the date of the end of the month
             let orgDate = NSDate(timeInterval:(24*60*60)*(-1), sinceDate: targetDate!)
             let str:String = dateFormatter.stringFromDate(orgDate)
-            //lastPathComponentを利用するのは目的として違う気も。。
             return Int((str as NSString).lastPathComponent);
         }
         
@@ -145,14 +144,20 @@ class MonthView: UIView ,DayViewDelegate{
                             for var i:Int = 0; i < day!;i++ {
                                 var eventBool = true
                                 for listevent in listeventsData{
-                                    if i == Int(listevent) || i < Int(eveDateData[2]){
+                                    if i == Int(listevent) ||
+                                        i < Int(eveDateData[2])
+                                    {
                                         eventBool = false
                                     }
+                                    
                                 }
                                 let week:Int    = self.getWeek(year,month: month,day:i+1)
-                                let x:CGFloat       = CGFloat(weekday - 1 ) * (self.dayWidth/2)
+                                let x:CGFloat       = CGFloat(weekday-1) * (self.dayWidth/2)
                                 let y:CGFloat       = CGFloat(week-1) * self.dayHeight/2
-                                if (eventBool){
+                                if weekday == 1{
+                                    eventBool = false
+                                }
+                                if eventBool{
                                     let cirView = UIView(frame: CGRectMake(x,y,self.frame.width/30,self.frame.height/30))
                                     self.addSubview(cirView)
                                     

@@ -150,7 +150,7 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
         var next_year:Int = currentYear
         var next_month:Int = currentMonth
         var next_date:Int = currentDay + 1
-        if next_date > getLastDay(currentYear,month: currentMonth){
+        if next_date > getLastDay(next_year,month: next_month){
             next_date = 1
             next_month++
             if next_month > 12{
@@ -162,18 +162,18 @@ class SheduleAlertView: UIView, UIScrollViewDelegate,DateSheduleDlegae{
     }
     
     func getPrevyMd () -> (year:Int,month:Int,date:Int){
-        var next_year:Int = currentYear
-        var next_month:Int = currentMonth
-        var next_date:Int = currentDay - 1
-        if next_date < 1{
-            next_month--
-            next_date = getLastDay(currentYear,month: currentMonth)!
-            if next_month < 1{
-                next_year--
-                next_month = 12
+        var prev_year:Int = currentYear
+        var prev_month:Int = currentMonth
+        var prev_date:Int = currentDay - 1
+        if prev_date < 1{
+            prev_month--
+            prev_date = getLastDay(prev_year,month: prev_month)!
+            if prev_month < 1{
+                prev_year--
+                prev_month = 12
             }
         }
-        return (next_year,next_month,next_date)
+        return (prev_year,prev_month,prev_date)
     }
 
     func getLastDay(var year:Int,var month:Int) -> Int?{
