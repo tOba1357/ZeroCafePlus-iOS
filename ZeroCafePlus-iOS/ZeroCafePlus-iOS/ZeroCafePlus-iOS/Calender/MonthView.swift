@@ -100,8 +100,10 @@ class MonthView: UIView ,DayViewDelegate{
                             for var i:Int = 0; i < day!;i++ {
                                 var eventBool = true
                                 for listevent in listeventsData{
-                                    if i == Int(listevent) ||
-                                        i < Int(nowDate[2])
+                                    if (Int(nowDate[0]) <= year && Int(nowDate[1]) <= month && (i+1) == Int(listevent)) ||
+                                    (Int(nowDate[0]) == year && Int(nowDate[1]) == month && (i+1) <= Int(nowDate[2])) ||
+                                        Int(nowDate[0]) > year ||
+                                        (Int(nowDate[0]) == year && Int(nowDate[1]) > month)
                                     {
                                         eventBool = false
                                     }
