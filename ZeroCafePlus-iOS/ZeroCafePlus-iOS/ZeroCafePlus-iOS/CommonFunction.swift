@@ -58,7 +58,7 @@ class CommonFunction: AnyObject {
         let date:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,day));
         if date != nil {
             let calendar:NSCalendar = NSCalendar.currentCalendar()
-            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekOfMonthCalendarUnit, fromDate: date!)
+            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.WeekOfMonth, fromDate: date!)
             return dateComp.weekOfMonth;
         }
         return 0;
@@ -71,7 +71,7 @@ class CommonFunction: AnyObject {
         let date:NSDate? = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,day));
         if date != nil {
             let calendar:NSCalendar = NSCalendar.currentCalendar()
-            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.NSWeekdayCalendarUnit, fromDate: date!)
+            let dateComp:NSDateComponents = calendar.components(NSCalendarUnit.Weekday, fromDate: date!)
             return dateComp.weekday;
         }
         return 0
