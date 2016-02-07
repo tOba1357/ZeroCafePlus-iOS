@@ -52,7 +52,7 @@ class EventsAttendViewController: UIViewController {
         starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
         
         
-//        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
+        //        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
         
         
         
@@ -337,7 +337,7 @@ class EventsAttendViewController: UIViewController {
         
         
         
-       
+        
         
         
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
@@ -360,33 +360,33 @@ class EventsAttendViewController: UIViewController {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "syukatu.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                             
-
+                            
                         } else if self.EventGenre == 1 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#AF2E84", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-
+                            
                         } else if self.EventGenre == 2 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#22B573", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-
+                            
                         } else if self.EventGenre == 3 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "sakuru.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-
+                            
                         } else if self.EventGenre == 4 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-
+                            
                         } else if self.EventGenre == 5 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("##EFEDE8", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-
+                            
                         } else if self.EventGenre == 6 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFDA3E", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-
+                            
                         }
-
+                        
                         //        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                         self.window = UIWindow()
                         self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
@@ -399,7 +399,7 @@ class EventsAttendViewController: UIViewController {
                         //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
                         self.window.addSubview(imgView)
                         
-
+                        
                         
                         // タイトル
                         self.name.text = events["event"]["title"].string! as String
@@ -414,7 +414,8 @@ class EventsAttendViewController: UIViewController {
                         date_formatter.dateFormat = "yyyy/MM/dd"
                         let change_date:NSDate = date_formatter.dateFromString(startArray[0])!
                         let weekdays: Array  = ["天", "日", "月", "火", "水", "木", "金", "土"]
-                        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+                        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                        //                        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
                         let comps = calendar.components([.Year, .Month, .Day, .Weekday] , fromDate:  change_date)
                         date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
                         print(date_formatter.stringFromDate(change_date))
@@ -507,7 +508,7 @@ class EventsAttendViewController: UIViewController {
         
         
     }
-
+    
     
     func onClickStarButton(sender: UIButton){
         
@@ -569,9 +570,7 @@ class EventsAttendViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     
 }
-
-
 
