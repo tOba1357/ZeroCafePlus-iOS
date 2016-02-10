@@ -26,7 +26,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
     private var kitVerticalSV: UIScrollView!
     private var kuVerticalSV: UIScrollView!
     private var favoriteVerticalSV: UIScrollView!
-//    private var horizontalSV: UIScrollView!
+    //    private var horizontalSV: UIScrollView!
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -137,85 +137,86 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     var myX :CGFloat = 6
                     var myY :CGFloat = 6
                     
+                    var sideDecide = 0
+                    
                     for event in eventArray.enumerate(){
                         
                         
-                        let sideDecide = event.index % 2
-                        if sideDecide == 0 {
-                            let eve = event.element as JSON
-                            let eventID = eve["event"]["id"].int
-                            let title = eve["event"]["title"].string! as String
-                            let dateName = eve["event"]["start_time"].string! as String
-                            let tagName : String? = { ()->(String) in
-                                if eve["event"]["category_tag"] == nil{
-                                    return ""
-                                }else {
-                                    return eve["event"]["category_tag"].string! as String
-                                }
-                            }()
-                            print(tagName)
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
-                            eventViewGenerate.mydelegate = self
-                            eventViewGenerate.layer.cornerRadius = 10
+                        //                        let sideDecide = event.index % 2
+                        myX = 6
+                        
+                        let eve = event.element as JSON
+                        let placeDecide = eve["event"]["place"]
+                        if placeDecide == 0 {
+                            if sideDecide % 2 == 0 {
+                                
+                                let eventID = eve["event"]["id"].int
+                                let title = eve["event"]["title"].string! as String
+                                let dateName = eve["event"]["start_time"].string! as String
+                                let tagName : String? = { ()->(String) in
+                                    if eve["event"]["category_tag"] == nil{
+                                        return ""
+                                    }else {
+                                        return eve["event"]["category_tag"].string! as String
+                                    }
+                                }()
+                                print(tagName)
+                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
+                                eventViewGenerate.mydelegate = self
+                                eventViewGenerate.layer.cornerRadius = 10
+                                
+                                self.kitVerticalSV.addSubview(eventViewGenerate)
+                                
+                                //                            self.view.addConstraints([
+                                //                                NSLayoutConstraint(
+                                //                                    item: eventViewGenerate,
+                                //                                    attribute: .Left,
+                                //                                    relatedBy: .Equal,
+                                //                                    attribute: .Left,
+                                //                                    multiplier: 1.0,
+                                //                                    constant: 10
+                                //                                )
+                                //                            ])
+                            }else{
+                                myX = self.view.frame.size.width/2
+                                
+                                let eve = event.element as JSON
+                                let eventID = eve["event"]["id"].int
+                                let title = eve["event"]["title"].string! as String
+                                let dateName = eve["event"]["start_time"].string! as String
+                                let tagName : String? = { ()->(String) in
+                                    if eve["event"]["category_tag"] == nil{
+                                        return ""
+                                    }else {
+                                        return eve["event"]["category_tag"].string! as String
+                                    }
+                                }()
+                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
+                                eventViewGenerate.mydelegate = self
+                                eventViewGenerate.layer.cornerRadius = 10
+                                self.kitVerticalSV.addSubview(eventViewGenerate)
+                                
+                                myY += 206
+                            }
+                            sideDecide++
                             
-                            self.kitVerticalSV.addSubview(eventViewGenerate)
-                            self.kuVerticalSV.addSubview(eventViewGenerate)
-                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
                             
-//                            self.view.addConstraints([
-//                                NSLayoutConstraint(
-//                                    item: eventViewGenerate,
-//                                    attribute: .Left,
-//                                    relatedBy: .Equal,
-//                                    attribute: .Left,
-//                                    multiplier: 1.0,
-//                                    constant: 10
-//                                )
-//                            ])
+                            self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                            self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
+                            self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
+                            self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+                     
+                            self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                            self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
+                            self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
+                            self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                             
-                            myX = 162
-                        }else{
+                            self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                            self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
+                            self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
+                            self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                             
-                            let eve = event.element as JSON
-                            let eventID = eve["event"]["id"].int
-                            let title = eve["event"]["title"].string! as String
-                            let dateName = eve["event"]["start_time"].string! as String
-                            let tagName : String? = { ()->(String) in
-                                if eve["event"]["category_tag"] == nil{
-                                    return ""
-                                }else {
-                                    return eve["event"]["category_tag"].string! as String
-                                }
-                            }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
-                            eventViewGenerate.mydelegate = self
-                            eventViewGenerate.layer.cornerRadius = 10
-                            self.kitVerticalSV.addSubview(eventViewGenerate)
-                            //                            self.kuVerticalSV.addSubview(eventViewGenerate)
-                            //                            self.favoriteVerticalSV.addSubview(eventViewGenerate)
-                            
-                            myX = 6
-                            myY += 206
                         }
-                        
-                        self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
-                        self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
-                        self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-                        //                        self.view.addSubview(self.horizontalSV)
-                        //                        self.horizontalSV.addSubview(self.kitVerticalSV)
-                        
-                        self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
-                        self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
-                        self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-                        
-                        self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eventArray.count + 1) / 2) * 212 + 93))
-                        self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
-                        self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-                        
-                        
                     }
                     let views = [
                         ViewPagerElement(selectedTitleView: kitView, noSelectedTitleView: selectedKitView, mainView: self.kitVerticalSV),
