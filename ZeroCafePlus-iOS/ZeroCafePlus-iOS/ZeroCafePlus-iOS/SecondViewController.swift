@@ -358,7 +358,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         let countClick = NSUserDefaults.standardUserDefaults()
         if sender.tag == 1{
             if countClick.objectForKey("勉強会") != nil {
-                studyButton.setImage(UIImage(named: "Zerostudy.png"), forState: .Normal)
+                studyButton.setImage(UIImage(named: "study.png"), forState: .Normal)
                 countClick.removeObjectForKey("勉強会")
                 countClick.synchronize()
             }else {
@@ -368,7 +368,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }else if sender.tag == 2 {
             if countClick.objectForKey("パーティ") != nil {
-                partyButton.setImage(UIImage(named: "Zeroparty.png"), forState: .Normal)
+                partyButton.setImage(UIImage(named: "party.png"), forState: .Normal)
                 countClick.removeObjectForKey("パーティ")
                 countClick.synchronize()
             }else {
@@ -378,7 +378,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }else if sender.tag == 3 {
             if countClick.objectForKey("サークル") != nil {
-                circleButton.setImage(UIImage(named: "Zerocircle.png"), forState: .Normal)
+                circleButton.setImage(UIImage(named: "sakuru.png"), forState: .Normal)
                 countClick.removeObjectForKey("サークル")
                 countClick.synchronize()
                 
@@ -390,7 +390,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
         }else if sender.tag == 4 {
             if countClick.objectForKey("大会") != nil {
-                gameButton.setImage(UIImage(named: "Zerogame.png"), forState: .Normal)
+                gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
                 countClick.removeObjectForKey("大会")
                 countClick.synchronize()
             }else {
@@ -400,7 +400,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }else if sender.tag == 5 {
             if countClick.objectForKey("趣味") != nil {
-                hobbyButton.setImage(UIImage(named: "Zerohobby.png"), forState: .Normal)
+                hobbyButton.setImage(UIImage(named: "hobby.png"), forState: .Normal)
                 countClick.removeObjectForKey("趣味")
                 countClick.synchronize()
             }else {
@@ -410,7 +410,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         } else if sender.tag == 6 {
             if countClick.objectForKey("読書会") != nil {
-                readButton.setImage(UIImage(named: "Zeroread.png"), forState: .Normal)
+                readButton.setImage(UIImage(named: "readbook.png"), forState: .Normal)
                 countClick.removeObjectForKey("読書会")
                 countClick.synchronize()
             }else {
@@ -420,7 +420,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         } else if sender.tag == 7 {
             if countClick.objectForKey("就活") != nil {
-                jobHuntNButton.setImage(UIImage(named: "Zerojobhunt.png"), forState: .Normal)
+                jobHuntNButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
                 countClick.removeObjectForKey("就活")
                 countClick.synchronize()
             }else{
@@ -433,19 +433,19 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     func clearEverything(sender: UIButton){
         
         let countClick = NSUserDefaults.standardUserDefaults()
-        studyButton.setImage(UIImage(named: "Zerostudy.png"), forState: .Normal)
+        studyButton.setImage(UIImage(named: "study.png"), forState: .Normal)
         countClick.removeObjectForKey("勉強会")
-        partyButton.setImage(UIImage(named: "Zeroparty.png"), forState: .Normal)
+        partyButton.setImage(UIImage(named: "party.png"), forState: .Normal)
         countClick.removeObjectForKey("パーティ")
-        circleButton.setImage(UIImage(named: "Zerocircle.png"), forState: .Normal)
+        circleButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
         countClick.removeObjectForKey("サークル")
-        gameButton.setImage(UIImage(named: "Zerogame.png"), forState: .Normal)
+        gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
         countClick.removeObjectForKey("大会")
-        hobbyButton.setImage(UIImage(named: "Zerohobby.png"), forState: .Normal)
+        hobbyButton.setImage(UIImage(named: "hobby.png"), forState: .Normal)
         countClick.removeObjectForKey("趣味")
-        readButton.setImage(UIImage(named: "Zeroread.png"), forState: .Normal)
+        readButton.setImage(UIImage(named: "readbook.png"), forState: .Normal)
         countClick.removeObjectForKey("読書会")
-        jobHuntNButton.setImage(UIImage(named: "Zerojobhunt.png"), forState: .Normal)
+        jobHuntNButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
         countClick.removeObjectForKey("就活")
         countClick.synchronize()
         searchTitle.text = ""
