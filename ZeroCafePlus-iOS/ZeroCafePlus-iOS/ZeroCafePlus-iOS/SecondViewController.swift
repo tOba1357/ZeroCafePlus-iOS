@@ -161,7 +161,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         hobbyButton = UIButton()
         hobbyButton.tag = 5
-        hobbyButton.setImage(UIImage(named: "Zerohobby.png"), forState: .Normal)
+        hobbyButton.setImage(UIImage(named: "hobby.png"), forState: .Normal)
         hobbyButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(hobbyButton)
         hobbyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -174,7 +174,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         jobHuntNButton = UIButton()
         jobHuntNButton.tag = 7
-        jobHuntNButton.setImage(UIImage(named: "Zerojobhunt.png"), forState: .Normal)
+        jobHuntNButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
         jobHuntNButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(jobHuntNButton)
         jobHuntNButton.translatesAutoresizingMaskIntoConstraints = false
@@ -187,7 +187,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         gameButton = UIButton()
         gameButton.tag = 4
-        gameButton.setImage(UIImage(named: "Zerogame.png"), forState: .Normal)
+        gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
         gameButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(gameButton)
         gameButton.translatesAutoresizingMaskIntoConstraints = false
@@ -200,7 +200,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         partyButton = UIButton()
         partyButton.tag = 2
-        partyButton.setImage(UIImage(named: "Zeroparty.png"), forState: .Normal)
+        partyButton.setImage(UIImage(named: "party.png"), forState: .Normal)
         partyButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(partyButton)
         partyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -213,7 +213,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         readButton = UIButton()
         readButton.tag = 6
-        readButton.setImage(UIImage(named: "Zeroread.png"), forState: .Normal)
+        readButton.setImage(UIImage(named: "readbook.png"), forState: .Normal)
         readButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(readButton)
         readButton.translatesAutoresizingMaskIntoConstraints = false
@@ -226,7 +226,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         circleButton = UIButton()
         circleButton.tag = 3
-        circleButton.setImage(UIImage(named: "Zerocircle.png"), forState: .Normal)
+        circleButton.setImage(UIImage(named: "sakuru.png"), forState: .Normal)
         circleButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(circleButton)
         circleButton.translatesAutoresizingMaskIntoConstraints = false
@@ -239,7 +239,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         studyButton = UIButton()
         studyButton.tag = 1
-        studyButton.setImage(UIImage(named: "Zerostudy.png"), forState: .Normal)
+        studyButton.setImage(UIImage(named: "study.png"), forState: .Normal)
         studyButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(studyButton)
         studyButton.translatesAutoresizingMaskIntoConstraints = false
