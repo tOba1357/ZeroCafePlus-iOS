@@ -90,15 +90,16 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         self.view.addSubview(genreLabel)
         
         let placeholder = NSAttributedString(string: "イベント名、関連ワードなど", attributes: [NSForegroundColorAttributeName : UIColor.hexStr("#a5a5a5", alpha: 1.0)])
+        
         searchTitle = UITextField()
+        searchTitle.frame = CGRectMake(screenWidth/4.5, screenHeight/19.5, screenWidth/1.42, screenHeight/13)
         searchTitle.attributedPlaceholder = placeholder
         searchTitle.inputAccessoryView = myKeyboard
         searchTitle.font = UIFont.systemFontOfSize(16)
         searchTitle.textAlignment = NSTextAlignment.Center
         searchTitle.textColor = UIColor.hexStr("#a5a5a5", alpha: 1.0)
         searchTitle.backgroundColor = UIColor.clearColor()
-        searchTitle.addUnderline(100.0, color: UIColor.grayColor())
-        searchTitle.frame = CGRectMake(screenWidth/4.5, screenHeight/19.5, screenWidth/1.42, screenHeight/13)
+        searchTitle.addUnderline(1.0, color: UIColor.grayColor())
         self.view.addSubview(searchTitle)
         
         startDatePicker = UIPickerView()
