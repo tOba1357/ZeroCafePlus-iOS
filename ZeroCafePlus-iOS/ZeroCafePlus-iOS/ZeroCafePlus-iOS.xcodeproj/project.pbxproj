@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		5EAB71C6708AEF4777A12E61 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349F285AC7FB4BBFF4B5E51F /* Pods.framework */; };
 		6F36351B1C60C18D009401B7 /* profile_edit .png in Resources */ = {isa = PBXBuildFile; fileRef = 6F36351A1C60C18D009401B7 /* profile_edit .png */; };
+		6F8FC4CD1C6DA5E600C838CD /* SelectCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4CC1C6DA5E600C838CD /* SelectCircle.png */; };
+		6F8FC4D11C6DA5ED00C838CD /* SelectGame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D01C6DA5ED00C838CD /* SelectGame.png */; };
+		6F8FC4D31C6DA5F400C838CD /* SelectHobby.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D21C6DA5F400C838CD /* SelectHobby.png */; };
+		6F8FC4D51C6DA5FE00C838CD /* SelectJobHunt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D41C6DA5FD00C838CD /* SelectJobHunt.png */; };
+		6F8FC4D71C6DA60700C838CD /* SelectParty.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D61C6DA60700C838CD /* SelectParty.png */; };
+		6F8FC4D91C6DA60E00C838CD /* SelectReadbook.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D81C6DA60E00C838CD /* SelectReadbook.png */; };
+		6F8FC4DB1C6DA61600C838CD /* SelectStudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4DA1C6DA61600C838CD /* SelectStudy.png */; };
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
 		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
 		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
@@ -126,6 +133,13 @@
 		52C1C8695B62FABDFECFECF0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		61556AD9CD680053C6333707 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6F36351A1C60C18D009401B7 /* profile_edit .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_edit .png"; sourceTree = "<group>"; };
+		6F8FC4CC1C6DA5E600C838CD /* SelectCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectCircle.png; sourceTree = "<group>"; };
+		6F8FC4D01C6DA5ED00C838CD /* SelectGame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectGame.png; sourceTree = "<group>"; };
+		6F8FC4D21C6DA5F400C838CD /* SelectHobby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectHobby.png; sourceTree = "<group>"; };
+		6F8FC4D41C6DA5FD00C838CD /* SelectJobHunt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectJobHunt.png; sourceTree = "<group>"; };
+		6F8FC4D61C6DA60700C838CD /* SelectParty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectParty.png; sourceTree = "<group>"; };
+		6F8FC4D81C6DA60E00C838CD /* SelectReadbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectReadbook.png; sourceTree = "<group>"; };
+		6F8FC4DA1C6DA61600C838CD /* SelectStudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectStudy.png; sourceTree = "<group>"; };
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
@@ -286,6 +300,13 @@
 		BA31F84E1C611FFE00CB0AF7 /* genre */ = {
 			isa = PBXGroup;
 			children = (
+				6F8FC4CC1C6DA5E600C838CD /* SelectCircle.png */,
+				6F8FC4D01C6DA5ED00C838CD /* SelectGame.png */,
+				6F8FC4D21C6DA5F400C838CD /* SelectHobby.png */,
+				6F8FC4D41C6DA5FD00C838CD /* SelectJobHunt.png */,
+				6F8FC4D61C6DA60700C838CD /* SelectParty.png */,
+				6F8FC4D81C6DA60E00C838CD /* SelectReadbook.png */,
+				6F8FC4DA1C6DA61600C838CD /* SelectStudy.png */,
 				BA31F84F1C61201400CB0AF7 /* hobby_light.png */,
 				BA31F8501C61201400CB0AF7 /* hobby.png */,
 				BA31F8511C61201400CB0AF7 /* party_light.png */,
@@ -605,6 +626,7 @@
 				BABD6E561C6209260018F456 /* tabbar_icon-04@2x.png in Resources */,
 				BA31F8651C61201400CB0AF7 /* study_light.png in Resources */,
 				BA31F85E1C61201400CB0AF7 /* hobby.png in Resources */,
+				6F8FC4D11C6DA5ED00C838CD /* SelectGame.png in Resources */,
 				BA31F8611C61201400CB0AF7 /* readbook_light.png in Resources */,
 				BABD6E551C6209260018F456 /* tabbar_icon-04.png in Resources */,
 				BA31F8621C61201400CB0AF7 /* readbook.png in Resources */,
@@ -617,21 +639,27 @@
 				BA31F8671C61201400CB0AF7 /* syukatu_light.png in Resources */,
 				BA31F8631C61201400CB0AF7 /* sakuru_light.png in Resources */,
 				BA31F8691C61201400CB0AF7 /* tournament_light.png in Resources */,
+				6F8FC4D91C6DA60E00C838CD /* SelectReadbook.png in Resources */,
 				6F36351B1C60C18D009401B7 /* profile_edit .png in Resources */,
 				98EC0B401C64089500185416 /* star_selected.png in Resources */,
 				BABD6E4E1C6209260018F456 /* tabbar_icon-02@2x.png in Resources */,
+				6F8FC4D31C6DA5F400C838CD /* SelectHobby.png in Resources */,
 				BABD6E531C6209260018F456 /* tabbar_icon-04_s.png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
 				BA31F8661C61201400CB0AF7 /* study.png in Resources */,
+				6F8FC4D51C6DA5FE00C838CD /* SelectJobHunt.png in Resources */,
 				BABD6E541C6209260018F456 /* tabbar_icon-04_s@2x.png in Resources */,
+				6F8FC4CD1C6DA5E600C838CD /* SelectCircle.png in Resources */,
 				BABD6E471C6209260018F456 /* tabbar_icon-01_s.png in Resources */,
 				BABD6E4C1C6209260018F456 /* tabbar_icon-02_s@2x.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
+				6F8FC4D71C6DA60700C838CD /* SelectParty.png in Resources */,
 				BABD6E4A1C6209260018F456 /* tabbar_icon-01@2x.png in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,
 				D76B282D1C60A1F80090DB73 /* event_detail_clock.png in Resources */,
 				D76B282F1C60A1F80090DB73 /* event_detail_rounded_blue.png in Resources */,
 				D76B28331C60A1F80090DB73 /* star.png in Resources */,
+				6F8FC4DB1C6DA61600C838CD /* SelectStudy.png in Resources */,
 				BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */,
 				BABD6E4F1C6209260018F456 /* tabbar_icon-03_s.png in Resources */,
 				BA31F8601C61201400CB0AF7 /* party.png in Resources */,
