@@ -86,6 +86,29 @@ class CommonFunction: AnyObject {
         return dates
     }
     
+    func genreImage(genreId genreId:Int,width:CGFloat,height:CGFloat)->UIImage{
+        var gImg = UIImage()
+        switch genreId{
+        case 1:
+            gImg = resizingImage(imageName: "study.png", w: width, h:height)
+        case 2:
+            gImg = resizingImage(imageName: "party.png", w: width, h:height)
+        case 3:
+            gImg = resizingImage(imageName: "sakuru.png", w: width, h:height)
+        case 4:
+            gImg = resizingImage(imageName: "tournament.png", w: width, h:height)
+        case 5:
+            gImg = resizingImage(imageName: "hoby.png", w: width, h:height)
+        case 6:
+            gImg = resizingImage(imageName: "readbook.png", w: width, h:height)
+        case 7:
+            gImg = resizingImage(imageName: "syukatu.png", w: width, h:height)
+
+        default:
+            break
+        }
+        return gImg
+    }
     
 
 

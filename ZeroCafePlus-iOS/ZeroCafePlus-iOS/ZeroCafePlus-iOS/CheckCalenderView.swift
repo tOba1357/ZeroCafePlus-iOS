@@ -132,13 +132,7 @@ class CheckCalenderView: UIView , CalenderViewDelegate{
         
         let checkDate :[String] = [checkYearStr,checkMonthStr,checkDateStr]
         
-        self.checkCalenderDelegate.checkedCalender(checkDate)
-        
-        //        if let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleVC") as? ScheduleVC{
-        //            scheduleVC.getDate = checkDate
-        //            self.navigationController?.pushViewController(scheduleVC, animated: true)
-        //        }
-        
+        self.checkCalenderDelegate.checkedCalender(checkDate)        
     }
     
     func presentWaitAlert(){
