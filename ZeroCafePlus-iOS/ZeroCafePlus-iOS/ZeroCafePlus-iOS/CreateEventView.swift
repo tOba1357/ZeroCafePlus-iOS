@@ -235,14 +235,6 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     
     func clickGenre(sender: UIButton){
         switch sender.tag{
-        case 5:
-            genreNum = sender.tag
-            genreHobyBtn.setImage(hoby_sImg, forState: .Normal)
-            genreStudyBtn.setImage(studyImg, forState: .Normal)
-            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
-            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
-            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
-            genrePartyBtn.setImage(partyImg, forState: .Normal)
         case 1:
             genreNum = sender.tag
             genreHobyBtn.setImage(hobyImg, forState: .Normal)
@@ -250,30 +242,6 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
             genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
             genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
             genreReadBookBtn.setImage(readBookImg, forState: .Normal)
-            genrePartyBtn.setImage(partyImg, forState: .Normal)
-        case 3:
-            genreNum = sender.tag
-            genreHobyBtn.setImage(hobyImg, forState: .Normal)
-            genreStudyBtn.setImage(studyImg, forState: .Normal)
-            genreSakuruBtn.setImage(sakuru_sImg, forState: .Normal)
-            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
-            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
-            genrePartyBtn.setImage(partyImg, forState: .Normal)
-        case 4:
-            genreNum = sender.tag
-            genreHobyBtn.setImage(hobyImg, forState: .Normal)
-            genreStudyBtn.setImage(studyImg, forState: .Normal)
-            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
-            genreTournamentBtn.setImage(tournament_sImg, forState: .Normal)
-            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
-            genrePartyBtn.setImage(partyImg, forState: .Normal)
-        case 6:
-            genreNum = sender.tag
-            genreHobyBtn.setImage(hobyImg, forState: .Normal)
-            genreStudyBtn.setImage(studyImg, forState: .Normal)
-            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
-            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
-            genreReadBookBtn.setImage(readBook_sImg, forState: .Normal)
             genrePartyBtn.setImage(partyImg, forState: .Normal)
         case 2:
             genreNum = sender.tag
@@ -283,6 +251,43 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
             genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
             genreReadBookBtn.setImage(readBookImg, forState: .Normal)
             genrePartyBtn.setImage(party_sImg, forState: .Normal)
+
+        case 3:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuru_sImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+            
+        case 4:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournament_sImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+            
+        case 5:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hoby_sImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBookImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+
+        case 6:
+            genreNum = sender.tag
+            genreHobyBtn.setImage(hobyImg, forState: .Normal)
+            genreStudyBtn.setImage(studyImg, forState: .Normal)
+            genreSakuruBtn.setImage(sakuruImg, forState: .Normal)
+            genreTournamentBtn.setImage(tournamentImg, forState: .Normal)
+            genreReadBookBtn.setImage(readBook_sImg, forState: .Normal)
+            genrePartyBtn.setImage(partyImg, forState: .Normal)
+            
         default:
             break
         }
