@@ -38,7 +38,14 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        makeView()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func makeView(){
         scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         scrollView.delegate = self
         
@@ -46,12 +53,12 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         scrollView.contentOffset = CGPointMake(0.0 , 0.0)
         self.view.addSubview(scrollView)
         
-        let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
-        label.textAlignment = NSTextAlignment.Center
-        label.font = UIFont.boldSystemFontOfSize(21)
-        label.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
-        label.text = "イベントを企画する"
-        label.layer.position = CGPointMake(self.view.frame.size.width/2, barHeight+label.frame.size.height/2)
+        let thirdTitle:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
+        thirdTitle.textAlignment = NSTextAlignment.Center
+        thirdTitle.font = UIFont.boldSystemFontOfSize(21)
+        thirdTitle.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        thirdTitle.text = "イベントを企画する"
+        thirdTitle.layer.position = CGPointMake(self.view.frame.size.width/2, barHeight+thirdTitle.frame.size.height/2)
         
         displayWidth = scrollView.frame.size.width
         displayHeight = scrollView.frame.size.height
@@ -59,13 +66,9 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         createEvetView = CreateEventView(frame: CGRectMake(self.view.frame.size.width*(46/640), 0, self.view.frame.width-self.view.frame.size.width*(92/640),displayHeight))
         createEvetView.createEventdelegate = self
         
-        scrollView.addSubview(label)
+        scrollView.addSubview(thirdTitle)
         scrollView.addSubview(createEvetView)
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+
     }
     
     func createEventNameExposition() {
@@ -231,8 +234,10 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
             .responseString { response in
                 debugPrint(response.result.value)
         }
-        
-        super.viewDidLoad()
+        for subview in self.view.subviews {
+            subview.removeFromSuperview()
+        }
+        makeView()
     }
     
     func presentWaitAlertAction(){
