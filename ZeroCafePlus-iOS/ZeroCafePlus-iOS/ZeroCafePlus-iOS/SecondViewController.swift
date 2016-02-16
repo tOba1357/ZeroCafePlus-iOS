@@ -437,7 +437,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         countClick.removeObjectForKey("勉強会")
         partyButton.setImage(UIImage(named: "party.png"), forState: .Normal)
         countClick.removeObjectForKey("パーティ")
-        circleButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
+        circleButton.setImage(UIImage(named: "sakuru.png"), forState: .Normal)
         countClick.removeObjectForKey("サークル")
         gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
         countClick.removeObjectForKey("大会")
