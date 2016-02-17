@@ -49,6 +49,7 @@
 		BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85C1C61201400CB0AF7 /* tournament.png */; };
 		BA3823501C6E1614001BFF1A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38234F1C6E1614001BFF1A /* Extension.swift */; };
 		BA465DE51C660D2B0068E404 /* AlertFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA465DE41C660D2B0068E404 /* AlertFunction.swift */; };
+		BA5384391C74748A00DA5AEE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5384381C74748A00DA5AEE /* CustomTabBarController.swift */; };
 		BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */; };
 		BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B721C26E54300648280 /* DateSheduleView.swift */; };
 		BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B731C26E54300648280 /* SheduleAlertView.swift */; };
@@ -176,6 +177,7 @@
 		BA31F85C1C61201400CB0AF7 /* tournament.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tournament.png; path = imageFile/genre/tournament.png; sourceTree = "<group>"; };
 		BA38234F1C6E1614001BFF1A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BA465DE41C660D2B0068E404 /* AlertFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFunction.swift; sourceTree = "<group>"; };
+		BA5384381C74748A00DA5AEE /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		BA5D9B6D1C26E30D00648280 /* ScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		BA5D9B721C26E54300648280 /* DateSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9B731C26E54300648280 /* SheduleAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheduleAlertView.swift; sourceTree = "<group>"; };
@@ -370,6 +372,14 @@
 			name = ThirdView_Detail;
 			sourceTree = "<group>";
 		};
+		BA53843C1C7474C500DA5AEE /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				BA5384381C74748A00DA5AEE /* CustomTabBarController.swift */,
+			);
+			name = TabBarController;
+			sourceTree = "<group>";
+		};
 		BA5D9B711C26E54300648280 /* SheduleListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +470,7 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BA53843C1C7474C500DA5AEE /* TabBarController */,
 				BA38234F1C6E1614001BFF1A /* Extension.swift */,
 				BA31F87C1C61275E00CB0AF7 /* ThirdView_Detail */,
 				D76B28341C60A2110090DB73 /* image */,
@@ -767,6 +778,7 @@
 				9DD8BDA61C284E9B002F243D /* EventsAttendViewController.swift in Sources */,
 				BA5D9B751C26E54300648280 /* DateSheduleView.swift in Sources */,
 				BA5D9B761C26E54300648280 /* SheduleAlertView.swift in Sources */,
+				BA5384391C74748A00DA5AEE /* CustomTabBarController.swift in Sources */,
 				BA465DE51C660D2B0068E404 /* AlertFunction.swift in Sources */,
 				BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */,
 				D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */,
