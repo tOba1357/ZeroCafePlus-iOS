@@ -52,11 +52,6 @@ class EventsAttendViewController: UIViewController {
         starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
         
         
-        //        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
-        
-        
-        
-        
         
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
@@ -225,7 +220,7 @@ class EventsAttendViewController: UIViewController {
         myScrollView.addSubview(sankaButton)
         sankaButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: content,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/8.29),
+            NSLayoutConstraint(item: sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/21.43),
             NSLayoutConstraint(item: sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
             NSLayoutConstraint(item: sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
             NSLayoutConstraint(item: sankaButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
@@ -331,11 +326,36 @@ class EventsAttendViewController: UIViewController {
         
         
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        
+        genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
+        window = UIWindow()
+        window.frame = CGRectMake(0, 0, 0, 0)
+        window.layer.position = CGPoint(x: 0, y: 0)
+        window.backgroundColor = UIColor.redColor()
+        window.makeKeyWindow()
+        window.makeKeyAndVisible()
+        
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+        imgView.image = genreImg
+        window.addSubview(imgView)
+        
+        
+    }
+    
+    
     override func viewWillAppear(animated: Bool) {
         
         
         
-        
+//        let viewControllers = self.navigationController?.viewControllers
+//        if indexOfArray(viewControllers!, searchObject: self) == nil {
+//            // 戻るボタンが押された処理
+//            print("back!")
+//        }
+//        super.viewWillDisappear(animated)
         
         
         
@@ -484,6 +504,16 @@ class EventsAttendViewController: UIViewController {
     }
     
     
+//    func indexOfArray(array:[AnyObject], searchObject: AnyObject)-> Int? {
+//        for (index, value) in array.enumerate() {
+//            if value as! UIViewController == searchObject as! UIViewController {
+//                return index
+//            }
+//        }
+//        return nil
+//    }
+    
+    
     
     
     func onClickSankaButton(sender: UIButton){
@@ -526,23 +556,6 @@ class EventsAttendViewController: UIViewController {
     
     
     
-    override func viewDidDisappear(animated: Bool) {
-        genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.bounds.width/100000000, h: self.view.bounds.height/100000)
-        window = UIWindow()
-        window.frame = CGRectMake(0, 0, 0, 0)
-        window.layer.position = CGPoint(x: 0, y:0)
-        window.backgroundColor = UIColor.clearColor()
-        window.makeKeyWindow()
-        window.makeKeyAndVisible()
-        
-        
-        let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
-        imgView.image = genreImg
-        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
-        window.addSubview(imgView)
-        
-        
-    }
     
     //    func onClickreservedButton(sender: UIButton){
     //        let EventDecideViewController = EventsDecideViewController()
