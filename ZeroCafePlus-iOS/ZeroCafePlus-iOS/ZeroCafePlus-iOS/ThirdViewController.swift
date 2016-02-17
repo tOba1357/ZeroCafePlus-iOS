@@ -9,7 +9,8 @@
 import UIKit
 import Alamofire
 
-class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate,ScheduleDelegate,CreateEventDetailDelegate,FinalDecisionEventAlertDelegate{
+class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDelegate,
+                            CreateEventDelegate, CheckCalenderDelegate, ScheduleDelegate,CreateEventDetailDelegate, FinalDecisionEventAlertDelegate{
     
     let scrollView = UIScrollView()
     var createEvetView :CreateEventView!

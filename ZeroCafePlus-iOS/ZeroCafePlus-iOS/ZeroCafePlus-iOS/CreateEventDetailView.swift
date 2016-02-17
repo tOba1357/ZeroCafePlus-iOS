@@ -91,6 +91,7 @@ class CreateEventDetailView: UIView,UITextFieldDelegate,UIPickerViewDataSource, 
         let checkbox = CTCheckbox()
         checkbox.frame = CGRectMake(0,self.frame.height*(446/1136),self.frame.width/5,self.frame.height/10)
         checkbox.checkboxColor = UIColor.blackColor()
+        checkbox.addTarget(self, action: "checked:", forControlEvents: .ValueChanged)
         checkbox.checkboxSideLength = 22
         checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Normal)
         checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Disabled)
