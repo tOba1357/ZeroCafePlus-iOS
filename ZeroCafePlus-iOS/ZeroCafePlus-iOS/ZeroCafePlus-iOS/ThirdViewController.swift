@@ -9,7 +9,8 @@
 import UIKit
 import Alamofire
 
-class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDelegate, CheckCalenderDelegate,ScheduleDelegate,CreateEventDetailDelegate,FinalDecisionEventAlertDelegate{
+class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDelegate,
+                            CreateEventDelegate, CheckCalenderDelegate, ScheduleDelegate,CreateEventDetailDelegate, FinalDecisionEventAlertDelegate{
     
     let scrollView = UIScrollView()
     var createEvetView :CreateEventView!
@@ -88,7 +89,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         self.view.userInteractionEnabled = false
 
         alertWindow = UIWindow()
-        alertWindow.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
+        alertWindow.frame = CGRectMake(barHeight, barHeight, myBoundSize.width-barHeight*2, myBoundSize.height-barHeight*2)
         alertWindow.backgroundColor = UIColor.grayColor()
         alertWindow.layer.masksToBounds = true
         alertWindow.layer.cornerRadius = 15
@@ -151,7 +152,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
         self.view.userInteractionEnabled = false
 
         alertWindow = UIWindow()
-        alertWindow.frame = CGRectMake(10, 10, myBoundSize.width-20, myBoundSize.height-20)
+        alertWindow.frame = CGRectMake(barHeight, barHeight, myBoundSize.width-barHeight*2, myBoundSize.height-barHeight*2)
         alertWindow.backgroundColor = UIColor.grayColor()
         alertWindow.layer.masksToBounds = true
         alertWindow.layer.cornerRadius = 15
@@ -215,7 +216,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate,CreateEventDel
                 "title" : self.eventName,
                 "description" : self.eventExposition,
                 "belonging" : "\(eventBelonging)",
-                "entry_fee" : 999,
+                "entry_fee" : 0,
                 "owner_id" : 1,
                 "dive_join" : eventDiveJoin,
                 "start_time" : "\(self.eventDate[0])-\(self.eventDate[1])-\(self.eventDate[2])T\(self.eventStartTime)",
