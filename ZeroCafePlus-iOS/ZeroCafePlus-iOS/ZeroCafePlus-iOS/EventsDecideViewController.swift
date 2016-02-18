@@ -157,21 +157,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     override func viewWillAppear(animated: Bool) {
-//        
-//        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-//        self.window = UIWindow()
-//        self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
-//        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
-//        self.window.backgroundColor = UIColor.clearColor()
-//        self.window.makeKeyWindow()
-//        self.window.makeKeyAndVisible()
-//        
-//        
-//        let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
-//        imgView.image = self.genreImg
-//        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
-//        self.window.addSubview(imgView)
-//        
+     
         
         
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
@@ -215,7 +201,6 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
                         
                     }
                     
-                    //        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                     self.window = UIWindow()
                     self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
                     self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
@@ -224,7 +209,6 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
                     self.window.makeKeyAndVisible()
                     let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
                     imgView.image = self.genreImg
-                    //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
                     self.window.addSubview(imgView)
 
                         
