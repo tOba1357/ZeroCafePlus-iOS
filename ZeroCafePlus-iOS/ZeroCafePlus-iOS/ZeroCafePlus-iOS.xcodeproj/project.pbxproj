@@ -56,6 +56,14 @@
 		BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D9B741C26E54300648280 /* TimeSheduleView.swift */; };
 		BA5D9BB21C26E6E300648280 /* libCTCheckbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5D9BAF1C26E5F000648280 /* libCTCheckbox.a */; };
 		BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */; };
+		BAB6488D1C760660009C8A8E /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB648851C760660009C8A8E /* GCD.swift */; };
+		BAB6488E1C760660009C8A8E /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB648861C760660009C8A8E /* Net.swift */; };
+		BAB6488F1C760660009C8A8E /* NetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB648871C760660009C8A8E /* NetData.swift */; };
+		BAB648901C760660009C8A8E /* NetDownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB648881C760660009C8A8E /* NetDownloadTask.swift */; };
+		BAB648911C760660009C8A8E /* NetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB648891C760660009C8A8E /* NetHelper.swift */; };
+		BAB648921C760660009C8A8E /* NetRequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6488A1C760660009C8A8E /* NetRequestSerialization.swift */; };
+		BAB648931C760660009C8A8E /* NetResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6488B1C760660009C8A8E /* NetResponseData.swift */; };
+		BAB648941C760660009C8A8E /* NetUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6488C1C760660009C8A8E /* NetUploadTask.swift */; };
 		BABD6E361C61F4010018F456 /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABD6E351C61F4010018F456 /* CommonFunction.swift */; };
 		BABD6E471C6209260018F456 /* tabbar_icon-01_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BABD6E371C6209260018F456 /* tabbar_icon-01_s.png */; };
 		BABD6E481C6209260018F456 /* tabbar_icon-01_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BABD6E381C6209260018F456 /* tabbar_icon-01_s@2x.png */; };
@@ -184,6 +192,14 @@
 		BA5D9B741C26E54300648280 /* TimeSheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSheduleView.swift; sourceTree = "<group>"; };
 		BA5D9BA91C26E5F000648280 /* CTCheckbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CTCheckbox.xcodeproj; path = "ZeroCafePlus-iOS/CTCheckbox-master/CTCheckbox.xcodeproj"; sourceTree = "<group>"; };
 		BA770AE31C5E5908002C918F /* CreateEventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventDetailView.swift; sourceTree = "<group>"; };
+		BAB648851C760660009C8A8E /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GCD.swift; path = Net/GCD.swift; sourceTree = "<group>"; };
+		BAB648861C760660009C8A8E /* Net.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Net.swift; path = Net/Net.swift; sourceTree = "<group>"; };
+		BAB648871C760660009C8A8E /* NetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetData.swift; path = Net/NetData.swift; sourceTree = "<group>"; };
+		BAB648881C760660009C8A8E /* NetDownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetDownloadTask.swift; path = Net/NetDownloadTask.swift; sourceTree = "<group>"; };
+		BAB648891C760660009C8A8E /* NetHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetHelper.swift; path = Net/NetHelper.swift; sourceTree = "<group>"; };
+		BAB6488A1C760660009C8A8E /* NetRequestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetRequestSerialization.swift; path = Net/NetRequestSerialization.swift; sourceTree = "<group>"; };
+		BAB6488B1C760660009C8A8E /* NetResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetResponseData.swift; path = Net/NetResponseData.swift; sourceTree = "<group>"; };
+		BAB6488C1C760660009C8A8E /* NetUploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetUploadTask.swift; path = Net/NetUploadTask.swift; sourceTree = "<group>"; };
 		BABD6E351C61F4010018F456 /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		BABD6E371C6209260018F456 /* tabbar_icon-01_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-01_s.png"; path = "imageFile/tabbar_icon/tabbar_icon-01_s.png"; sourceTree = "<group>"; };
 		BABD6E381C6209260018F456 /* tabbar_icon-01_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar_icon-01_s@2x.png"; path = "imageFile/tabbar_icon/tabbar_icon-01_s@2x.png"; sourceTree = "<group>"; };
@@ -399,6 +415,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BAB648821C760631009C8A8E /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				BAB648851C760660009C8A8E /* GCD.swift */,
+				BAB648861C760660009C8A8E /* Net.swift */,
+				BAB648871C760660009C8A8E /* NetData.swift */,
+				BAB648881C760660009C8A8E /* NetDownloadTask.swift */,
+				BAB648891C760660009C8A8E /* NetHelper.swift */,
+				BAB6488A1C760660009C8A8E /* NetRequestSerialization.swift */,
+				BAB6488B1C760660009C8A8E /* NetResponseData.swift */,
+				BAB6488C1C760660009C8A8E /* NetUploadTask.swift */,
+			);
+			name = Net;
+			sourceTree = "<group>";
+		};
 		BAE34F5A1C28EFBB0029D6B9 /* CTCheckbox */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +501,7 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BAB648821C760631009C8A8E /* Net */,
 				BA53843C1C7474C500DA5AEE /* TabBarController */,
 				BA38234F1C6E1614001BFF1A /* Extension.swift */,
 				BA31F87C1C61275E00CB0AF7 /* ThirdView_Detail */,
@@ -766,12 +798,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB6488D1C760660009C8A8E /* GCD.swift in Sources */,
 				6FD54C491C6476F300A6EC41 /* ViewPagerElement2.swift in Sources */,
 				BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */,
 				BA5D9B771C26E54300648280 /* TimeSheduleView.swift in Sources */,
 				D76B27FE1C5622410090DB73 /* CreateEventView.swift in Sources */,
 				6FD54C5C1C64860C00A6EC41 /* ViewPagerTab2.swift in Sources */,
 				6FD54C4F1C647CEC00A6EC41 /* EventView2.swift in Sources */,
+				BAB6488E1C760660009C8A8E /* Net.swift in Sources */,
+				BAB648901C760660009C8A8E /* NetDownloadTask.swift in Sources */,
+				BAB648931C760660009C8A8E /* NetResponseData.swift in Sources */,
 				6FD54C451C6476A600A6EC41 /* ViewPager2.swift in Sources */,
 				BA2F0AD71C2858090007A49D /* DayView.swift in Sources */,
 				D7A626521C1AB359002DCEC6 /* SecondViewController.swift in Sources */,
@@ -783,8 +819,11 @@
 				BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */,
 				D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */,
 				BA3823501C6E1614001BFF1A /* Extension.swift in Sources */,
+				BAB648911C760660009C8A8E /* NetHelper.swift in Sources */,
 				6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */,
+				BAB648921C760660009C8A8E /* NetRequestSerialization.swift in Sources */,
 				BA31F8441C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift in Sources */,
+				BAB648941C760660009C8A8E /* NetUploadTask.swift in Sources */,
 				D76B28001C56224F0090DB73 /* CheckCalenderView.swift in Sources */,
 				BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */,
 				D76B28461C63D6750090DB73 /* ViewPagerElement.swift in Sources */,
@@ -797,6 +836,7 @@
 				D76B284E1C6469050090DB73 /* EventView.swift in Sources */,
 				BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */,
 				D76B28421C63D60C0090DB73 /* ViewPager.swift in Sources */,
+				BAB6488F1C760660009C8A8E /* NetData.swift in Sources */,
 				BA770AE41C5E5908002C918F /* CreateEventDetailView.swift in Sources */,
 				D76B284A1C6468510090DB73 /* ViewPagerTab.swift in Sources */,
 				D7A626801C1AD3D6002DCEC6 /* FourthViewController.swift in Sources */,
