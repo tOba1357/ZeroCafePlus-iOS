@@ -55,6 +55,10 @@ class ViewPager2: UIView, UIScrollViewDelegate, ViewPagerTabDelegate {
         
         self.uiPageController.numberOfPages = viewNum
         changePage(defaultPage)
+        let border = CALayer()
+        border.frame = CGRect(x: 0, y: 0, width: self.frame.width*3, height: 2)
+        border.backgroundColor = UIColor.hexStr("#BABABA", alpha: 1.0).CGColor
+        self.scrollView.layer.addSublayer(border)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,5 +100,5 @@ class ViewPager2: UIView, UIScrollViewDelegate, ViewPagerTabDelegate {
     func onClickTabButton(index: Int) {
         self.changePage(index)
     }
-
+    
 }
