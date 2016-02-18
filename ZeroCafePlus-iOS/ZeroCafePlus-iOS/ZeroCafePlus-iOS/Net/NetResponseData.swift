@@ -26,17 +26,17 @@ class ResponseData
     *
     *  @return json dictionary
     */
-    func json(error: NSErrorPointer = nil) -> NSDictionary? {
+    func json() throws -> NSDictionary {
+        var error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
         if let httpResponse = urlResponse as? NSHTTPURLResponse {
             if httpResponse.statusCode == 200 {
-                let jsonData = NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments, error: error) as! NSDictionary
+                let jsonData = (try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)) as! NSDictionary
                 return jsonData
             }
-            else if error != nil {
-                error.memory = NSError(domain: "HTTP_ERROR_CODE", code: httpResponse.statusCode, userInfo: nil)
-            }
+            else{
+                error = NSError(domain: "HTTP_ERROR_CODE", code: httpResponse.statusCode, userInfo: nil)            }
         }
-        return nil
+        throw error
     }
 
     /**
