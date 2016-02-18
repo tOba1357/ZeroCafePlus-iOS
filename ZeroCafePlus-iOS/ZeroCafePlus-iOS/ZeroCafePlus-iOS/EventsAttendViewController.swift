@@ -311,24 +311,33 @@ class EventsAttendViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.whiteColor()
         
-        print(self.view.bounds.height)
-        print(self.view.frame.height)
-        print("\(self.view.frame.size.height*(91/1136))asdf")
-        print("\(myScrollView.frame.size.height)asdf")
-        print("\(line.layer.position.y)asdf")
-        
-        
-        
-        print(name.bounds.height)
-        
-        
-        
-        
         
     }
     
+    
+    override func viewWillDisappear(animated: Bool) {
+        let viewControllers = self.navigationController?.viewControllers
+        if indexOfArray(viewControllers!, searchObject: self) == nil {
+            // 戻るボタンが押された処理
+            genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
+            window = UIWindow()
+            window.frame = CGRectMake(0, 0, 0, 0)
+            window.layer.position = CGPoint(x: 0, y: 0)
+            window.backgroundColor = UIColor.redColor()
+            window.makeKeyWindow()
+            window.makeKeyAndVisible()
+            
+            
+            let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+            imgView.image = genreImg
+            window.addSubview(imgView)
+        }
+        super.viewWillDisappear(animated)
+    }
+    
+    
+    
     override func viewDidDisappear(animated: Bool) {
-        
         genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
         window = UIWindow()
         window.frame = CGRectMake(0, 0, 0, 0)
@@ -342,21 +351,10 @@ class EventsAttendViewController: UIViewController {
         imgView.image = genreImg
         window.addSubview(imgView)
         
-        
     }
     
     
     override func viewWillAppear(animated: Bool) {
-        
-        
-        
-//        let viewControllers = self.navigationController?.viewControllers
-//        if indexOfArray(viewControllers!, searchObject: self) == nil {
-//            // 戻るボタンが押された処理
-//            print("back!")
-//        }
-//        super.viewWillDisappear(animated)
-        
         
         
         
@@ -501,17 +499,18 @@ class EventsAttendViewController: UIViewController {
         
         
         
+        
     }
     
     
-//    func indexOfArray(array:[AnyObject], searchObject: AnyObject)-> Int? {
-//        for (index, value) in array.enumerate() {
-//            if value as! UIViewController == searchObject as! UIViewController {
-//                return index
-//            }
-//        }
-//        return nil
-//    }
+    func indexOfArray(array:[AnyObject], searchObject: AnyObject)-> Int? {
+        for (index, value) in array.enumerate() {
+            if value as! UIViewController == searchObject as! UIViewController {
+                return index
+            }
+        }
+        return nil
+    }
     
     
     
