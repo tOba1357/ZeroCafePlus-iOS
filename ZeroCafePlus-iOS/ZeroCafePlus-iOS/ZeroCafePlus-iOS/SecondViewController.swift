@@ -35,13 +35,17 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     private var hobbyLabel:UILabel!
     private var partyLabel: UILabel!
     
-    private var startDatePicker:UIPickerView!
-    private var startDatePicker2: UIPickerView!
-    private var dataArr: NSArray = ["10:00","11:00","12:00","13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00","21:00"]
+    private var startDatePicker:UIDatePicker!
+    private var startDatePicker2: UIDatePicker!
+    
     private var myToolBar: UIToolbar!
     
     private var clearButton:UIButton!
     private var searchEvents:UIButton!
+    
+    private var genreCount:[Int] = []
+    private var userStartTime: String!
+    private var userEndTime: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +58,10 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         countClick.removeObjectForKey("読書会")
         countClick.removeObjectForKey("趣味")
         countClick.removeObjectForKey("就活")
+        countClick.removeObjectForKey("SearchTitle")
+        countClick.removeObjectForKey("StartTime")
+        countClick.removeObjectForKey("EndTime")
+        countClick.removeObjectForKey("genreCount")
         countClick.synchronize()
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
@@ -90,24 +98,25 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         self.view.addSubview(genreLabel)
         
         let placeholder = NSAttributedString(string: "イベント名、関連ワードなど", attributes: [NSForegroundColorAttributeName : UIColor.hexStr("#a5a5a5", alpha: 1.0)])
-        
         searchTitle = UITextField()
-        searchTitle.frame = CGRectMake(screenWidth/4.5, screenHeight/19.5, screenWidth/1.42, screenHeight/13)
         searchTitle.attributedPlaceholder = placeholder
         searchTitle.inputAccessoryView = myKeyboard
         searchTitle.font = UIFont.systemFontOfSize(16)
         searchTitle.textAlignment = NSTextAlignment.Center
         searchTitle.textColor = UIColor.hexStr("#a5a5a5", alpha: 1.0)
         searchTitle.backgroundColor = UIColor.clearColor()
-        searchTitle.addUnderline(1.0, color: UIColor.grayColor())
+        searchTitle.frame = CGRectMake(screenWidth/4.5, screenHeight/16.5, screenWidth/1.42, screenHeight/17)
+        searchTitle.addUnderline(1.159, color: UIColor.hexStr("#a5a5a5", alpha: 1.0))
         self.view.addSubview(searchTitle)
         
-        startDatePicker = UIPickerView()
-        startDatePicker.showsSelectionIndicator = true
-        startDatePicker.delegate = self
-        startDatePicker2 = UIPickerView()
-        startDatePicker2.showsSelectionIndicator = true
-        startDatePicker2.delegate = self
+        startDatePicker = UIDatePicker()
+        startDatePicker.addTarget(self, action: "changedDateEvent:", forControlEvents: UIControlEvents.ValueChanged)
+        startDatePicker.datePickerMode = UIDatePickerMode.Date
+        startDatePicker.locale = NSLocale(localeIdentifier: "ja")
+        startDatePicker2 = UIDatePicker()
+        startDatePicker2.addTarget(self, action: "changedDateEvent2:", forControlEvents: UIControlEvents.ValueChanged)
+        startDatePicker2.locale = NSLocale(localeIdentifier: "ja")
+        startDatePicker2.datePickerMode = UIDatePickerMode.Date
         
         myToolBar = UIToolbar(frame: CGRectMake(0, screenHeight/6, screenWidth, 40.0))
         myToolBar.layer.position = CGPoint(x: screenWidth/2, y: screenHeight-20.0)
@@ -119,27 +128,31 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         myToolBar.items = [myToolBarButton]
         
         let placeholder2 = NSAttributedString(string: "指定なし", attributes: [NSForegroundColorAttributeName : UIColor.hexStr("#a5a5a5", alpha: 1.0)])
-        startTime = UITextField(frame: CGRectMake(screenWidth/4.4, screenHeight/5.0,screenWidth/3.13, screenHeight/30))
+        startTime = UITextField(frame: CGRectMake(screenWidth/4.5, screenHeight/5.0,screenWidth/3.3, screenHeight/21))
         startTime.textColor = UIColor.hexStr("a5a5a5", alpha: 1.0)
         startTime.attributedPlaceholder = placeholder2
         startTime.text = ""
         startTime.textAlignment = NSTextAlignment.Center
+        startTime.font = UIFont.systemFontOfSize(12)
+        startTime.addUnderline(1.2, color: UIColor.hexStr("#a5a5a5", alpha: 1.0))
         startTime.inputView = startDatePicker
         startTime.inputAccessoryView = myToolBar
         self.view.addSubview(startTime)
         
-        endTime = UITextField(frame: CGRectMake(screenWidth/1.789, screenHeight/5.0,screenWidth/3.13, screenHeight/30))
+        endTime = UITextField(frame: CGRectMake(screenWidth/1.6, screenHeight/5.0,screenWidth/3.3, screenHeight/21))
         endTime.textColor = UIColor.hexStr("a5a5a5", alpha: 1.0)
         endTime.attributedPlaceholder = placeholder2
         endTime.text = ""
+        endTime.font = UIFont.systemFontOfSize(12)
+        endTime.addUnderline(1.2, color: UIColor.hexStr("#a5a5a5", alpha: 1.0))
         endTime.textAlignment = NSTextAlignment.Center
         endTime.inputView = startDatePicker2
         endTime.inputAccessoryView = myToolBar
         self.view.addSubview(endTime)
         
-        tooLabel = UILabel(frame: CGRectMake(screenWidth/1.9, screenHeight/5.0, screenWidth/14.2, screenHeight/30))
+        tooLabel = UILabel(frame: CGRectMake(screenWidth/1.85, screenHeight/5.0, screenWidth/14.2, screenHeight/30))
         tooLabel.text = "〜"
-        tooLabel.font = UIFont.systemFontOfSize(16)
+        tooLabel.font = UIFont.systemFontOfSize(18)
         tooLabel.textColor = UIColor.hexStr("a5a5a5", alpha: 1.0)
         tooLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(tooLabel)
@@ -162,7 +175,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         hobbyButton = UIButton()
         hobbyButton.tag = 5
-        hobbyButton.setImage(UIImage(named: "hobby.png"), forState: .Normal)
+        hobbyButton.setImage(UIImage(named: "Zerohobby.png"), forState: .Normal)
         hobbyButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(hobbyButton)
         hobbyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -175,7 +188,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         jobHuntNButton = UIButton()
         jobHuntNButton.tag = 7
-        jobHuntNButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
+        jobHuntNButton.setImage(UIImage(named: "Zerojobhunt.png"), forState: .Normal)
         jobHuntNButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(jobHuntNButton)
         jobHuntNButton.translatesAutoresizingMaskIntoConstraints = false
@@ -188,7 +201,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         gameButton = UIButton()
         gameButton.tag = 4
-        gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
+        gameButton.setImage(UIImage(named: "Zerogame.png"), forState: .Normal)
         gameButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(gameButton)
         gameButton.translatesAutoresizingMaskIntoConstraints = false
@@ -201,7 +214,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         partyButton = UIButton()
         partyButton.tag = 2
-        partyButton.setImage(UIImage(named: "party.png"), forState: .Normal)
+        partyButton.setImage(UIImage(named: "Zeroparty.png"), forState: .Normal)
         partyButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(partyButton)
         partyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -214,7 +227,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         readButton = UIButton()
         readButton.tag = 6
-        readButton.setImage(UIImage(named: "readbook.png"), forState: .Normal)
+        readButton.setImage(UIImage(named: "Zeroread.png"), forState: .Normal)
         readButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(readButton)
         readButton.translatesAutoresizingMaskIntoConstraints = false
@@ -227,7 +240,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         circleButton = UIButton()
         circleButton.tag = 3
-        circleButton.setImage(UIImage(named: "sakuru.png"), forState: .Normal)
+        circleButton.setImage(UIImage(named: "Zerocircle.png"), forState: .Normal)
         circleButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(circleButton)
         circleButton.translatesAutoresizingMaskIntoConstraints = false
@@ -240,7 +253,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
         studyButton = UIButton()
         studyButton.tag = 1
-        studyButton.setImage(UIImage(named: "study.png"), forState: .Normal)
+        studyButton.setImage(UIImage(named: "Zerostudy.png"), forState: .Normal)
         studyButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(studyButton)
         studyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -348,9 +361,6 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             NSLayoutConstraint(item: self.studyLabel,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8),
             NSLayoutConstraint(item: self.studyLabel,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/40)]
         )
-        
-        
-        
         // Do any additional setup after loading the view
     }
     
@@ -358,7 +368,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         let countClick = NSUserDefaults.standardUserDefaults()
         if sender.tag == 1{
             if countClick.objectForKey("勉強会") != nil {
-                studyButton.setImage(UIImage(named: "study.png"), forState: .Normal)
+                studyButton.setImage(UIImage(named: "Zerostudy.png"), forState: .Normal)
                 countClick.removeObjectForKey("勉強会")
                 countClick.synchronize()
             }else {
@@ -368,7 +378,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }else if sender.tag == 2 {
             if countClick.objectForKey("パーティ") != nil {
-                partyButton.setImage(UIImage(named: "party.png"), forState: .Normal)
+                partyButton.setImage(UIImage(named: "Zeroparty.png"), forState: .Normal)
                 countClick.removeObjectForKey("パーティ")
                 countClick.synchronize()
             }else {
@@ -378,7 +388,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }else if sender.tag == 3 {
             if countClick.objectForKey("サークル") != nil {
-                circleButton.setImage(UIImage(named: "sakuru.png"), forState: .Normal)
+                circleButton.setImage(UIImage(named: "Zerocircle.png"), forState: .Normal)
                 countClick.removeObjectForKey("サークル")
                 countClick.synchronize()
                 
@@ -390,7 +400,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
         }else if sender.tag == 4 {
             if countClick.objectForKey("大会") != nil {
-                gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
+                gameButton.setImage(UIImage(named: "Zerogame.png"), forState: .Normal)
                 countClick.removeObjectForKey("大会")
                 countClick.synchronize()
             }else {
@@ -400,7 +410,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }else if sender.tag == 5 {
             if countClick.objectForKey("趣味") != nil {
-                hobbyButton.setImage(UIImage(named: "hobby.png"), forState: .Normal)
+                hobbyButton.setImage(UIImage(named: "Zerohobby.png"), forState: .Normal)
                 countClick.removeObjectForKey("趣味")
                 countClick.synchronize()
             }else {
@@ -410,7 +420,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         } else if sender.tag == 6 {
             if countClick.objectForKey("読書会") != nil {
-                readButton.setImage(UIImage(named: "readbook.png"), forState: .Normal)
+                readButton.setImage(UIImage(named: "Zeroread.png"), forState: .Normal)
                 countClick.removeObjectForKey("読書会")
                 countClick.synchronize()
             }else {
@@ -420,7 +430,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         } else if sender.tag == 7 {
             if countClick.objectForKey("就活") != nil {
-                jobHuntNButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
+                jobHuntNButton.setImage(UIImage(named: "Zerojobhunt.png"), forState: .Normal)
                 countClick.removeObjectForKey("就活")
                 countClick.synchronize()
             }else{
@@ -430,22 +440,22 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             }
         }
     }
+    
     func clearEverything(sender: UIButton){
-        
         let countClick = NSUserDefaults.standardUserDefaults()
-        studyButton.setImage(UIImage(named: "study.png"), forState: .Normal)
+        studyButton.setImage(UIImage(named: "Zerostudy.png"), forState: .Normal)
         countClick.removeObjectForKey("勉強会")
-        partyButton.setImage(UIImage(named: "party.png"), forState: .Normal)
+        partyButton.setImage(UIImage(named: "Zeroparty.png"), forState: .Normal)
         countClick.removeObjectForKey("パーティ")
-        circleButton.setImage(UIImage(named: "sakuru.png"), forState: .Normal)
+        circleButton.setImage(UIImage(named: "Zerocircle.png"), forState: .Normal)
         countClick.removeObjectForKey("サークル")
-        gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
+        gameButton.setImage(UIImage(named: "Zerogame.png"), forState: .Normal)
         countClick.removeObjectForKey("大会")
-        hobbyButton.setImage(UIImage(named: "hobby.png"), forState: .Normal)
+        hobbyButton.setImage(UIImage(named: "Zerohobby.png"), forState: .Normal)
         countClick.removeObjectForKey("趣味")
-        readButton.setImage(UIImage(named: "readbook.png"), forState: .Normal)
+        readButton.setImage(UIImage(named: "Zeroread.png"), forState: .Normal)
         countClick.removeObjectForKey("読書会")
-        jobHuntNButton.setImage(UIImage(named: "syukatu.png"), forState: .Normal)
+        jobHuntNButton.setImage(UIImage(named: "Zerojobhunt.png"), forState: .Normal)
         countClick.removeObjectForKey("就活")
         countClick.synchronize()
         searchTitle.text = ""
@@ -455,63 +465,90 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     func searchStart(sedner: UIButton){
         let userSearch = NSUserDefaults.standardUserDefaults()
-        userSearch.setObject(searchTitle.text, forKey: "SearchTitle")
-        userSearch.setObject(startTime.text, forKey: "StartTime")
-        userSearch.setObject(endTime, forKey: "EndTime")
+        if searchTitle.text == "" {}else{
+            userSearch.setObject(searchTitle.text, forKey: "SearchTitle")
+        }
+        if startTime.text == "" {}else {
+            userSearch.setObject(userStartTime, forKey: "StartTime")
+        }
+        if endTime.text == "" {}else {
+            userSearch.setObject(userEndTime, forKey: "EndTime")
+        }
         userSearch.synchronize()
         searchGenre()
+//        let SRVC = SearchReslutViewController()
+//        presentViewController(SRVC, animated: true, completion: nil)
     }
     
     func searchGenre() {
         let countClick = NSUserDefaults.standardUserDefaults()
         if countClick.objectForKey("勉強会") != nil {
-            countClick.setObject("1", forKey: "1")
+            genreCount.append(1)
         }
         if countClick.objectForKey("パーティ") != nil {
-            countClick.setObject("2", forKey: "2")
+            genreCount.append(2)
         }
         if countClick.objectForKey("サークル") != nil {
-            countClick.setObject("3", forKey: "3")
+            genreCount.append(3)
         }
         if countClick.objectForKey("大会") != nil {
-            countClick.setObject("4", forKey: "4")
+            genreCount.append(4)
         }
         if countClick.objectForKey("趣味") != nil {
-            countClick.setObject("5", forKey: "5")
+            genreCount.append(5)
         }
         if countClick.objectForKey("読書会") != nil {
-            countClick.setObject("6", forKey: "6")
+            genreCount.append(6)
         }
         if countClick.objectForKey("就活") != nil {
-            countClick.setObject("7", forKey: "7")
+            genreCount.append(7)
         }
-        countClick.synchronize()
+        if genreCount.isEmpty{}else{
+            countClick.setObject(genreCount, forKey: "genreCount")
+            countClick.synchronize()
+        }
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView!, numberOfRowsInComponent component: Int) -> Int {
-        return dataArr.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return dataArr[row] as? String;
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == startDatePicker {
-            startTime.text = dataArr[row] as? String;
-        }else {
-            endTime.text = dataArr[row] as? String
-        }
-    }
-    
     func onClick(sender: UIBarButtonItem) {
         startTime.resignFirstResponder()
         endTime.resignFirstResponder()
     }
+    func changedDateEvent(sender:AnyObject?){
+        self.changeLabelDate(startDatePicker.date)
+    }
+    func changedDateEvent2(sender:AnyObject?){
+        self.changeLabelDate2(startDatePicker2.date)
+    }
+    func changeLabelDate(date:NSDate) {
+        startTime.text = self.dateToString(date)
+    }
+    func changeLabelDate2(date:NSDate) {
+        endTime.text = self.dateToString2(date)
+    }
+    
+    func dateToString(date:NSDate) ->String {
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja")
+        dateFormatter.dateFormat = "yyy年MM月dd日"
+        let selectedDate: NSString = dateFormatter.stringFromDate(date)
+        dateFormatter.dateFormat = "yyy-MM-dd"
+        userStartTime = dateFormatter.stringFromDate(date)
+        return selectedDate as String
+    }
+    func dateToString2(date:NSDate) ->String {
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja")
+        dateFormatter.dateFormat = "yyy年MM月dd日"
+        let selectedDate: NSString = dateFormatter.stringFromDate(date)
+        dateFormatter.dateFormat = "yyy-MM-dd"
+        userEndTime = dateFormatter.stringFromDate(date)
+        return selectedDate as String
+    }
+    
     
     func onClickMyButton (sender: UIButton) {
         self.view.endEditing(true)
@@ -537,6 +574,6 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
 
