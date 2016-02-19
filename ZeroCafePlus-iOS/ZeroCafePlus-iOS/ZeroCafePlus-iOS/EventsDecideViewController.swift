@@ -173,7 +173,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
                         
                 if self.EventGenre == 0 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "syukatu.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
 
                     } else if self.EventGenre == 1 {
                         self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#AF2E84", alpha: 1.0)
