@@ -330,6 +330,22 @@ class EventsAttendViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
+        window = UIWindow()
+        window.frame = CGRectMake(0, 0, 0, 0)
+        window.layer.position = CGPoint(x: 0, y: 0)
+        window.backgroundColor = UIColor.redColor()
+        window.makeKeyWindow()
+        window.makeKeyAndVisible()
+        
+        
+        let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+        imgView.image = genreImg
+        window.addSubview(imgView)
+        super.viewDidDisappear(animated)
+    }
+    
     func indexOfArray(array:[AnyObject], searchObject: AnyObject)-> Int? {
         for (index, value) in array.enumerate() {
             if value as! UIViewController == searchObject as! UIViewController {
