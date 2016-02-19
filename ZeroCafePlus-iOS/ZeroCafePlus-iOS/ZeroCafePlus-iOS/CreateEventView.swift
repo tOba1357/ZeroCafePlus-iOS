@@ -201,11 +201,12 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         partyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         partyLabel.sizeToFit()
         
-        let myButton = UIButton(frame: CGRectMake(0,0,self.frame.width/5,self.frame.height/10))
+        let myButton = UIButton(frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/15))
         myButton.layer.masksToBounds = true
         myButton.layer.cornerRadius = 20.0
+        myButton.setTitle("次へ", forState: .Normal)
+        myButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xf39800)
         myButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
-        myButton.backgroundColor = UIColor.redColor()
         myButton.layer.position = CGPoint(x: self.frame.width/2, y:self.frame.height/10*8.5)
         
         self.addSubview(titleLabel)

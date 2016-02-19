@@ -120,11 +120,12 @@ class CreateEventDetailView: UIView,UITextFieldDelegate,UIPickerViewDataSource, 
         tagText.layer.borderWidth = 0.75
         tagText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
         
-        let makeButton = UIButton (frame: CGRectMake(0,0,self.frame.width/5,self.frame.height/10))
+        let makeButton = UIButton (frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/15))
         makeButton.layer.masksToBounds = true
         makeButton.layer.cornerRadius = 20.0
+        makeButton.setTitle("決定", forState: .Normal)
+        makeButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xf39800)
         makeButton.addTarget(self, action: "onClickMakeButton:", forControlEvents: .TouchUpInside)
-        makeButton.backgroundColor = UIColor.redColor()
         makeButton.layer.position = CGPointMake(self.frame.width/2, self.frame.height/6*5)
         
         
