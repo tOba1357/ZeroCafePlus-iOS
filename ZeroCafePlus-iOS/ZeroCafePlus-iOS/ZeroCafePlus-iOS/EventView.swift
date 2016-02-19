@@ -15,7 +15,7 @@ class EventView :UIView{
     var mydelegate: EventViewDelegate!
     var myEventID :Int!
     
-    init(frame: CGRect, titleNameString: String, id:Int, dateNameString: String, tagNameString: String) {
+    init(frame: CGRect, titleNameString: String, id:Int, dateNameString: String, tagNameString: String, genreImageNum: Int) {
         super.init(frame: frame)
         myEventID = id
         self.backgroundColor = UIColor.whiteColor()
