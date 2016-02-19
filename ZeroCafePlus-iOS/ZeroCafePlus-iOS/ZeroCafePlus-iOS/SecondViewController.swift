@@ -22,7 +22,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     private var studyButton:UIButton!
     private var jobHuntNButton:UIButton!
     private var readButton:UIButton!
-    private var gameButton:UIButton!
+    private var tournamentButton:UIButton!
     private var circleButton:UIButton!
     private var hobbyButton:UIButton!
     private var partyButton:UIButton!
@@ -30,7 +30,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     private var studyLabel: UILabel!
     private var jobHuntLabel: UILabel!
     private var readLabel: UILabel!
-    private var gameLabel: UILabel!
+    private var tournamentLabel: UILabel!
     private var circleLabel: UILabel!
     private var hobbyLabel:UILabel!
     private var partyLabel: UILabel!
@@ -48,8 +48,6 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     private var userEndTime: String!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         let countClick = NSUserDefaults.standardUserDefaults()
         countClick.removeObjectForKey("勉強会")
         countClick.removeObjectForKey("パーティ")
@@ -162,7 +160,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         clearButton.setTitleColor(UIColor.hexStr("#FFFFFF", alpha: 1.0), forState: .Normal)
         clearButton.backgroundColor = UIColor.hexStr("#B3B3B3", alpha: 1.0)
         clearButton.layer.cornerRadius = 8.0
-        clearButton.addTarget(self, action: "clearEverything:", forControlEvents: .TouchUpInside)
+        clearButton.addTarget(self, action: "clearCondition:", forControlEvents: .TouchUpInside)
         self.view.addSubview(clearButton)
         
         searchEvents = UIButton(frame: CGRectMake(screenWidth-screenWidth/1.927, screenHeight/1.28, screenWidth/2.237, screenHeight/17.75))
@@ -187,7 +185,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         )
         
         jobHuntNButton = UIButton()
-        jobHuntNButton.tag = 7
+        jobHuntNButton.tag = 0
         jobHuntNButton.setImage(UIImage(named: "jobhunt.png"), forState: .Normal)
         jobHuntNButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(jobHuntNButton)
@@ -199,17 +197,17 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             NSLayoutConstraint(item: self.jobHuntNButton,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/14.564)]
         )
         
-        gameButton = UIButton()
-        gameButton.tag = 4
-        gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
-        gameButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(gameButton)
-        gameButton.translatesAutoresizingMaskIntoConstraints = false
+        tournamentButton = UIButton()
+        tournamentButton.tag = 4
+        tournamentButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
+        tournamentButton.addTarget(self, action: "clickGenreButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(tournamentButton)
+        tournamentButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: self.gameButton,attribute: .Top,relatedBy: .Equal,toItem: self.genreLabel,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/27.0),
-            NSLayoutConstraint(item: self.gameButton,attribute: .Left,relatedBy: .Equal,toItem: self.hobbyButton,attribute: NSLayoutAttribute.Right,multiplier: 1.0,constant: screenWidth/13.334),
-            NSLayoutConstraint(item: self.gameButton,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8.2),
-            NSLayoutConstraint(item: self.gameButton,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/14.564)]
+            NSLayoutConstraint(item: self.tournamentButton,attribute: .Top,relatedBy: .Equal,toItem: self.genreLabel,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/27.0),
+            NSLayoutConstraint(item: self.tournamentButton,attribute: .Left,relatedBy: .Equal,toItem: self.hobbyButton,attribute: NSLayoutAttribute.Right,multiplier: 1.0,constant: screenWidth/13.334),
+            NSLayoutConstraint(item: self.tournamentButton,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8.2),
+            NSLayoutConstraint(item: self.tournamentButton,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/14.564)]
         )
         
         partyButton = UIButton()
@@ -219,7 +217,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         self.view.addSubview(partyButton)
         partyButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: self.partyButton,attribute: .Top,relatedBy: .Equal,toItem: self.gameButton,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/15.35),
+            NSLayoutConstraint(item: self.partyButton,attribute: .Top,relatedBy: .Equal,toItem: self.tournamentButton,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/15.35),
             NSLayoutConstraint(item: self.partyButton,attribute: .Left,relatedBy: .Equal,toItem: self.jobHuntNButton,attribute: .Right,multiplier: 1.0,constant: screenWidth/13.334),
             NSLayoutConstraint(item: self.partyButton,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8.2),
             NSLayoutConstraint(item: self.partyButton,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/14.564)]
@@ -233,7 +231,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         readButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
             NSLayoutConstraint(item: self.readButton,attribute: .Top,relatedBy: .Equal,toItem: self.genreLabel,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/27.0),
-            NSLayoutConstraint(item: self.readButton,attribute: .Left,relatedBy: .Equal,toItem: self.gameButton,attribute: NSLayoutAttribute.Right,multiplier: 1.0,constant: screenWidth/13.334),
+            NSLayoutConstraint(item: self.readButton,attribute: .Left,relatedBy: .Equal,toItem: self.tournamentButton,attribute: NSLayoutAttribute.Right,multiplier: 1.0,constant: screenWidth/13.334),
             NSLayoutConstraint(item: self.readButton,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8.2),
             NSLayoutConstraint(item: self.readButton,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/14.564)]
         )
@@ -292,18 +290,18 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             NSLayoutConstraint(item: self.jobHuntLabel,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/40)]
         )
         
-        gameLabel = UILabel()
-        gameLabel.text = "大会"
-        gameLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
-        gameLabel.font = UIFont.systemFontOfSize(15.25)
-        gameLabel.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(gameLabel)
-        gameLabel.translatesAutoresizingMaskIntoConstraints = false
+        tournamentLabel = UILabel()
+        tournamentLabel.text = "大会"
+        tournamentLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
+        tournamentLabel.font = UIFont.systemFontOfSize(15.25)
+        tournamentLabel.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(tournamentLabel)
+        tournamentLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(item: self.gameLabel,attribute: .Top,relatedBy: .Equal,toItem: self.gameButton,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/100),
-            NSLayoutConstraint(item: self.gameLabel,attribute: .Left,relatedBy: .Equal,toItem: self.hobbyButton,attribute: .Right,multiplier: 1.0,constant: screenWidth/13.334),
-            NSLayoutConstraint(item: self.gameLabel,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8.2),
-            NSLayoutConstraint(item: self.gameLabel,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/40)]
+            NSLayoutConstraint(item: self.tournamentLabel,attribute: .Top,relatedBy: .Equal,toItem: self.tournamentButton,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/100),
+            NSLayoutConstraint(item: self.tournamentLabel,attribute: .Left,relatedBy: .Equal,toItem: self.hobbyButton,attribute: .Right,multiplier: 1.0,constant: screenWidth/13.334),
+            NSLayoutConstraint(item: self.tournamentLabel,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8.2),
+            NSLayoutConstraint(item: self.tournamentLabel,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/40)]
         )
         
         partyLabel = UILabel()
@@ -329,7 +327,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         readLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
             NSLayoutConstraint(item: self.readLabel,attribute: .Top,relatedBy: .Equal,toItem: self.readButton,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/100),
-            NSLayoutConstraint(item: self.readLabel,attribute: .Left,relatedBy: .Equal,toItem: self.gameButton,attribute: .Right,multiplier: 1.0,constant: screenWidth/13.334),
+            NSLayoutConstraint(item: self.readLabel,attribute: .Left,relatedBy: .Equal,toItem: self.tournamentButton,attribute: .Right,multiplier: 1.0,constant: screenWidth/13.334),
             NSLayoutConstraint(item: self.readLabel,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/8),
             NSLayoutConstraint(item: self.readLabel,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/40)]
         )
@@ -343,7 +341,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         circleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
             NSLayoutConstraint(item: self.circleLabel,attribute: .Top,relatedBy: .Equal,toItem: self.circleButton,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenHeight/100),
-            NSLayoutConstraint(item: self.circleLabel,attribute: .Left,relatedBy: .Equal,toItem: self.gameButton,attribute: .Right,multiplier: 1.0,constant: screenWidth/16),
+            NSLayoutConstraint(item: self.circleLabel,attribute: .Left,relatedBy: .Equal,toItem: self.tournamentButton,attribute: .Right,multiplier: 1.0,constant: screenWidth/16),
             NSLayoutConstraint(item: self.circleLabel,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth/6),
             NSLayoutConstraint(item: self.circleLabel,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/40)]
         )
@@ -362,6 +360,10 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             NSLayoutConstraint(item: self.studyLabel,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/40)]
         )
         // Do any additional setup after loading the view
+    }
+    override func viewWillAppear(animated: Bool) {
+        clearEverything()
+        genreCount = []
     }
     
     func clickGenreButton(sender: UIButton){
@@ -400,11 +402,11 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
         }else if sender.tag == 4 {
             if countClick.objectForKey("大会") != nil {
-                gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
+                tournamentButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
                 countClick.removeObjectForKey("大会")
                 countClick.synchronize()
             }else {
-                gameButton.setImage(UIImage(named: "SelectGame.png"), forState: .Normal)
+                tournamentButton.setImage(UIImage(named: "SelectGame.png"), forState: .Normal)
                 countClick.setObject("first", forKey: "大会")
                 countClick.synchronize()
             }
@@ -428,7 +430,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 countClick.setObject("first", forKey: "読書会")
                 countClick.synchronize()
             }
-        } else if sender.tag == 7 {
+        } else if sender.tag == 0 {
             if countClick.objectForKey("就活") != nil {
                 jobHuntNButton.setImage(UIImage(named: "jobhunt.png"), forState: .Normal)
                 countClick.removeObjectForKey("就活")
@@ -441,7 +443,10 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         }
     }
     
-    func clearEverything(sender: UIButton){
+    func clearCondition(sender: UIButton){
+        clearEverything()
+    }
+    func clearEverything(){
         let countClick = NSUserDefaults.standardUserDefaults()
         studyButton.setImage(UIImage(named: "study.png"), forState: .Normal)
         countClick.removeObjectForKey("勉強会")
@@ -449,7 +454,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         countClick.removeObjectForKey("パーティ")
         circleButton.setImage(UIImage(named: "circle.png"), forState: .Normal)
         countClick.removeObjectForKey("サークル")
-        gameButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
+        tournamentButton.setImage(UIImage(named: "tournament.png"), forState: .Normal)
         countClick.removeObjectForKey("大会")
         hobbyButton.setImage(UIImage(named: "hobby.png"), forState: .Normal)
         countClick.removeObjectForKey("趣味")
@@ -457,6 +462,10 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         countClick.removeObjectForKey("読書会")
         jobHuntNButton.setImage(UIImage(named: "jobhunt.png"), forState: .Normal)
         countClick.removeObjectForKey("就活")
+        countClick.removeObjectForKey("genreCount")
+        countClick.removeObjectForKey("SearchTitle")
+        countClick.removeObjectForKey("StartTime")
+        countClick.removeObjectForKey("EndTime")
         countClick.synchronize()
         searchTitle.text = ""
         startTime.text = ""
@@ -476,8 +485,8 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         }
         userSearch.synchronize()
         searchGenre()
-//        let SRVC = SearchReslutViewController()
-//        presentViewController(SRVC, animated: true, completion: nil)
+        let SRVC = SearchReslutViewController()
+        presentViewController(SRVC, animated: true, completion: nil)
     }
     
     func searchGenre() {
@@ -501,7 +510,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             genreCount.append(6)
         }
         if countClick.objectForKey("就活") != nil {
-            genreCount.append(7)
+            genreCount.append(0)
         }
         if genreCount.isEmpty{}else{
             countClick.setObject(genreCount, forKey: "genreCount")
@@ -574,6 +583,5 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     // Pass the selected object to the new view controller.
     }
     */
-    
 }
 
