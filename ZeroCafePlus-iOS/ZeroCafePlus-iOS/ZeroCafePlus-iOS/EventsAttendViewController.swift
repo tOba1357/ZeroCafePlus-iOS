@@ -11,9 +11,6 @@ import Alamofire
 import SwiftyJSON
 import Accounts
 
-
-
-
 class EventsAttendViewController: UIViewController {
     
     private var myScrollView:UIScrollView!
@@ -314,11 +311,9 @@ class EventsAttendViewController: UIViewController {
         
     }
     
-    
     override func viewWillDisappear(animated: Bool) {
         let viewControllers = self.navigationController?.viewControllers
-        if indexOfArray(viewControllers!, searchObject: self) == nil {
-            // 戻るボタンが押された処理
+        if indexOfArray((viewControllers)!, searchObject: self) == nil {
             genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
             window = UIWindow()
             window.frame = CGRectMake(0, 0, 0, 0)
@@ -335,24 +330,14 @@ class EventsAttendViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
-    
-    
-    override func viewDidDisappear(animated: Bool) {
-        genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
-        window = UIWindow()
-        window.frame = CGRectMake(0, 0, 0, 0)
-        window.layer.position = CGPoint(x: 0, y: 0)
-        window.backgroundColor = UIColor.redColor()
-        window.makeKeyWindow()
-        window.makeKeyAndVisible()
-        
-        
-        let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
-        imgView.image = genreImg
-        window.addSubview(imgView)
-        
+    func indexOfArray(array:[AnyObject], searchObject: AnyObject)-> Int? {
+        for (index, value) in array.enumerate() {
+            if value as! UIViewController == searchObject as! UIViewController {
+                return index
+            }
+        }
+        return nil
     }
-    
     
     override func viewWillAppear(animated: Bool) {
         
@@ -376,7 +361,7 @@ class EventsAttendViewController: UIViewController {
                         self.EventGenre = events["event"]["genre"].int! as Int
                         if self.EventGenre == 0 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "syukatu.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                             
                             
                         } else if self.EventGenre == 1 {
@@ -389,7 +374,7 @@ class EventsAttendViewController: UIViewController {
                             
                         } else if self.EventGenre == 3 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "sakuru.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                             
                         } else if self.EventGenre == 4 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
@@ -501,19 +486,6 @@ class EventsAttendViewController: UIViewController {
         
         
     }
-    
-    
-    func indexOfArray(array:[AnyObject], searchObject: AnyObject)-> Int? {
-        for (index, value) in array.enumerate() {
-            if value as! UIViewController == searchObject as! UIViewController {
-                return index
-            }
-        }
-        return nil
-    }
-    
-    
-    
     
     func onClickSankaButton(sender: UIButton){
         let EventDecideViewController = EventsDecideViewController()
