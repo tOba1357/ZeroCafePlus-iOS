@@ -94,15 +94,15 @@ class CommonFunction: AnyObject {
         case 2:
             gImg = resizingImage(imageName: "party.png", w: width, h:height)
         case 3:
-            gImg = resizingImage(imageName: "sakuru.png", w: width, h:height)
+            gImg = resizingImage(imageName: "circle.png", w: width, h:height)
         case 4:
             gImg = resizingImage(imageName: "tournament.png", w: width, h:height)
         case 5:
-            gImg = resizingImage(imageName: "hoby.png", w: width, h:height)
+            gImg = resizingImage(imageName: "hobby.png", w: width, h:height)
         case 6:
             gImg = resizingImage(imageName: "readbook.png", w: width, h:height)
         case 7:
-            gImg = resizingImage(imageName: "syukatu.png", w: width, h:height)
+            gImg = resizingImage(imageName: "jobhunt.png", w: width, h:height)
 
         default:
             break
