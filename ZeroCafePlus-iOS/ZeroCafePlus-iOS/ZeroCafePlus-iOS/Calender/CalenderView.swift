@@ -93,19 +93,19 @@ class CalenderView: UIView, UIScrollViewDelegate, MonthViewDelegate{
     func showNextView (){
         currentMonth++;
         if( currentMonth > 12 ){
-            currentMonth = 1;
-            currentYear++;
+            currentMonth = 1
+            currentYear++
         }
         let tmpView:MonthView = currentMonthView
         let ret = self.getNextYearAndMonth()
         currentMonthView = nextMonthView
         
-        nextMonthView  =  MonthView(frame: CGRectMake(frame.size.width * 3.0, 0, frame.size.width,frame.size.height),
+        nextMonthView  =  MonthView(frame: CGRectMake(frame.size.width * 2.0, 0, frame.size.width,frame.size.height),
             year:ret.year,month:ret.month)
         nextMonthView.monthDelegate = self
         scrollView.addSubview(nextMonthView)
         
-        prevMonthView    = tmpView
+        prevMonthView = tmpView
         
         self.resetContentOffSet()
         

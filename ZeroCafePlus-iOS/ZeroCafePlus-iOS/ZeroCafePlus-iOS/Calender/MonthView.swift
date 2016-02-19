@@ -26,12 +26,8 @@ class MonthView: UIView ,DayViewDelegate{
     }
     init(frame: CGRect,year:Int,month:Int) {
         super.init(frame:frame)
-        self.setUpDays(year,month:month,boolLabel: true)
         self.layer.borderWidth = 1
         self.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3).CGColor
-    }
-    
-    func setUpDays(year:Int,month:Int,boolLabel:Bool){
         
         let subViews:[UIView] = self.subviews as [UIView]
         for view in subViews {
@@ -109,10 +105,17 @@ class MonthView: UIView ,DayViewDelegate{
                                     }
                                     
                                 }
+                                
+                                let dateFormatter = NSDateFormatter()
+                                dateFormatter.dateFormat = "yyyy/MM/dd"
+                                let nsNowDate = dateFormatter.dateFromString(String(format:"%04d/%02d/%02d",year,month,i+1))
+                                
                                 let week:Int    = CommonFunction().getWeek(year,month: month,day:i+1)
                                 let x:CGFloat       = CGFloat(weekday-1) * (self.dayWidth/2)
                                 let y:CGFloat       = CGFloat(week-1) * self.dayHeight/2
-                                if weekday == 1{
+                                
+                                if weekday == 1 || nsNowDate!.holiday() != nil
+                                {
                                     eventBool = false
                                 }
                                 if eventBool{
