@@ -281,8 +281,8 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     myY += 206
                                 }
                                 
-                                self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                                self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 1) / 2) * 212 + 77))
+                                self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                                self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 1) / 2) * 212 + 93))
                                 self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                                 self.kitVerticalSV.backgroundColor = UIColor.whiteColor()
                             }
@@ -332,7 +332,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     kuY += 206
                                 }
                                 
-                                self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                                self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
                                 self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
                                 self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
                                 self.kuVerticalSV.backgroundColor = UIColor.whiteColor()
@@ -380,8 +380,8 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     
                                     kuY += 206
                                 }
-                                self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                                self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 77))
+                                self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                                self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
                                 self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
                                 self.favoriteVerticalSV.backgroundColor = UIColor.whiteColor()
                                 
