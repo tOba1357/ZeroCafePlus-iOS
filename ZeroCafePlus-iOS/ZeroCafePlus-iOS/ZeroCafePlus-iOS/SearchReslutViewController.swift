@@ -112,7 +112,8 @@ class SearchReslutViewController: UIViewController {
                             searchX = 6
                             let genreImage = event["event"]["genre"].int
                             let eventID = event["event"]["id"].int
-                            let dateName = event["event"]["start_time"].string! as String
+                            let startDate = event["event"]["start_time"].string! as String
+                            let endDate = event["event"]["end_time"].string! as String
                             let tagName : String? = { ()->(String) in
                                 if event["event"]["category_tag"] == nil{
                                     return ""
@@ -120,7 +121,9 @@ class SearchReslutViewController: UIViewController {
                                     return event["event"]["category_tag"].string! as String
                                 }
                             }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                            
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate, tagNameString: tagName!, genreImageNum: genreImage!)
+
                             eventViewGenerate.layer.cornerRadius = 10
                             self.searchVerticalSV.addSubview(eventViewGenerate)
                             
@@ -129,7 +132,8 @@ class SearchReslutViewController: UIViewController {
                             let genreImage = event["event"]["genre"].int
                             let eventID = event["event"]["id"].int
                             let title = event["event"]["title"].string! as String
-                            let dateName = event["event"]["start_time"].string! as String
+                            let startDate = event["event"]["start_time"].string! as String
+                            let endDate = event["event"]["end_time"].string! as String
                             let tagName : String? = { ()->(String) in
                                 if event["event"]["category_tag"] == nil{
                                     return ""
@@ -137,7 +141,9 @@ class SearchReslutViewController: UIViewController {
                                     return event["event"]["category_tag"].string! as String
                                 }
                             }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate, tagNameString: tagName!, genreImageNum: genreImage!)
+
                             eventViewGenerate.layer.cornerRadius = 10
                             self.searchVerticalSV.addSubview(eventViewGenerate)
                             
