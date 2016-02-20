@@ -11,6 +11,7 @@ import Foundation
 class EventView :UIView{
     
     private var genreImageView: UIImageView!
+    private var genreImage: UIImage!
     
     var mydelegate: EventViewDelegate!
     var myEventID :Int!
@@ -18,7 +19,12 @@ class EventView :UIView{
     init(frame: CGRect, titleNameString: String, id:Int, startDateString: String, endDateString: String,tagNameString: String, genreImageNum: Int) {
         super.init(frame: frame)
         myEventID = id
+        
         self.backgroundColor = UIColor.whiteColor()
+        
+        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
         
         let startData = getDateTime(startDateString)
         let endData = getDateTime(endDateString)
@@ -51,14 +57,40 @@ class EventView :UIView{
         self.addSubview(tagName)
         self.addSubview(touchButton)
         
+        if genreImageNum == 0 {
+            genreImage =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: 70, h: 70)
+            
+            
+        } else if genreImageNum == 1 {
+            genreImage =  CommonFunction().resizingImage(imageName: "study.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 2 {
+            genreImage =  CommonFunction().resizingImage(imageName: "party.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 3 {
+            genreImage =  CommonFunction().resizingImage(imageName: "circle.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 4 {
+            genreImage =  CommonFunction().resizingImage(imageName: "tournament.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 5 {
+            genreImage =  CommonFunction().resizingImage(imageName: "hobby.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 6 {
+            genreImage =  CommonFunction().resizingImage(imageName: "readbook.png", w: 70, h: 70)
+            
+        }
         
-        let genreImage = UIImage(named: "party.png")
+        
+//        let genreImage = UIImage(named: "party.png")
         genreImageView = UIImageView(frame: CGRectMake(0,0,70,70))
         genreImageView.image = genreImage
         genreImageView.layer.position = CGPoint(x: 75, y: 40)
         genreImageView.layer.masksToBounds = true
         genreImageView.layer.cornerRadius = 10.0
         self.addSubview(genreImageView)
+        
+        
         
     }
     
