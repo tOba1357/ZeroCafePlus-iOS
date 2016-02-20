@@ -15,13 +15,14 @@ class EventView :UIView{
     var mydelegate: EventViewDelegate!
     var myEventID :Int!
     
-    init(frame: CGRect, titleNameString: String, id:Int, dateNameString: String, tagNameString: String, genreImageNum: Int) {
+    init(frame: CGRect, titleNameString: String, id:Int, startDateString: String, endDateString: String,tagNameString: String, genreImageNum: Int) {
         super.init(frame: frame)
         myEventID = id
         self.backgroundColor = UIColor.whiteColor()
         
-        let dateData = getDateTime(dateNameString)
-        let dateText = "\(dateData[1])/\(dateData[2])\n\(dateData[3]):\(dateData[4])~10:00"
+        let startData = getDateTime(startDateString)
+        let endData = getDateTime(endDateString)
+        let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[1])/\(endData[2])\n\(endData[3]):\(endData[4])"
         
         let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,70))
         titleName.numberOfLines = 2

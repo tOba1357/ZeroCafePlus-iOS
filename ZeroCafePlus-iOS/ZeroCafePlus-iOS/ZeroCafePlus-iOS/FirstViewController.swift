@@ -159,7 +159,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 let genreImage = eve["event"]["genre"].int
                                 let eventID = eve["event"]["id"].int
                                 let title = eve["event"]["title"].string! as String
-                                let dateName = eve["event"]["start_time"].string! as String
+                                let startDate = eve["event"]["start_time"].string! as String
+                                let endDate = eve["event"]["end_time"].string! as String
                                 let tagName : String? = { ()->(String) in
                                     if eve["event"]["category_tag"] == nil{
                                         return ""
@@ -168,7 +169,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                     }
                                 }()
                                 print(tagName)
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
                                 
@@ -191,7 +192,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 let genreImage = eve["event"]["genre"].int
                                 let eventID = eve["event"]["id"].int
                                 let title = eve["event"]["title"].string! as String
-                                let dateName = eve["event"]["start_time"].string! as String
+                                let startDate = eve["event"]["start_time"].string! as String
+                                let endDate = eve["event"]["end_time"].string! as String
                                 let tagName : String? = { ()->(String) in
                                     if eve["event"]["category_tag"] == nil{
                                         return ""
@@ -199,7 +201,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                         return eve["event"]["category_tag"].string! as String
                                     }
                                 }()
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, 150, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
                                 self.kitVerticalSV.addSubview(eventViewGenerate)
@@ -225,7 +227,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 let genreImage = eve["event"]["genre"].int
                                 let eventID = eve["event"]["id"].int
                                 let title = eve["event"]["title"].string! as String
-                                let dateName = eve["event"]["start_time"].string! as String
+                                let startDate = eve["event"]["start_time"].string! as String
+                                let endDate = eve["event"]["end_time"].string! as String
                                 let tagName : String? = { ()->(String) in
                                     if eve["event"]["category_tag"] == nil{
                                         return ""
@@ -234,7 +237,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                     }
                                 }()
                                 print(tagName)
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
                                 
@@ -248,7 +251,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 let genreImage = eve["event"]["genre"].int
                                 let eventID = eve["event"]["id"].int
                                 let title = eve["event"]["title"].string! as String
-                                let dateName = eve["event"]["start_time"].string! as String
+                                let startDate = eve["event"]["start_time"].string! as String
+                                let endDate = eve["event"]["end_time"].string! as String
                                 let tagName : String? = { ()->(String) in
                                     if eve["event"]["category_tag"] == nil{
                                         return ""
@@ -256,7 +260,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                         return eve["event"]["category_tag"].string! as String
                                     }
                                 }()
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, 150, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate, tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
                                 self.kuVerticalSV.addSubview(eventViewGenerate)
@@ -299,14 +303,9 @@ class FirstViewController: UIViewController, EventViewDelegate {
     func pushMyButton(myEventID:Int) {
         
         print("success")
-        if let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController {
-            eventAttendVC.getID = myEventID
+        let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController
+            eventAttendVC!.getID = myEventID
             print("")
-            self.navigationController?.pushViewController(eventAttendVC, animated: true)
-        }
-        else{
-            print("error")
-        }
-        
+            self.navigationController?.pushViewController(eventAttendVC!, animated: true)        
     }
 }
