@@ -215,6 +215,8 @@ class ForthViewController: UIViewController, EventViewDelegate {
                     let users = json["users"].array! as Array
                     var myX :CGFloat = 6
                     var myY :CGFloat = 6
+                    var kuX :CGFloat = 6
+                    var kuY :CGFloat = 6
                     
                     for user in users {
                         let user_id = user["user"]["id"].int!
@@ -232,12 +234,13 @@ class ForthViewController: UIViewController, EventViewDelegate {
                             self.profileLabel.attributedText = attributedText
                             self.profileLabel.sizeToFit()
                             self.nameLabel.text = self.user_name
-                            let plan_ev = user["planning_events"].array! as Array
-                            for planEvCount in plan_ev.enumerate() {
+                            let plan_ev = user["attend_events"].array! as Array
+                            for attendEvCount in plan_ev.enumerate() {
                                 
-                                let sideDecide = planEvCount.index % 2
+                                let sideDecide = attendEvCount.index % 2
                                 if sideDecide == 0 {
-                                    let eve = planEvCount.element as JSON
+                                    let eve = attendEvCount.element as JSON
+                                    let genreImage = eve["event"]["genre"].int
                                     let eventID = eve["event"]["id"].int
                                     let title = eve["event"]["title"].string! as String
                                     let dateName = eve["event"]["start_time"].string! as String
@@ -249,16 +252,17 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                         }
                                     }()
                                     print(tagName)
-                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!)
+                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
                                     self.kitVerticalSV.addSubview(eventViewGenerate)
                                     
-                                    myX = 162
+                                    myX = screenWidth/1.96319018
                                 }else{
                                     
-                                    let eve = planEvCount.element as JSON
+                                    let eve = attendEvCount.element as JSON
                                     let eventID = eve["event"]["id"].int
+                                    let genreImage = eve["event"]["genre"].int
                                     let title = eve["event"]["title"].string! as String
                                     let dateName = eve["event"]["start_time"].string! as String
                                     let tagName : String? = { ()->(String) in
@@ -268,7 +272,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return eve["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!)
+                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
                                     self.kitVerticalSV.addSubview(eventViewGenerate)
@@ -281,78 +285,156 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                 self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 1) / 2) * 212 + 77))
                                 self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                                 self.kitVerticalSV.backgroundColor = UIColor.whiteColor()
+                            }
+                            
+                            
+                            let planning_ev = user["planning_events"].array! as Array
+                            for (index,planEvCount) in planning_ev.enumerate() {
+                                let eveCount = planEvCount.count
+                                if  index % 2 == 0 {
+                                    kuX = 6
+                                    let eventID = planEvCount["event"]["id"].int
+                                    let genreImage = planEvCount["event"]["genre"].int
+                                    let title = planEvCount["event"]["title"].string! as String
+                                    let dateName = planEvCount["event"]["start_time"].string! as String
+                                    let tagName : String? = { ()->(String) in
+                                        if planEvCount["event"]["category_tag"] == nil{
+                                            return ""
+                                        }else {
+                                            return planEvCount["event"]["category_tag"].string! as String
+                                        }
+                                    }()
+                                    print(tagName)
+                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                                    eventViewGenerate.mydelegate = self
+                                    eventViewGenerate.layer.cornerRadius = 10
+                                    
+                                    self.kuVerticalSV.addSubview(eventViewGenerate)
+                                    
+                                }else{
+                                    kuX = screenWidth/1.96319018
+                                    let eventID = planEvCount["event"]["id"].int
+                                    let genreImage = planEvCount["event"]["genre"].int
+                                    let title = planEvCount["event"]["title"].string! as String
+                                    let dateName = planEvCount["event"]["start_time"].string! as String
+                                    let tagName : String? = { ()->(String) in
+                                        if planEvCount["event"]["category_tag"] == nil{
+                                            return ""
+                                        }else {
+                                            return planEvCount["event"]["category_tag"].string! as String
+                                        }
+                                    }()
+                                    let eventViewGenerate2:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
+                                    eventViewGenerate2.mydelegate = self
+                                    eventViewGenerate2.layer.cornerRadius = 10
+                                    self.kuVerticalSV.addSubview(eventViewGenerate2)
+                                    
+                                    kuY += 206
+                                }
                                 
                                 self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                                self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 1) / 2) * 212 + 77))
+                                self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
                                 self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
                                 self.kuVerticalSV.backgroundColor = UIColor.whiteColor()
-                                
+                            }
+                            
+                            let end_ev = user["end_events"].array! as Array
+                            for (index,endEvCount) in end_ev.enumerate() {
+                                let eveCount = endEvCount.count
+                                if index % 2 == 0{
+                                    kuX = 6
+                                    let eventID = endEvCount["event"]["id"].int
+                                    let genreImage = endEvCount["event"]["genre"].int
+                                    let title = endEvCount["event"]["title"].string! as String
+                                    let dateName = endEvCount["event"]["start_time"].string! as String
+                                    let tagName : String? = { ()->(String) in
+                                        if endEvCount["event"]["category_tag"] == nil{
+                                            return ""
+                                        }else {
+                                            return endEvCount["event"]["category_tag"].string! as String
+                                        }
+                                    }()
+                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
+                                    eventViewGenerate.mydelegate = self
+                                    eventViewGenerate.layer.cornerRadius = 10
+                                    self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                                    
+                                }else{
+                                    kuX = screenWidth/1.96319018
+                                    let eventID = endEvCount["event"]["id"].int
+                                    let genreImage = endEvCount["event"]["genre"].int
+                                    let title = endEvCount["event"]["title"].string! as String
+                                    let dateName = endEvCount["event"]["start_time"].string! as String
+                                    let tagName : String? = { ()->(String) in
+                                        if endEvCount["event"]["category_tag"] == nil{
+                                            return ""
+                                        }else {
+                                            return endEvCount["event"]["category_tag"].string! as String
+                                        }
+                                    }()
+                                    let eventViewGenerate3:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
+                                    eventViewGenerate3.mydelegate = self
+                                    eventViewGenerate3.tag = 3
+                                    eventViewGenerate3.layer.cornerRadius = 10
+                                    self.favoriteVerticalSV.addSubview(eventViewGenerate3)
+                                    
+                                    kuY += 206
+                                }
                                 self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                                self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 1) / 2) * 212 + 77))
+                                self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 77))
                                 self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
                                 self.favoriteVerticalSV.backgroundColor = UIColor.whiteColor()
                                 
-                                
                             }
-                            let views = [
-                                ViewPagerElement2(selectedTitleView: self.kitView, noSelectedTitleView: self.selectedKitView, mainView: self.kitVerticalSV),
-                                ViewPagerElement2(selectedTitleView: self.kuView, noSelectedTitleView: self.selectedKuView, mainView: self.kuVerticalSV),
-                                ViewPagerElement2(selectedTitleView: self.favoriteView, noSelectedTitleView: self.selectedFavoriteView, mainView: self.favoriteVerticalSV)
-                            ]
-                            let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
-                            let tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: views)
+                        }
+                        let views = [
+                            ViewPagerElement2(selectedTitleView: self.kitView, noSelectedTitleView: self.selectedKitView, mainView: self.kitVerticalSV),
+                            ViewPagerElement2(selectedTitleView: self.kuView, noSelectedTitleView: self.selectedKuView, mainView: self.kuVerticalSV),
+                            ViewPagerElement2(selectedTitleView: self.favoriteView, noSelectedTitleView: self.selectedFavoriteView, mainView: self.favoriteVerticalSV)
+                        ]
+                        let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
+                        let tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: views)
+                        self.view.addSubview(tabView)
+                        tabView.translatesAutoresizingMaskIntoConstraints = false
+                        self.view.addConstraints([
                             
-                            self.view.addSubview(tabView)
-                            tabView.translatesAutoresizingMaskIntoConstraints = false
-                            self.view.addConstraints([
+                            NSLayoutConstraint(
+                                item: tabView,
+                                attribute: NSLayoutAttribute.Top,
+                                relatedBy: NSLayoutRelation.Equal,
+                                toItem: self.profileLabel,
+                                attribute: NSLayoutAttribute.Bottom,
+                                multiplier: 1.0,
+                                constant: screenWidth/40.57
+                            ),
+                            // 横（固定）
+                            NSLayoutConstraint(
+                                item: tabView,
+                                attribute: .Width,
+                                relatedBy: .Equal,
+                                toItem: nil,
+                                attribute: .Width,
+                                multiplier: 1.0,
+                                constant: screenWidth
+                            ),
+                            
+                            // 縦（固定）
+                            NSLayoutConstraint(
+                                item: tabView,
+                                attribute: .Height,
+                                relatedBy: .Equal,
+                                toItem: nil,
+                                attribute: .Height,
+                                multiplier: 1.0,
+                                constant: screenHeight/1.9
                                 
-                                NSLayoutConstraint(
-                                    item: tabView,
-                                    attribute: NSLayoutAttribute.Top,
-                                    relatedBy: NSLayoutRelation.Equal,
-                                    toItem: self.profileLabel,
-                                    attribute: NSLayoutAttribute.Bottom,
-                                    multiplier: 1.0,
-                                    constant: screenWidth/40.57
-                                ),
-                                // 横（固定）
-                                NSLayoutConstraint(
-                                    item: tabView,
-                                    attribute: .Width,
-                                    relatedBy: .Equal,
-                                    toItem: nil,
-                                    attribute: .Width,
-                                    multiplier: 1.0,
-                                    constant: screenWidth
-                                ),
-                                
-                                // 縦（固定）
-                                NSLayoutConstraint(
-                                    item: tabView,
-                                    attribute: .Height,
-                                    relatedBy: .Equal,
-                                    toItem: nil,
-                                    attribute: .Height,
-                                    multiplier: 1.0,
-                                    constant: screenHeight/1.6
-                                    
-                                )]
-                            )
-                            
-                        }
-                        let attend_ev = user["attend_events"].array! as Array
-                        for attendEvCount in attend_ev.enumerate() {
-                            
-                        }
-                        let end_ev = user["end_events"].array! as Array
-                        for endEvCount in end_ev.enumerate() {
-                            
-                        }
+                            )]
+                        )
+                        
                     }
-                    
                 }
-                
         }
+
         // Do any additional setup after loading the view, typically from a nib.
     }
     
