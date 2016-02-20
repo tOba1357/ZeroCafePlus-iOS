@@ -120,12 +120,12 @@ class SearchReslutViewController: UIViewController {
                                     return event["event"]["category_tag"].string! as String
                                 }
                             }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.2, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
                             eventViewGenerate.layer.cornerRadius = 10
                             self.searchVerticalSV.addSubview(eventViewGenerate)
                             
                         }else{
-                            searchX = self.view.frame.size.width/2
+                            searchX = screenWidth/1.96319018
                             let genreImage = event["event"]["genre"].int
                             let eventID = event["event"]["id"].int
                             let title = event["event"]["title"].string! as String
@@ -137,13 +137,12 @@ class SearchReslutViewController: UIViewController {
                                     return event["event"]["category_tag"].string! as String
                                 }
                             }()
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, 150, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
                             eventViewGenerate.layer.cornerRadius = 10
                             self.searchVerticalSV.addSubview(eventViewGenerate)
                             
                             searchY += 206
                         }
-                        
                         self.searchVerticalSV.frame = CGRectMake(0, self.view.frame.height-self.view.frame.height/1.2, self.view.frame.width, self.view.frame.height/1.2)
                         self.searchVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
                         self.searchVerticalSV.contentOffset = CGPointMake(0, -50)

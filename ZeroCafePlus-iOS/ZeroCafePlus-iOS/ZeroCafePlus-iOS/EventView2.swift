@@ -10,12 +10,12 @@ import UIKit
 
 class EventView2: UIView {
     
-    private var myImageView: UIImageView!
+    private var genreImageView: UIImageView!
     
     var mydelegate: EventViewDelegate!
     var myEventID :Int!
     
-    init(frame: CGRect, titleNameString: String, id:Int, dateNameString: String, tagNameString: String) {
+    init(frame: CGRect, titleNameString: String, id:Int, dateNameString: String, tagNameString: String, genreImageNum: Int) {
         super.init(frame: frame)
         myEventID = id
         self.backgroundColor = UIColor.whiteColor()
@@ -51,15 +51,14 @@ class EventView2: UIView {
         self.addSubview(dateName)
         self.addSubview(tagName)
         self.addSubview(touchButton)
-        
-        
-        let myImage = UIImage(named: "party.png")
-        myImageView = UIImageView(frame: CGRectMake(0,0,70,70))
-        myImageView.image = myImage
-        myImageView.layer.position = CGPoint(x: 75, y: 40)
-        myImageView.layer.masksToBounds = true
-        myImageView.layer.cornerRadius = 10.0
-        self.addSubview(myImageView)
+
+        let genreImage = UIImage(named: "party.png")
+        genreImageView = UIImageView(frame: CGRectMake(0,0,70,70))
+        genreImageView.image = genreImage
+        genreImageView.layer.position = CGPoint(x: 75, y: 40)
+        genreImageView.layer.masksToBounds = true
+        genreImageView.layer.cornerRadius = 10.0
+        self.addSubview(genreImageView)
     }
     
     func onClickMyButton(sender: UIButton) {
