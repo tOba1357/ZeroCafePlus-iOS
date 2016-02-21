@@ -22,15 +22,15 @@ class EventView :UIView{
         
         self.backgroundColor = UIColor.whiteColor()
         
-        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
+        let eventSize: CGSize = frame.size
+        let eventWidth = eventSize.width
+        let eventHeight = eventSize.height
         
         let startData = getDateTime(startDateString)
         let endData = getDateTime(endDateString)
-        let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[1])/\(endData[2])\n\(endData[3]):\(endData[4])"
+        let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[3]):\(endData[4])"
         
-        let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,70))
+        let titleName: UILabel = UILabel(frame: CGRectMake(eventWidth*(17/300),eventHeight*(110/385),eventWidth*(283/300),eventHeight*(70/385)))
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
         let dateName: UILabel = UILabel(frame: CGRectMake(10,110,130,50))
@@ -85,7 +85,7 @@ class EventView :UIView{
 //        let genreImage = UIImage(named: "party.png")
         genreImageView = UIImageView(frame: CGRectMake(0,0,70,70))
         genreImageView.image = genreImage
-        genreImageView.layer.position = CGPoint(x: 75, y: 40)
+        genreImageView.layer.position = CGPoint(x: eventWidth/2, y: eventHeight*(60/385))
         genreImageView.layer.masksToBounds = true
         genreImageView.layer.cornerRadius = 10.0
         self.addSubview(genreImageView)
