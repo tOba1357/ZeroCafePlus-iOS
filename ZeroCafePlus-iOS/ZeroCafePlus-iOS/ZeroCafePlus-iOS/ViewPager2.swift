@@ -46,7 +46,7 @@ class ViewPager2: UIView, UIScrollViewDelegate, ViewPagerTabDelegate {
                 x: scrolleViewFrame.width * CGFloat($0.0),
                 y: 0,
                 width: scrolleViewFrame.width,
-                height: mainView.frame.height/2
+                height: mainView.frame.height
             )
             mainView.frame = frame
             self.scrollView.addSubview(mainView)
