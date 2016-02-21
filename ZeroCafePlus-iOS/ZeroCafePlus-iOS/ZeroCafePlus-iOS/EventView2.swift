@@ -26,7 +26,7 @@ class EventView2: UIView {
         
         let startData = getDateTime(startDateString)
         let endData = getDateTime(endDateString)
-        let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[1])/\(endData[2])\n\(endData[3]):\(endData[4])"
+        let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[3]):\(endData[4])"
         
         let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,70))
         titleName.numberOfLines = 2
