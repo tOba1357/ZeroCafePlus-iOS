@@ -28,9 +28,11 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     var window :UIWindow!
     
     var EventGenre: Int!
-    var MygetID: Int!
+    var getID: Int!
     var Myrow: Int?
 
+    let judgment = NSUserDefaults.standardUserDefaults()
+    let TakeFriendsNumber = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,7 +169,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
                 let eventArray = json["events"].array! as Array
                 for events in eventArray {
                     let id = events["event"]["id"].int! as Int
-                    if  id == self.MygetID{
+                    if  id == self.getID{
                         self.EventGenre = events["event"]["genre"].int! as Int
                         
                         
@@ -249,16 +251,17 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
         
         
+        
         let headers = [
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]
-        
+
         let parameters:[String:AnyObject] =
         [
             "ticket": [
-                "user_id": 2,
-                "event_id": MygetID,
+                "user_id": 3,
+                "event_id": getID,
                 "other_participant": Myrow
                 
                 
@@ -272,10 +275,12 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
                 //"いいよぉ！"が返って来れば成功
         }
         
-        let myEventsAttendViewController = EventsAttendViewController()
-        myEventsAttendViewController.getID = MygetID
-        self.navigationController?.pushViewController(myEventsAttendViewController, animated: true)
         
+        
+        
+        let myEventsAttendViewController = EventsAttendViewController()
+        myEventsAttendViewController.getID = getID
+        self.navigationController?.pushViewController(myEventsAttendViewController, animated: true)
         
         
         
