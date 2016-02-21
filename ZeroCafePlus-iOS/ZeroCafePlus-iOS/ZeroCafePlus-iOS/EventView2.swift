@@ -11,27 +11,30 @@ import UIKit
 class EventView2: UIView {
     
     private var genreImageView: UIImageView!
+    private var genreImage: UIImage!
     
     var mydelegate: EventViewDelegate!
     var myEventID :Int!
     
-    init(frame: CGRect, titleNameString: String, id:Int, dateNameString: String, tagNameString: String, genreImageNum: Int) {
+    init(frame: CGRect, titleNameString: String, id:Int, startDateString: String, endDateString: String,tagNameString: String, genreImageNum: Int) {
         super.init(frame: frame)
+      
         myEventID = id
         self.backgroundColor = UIColor.whiteColor()
         self.layer.borderColor = UIColor.hexStr("#BABABA", alpha: 1.0).CGColor
         self.layer.borderWidth = 1.3
         
-        let dateData = getDateTime(dateNameString)
-        let dateText = "\(dateData[1])/\(dateData[2])\n\(dateData[3]):\(dateData[4])~10:00"
+        let startData = getDateTime(startDateString)
+        let endData = getDateTime(endDateString)
+        let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[1])/\(endData[2])\n\(endData[3]):\(endData[4])"
         
         let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,70))
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
-        let dateName: UILabel = UILabel(frame: CGRectMake(10,120,130,50))
+        let dateName: UILabel = UILabel(frame: CGRectMake(10,110,130,50))
         dateName.numberOfLines = 2
         dateName.textAlignment = NSTextAlignment.Center
-        let tagName: UILabel = UILabel(frame: CGRectMake(10,150,130,70))
+        let tagName: UILabel = UILabel(frame: CGRectMake(10,140,130,70))
         tagName.numberOfLines = 2
         tagName.textAlignment = NSTextAlignment.Center
         let touchButton: UIButton = UIButton(frame: CGRectMake(10,10,130,180))
@@ -39,8 +42,6 @@ class EventView2: UIView {
         titleName.text = titleNameString
         dateName.text = dateText
         tagName.text = tagNameString
-        
-        
         
         touchButton.setTitle("", forState: .Normal)
         touchButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
@@ -51,14 +52,38 @@ class EventView2: UIView {
         self.addSubview(dateName)
         self.addSubview(tagName)
         self.addSubview(touchButton)
-
-        let genreImage = UIImage(named: "party.png")
+        
+        if genreImageNum == 0 {
+            genreImage =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: 70, h: 70)
+        } else if genreImageNum == 1 {
+            genreImage =  CommonFunction().resizingImage(imageName: "study.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 2 {
+            genreImage =  CommonFunction().resizingImage(imageName: "party.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 3 {
+            genreImage =  CommonFunction().resizingImage(imageName: "circle.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 4 {
+            genreImage =  CommonFunction().resizingImage(imageName: "tournament.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 5 {
+            genreImage =  CommonFunction().resizingImage(imageName: "hobby.png", w: 70, h: 70)
+            
+        } else if genreImageNum == 6 {
+            genreImage =  CommonFunction().resizingImage(imageName: "readbook.png", w: 70, h: 70)
+            
+        }
+        
         genreImageView = UIImageView(frame: CGRectMake(0,0,70,70))
         genreImageView.image = genreImage
         genreImageView.layer.position = CGPoint(x: 75, y: 40)
         genreImageView.layer.masksToBounds = true
         genreImageView.layer.cornerRadius = 10.0
         self.addSubview(genreImageView)
+        
+        
+        
     }
     
     func onClickMyButton(sender: UIButton) {

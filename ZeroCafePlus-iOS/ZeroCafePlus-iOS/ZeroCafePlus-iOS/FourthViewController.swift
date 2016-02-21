@@ -41,15 +41,15 @@ class ForthViewController: UIViewController, EventViewDelegate {
     private var joinedButton:UILabel!
     private var nonjoinedButton:UILabel!
     
-    private var kitVerticalSV: UIScrollView!
-    private var kuVerticalSV: UIScrollView!
-    private var favoriteVerticalSV: UIScrollView!
-    private var kitView: UIView!
-    private var kuView:UIView!
-    private var favoriteView:UIView!
-    private var selectedKitView:UIView!
-    private var selectedKuView:UIView!
-    private var selectedFavoriteView :UIView!
+    private var willJoinVerticalSV: UIScrollView!
+    private var planVerticalSV: UIScrollView!
+    private var joinedVerticalSV: UIScrollView!
+    private var willJoinView: UIView!
+    private var planView:UIView!
+    private var joinedView:UIView!
+    private var selectedwillJoinView:UIView!
+    private var selectedplanView:UIView!
+    private var selectedjoinedView :UIView!
     private var horizontalSV: UIScrollView!
     
     var getID: Int!
@@ -59,12 +59,12 @@ class ForthViewController: UIViewController, EventViewDelegate {
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
-        kitView = UIView()
-        kuView = UIView()
-        favoriteView = UIView()
-        selectedKitView = UIView()
-        selectedKuView = UIView()
-        selectedFavoriteView = UIView()
+        willJoinView = UIView()
+        planView = UIView()
+        joinedView = UIView()
+        selectedwillJoinView = UIView()
+        selectedplanView = UIView()
+        selectedjoinedView = UIView()
         view.backgroundColor = UIColor.whiteColor()
         
         profileLabel = UILabel(frame: CGRectMake(0,0,screenWidth/1.2,screenHeight/4))
@@ -107,16 +107,16 @@ class ForthViewController: UIViewController, EventViewDelegate {
         profileImage.layer.cornerRadius = 8.0
         self.view.addSubview(profileImage)
         
-        kitVerticalSV = UIScrollView()
-        kuVerticalSV = UIScrollView()
-        favoriteVerticalSV = UIScrollView()
+        willJoinVerticalSV = UIScrollView()
+        planVerticalSV = UIScrollView()
+        joinedVerticalSV = UIScrollView()
         
-        kitVerticalSV.pagingEnabled = false
-        kuVerticalSV.pagingEnabled = false
-        favoriteVerticalSV.pagingEnabled = false
+        willJoinVerticalSV.pagingEnabled = false
+        planVerticalSV.pagingEnabled = false
+        joinedVerticalSV.pagingEnabled = false
         
         
-        willJoinButton = UILabel(frame: CGRectMake(kitView.layer.frame.width,0,screenWidth/3.7,screenHeight/19))
+        willJoinButton = UILabel(frame: CGRectMake(willJoinView.layer.frame.width,0,screenWidth/3.7,screenHeight/19))
         willJoinButton.textAlignment = NSTextAlignment.Center
         willJoinButton.text = "参加予定"
         willJoinButton.layer.position.y = screenHeight/15
@@ -128,7 +128,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         willJoinButton.layer.borderWidth = 1.3
         willJoinButton.font = UIFont.systemFontOfSize(15)
         willJoinButton.textColor = UIColor.hexStr("#ffffff", alpha: 1.0)
-        kitView.addSubview(willJoinButton)
+        willJoinView.addSubview(willJoinButton)
         
         
         nonwillJoinButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.8,screenHeight/19))
@@ -143,7 +143,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         nonwillJoinButton.layer.borderColor = UIColor.hexStr("#ff8010", alpha: 1.0).CGColor
         nonwillJoinButton.layer.borderWidth = 1.3
         nonwillJoinButton.textColor = UIColor.hexStr("#ff8010", alpha: 1.0)
-        selectedKitView.addSubview(nonwillJoinButton)
+        selectedwillJoinView.addSubview(nonwillJoinButton)
         
         planedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.8,screenHeight/19))
         planedButton.text = "企画"
@@ -157,7 +157,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         planedButton.layer.borderWidth = 1.3
         planedButton.layer.masksToBounds = true
         planedButton.font = UIFont.systemFontOfSize(15)
-        kuView.addSubview(planedButton)
+        planView.addSubview(planedButton)
         
         nonplanedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.8,screenHeight/19))
         nonplanedButton.text = "企画"
@@ -171,7 +171,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         nonplanedButton.layer.borderWidth = 1.3
         nonplanedButton.layer.masksToBounds = true
         nonplanedButton.font = UIFont.systemFontOfSize(15)
-        selectedKuView.addSubview(nonplanedButton)
+        selectedplanView.addSubview(nonplanedButton)
         
         joinedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.8,screenHeight/19))
         joinedButton.layer.position = CGPoint(x: screenWidth/1.25, y: screenHeight/2)
@@ -186,7 +186,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         joinedButton.layer.borderWidth = 1.3
         joinedButton.font = UIFont.systemFontOfSize(15)
         joinedButton.backgroundColor = UIColor.hexStr("#ff8010", alpha: 1.0)
-        favoriteView.addSubview(joinedButton)
+        joinedView.addSubview(joinedButton)
         
         nonjoinedButton = UILabel(frame: CGRectMake(0,0,screenWidth/3.8,screenHeight/19))
         nonjoinedButton.text = "参加"
@@ -199,7 +199,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         nonjoinedButton.layer.masksToBounds = true
         nonjoinedButton.font = UIFont.systemFontOfSize(15)
         nonjoinedButton.textColor = UIColor.hexStr("#ff8010", alpha: 1.0)
-        selectedFavoriteView.addSubview(nonjoinedButton)
+        selectedjoinedView.addSubview(nonjoinedButton)
         
         
     }
@@ -215,8 +215,8 @@ class ForthViewController: UIViewController, EventViewDelegate {
                     let users = json["users"].array! as Array
                     var myX :CGFloat = 6
                     var myY :CGFloat = 6
-                    var kuX :CGFloat = 6
-                    var kuY :CGFloat = 6
+                    var planX :CGFloat = 6
+                    var planY :CGFloat = 6
                     
                     for user in users {
                         let user_id = user["user"]["id"].int!
@@ -243,7 +243,8 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     let genreImage = eve["event"]["genre"].int
                                     let eventID = eve["event"]["id"].int
                                     let title = eve["event"]["title"].string! as String
-                                    let dateName = eve["event"]["start_time"].string! as String
+                                    let startDate = eve["event"]["start_time"].string! as String
+                                    let endDate = eve["event"]["end_time"].string! as String
                                     let tagName : String? = { ()->(String) in
                                         if eve["event"]["category_tag"] == nil{
                                             return ""
@@ -252,10 +253,10 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                         }
                                     }()
                                     print(tagName)
-                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
+                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
-                                    self.kitVerticalSV.addSubview(eventViewGenerate)
+                                    self.willJoinVerticalSV.addSubview(eventViewGenerate)
                                     
                                     myX = screenWidth/1.96319018
                                 }else{
@@ -264,7 +265,8 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     let eventID = eve["event"]["id"].int
                                     let genreImage = eve["event"]["genre"].int
                                     let title = eve["event"]["title"].string! as String
-                                    let dateName = eve["event"]["start_time"].string! as String
+                                    let startDate = eve["event"]["start_time"].string! as String
+                                    let endDate = eve["event"]["end_time"].string! as String
                                     let tagName : String? = { ()->(String) in
                                         if eve["event"]["category_tag"] == nil{
                                             return ""
@@ -272,19 +274,19 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return eve["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                                    let eventViewGenerate = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
-                                    self.kitVerticalSV.addSubview(eventViewGenerate)
+                                    self.willJoinVerticalSV.addSubview(eventViewGenerate)
                                     
                                     myX = 6
                                     myY += 206
                                 }
                                 
-                                self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
-                                self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 1) / 2) * 212 + 93))
-                                self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
-                                self.kitVerticalSV.backgroundColor = UIColor.whiteColor()
+                                self.willJoinVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                                self.willJoinVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 3) / 2) * 212 + 93))
+                                self.willJoinVerticalSV.contentOffset = CGPointMake(0, -50)
+                                self.willJoinVerticalSV.backgroundColor = UIColor.whiteColor()
                             }
                             
                             
@@ -292,11 +294,12 @@ class ForthViewController: UIViewController, EventViewDelegate {
                             for (index,planEvCount) in planning_ev.enumerate() {
                                 let eveCount = planEvCount.count
                                 if  index % 2 == 0 {
-                                    kuX = 6
+                                    planX = 6
                                     let eventID = planEvCount["event"]["id"].int
-                                    let genreImage = planEvCount["event"]["genre"].int
+                                    let genreImage = planEvCount["event"]["genre"].int! as Int
                                     let title = planEvCount["event"]["title"].string! as String
-                                    let dateName = planEvCount["event"]["start_time"].string! as String
+                                    let startDate = planEvCount["event"]["start_time"].string! as String
+                                    let endDate = planEvCount["event"]["end_time"].string! as String
                                     let tagName : String? = { ()->(String) in
                                         if planEvCount["event"]["category_tag"] == nil{
                                             return ""
@@ -305,18 +308,19 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                         }
                                     }()
                                     print(tagName)
-                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!, genreImageNum: genreImage!)
+                                    let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
                                     
-                                    self.kuVerticalSV.addSubview(eventViewGenerate)
+                                    self.planVerticalSV.addSubview(eventViewGenerate)
                                     
                                 }else{
-                                    kuX = screenWidth/1.96319018
+                                    planX = screenWidth/1.96319018
                                     let eventID = planEvCount["event"]["id"].int
                                     let genreImage = planEvCount["event"]["genre"].int
                                     let title = planEvCount["event"]["title"].string! as String
-                                    let dateName = planEvCount["event"]["start_time"].string! as String
+                                    let startDate = planEvCount["event"]["start_time"].string! as String
+                                    let endDate = planEvCount["event"]["end_time"].string! as String
                                     let tagName : String? = { ()->(String) in
                                         if planEvCount["event"]["category_tag"] == nil{
                                             return ""
@@ -324,29 +328,30 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return planEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate2:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
+                                    let eventViewGenerate2 = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate2.mydelegate = self
                                     eventViewGenerate2.layer.cornerRadius = 10
-                                    self.kuVerticalSV.addSubview(eventViewGenerate2)
+                                    self.planVerticalSV.addSubview(eventViewGenerate2)
                                     
-                                    kuY += 206
+                                    planY += 206
                                 }
                                 
-                                self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
-                                self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
-                                self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
-                                self.kuVerticalSV.backgroundColor = UIColor.whiteColor()
+                                self.planVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                                self.planVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 4) / 2) * 212 + 93))
+                                self.planVerticalSV.contentOffset = CGPointMake(0, -50)
+                                self.planVerticalSV.backgroundColor = UIColor.whiteColor()
                             }
                             
                             let end_ev = user["end_events"].array! as Array
                             for (index,endEvCount) in end_ev.enumerate() {
                                 let eveCount = endEvCount.count
                                 if index % 2 == 0{
-                                    kuX = 6
+                                    planX = 6
                                     let eventID = endEvCount["event"]["id"].int
                                     let genreImage = endEvCount["event"]["genre"].int
                                     let title = endEvCount["event"]["title"].string! as String
-                                    let dateName = endEvCount["event"]["start_time"].string! as String
+                                    let startDate = endEvCount["event"]["start_time"].string! as String
+                                    let endDate = endEvCount["event"]["end_time"].string! as String
                                     let tagName : String? = { ()->(String) in
                                         if endEvCount["event"]["category_tag"] == nil{
                                             return ""
@@ -354,17 +359,18 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return endEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
+                                    let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
-                                    self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                                    self.joinedVerticalSV.addSubview(eventViewGenerate)
                                     
                                 }else{
-                                    kuX = screenWidth/1.96319018
+                                    planX = screenWidth/1.96319018
                                     let eventID = endEvCount["event"]["id"].int
                                     let genreImage = endEvCount["event"]["genre"].int
                                     let title = endEvCount["event"]["title"].string! as String
-                                    let dateName = endEvCount["event"]["start_time"].string! as String
+                                    let startDate = endEvCount["event"]["start_time"].string! as String
+                                    let endDate = endEvCount["event"]["end_time"].string! as String
                                     let tagName : String? = { ()->(String) in
                                         if endEvCount["event"]["category_tag"] == nil{
                                             return ""
@@ -372,25 +378,25 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return endEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate3:EventView2 = EventView2(frame:CGRectMake(kuX,kuY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, dateNameString: dateName, tagNameString: tagName!,genreImageNum: genreImage!)
+                                    let eventViewGenerate3 = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate3.mydelegate = self
                                     eventViewGenerate3.tag = 3
                                     eventViewGenerate3.layer.cornerRadius = 10
-                                    self.favoriteVerticalSV.addSubview(eventViewGenerate3)
+                                    self.joinedVerticalSV.addSubview(eventViewGenerate3)
                                     
-                                    kuY += 206
+                                    planY += 206
                                 }
-                                self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
-                                self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
-                                self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
-                                self.favoriteVerticalSV.backgroundColor = UIColor.whiteColor()
+                                self.joinedVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                                self.joinedVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 4) / 2) * 212 + 93))
+                                self.joinedVerticalSV.contentOffset = CGPointMake(0, -50)
+                                self.joinedVerticalSV.backgroundColor = UIColor.whiteColor()
                                 
                             }
                         }
                         let views = [
-                            ViewPagerElement2(selectedTitleView: self.kitView, noSelectedTitleView: self.selectedKitView, mainView: self.kitVerticalSV),
-                            ViewPagerElement2(selectedTitleView: self.kuView, noSelectedTitleView: self.selectedKuView, mainView: self.kuVerticalSV),
-                            ViewPagerElement2(selectedTitleView: self.favoriteView, noSelectedTitleView: self.selectedFavoriteView, mainView: self.favoriteVerticalSV)
+                            ViewPagerElement2(selectedTitleView: self.willJoinView, noSelectedTitleView: self.selectedwillJoinView, mainView: self.willJoinVerticalSV),
+                            ViewPagerElement2(selectedTitleView: self.planView, noSelectedTitleView: self.selectedplanView, mainView: self.planVerticalSV),
+                            ViewPagerElement2(selectedTitleView: self.joinedView, noSelectedTitleView: self.selectedjoinedView, mainView: self.joinedVerticalSV)
                         ]
                         let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
                         let tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: views)
