@@ -67,26 +67,6 @@ class EventsAttendViewController: UIViewController {
         myScrollView.pagingEnabled = false
         self.view.addSubview(myScrollView)
         
-        if judgeKey.boolForKey("Key") {
-            starSelectedButton = UIButton()
-            starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
-            starSelectedButton.setBackgroundImage(starImage2, forState: UIControlState.Normal);
-            starSelectedButton.setTitle("", forState: UIControlState.Normal)
-            starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-            starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
-        } else {
-            starButton = UIButton()
-            starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
-            starButton.setBackgroundImage(starImage1, forState: UIControlState.Normal);
-            starButton.setTitle("", forState: UIControlState.Normal)
-            starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-            starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
-            
-        }
         
         
         
@@ -399,6 +379,31 @@ class EventsAttendViewController: UIViewController {
                         print("成功")
                         print(self.getID)
                         
+                        let keyInt: Int = events["event"]["id"].int as Int!
+                        let key: String = String(keyInt)
+
+                        if self.judgeKey.boolForKey(key) {
+                            self.starSelectedButton = UIButton()
+                            self.starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+                            self.starSelectedButton.setBackgroundImage(self.starImage2, forState: UIControlState.Normal);
+                            self.starSelectedButton.setTitle("", forState: UIControlState.Normal)
+                            self.starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                            self.starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+                            self.starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
+                            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starSelectedButton)
+                        } else {
+                            self.starButton = UIButton()
+                            self.starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+                            self.starButton.setBackgroundImage(self.starImage1, forState: UIControlState.Normal);
+                            self.starButton.setTitle("", forState: UIControlState.Normal)
+                            self.starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                            self.starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+                            self.starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
+                            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starButton)
+                            
+                        }
+
+                        
                         
                         self.EventGenre = events["event"]["genre"].int! as Int
                         if self.EventGenre == 0 {
@@ -432,7 +437,6 @@ class EventsAttendViewController: UIViewController {
                             
                         }
                         
-                        //        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                         self.window = UIWindow()
                         self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
                         self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
@@ -441,7 +445,6 @@ class EventsAttendViewController: UIViewController {
                         self.window.makeKeyAndVisible()
                         let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
                         imgView.image = self.genreImg
-                        //        imgView.center = CGPointMake(self.view.frame.size.width/2, ((self.navigationController?.navigationBar.frame.size.height)!*0.6))
                         self.window.addSubview(imgView)
                         
                         
@@ -535,7 +538,22 @@ class EventsAttendViewController: UIViewController {
     
     
     func onClickStarSelectedButton(sender: UIButton){
-        
+        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                let json = JSON(response.result.value!)
+                let eventArray = json["events"].array! as Array
+                for events in eventArray {
+                    let id = events["event"]["id"].int! as Int
+                    if  id == self.getID {
+                        let keyInt: Int = events["event"]["id"].int as Int!
+                        let key: String = String(keyInt)
+                        self.judgeKey.setBool(false, forKey: key)
+                        self.judgeKey.synchronize()
+
+                    }
+                }
+        }
         starButton = UIButton()
         starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
         starButton.setBackgroundImage(starImage1, forState: UIControlState.Normal);
@@ -545,13 +563,28 @@ class EventsAttendViewController: UIViewController {
         starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
         
-        judgeKey.setBool(false, forKey: "Key")
-        judgeKey.synchronize()
 
     }
     
     
     func onClickStarButton(sender: UIButton){
+        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, url)
+            .responseJSON { response in
+                let json = JSON(response.result.value!)
+                let eventArray = json["events"].array! as Array
+                for events in eventArray {
+                    let id = events["event"]["id"].int! as Int
+                    if  id == self.getID {
+                        let keyInt: Int = events["event"]["id"].int as Int!
+                        let key: String = String(keyInt)
+                        self.judgeKey.setBool(true, forKey: key)
+                        self.judgeKey.synchronize()
+                        
+                    }
+                }
+        }
+
         
         starSelectedButton = UIButton()
         starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
@@ -562,9 +595,6 @@ class EventsAttendViewController: UIViewController {
         starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
         
-        judgeKey.setBool(true, forKey: "Key")
-        judgeKey.synchronize()
-
         
     }
     
