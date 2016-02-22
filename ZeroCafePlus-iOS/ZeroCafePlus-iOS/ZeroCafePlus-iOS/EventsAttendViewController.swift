@@ -39,6 +39,8 @@ class EventsAttendViewController: UIViewController {
     
     var getID: Int!
     
+    let judgeKey = NSUserDefaults.standardUserDefaults()
+    
     var userID: JSON = 3
     
     
@@ -65,15 +67,26 @@ class EventsAttendViewController: UIViewController {
         myScrollView.pagingEnabled = false
         self.view.addSubview(myScrollView)
         
-        
-        starButton = UIButton()
-        starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
-        starButton.setBackgroundImage(starImage1, forState: UIControlState.Normal);
-        starButton.setTitle("", forState: UIControlState.Normal)
-        starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-        starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
+        if judgeKey.boolForKey("Key") {
+            starSelectedButton = UIButton()
+            starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+            starSelectedButton.setBackgroundImage(starImage2, forState: UIControlState.Normal);
+            starSelectedButton.setTitle("", forState: UIControlState.Normal)
+            starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+            starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
+        } else {
+            starButton = UIButton()
+            starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+            starButton.setBackgroundImage(starImage1, forState: UIControlState.Normal);
+            starButton.setTitle("", forState: UIControlState.Normal)
+            starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+            starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
+            
+        }
         
         
         
@@ -217,7 +230,7 @@ class EventsAttendViewController: UIViewController {
         self.reservedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
         self.reservedButton.addTarget(self, action: "onClickrezervedButton:", forControlEvents: .TouchUpInside)
         self.myScrollView.addSubview(self.reservedButton)
-
+        
         
         let sankaButtonImage: UIImage = UIImage(named: "event_detail_rounded.png")!
         self.sankaButton = UIButton()
@@ -228,7 +241,7 @@ class EventsAttendViewController: UIViewController {
         self.sankaButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
         self.sankaButton.addTarget(self, action: "onClickSankaButton:", forControlEvents: .TouchUpInside)
         self.myScrollView.addSubview(self.sankaButton)
-
+        
         
         
         let FriendTellButtonImage: UIImage = UIImage(named: "event_detail_rounded_gray.png")!
@@ -485,12 +498,12 @@ class EventsAttendViewController: UIViewController {
                         let capacity = events["event"]["capacity"].int! as Int
                         let participant: Int? = events["event"]["participant"].int
                         if judgeID == 0 {
-                                let reserved = capacity - participant!
-                                if reserved <= 0 {
-                                    self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
-                                } else {
-                                    self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
-                                }
+                            let reserved = capacity - participant!
+                            if reserved <= 0 {
+                                self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
+                            } else {
+                                self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
+                            }
                             
                         }
                         //スクロールサイズ
@@ -532,7 +545,9 @@ class EventsAttendViewController: UIViewController {
         starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
         
-        
+        judgeKey.setBool(false, forKey: "Key")
+        judgeKey.synchronize()
+
     }
     
     
@@ -546,6 +561,10 @@ class EventsAttendViewController: UIViewController {
         starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
         starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
+        
+        judgeKey.setBool(true, forKey: "Key")
+        judgeKey.synchronize()
+
         
     }
     
