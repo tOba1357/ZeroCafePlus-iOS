@@ -28,7 +28,7 @@ class SearchReslutViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         searchVerticalSV = UIScrollView()
         
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
@@ -152,7 +152,8 @@ class SearchReslutViewController: UIViewController {
                         self.searchVerticalSV.frame = CGRectMake(0, self.view.frame.height-self.view.frame.height/1.2, self.view.frame.width, self.view.frame.height/1.2)
                         self.searchVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
                         self.searchVerticalSV.contentOffset = CGPointMake(0, -50)
-                        self.searchVerticalSV.backgroundColor = UIColor.whiteColor()
+                        self.searchVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+
                     }
                     self.view.addSubview(self.searchVerticalSV)
                 }
@@ -161,11 +162,11 @@ class SearchReslutViewController: UIViewController {
     }
     
     func pushMyButton(myEventID:Int) {
-                let eventAttendVC = EventsAttendViewController()
-                eventAttendVC.getID = myEventID
-                print("")
-                eventAttendVC.modalTransitionStyle  = UIModalTransitionStyle.CoverVertical
-                presentViewController(eventAttendVC, animated: true, completion: nil)
+        
+        let eventAttendVC = EventsAttendViewController()
+        eventAttendVC.getID = myEventID
+        self.navigationController?.pushViewController(eventAttendVC, animated: true)
+ 
     }
     func returnOriginal(sender: UIButton){
         let scVC = SecondViewController()
