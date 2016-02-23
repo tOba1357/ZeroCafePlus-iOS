@@ -27,6 +27,7 @@
 		6FD54C4F1C647CEC00A6EC41 /* EventView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD54C4E1C647CEC00A6EC41 /* EventView2.swift */; };
 		6FD54C5C1C64860C00A6EC41 /* ViewPagerTab2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD54C5B1C64860C00A6EC41 /* ViewPagerTab2.swift */; };
 		98EC0B401C64089500185416 /* star_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 98EC0B3F1C64089500185416 /* star_selected.png */; };
+		98F348571C7C4BD30067B8DB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F348561C7C4BD30067B8DB /* SignUpViewController.swift */; };
 		9DD8BDA61C284E9B002F243D /* EventsAttendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */; };
 		9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */; };
 		BA2F0AD61C2858090007A49D /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD31C2858090007A49D /* CalenderView.swift */; };
@@ -164,6 +165,7 @@
 		6FD54C4E1C647CEC00A6EC41 /* EventView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView2.swift; sourceTree = "<group>"; };
 		6FD54C5B1C64860C00A6EC41 /* ViewPagerTab2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerTab2.swift; sourceTree = "<group>"; };
 		98EC0B3F1C64089500185416 /* star_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star_selected.png; path = imageFile/star_selected.png; sourceTree = "<group>"; };
+		98F348561C7C4BD30067B8DB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAttendViewController.swift; sourceTree = "<group>"; };
 		9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDecideViewController.swift; sourceTree = "<group>"; };
 		BA2F0AD31C2858090007A49D /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
 				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
 				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
+				98F348561C7C4BD30067B8DB /* SignUpViewController.swift */,
 				BABD6E351C61F4010018F456 /* CommonFunction.swift */,
 				BA465DE41C660D2B0068E404 /* AlertFunction.swift */,
 			);
@@ -830,6 +833,7 @@
 				BA5D9B6E1C26E30D00648280 /* ScheduleVC.swift in Sources */,
 				D7A6264E1C1AB359002DCEC6 /* AppDelegate.swift in Sources */,
 				BA3823501C6E1614001BFF1A /* Extension.swift in Sources */,
+				98F348571C7C4BD30067B8DB /* SignUpViewController.swift in Sources */,
 				BAB648911C760660009C8A8E /* NetHelper.swift in Sources */,
 				6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */,
 				BAB648921C760660009C8A8E /* NetRequestSerialization.swift in Sources */,
