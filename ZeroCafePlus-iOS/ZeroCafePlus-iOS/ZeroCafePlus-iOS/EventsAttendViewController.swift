@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Accounts
+import Foundation
 
 class EventsAttendViewController: UIViewController {
     
@@ -51,8 +52,6 @@ class EventsAttendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         starImage1 =  CommonFunction().resizingImage(imageName: "star.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)     //UIImage(named: "star.png")
         starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
         
@@ -360,6 +359,7 @@ class EventsAttendViewController: UIViewController {
                 for events in eventArray {
                     let id = events["event"]["id"].int! as Int
                     if  id == self.getID {
+                        //主催者かどうか判別
                         let ownerID = events["event"]["owner_id"].int! as Int
                         if ownerID == self.userID {
                             
@@ -413,8 +413,6 @@ class EventsAttendViewController: UIViewController {
                                 
                             }
                         }
-                        print("成功")
-                        print(self.getID)
                         
                         //お気に入りボタン
                         let keyInt: Int = events["event"]["id"].int as Int!
@@ -442,7 +440,7 @@ class EventsAttendViewController: UIViewController {
                         }
                         
                         
-                        
+                        //genreicon
                         self.EventGenre = events["event"]["genre"].int! as Int
                         if self.EventGenre == 0 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
@@ -499,15 +497,14 @@ class EventsAttendViewController: UIViewController {
                         date_formatter.locale     = NSLocale(localeIdentifier: "ja")
                         date_formatter.dateFormat = "yyyy/MM/dd"
                         let change_date:NSDate = date_formatter.dateFromString(startArray[0])!
-                        let weekdays: Array  = ["天", "日", "月", "火", "水", "木", "金", "土"]
+                        let weekdays: Array  = ["", "日", "月", "火", "水", "木", "金", "土"]
                         let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-                        //                        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
                         let comps = calendar.components([.Year, .Month, .Day, .Weekday] , fromDate:  change_date)
                         date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
                         print(date_formatter.stringFromDate(change_date))
                         self.date.text = date_formatter.stringFromDate(change_date)
                         self.date.sizeToFit()
-                        
+  
                         // 時間
                         let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
                         let endTime = events["event"]["end_time"].string! as String
@@ -515,6 +512,15 @@ class EventsAttendViewController: UIViewController {
                         let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
                         self.time.text = "\(startMinute) ~ \(endMinute)"
                         self.time.sizeToFit()
+                        print(endMinute)
+                       let dateFormat: NSDateFormatter = NSDateFormatter()
+                        dateFormat.locale = NSLocale(localeIdentifier: "ja")
+                        dateFormat.dateFormat = "yyyy/MM/dd hh:mm"
+                        print(startArray[0])
+               //         let eventTime = dateFormat.dateFromString("\(startArray[0]) \(endMinute)")!
+                 //       print(eventTime)
+                        
+                        
                         
                         // イベント説明
                         self.content.text = "\(events["event"]["description"].string! as String)"
