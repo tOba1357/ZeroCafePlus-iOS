@@ -217,10 +217,10 @@ class ForthViewController: UIViewController, EventViewDelegate {
                     var myY :CGFloat = 6
                     var planX :CGFloat = 6
                     var planY :CGFloat = 6
-                    
+                    let userId = NSUserDefaults.standardUserDefaults()
                     for user in users {
                         let user_id = user["user"]["id"].int!
-                        if user_id == 1 {
+                        if user_id == userId.objectForKey("UserIDKey") as! Int {
                             self.user_name = user["user"]["name"].string!
                             self.statusLabel.text = user["user"]["major"].string!
                             self.statusLabel.sizeToFit()
