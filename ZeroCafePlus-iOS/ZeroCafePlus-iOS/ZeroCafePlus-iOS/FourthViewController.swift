@@ -252,7 +252,6 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return eve["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    print(tagName)
                                     let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
@@ -307,7 +306,6 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return planEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    print(tagName)
                                     let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
@@ -446,10 +444,8 @@ class ForthViewController: UIViewController, EventViewDelegate {
     
     func pushMyButton(myEventID:Int) {
         
-        print("success")
         let eventAttendVC = EventsAttendViewController()
         eventAttendVC.getID = myEventID
-        print("")
         eventAttendVC.modalTransitionStyle  = UIModalTransitionStyle.CoverVertical
         presentViewController(eventAttendVC, animated: true, completion: nil)
     }
@@ -479,7 +475,6 @@ extension UIColor {
             let b = CGFloat(color & 0x0000FF) / 255.0
             return UIColor(red:r,green:g,blue:b,alpha:alpha)
         } else {
-            print("invalid hex string")
             return UIColor.whiteColor();
         }
     }
