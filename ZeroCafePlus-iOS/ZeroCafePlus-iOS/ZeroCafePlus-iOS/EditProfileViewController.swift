@@ -209,9 +209,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        
-        return true
-        
+    
         let maxLength: Int = 8
         
         let str = textField.text! + string
