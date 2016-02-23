@@ -29,10 +29,9 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     var EventGenre: Int!
     var getID: Int!
-    var Myrow: Int?
+    var friendsNumber: Int?
+    var userID: Int!
 
-    let judgment = NSUserDefaults.standardUserDefaults()
-    let TakeFriendsNumber = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,7 +150,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         addButton.text = myValues[row] as? String;
         print("row: \(row)")
         print("value: \(myValues[row])")
-        Myrow = row
+        friendsNumber = row
     }
     
     func onClick(sender: UIBarButtonItem) {
@@ -244,10 +243,10 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     func onClickMyButton(sender: UIButton){
         
-        if let varow: Int = Myrow {
-            Myrow = varow
+        if let varow: Int = friendsNumber {
+            friendsNumber = varow
         } else {
-            Myrow = 0
+            friendsNumber = 0
         }
         
         
@@ -260,9 +259,9 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         let parameters:[String:AnyObject] =
         [
             "ticket": [
-                "user_id": 3,
+                "user_id": userID,
                 "event_id": getID,
-                "other_participant": Myrow
+                "other_participant": friendsNumber
                 
                 
             ]
@@ -280,6 +279,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         let myEventsAttendViewController = EventsAttendViewController()
         myEventsAttendViewController.getID = getID
+        myEventsAttendViewController.friendsNumber = friendsNumber
         self.navigationController?.pushViewController(myEventsAttendViewController, animated: true)
         
         
