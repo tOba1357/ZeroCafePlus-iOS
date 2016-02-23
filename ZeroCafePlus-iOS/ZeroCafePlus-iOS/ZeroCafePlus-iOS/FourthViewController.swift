@@ -54,8 +54,14 @@ class ForthViewController: UIViewController, EventViewDelegate {
     
     var getID: Int!
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
@@ -204,6 +210,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         
     }
     override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height

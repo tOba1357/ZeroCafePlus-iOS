@@ -47,6 +47,11 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     private var userStartTime: String!
     private var userEndTime: String!
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLoad() {
         let countClick = NSUserDefaults.standardUserDefaults()
         countClick.removeObjectForKey("勉強会")
@@ -364,6 +369,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     override func viewWillAppear(animated: Bool) {
         clearEverything()
         genreCount = []
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func clickGenreButton(sender: UIButton){
@@ -486,7 +492,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         userSearch.synchronize()
         searchGenre()
         let SRVC = SearchReslutViewController()
-        presentViewController(SRVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(SRVC, animated: true)
     }
     
     func searchGenre() {

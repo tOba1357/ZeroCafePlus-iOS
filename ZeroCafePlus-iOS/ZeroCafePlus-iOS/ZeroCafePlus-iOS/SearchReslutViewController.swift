@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class SearchReslutViewController: UIViewController {
+class SearchReslutViewController: UIViewController, EventViewDelegate{
     
     private var searchVerticalSV: UIScrollView!
     private var kuVerticalSV: UIScrollView!
@@ -24,22 +24,23 @@ class SearchReslutViewController: UIViewController {
     private var horizontalSV: UIScrollView!
     private var returnOriginal: UIButton!
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLoad() {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.view.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         searchVerticalSV = UIScrollView()
         
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
         let searchCondition = NSUserDefaults.standardUserDefaults()
-        returnOriginal = UIButton(frame: CGRectMake(screenWidth/20,screenHeight/20,screenWidth/10, screenHeight/10))
-        returnOriginal.setTitle("戻る", forState: .Normal)
-        returnOriginal.setTitleColor(UIColor.hexStr("#BABABA", alpha: 1.0), forState: .Normal)
-        returnOriginal.addTarget(self, action: "returnOriginal:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(returnOriginal)
+
         
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
@@ -123,7 +124,7 @@ class SearchReslutViewController: UIViewController {
                             }()
                             
                             let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate, tagNameString: tagName!, genreImageNum: genreImage!)
-
+                            eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             self.searchVerticalSV.addSubview(eventViewGenerate)
                             
@@ -143,13 +144,13 @@ class SearchReslutViewController: UIViewController {
                             }()
 
                             let eventViewGenerate:EventView = EventView(frame:CGRectMake(searchX,searchY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate, tagNameString: tagName!, genreImageNum: genreImage!)
-
+                            eventViewGenerate.mydelegate = self
                             eventViewGenerate.layer.cornerRadius = 10
                             self.searchVerticalSV.addSubview(eventViewGenerate)
                             
                             searchY += 206
                         }
-                        self.searchVerticalSV.frame = CGRectMake(0, self.view.frame.height-self.view.frame.height/1.2, self.view.frame.width, self.view.frame.height/1.2)
+                        self.searchVerticalSV.frame = CGRectMake(0, self.view.frame.height-self.view.frame.height/1.05, self.view.frame.width, self.view.frame.height/1.2)
                         self.searchVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 1) / 2) * 212 + 93))
                         self.searchVerticalSV.contentOffset = CGPointMake(0, -50)
                         self.searchVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
@@ -167,11 +168,6 @@ class SearchReslutViewController: UIViewController {
         eventAttendVC.getID = myEventID
         self.navigationController?.pushViewController(eventAttendVC, animated: true)
  
-    }
-    func returnOriginal(sender: UIButton){
-        let scVC = SecondViewController()
-        scVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
