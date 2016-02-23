@@ -44,7 +44,7 @@ class EventsAttendViewController: UIViewController {
     
     let judgeKey = NSUserDefaults.standardUserDefaults()
     // userのid(仮)
-    var userID: Int = 2
+    var userID = NSUserDefaults.standardUserDefaults().integerForKey("UserIDKey")
     
     
     private var starImage1: UIImage!
@@ -360,6 +360,7 @@ class EventsAttendViewController: UIViewController {
                     let id = events["event"]["id"].int! as Int
                     if  id == self.getID {
                         //主催者かどうか判別
+                        print(self.userID)
                         let ownerID = events["event"]["owner_id"].int! as Int
                         if ownerID == self.userID {
                             
@@ -663,7 +664,6 @@ class EventsAttendViewController: UIViewController {
     func onClickSankaButton(sender: UIButton){
         let EventDecideViewController = EventsDecideViewController()
         EventDecideViewController.getID = getID
-        EventDecideViewController.userID = userID
         self.navigationController?.pushViewController(EventDecideViewController, animated: true)
     }
     

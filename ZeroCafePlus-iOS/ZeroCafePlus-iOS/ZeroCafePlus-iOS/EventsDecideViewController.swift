@@ -30,7 +30,7 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     var EventGenre: Int!
     var getID: Int!
     var friendsNumber: Int?
-    var userID: Int!
+    var userID = NSUserDefaults.standardUserDefaults().integerForKey("UserIDKey")
 
     
     override func viewDidLoad() {
