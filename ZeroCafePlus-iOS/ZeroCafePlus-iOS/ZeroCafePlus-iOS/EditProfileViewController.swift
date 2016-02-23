@@ -141,6 +141,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     func createUserView(sender:UIButton){
+        let userId = NSUserDefaults.standardUserDefaults()
+        
         if currentName.text != "" && currentProfile.text != "" {
             let headers = [
                 "Content-Type": "application/json",
@@ -154,7 +156,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                     "description": String(currentProfile.text)
                 ]
             ]
-            let url = "https://zerocafe.herokuapp.com/api/v1/users/1"
+            let url = "https://zerocafe.herokuapp.com/api/v1/users/\(userId.objectForKey("UserIDKey") as! Int)"
             Alamofire.request(.PUT, url, parameters: parameters, encoding: .JSON, headers:headers)
                 .responseString { response in
                     debugPrint(response.result.value)
