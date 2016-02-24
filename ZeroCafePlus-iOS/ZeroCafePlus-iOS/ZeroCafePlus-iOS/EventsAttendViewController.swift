@@ -41,6 +41,8 @@ class EventsAttendViewController: UIViewController {
     let judgeKey = NSUserDefaults.standardUserDefaults()
     var userID = NSUserDefaults.standardUserDefaults().integerForKey("UserIDKey")
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+
     
     private var starImage1: UIImage!
     private var starImage2: UIImage!!
@@ -635,7 +637,23 @@ class EventsAttendViewController: UIViewController {
         starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
         
-        
+        print("------selected-------")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var aaa = defaults.objectForKey("EVENT_ID") as! [Int]
+        var removeCount = 0
+        for (index,defaultID) in aaa.enumerate(){
+            if defaultID == getID{
+                aaa.removeAtIndex(index-removeCount)
+                removeCount++
+            }
+            print("defailtID",defaultID)
+            print("index",index)
+            print("aaa",aaa)
+
+        }
+        defaults.setObject(aaa, forKey:"EVENT_ID")
+        defaults.synchronize()
+
     }
     
     
@@ -667,6 +685,20 @@ class EventsAttendViewController: UIViewController {
         starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starSelectedButton)
         
+        //        お気に入りのボタンの処理
+        var eventIds: [Int] = []
+        
+        if let aaa = defaults.objectForKey("EVENT_ID"){
+            let orderedSet = NSOrderedSet(array: aaa as! [AnyObject])
+            let uniqueValues = orderedSet.array
+            eventIds = uniqueValues as! [Int]
+        }
+        //配列に追加していく
+        eventIds.append(getID)
+        
+        defaults.setObject(eventIds, forKey:"EVENT_ID")
+        defaults.synchronize()
+        print(eventIds)
         
     }
     
