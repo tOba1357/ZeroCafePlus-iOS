@@ -33,17 +33,12 @@ class EventsAttendViewController: UIViewController {
     private var event_detail_tag: UIImageView!
     private var starButton: UIButton!
     private var starSelectedButton: UIButton!
-    
     private var genreImg:UIImage!
     var window :UIWindow!
-    
     var EventGenre: Int!
-    
     var getID: Int!
     var friendsNumber: Int!
-    
     let judgeKey = NSUserDefaults.standardUserDefaults()
-    // userのid(仮)
     var userID = NSUserDefaults.standardUserDefaults().integerForKey("UserIDKey")
     
     
@@ -52,13 +47,13 @@ class EventsAttendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        starImage1 =  CommonFunction().resizingImage(imageName: "star.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)     //UIImage(named: "star.png")
-        starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
-        
-        
         
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
+        
+        
+        starImage1 =  CommonFunction().resizingImage(imageName: "star.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)     //UIImage(named: "star.png")
+        starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
         
         
         myScrollView = UIScrollView()
@@ -67,7 +62,6 @@ class EventsAttendViewController: UIViewController {
         myScrollView.contentOffset = CGPointMake(0, 0)
         myScrollView.pagingEnabled = false
         self.view.addSubview(myScrollView)
-        
         
         
         
@@ -106,6 +100,7 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: event_detail_calendar, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width/18.18),
             NSLayoutConstraint(item: event_detail_calendar, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/32.45)
             ])
+        
         
         
         date = UILabel(frame: CGRectMake(self.view.bounds.width/4.18,self.view.bounds.height/6.01,self.view.bounds.width,self.view.bounds.height/37.86))
@@ -322,6 +317,7 @@ class EventsAttendViewController: UIViewController {
         }
     }
     override func viewDidDisappear(animated: Bool) {
+        
         genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
         window = UIWindow()
         window.frame = CGRectMake(0, 0, 0, 0)
@@ -359,61 +355,8 @@ class EventsAttendViewController: UIViewController {
                 for events in eventArray {
                     let id = events["event"]["id"].int! as Int
                     if  id == self.getID {
-                        //主催者かどうか判別
                         print(self.userID)
                         let ownerID = events["event"]["owner_id"].int! as Int
-                        if ownerID == self.userID {
-                            
-                            self.cancelButton.translatesAutoresizingMaskIntoConstraints = false
-                            self.view.addConstraints([
-                                NSLayoutConstraint(item: self.cancelButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
-                                NSLayoutConstraint(item: self.cancelButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
-                                NSLayoutConstraint(item: self.cancelButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
-                                NSLayoutConstraint(item: self.cancelButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
-                                ])
-                            
-                            
-                        } else {
-                            // 参加済みかどうか判別
-                            let participantsArray =  events["participants"].array! as Array
-                            for participants in participantsArray{
-                                let participantsID = participants["id"].int! as Int
-                                if participantsID == self.userID {
-                                    judgeID = 1
-                                }
-                                if judgeID == 1 {
-                                    let keyIDInt: Int = events["event"]["id"].int as Int!
-                                    let keyID: String = String(keyIDInt)
-                                    
-                                    if let FriendsNumber = self.friendsNumber {
-                                        
-                                        NSUserDefaults.standardUserDefaults().setInteger(FriendsNumber, forKey: keyID)
-                                        NSUserDefaults.standardUserDefaults().synchronize()
-                                    }
-                                    let Number = NSUserDefaults.standardUserDefaults().integerForKey(keyID)
-                                    self.reservedButton.setTitle("予約済み 友だち +\(Number)", forState: UIControlState.Normal)
-                                    
-                                    self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
-                                    self.view.addConstraints([
-                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
-                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
-                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
-                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
-                                        ])
-                                }
-                                
-                            }
-                            if judgeID == 0 {
-                                self.sankaButton.translatesAutoresizingMaskIntoConstraints = false
-                                self.view.addConstraints([
-                                    NSLayoutConstraint(item: self.sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
-                                    NSLayoutConstraint(item: self.sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
-                                    NSLayoutConstraint(item: self.sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
-                                    NSLayoutConstraint(item: self.sankaButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
-                                    ])
-                                
-                            }
-                        }
                         
                         //お気に入りボタン
                         let keyInt: Int = events["event"]["id"].int as Int!
@@ -505,7 +448,7 @@ class EventsAttendViewController: UIViewController {
                         print(date_formatter.stringFromDate(change_date))
                         self.date.text = date_formatter.stringFromDate(change_date)
                         self.date.sizeToFit()
-  
+                        
                         // 時間
                         let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
                         let endTime = events["event"]["end_time"].string! as String
@@ -513,15 +456,104 @@ class EventsAttendViewController: UIViewController {
                         let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
                         self.time.text = "\(startMinute) ~ \(endMinute)"
                         self.time.sizeToFit()
-                        print(endMinute)
-                       let dateFormat: NSDateFormatter = NSDateFormatter()
+                        //eventと現在時刻を比較
+                        let dateFormat: NSDateFormatter = NSDateFormatter()
                         dateFormat.locale = NSLocale(localeIdentifier: "ja")
-                        dateFormat.dateFormat = "yyyy/MM/dd hh:mm"
-                        print(startArray[0])
-               //         let eventTime = dateFormat.dateFromString("\(startArray[0]) \(endMinute)")!
-                 //       print(eventTime)
+                        dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
+                        let time: String = "\(startArray[0]) \(endMinute)"
+                        let eventTime: NSDate = dateFormat.dateFromString(time)!
+                        print(dateFormat.stringFromDate(eventTime))
+                        print(eventTime)
+                        let now: NSDate = NSDate()
+                        let NowDateFormat = NSDateFormatter()
+                        NowDateFormat.locale = NSLocale(localeIdentifier: "ja")
+                        NowDateFormat.timeStyle = .ShortStyle
+                        NowDateFormat.dateStyle = .ShortStyle
+                        let nowstr: String = NowDateFormat.stringFromDate(now) // -> 2014/06/24 11:14
+                        print(nowstr)
+                        let NowTime: NSDate = dateFormat.dateFromString(nowstr)!
+                        print(NowTime)
                         
+                        var judgeTime: Int
                         
+                        if (eventTime.compare(NowTime) == NSComparisonResult.OrderedDescending){
+                            print("- イベントをやる前")
+                            judgeTime = 0
+                        }else if (eventTime.compare(NowTime) == NSComparisonResult.OrderedAscending){
+                            print("- イベントをやった後")
+                            judgeTime = 1
+                        }else{
+                            print("- 同じ")
+                            judgeTime = 0
+                        }
+                        
+                        if judgeTime == 0 {
+                            //主催者かどうか判別
+                            if ownerID == self.userID {
+                                self.cancelButton.translatesAutoresizingMaskIntoConstraints = false
+                                self.view.addConstraints([
+                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                    ])
+                                
+                                
+                            } else {
+                                // 参加済みかどうか判別
+                                let participantsArray =  events["participants"].array! as Array
+                                for participants in participantsArray{
+                                    let participantsID = participants["id"].int! as Int
+                                    if participantsID == self.userID {
+                                        judgeID = 1
+                                    }
+                                    if judgeID == 1 {
+                                        let keyIDInt: Int = events["event"]["id"].int as Int!
+                                        let keyID: String = String(keyIDInt)
+                                        
+                                        if let FriendsNumber = self.friendsNumber {
+                                            
+                                            NSUserDefaults.standardUserDefaults().setInteger(FriendsNumber, forKey: keyID)
+                                            NSUserDefaults.standardUserDefaults().synchronize()
+                                        }
+                                        let Number = NSUserDefaults.standardUserDefaults().integerForKey(keyID)
+                                        self.reservedButton.setTitle("予約済み 友だち +\(Number)", forState: UIControlState.Normal)
+                                        
+                                        self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
+                                        self.view.addConstraints([
+                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                            ])
+                                    }
+                                    
+                                }
+                                if judgeID == 0 {
+                                    self.sankaButton.translatesAutoresizingMaskIntoConstraints = false
+                                    self.view.addConstraints([
+                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                        ])
+                                    
+                                }
+                            }
+                            
+                            
+                        } else {
+                            self.reservedButton.setTitle("参加済み", forState: UIControlState.Normal)
+                            
+                            self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
+                            self.view.addConstraints([
+                                NSLayoutConstraint(item: self.reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                NSLayoutConstraint(item: self.reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                ])
+                            
+                        }
                         
                         // イベント説明
                         self.content.text = "\(events["event"]["description"].string! as String)"
@@ -557,7 +589,7 @@ class EventsAttendViewController: UIViewController {
                         //スクロールサイズ
                         if ownerID == self.userID {
                             self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
-
+                            
                         }
                         if  judgeID == 0 {
                             self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
@@ -659,7 +691,7 @@ class EventsAttendViewController: UIViewController {
         presentViewController(cancelAlert, animated: true, completion: nil)
         
     }
-
+    
     
     func onClickSankaButton(sender: UIButton){
         let EventDecideViewController = EventsDecideViewController()

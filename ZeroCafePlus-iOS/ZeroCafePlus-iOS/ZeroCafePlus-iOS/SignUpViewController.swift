@@ -71,7 +71,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         descriptionText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         descriptionText.text = ""
-        descriptionText.placeholder = "自己紹介文"
+        descriptionText.placeholder = "自己紹介文(任意)"
         descriptionText.delegate = self
         descriptionText.borderStyle = UITextBorderStyle.RoundedRect
         //        descriptionText.dataDetectorTypes = UIDataDetectorTypes.All
