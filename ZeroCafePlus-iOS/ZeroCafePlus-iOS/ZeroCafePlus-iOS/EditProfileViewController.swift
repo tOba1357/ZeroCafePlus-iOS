@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     private var nameLabel: UILabel!
@@ -116,7 +117,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         saveUpdate.setTitle("Save", forState: .Normal)
         saveUpdate.setTitleColor(UIColor.blueColor(), forState: .Normal)
         saveUpdate.backgroundColor = UIColor.clearColor()
-         saveUpdate.addTarget(self, action: "createUserView:", forControlEvents: .TouchUpInside)
+        saveUpdate.addTarget(self, action: "createUserView:", forControlEvents: .TouchUpInside)
         self.view.addSubview(saveUpdate)
         
         titleLabel = UILabel(frame: CGRectMake(0,0,screenWidth/2, screenHeight/15))
@@ -144,24 +145,50 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let userId = NSUserDefaults.standardUserDefaults()
         
         if currentName.text != "" && currentProfile.text != "" {
+            
+            //            let data:NSData = UIImagePNGRepresentation(test)!
+            //            var dataString = data.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            //
+            //
+            //            let headers = [
+            //                "Content-Type": "application/json",
+            //                "Accept": "application/json"
+            //            ]
+            //
+            //            let params:[String:AnyObject] =
+            //            [
+            //                "user": [
+            //                    "name": String(UTF8String: currentName.text!)!,
+            //                    "description": String(currentProfile.text),
+            //                    "image": "base64data:image/png;base64,\(dataString))"
+            //
+            //                ]
+            //            ]
+            let datas:NSData = UIImagePNGRepresentation(profileImage.image!)!
+            let dataString = datas.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            let dataArray = "\(dataString)".componentsSeparatedByString("\n")
+            var convertData = ""
+            
+            for data in dataArray{
+                convertData += data
+            }
+            
             let headers = [
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             ]
-            //nilのとき落ちるので注意
-            let parameters:[String:AnyObject] =
+            let params:[String:AnyObject] =
             [
                 "user": [
                     "name": String(UTF8String: currentName.text!)!,
-                    "description": String(currentProfile.text)
+                    "description": String(currentProfile.text),
+                    "image": "base64data:image/png;base64,\(convertData)"
                 ]
             ]
             let url = "https://zerocafe.herokuapp.com/api/v1/users/\(userId.objectForKey("UserIDKey") as! Int)"
-            Alamofire.request(.PUT, url, parameters: parameters, encoding: .JSON, headers:headers)
+            Alamofire.request(.PUT, url, parameters: params, encoding: .JSON, headers:headers)
                 .responseString { response in
                     debugPrint(response.result.value)
-                    
-                    //"いいよぉ！"が返ってくれば成功
             }
             let fv = ForthViewController()
             fv.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
@@ -192,7 +219,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo: [String: AnyObject]) {
         if didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] != nil {
             profileImage.image = didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] as? UIImage
-            
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -211,7 +237,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-    
+        
         let maxLength: Int = 8
         
         let str = textField.text! + string
@@ -226,14 +252,4 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-    
 }
