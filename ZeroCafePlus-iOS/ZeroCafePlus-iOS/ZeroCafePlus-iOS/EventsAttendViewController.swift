@@ -646,9 +646,6 @@ class EventsAttendViewController: UIViewController {
                 aaa.removeAtIndex(index-removeCount)
                 removeCount++
             }
-            print("defailtID",defaultID)
-            print("index",index)
-            print("aaa",aaa)
 
         }
         defaults.setObject(aaa, forKey:"EVENT_ID")
@@ -698,7 +695,6 @@ class EventsAttendViewController: UIViewController {
         
         defaults.setObject(eventIds, forKey:"EVENT_ID")
         defaults.synchronize()
-        print(eventIds)
         
     }
     
