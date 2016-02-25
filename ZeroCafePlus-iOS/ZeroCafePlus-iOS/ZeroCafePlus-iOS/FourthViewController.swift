@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import AlamofireImage
 
 class ForthViewController: UIViewController, EventViewDelegate {
     
@@ -241,6 +242,11 @@ class ForthViewController: UIViewController, EventViewDelegate {
                             self.profileLabel.attributedText = attributedText
                             self.profileLabel.sizeToFit()
                             self.nameLabel.text = self.user_name
+                            let userImage: String? = user["user"]["image"]["thumb"]["url"].string
+                            if userImage != nil {
+                                self.profileImage.af_setImageWithURL(NSURL(string: userImage!)!)
+                            }
+                            
                             let plan_ev = user["attend_events"].array! as Array
                             for attendEvCount in plan_ev.enumerate() {
                                 
