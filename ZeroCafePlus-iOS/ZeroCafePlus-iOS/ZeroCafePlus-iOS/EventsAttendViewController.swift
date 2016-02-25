@@ -637,7 +637,6 @@ class EventsAttendViewController: UIViewController {
         starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starButton)
         
-        print("------selected-------")
         let defaults = NSUserDefaults.standardUserDefaults()
         var defaultsEventId = defaults.objectForKey("EVENT_ID") as! [Int]
         var removeCount = 0

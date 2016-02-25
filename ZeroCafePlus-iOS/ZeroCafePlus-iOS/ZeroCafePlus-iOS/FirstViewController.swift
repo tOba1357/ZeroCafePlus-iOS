@@ -251,9 +251,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                     if favoriteCount % 2 == 1 {
                                         favoriteY += screenHeight*(400/1136)
                                     }
-                                    
-                                    print("はいれつうううううう", favoriteEventIdList)
-                                    
                                     favoriteSideDecide++
                                     favoriteCount++
                                 }
