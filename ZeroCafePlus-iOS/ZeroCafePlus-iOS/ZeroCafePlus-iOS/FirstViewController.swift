@@ -140,11 +140,15 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     var kitY :CGFloat = 6
                     var kuX :CGFloat = 6
                     var kuY :CGFloat = 6
+                    var favoriteX :CGFloat = 6
+                    var favoriteY :CGFloat = 6
                     
-                    var kuSideDecide = 0
-                    var kuCount = 0
                     var kitSideDecide = 0
                     var kitCount = 0
+                    var kuSideDecide = 0
+                    var kuCount = 0
+                    var favoriteSideDecide = 0
+                    var favoriteCount = 0
                     
                     for event in eventArray.enumerate(){
                         
@@ -208,7 +212,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                             
                         }else if placeDecide == 1{
-                            //金沢大学のEventViewの表示 2page
+                            //                            金沢大学のEventViewの表示 2page
                             
                             kuX = screenWidth*(15/640)
                             
@@ -261,19 +265,98 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             kuCount++
                             
                             
+                            
                             self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
                             self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kuCount + 1) / 2) * 212 + 93))
                             self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
                             self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                             
                             
-                        } 
+                        }
+                        
+                        //                    お気に入りページの作成
+                        
+                        if favoriteSideDecide % 2 == 0 {
+                            
+                            favoriteX = screenWidth*(15/640)
+                            
+                            let genreImage = eve["event"]["genre"].int
+                            let eventID = eve["event"]["id"].int
+                            let title = eve["event"]["title"].string! as String
+                            let startDate = eve["event"]["start_time"].string! as String
+                            let endDate = eve["event"]["end_time"].string! as String
+                            let tagName : String? = { ()->(String) in
+                                if eve["event"]["category_tag"] == nil{
+                                    return ""
+                                }else {
+                                    return eve["event"]["category_tag"].string! as String
+                                }
+                            }()
+                            
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            
+                            if  let _favoriteEventList = defaults.objectForKey("EVENT_ID"){
+                                var favoriteEventIdList = _favoriteEventList as! [Int]
+                                
+                                for (key,_) in favoriteEventIdList.enumerate(){
+                                    if favoriteEventIdList[key] == eventID {
+                                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(favoriteX,favoriteY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                        eventViewGenerate.mydelegate = self
+                                        eventViewGenerate.layer.cornerRadius = 10
+                                        
+                                        self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                                    }
+                                }
+                            }
+                        }else{
+                            favoriteX = screenWidth*(332/640)
+                            
+                            let eve = event.element as JSON
+                            let genreImage = eve["event"]["genre"].int
+                            let eventID = eve["event"]["id"].int
+                            let title = eve["event"]["title"].string! as String
+                            let startDate = eve["event"]["start_time"].string! as String
+                            let endDate = eve["event"]["end_time"].string! as String
+                            let tagName : String? = { ()->(String) in
+                                if eve["event"]["category_tag"] == nil{
+                                    return ""
+                                }else {
+                                    return eve["event"]["category_tag"].string! as String
+                                }
+                            }()
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            
+                            if  let _favoriteEventList = defaults.objectForKey("EVENT_ID"){
+                                var favoriteEventIdList = _favoriteEventList as! [Int]
+                                
+                                for (key,_) in favoriteEventIdList.enumerate(){
+                                    if favoriteEventIdList[key] == eventID {
+                                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(favoriteX,favoriteY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                        eventViewGenerate.mydelegate = self
+                                        eventViewGenerate.layer.cornerRadius = 10
+                                        
+                                        self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                                        favoriteY += screenHeight*(400/1136)
+                                        
+                                        print("はいれつうううううう", favoriteEventIdList)
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        favoriteSideDecide++
+                        favoriteCount++
+                        
+                        
                         
                         self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        //                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2) * 212 + 93))
+                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
                         self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
                         self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+                        
+                        
                     }
+                    
                     let views = [
                         ViewPagerElement(selectedTitleView: kitView, noSelectedTitleView: selectedKitView, mainView: self.kitVerticalSV),
                         ViewPagerElement(selectedTitleView: kuView, noSelectedTitleView: selectedKuView, mainView: self.kuVerticalSV),
