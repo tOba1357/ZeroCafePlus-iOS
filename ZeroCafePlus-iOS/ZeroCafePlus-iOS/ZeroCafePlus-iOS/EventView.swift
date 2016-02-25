@@ -30,7 +30,7 @@ class EventView :UIView{
         let endData = getDateTime(endDateString)
         let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[3]):\(endData[4])"
         
-        let titleName: UILabel = UILabel(frame: CGRectMake(eventWidth*(17/300),eventHeight*(110/385),eventWidth*(283/300),eventHeight*(70/385)))
+        let titleName: UILabel = UILabel(frame: CGRectMake(eventWidth*(17/300),eventHeight*(130/385),eventWidth*(283/300),eventHeight*(90/385)))
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
         let dateName: UILabel = UILabel(frame: CGRectMake(10,110,130,50))
@@ -85,7 +85,7 @@ class EventView :UIView{
 //        let genreImage = UIImage(named: "party.png")
         genreImageView = UIImageView(frame: CGRectMake(0,0,70,70))
         genreImageView.image = genreImage
-        genreImageView.layer.position = CGPoint(x: eventWidth/2, y: eventHeight*(60/385))
+        genreImageView.layer.position = CGPoint(x: eventWidth/2, y: eventHeight*(70/385))
         genreImageView.layer.masksToBounds = true
         genreImageView.layer.cornerRadius = 10.0
         self.addSubview(genreImageView)
