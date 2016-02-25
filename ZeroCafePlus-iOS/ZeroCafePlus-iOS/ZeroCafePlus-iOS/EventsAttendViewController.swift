@@ -639,16 +639,16 @@ class EventsAttendViewController: UIViewController {
         
         print("------selected-------")
         let defaults = NSUserDefaults.standardUserDefaults()
-        var aaa = defaults.objectForKey("EVENT_ID") as! [Int]
+        var defaultsEventId = defaults.objectForKey("EVENT_ID") as! [Int]
         var removeCount = 0
-        for (index,defaultID) in aaa.enumerate(){
+        for (index,defaultID) in defaultsEventId.enumerate(){
             if defaultID == getID{
-                aaa.removeAtIndex(index-removeCount)
+                defaultsEventId.removeAtIndex(index-removeCount)
                 removeCount++
             }
 
         }
-        defaults.setObject(aaa, forKey:"EVENT_ID")
+        defaults.setObject(defaultsEventId, forKey:"EVENT_ID")
         defaults.synchronize()
 
     }
@@ -685,8 +685,8 @@ class EventsAttendViewController: UIViewController {
         //        お気に入りのボタンの処理
         var eventIds: [Int] = []
         
-        if let aaa = defaults.objectForKey("EVENT_ID"){
-            let orderedSet = NSOrderedSet(array: aaa as! [AnyObject])
+        if let defaultsEventId = defaults.objectForKey("EVENT_ID"){
+            let orderedSet = NSOrderedSet(array: defaultsEventId as! [AnyObject])
             let uniqueValues = orderedSet.array
             eventIds = uniqueValues as! [Int]
         }
