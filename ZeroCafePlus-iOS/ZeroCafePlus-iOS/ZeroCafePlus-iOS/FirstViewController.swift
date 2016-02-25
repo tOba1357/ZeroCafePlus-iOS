@@ -61,13 +61,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
         kitVerticalSV = UIScrollView()
         kuVerticalSV = UIScrollView()
         favoriteVerticalSV = UIScrollView()
-        //        horizontalSV = UIScrollView()
-        //
-        //        horizontalSV.pagingEnabled = true
-        //        horizontalSV.frame = CGRectMake(0, screenHeight/11, self.view.frame.size.width, self.view.frame.size.height)
-        //        horizontalSV.contentSize = CGSizeMake(self.view.frame.size.width * 3.0,self.view.frame.size.height)
-        //        horizontalSV.contentOffset = CGPointMake(0, screenHeight/11)
-        //        horizontalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
         
         kitVerticalSV.pagingEnabled = false
         kuVerticalSV.pagingEnabled = false
@@ -133,7 +126,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     debugPrint(response.result.value)
                     
                     let eventArray = json["events"].array! as Array
-                    let eventLastId = eventArray.count
                     print("持ってきたもの:",eventArray)
                     
                     var kitX :CGFloat = 6
@@ -156,23 +148,24 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         
                         let eve = event.element as JSON
                         let placeDecide = eve["event"]["place"]
+                        
+                        let genreImage = eve["event"]["genre"].int
+                        let eventID = eve["event"]["id"].int
+                        let title = eve["event"]["title"].string! as String
+                        let startDate = eve["event"]["start_time"].string! as String
+                        let endDate = eve["event"]["end_time"].string! as String
+                        let tagName : String? = { ()->(String) in
+                            if eve["event"]["category_tag"] == nil{
+                                return ""
+                            }else {
+                                return eve["event"]["category_tag"].string! as String
+                            }
+                        }()
+                        
                         if placeDecide == 0 {
                             
                             if kitSideDecide % 2 == 0 {
                                 
-                                let genreImage = eve["event"]["genre"].int
-                                let eventID = eve["event"]["id"].int
-                                let title = eve["event"]["title"].string! as String
-                                let startDate = eve["event"]["start_time"].string! as String
-                                let endDate = eve["event"]["end_time"].string! as String
-                                let tagName : String? = { ()->(String) in
-                                    if eve["event"]["category_tag"] == nil{
-                                        return ""
-                                    }else {
-                                        return eve["event"]["category_tag"].string! as String
-                                    }
-                                }()
-                                print(tagName)
                                 let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
@@ -182,19 +175,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             }else{
                                 kitX = screenWidth*(332/640)
                                 
-                                let eve = event.element as JSON
-                                let genreImage = eve["event"]["genre"].int
-                                let eventID = eve["event"]["id"].int
-                                let title = eve["event"]["title"].string! as String
-                                let startDate = eve["event"]["start_time"].string! as String
-                                let endDate = eve["event"]["end_time"].string! as String
-                                let tagName : String? = { ()->(String) in
-                                    if eve["event"]["category_tag"] == nil{
-                                        return ""
-                                    }else {
-                                        return eve["event"]["category_tag"].string! as String
-                                    }
-                                }()
                                 let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
@@ -218,19 +198,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             
                             if kuSideDecide % 2 == 0 {
                                 
-                                let genreImage = eve["event"]["genre"].int
-                                let eventID = eve["event"]["id"].int
-                                let title = eve["event"]["title"].string! as String
-                                let startDate = eve["event"]["start_time"].string! as String
-                                let endDate = eve["event"]["end_time"].string! as String
-                                let tagName : String? = { ()->(String) in
-                                    if eve["event"]["category_tag"] == nil{
-                                        return ""
-                                    }else {
-                                        return eve["event"]["category_tag"].string! as String
-                                    }
-                                }()
-                                print(tagName)
                                 let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
@@ -241,19 +208,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 
                                 kuX = screenWidth*(332/640)
                                 
-                                let eve = event.element as JSON
-                                let genreImage = eve["event"]["genre"].int
-                                let eventID = eve["event"]["id"].int
-                                let title = eve["event"]["title"].string! as String
-                                let startDate = eve["event"]["start_time"].string! as String
-                                let endDate = eve["event"]["end_time"].string! as String
-                                let tagName : String? = { ()->(String) in
-                                    if eve["event"]["category_tag"] == nil{
-                                        return ""
-                                    }else {
-                                        return eve["event"]["category_tag"].string! as String
-                                    }
-                                }()
                                 let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate, tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
@@ -277,77 +231,34 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         //                    お気に入りページの作成
                         
                         if favoriteSideDecide % 2 == 0 {
-                            
                             favoriteX = screenWidth*(15/640)
-                            
-                            let genreImage = eve["event"]["genre"].int
-                            let eventID = eve["event"]["id"].int
-                            let title = eve["event"]["title"].string! as String
-                            let startDate = eve["event"]["start_time"].string! as String
-                            let endDate = eve["event"]["end_time"].string! as String
-                            let tagName : String? = { ()->(String) in
-                                if eve["event"]["category_tag"] == nil{
-                                    return ""
-                                }else {
-                                    return eve["event"]["category_tag"].string! as String
-                                }
-                            }()
-                            
-                            let defaults = NSUserDefaults.standardUserDefaults()
-                            
-                            if  let _favoriteEventList = defaults.objectForKey("EVENT_ID"){
-                                var favoriteEventIdList = _favoriteEventList as! [Int]
-                                
-                                for (key,_) in favoriteEventIdList.enumerate(){
-                                    if favoriteEventIdList[key] == eventID {
-                                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(favoriteX,favoriteY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
-                                        eventViewGenerate.mydelegate = self
-                                        eventViewGenerate.layer.cornerRadius = 10
-                                        
-                                        self.favoriteVerticalSV.addSubview(eventViewGenerate)
-                                    }
-                                }
-                            }
                         }else{
                             favoriteX = screenWidth*(332/640)
+                        }
+                        let defaults = NSUserDefaults.standardUserDefaults()
+                        
+                        if  let _favoriteEventList = defaults.objectForKey("EVENT_ID"){
+                            var favoriteEventIdList = _favoriteEventList as! [Int]
                             
-                            let eve = event.element as JSON
-                            let genreImage = eve["event"]["genre"].int
-                            let eventID = eve["event"]["id"].int
-                            let title = eve["event"]["title"].string! as String
-                            let startDate = eve["event"]["start_time"].string! as String
-                            let endDate = eve["event"]["end_time"].string! as String
-                            let tagName : String? = { ()->(String) in
-                                if eve["event"]["category_tag"] == nil{
-                                    return ""
-                                }else {
-                                    return eve["event"]["category_tag"].string! as String
-                                }
-                            }()
-                            let defaults = NSUserDefaults.standardUserDefaults()
-                            
-                            if  let _favoriteEventList = defaults.objectForKey("EVENT_ID"){
-                                var favoriteEventIdList = _favoriteEventList as! [Int]
-                                
-                                for (key,_) in favoriteEventIdList.enumerate(){
-                                    if favoriteEventIdList[key] == eventID {
-                                        let eventViewGenerate:EventView = EventView(frame:CGRectMake(favoriteX,favoriteY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
-                                        eventViewGenerate.mydelegate = self
-                                        eventViewGenerate.layer.cornerRadius = 10
-                                        
-                                        self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                            for (key,_) in favoriteEventIdList.enumerate(){
+                                if favoriteEventIdList[key] == eventID {
+                                    let eventViewGenerate:EventView = EventView(frame:CGRectMake(favoriteX,favoriteY, screenWidth*(300/640),screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                    eventViewGenerate.mydelegate = self
+                                    eventViewGenerate.layer.cornerRadius = 10
+                                    
+                                    self.favoriteVerticalSV.addSubview(eventViewGenerate)
+                                    
+                                    if favoriteCount % 2 == 1 {
                                         favoriteY += screenHeight*(400/1136)
-                                        
-                                        print("はいれつうううううう", favoriteEventIdList)
-                                        
                                     }
+                                    
+                                    print("はいれつうううううう", favoriteEventIdList)
+                                    
+                                    favoriteSideDecide++
+                                    favoriteCount++
                                 }
                             }
                         }
-                        favoriteSideDecide++
-                        favoriteCount++
-                        
-                        
                         
                         self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
                         self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
