@@ -11,9 +11,11 @@ import Alamofire
 import SwiftyJSON
 import Accounts
 import Foundation
+import Social
 
-class EventsAttendViewController: UIViewController {
-    
+
+class EventsAttendViewController: UIViewController,UINavigationControllerDelegate  {
+
     private var myScrollView:UIScrollView!
     private var name:UILabel!
     private var date: UILabel!
@@ -25,6 +27,9 @@ class EventsAttendViewController: UIViewController {
     private var reservedButton: UIButton!
     private var cancelButton: UIButton!
     private var kikaku: UILabel!
+    private var ownerImage: UIImageView!
+    private var participantsImage: UIImageView!
+    private var participantsButton: UIButton!
     private var sanka: UILabel!
     private var overLine: UILabel!
     private var line: UILabel!
@@ -40,15 +45,18 @@ class EventsAttendViewController: UIViewController {
     var friendsNumber: Int!
     let judgeKey = NSUserDefaults.standardUserDefaults()
     var userID = NSUserDefaults.standardUserDefaults().integerForKey("UserIDKey")
-    
+    var anime: Int = 0
     let defaults = NSUserDefaults.standardUserDefaults()
-
+    
     
     private var starImage1: UIImage!
     private var starImage2: UIImage!!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.delegate = self
+
         
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
@@ -279,6 +287,11 @@ class EventsAttendViewController: UIViewController {
             ])
         
         
+        
+        
+        
+        
+        
         sanka = UILabel(frame: CGRectMake(0,0,0,0))
         sanka.text = "参加"
         sanka.textColor = UIColor.hexStr("1A1A1A", alpha: 1.0)
@@ -290,6 +303,18 @@ class EventsAttendViewController: UIViewController {
             NSLayoutConstraint(item: sanka, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
             NSLayoutConstraint(item: sanka, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/45.44)
             ])
+        
+        
+        participantsButton = UIButton()
+        participantsButton.frame = CGRectMake(0,0,0,0)
+        participantsButton.titleLabel!.font = UIFont.boldSystemFontOfSize(self.view.bounds.height*(23/1136))
+        participantsButton.setTitle("", forState: UIControlState.Normal)
+        participantsButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        participantsButton.addTarget(self, action: "onClickParticipantsButton:", forControlEvents: .TouchUpInside)
+        myScrollView.addSubview(participantsButton)
+        
+        
+        
         
         
         self.view.backgroundColor = UIColor.whiteColor()
@@ -346,11 +371,9 @@ class EventsAttendViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         var judgeID: Int = 0
-        
-        let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
-        Alamofire.request(.GET, url)
+        let EventsUrl = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, EventsUrl)
             .responseJSON { response in
-                
                 
                 let json = JSON(response.result.value!)
                 let eventArray = json["events"].array! as Array
@@ -358,7 +381,10 @@ class EventsAttendViewController: UIViewController {
                     let id = events["event"]["id"].int! as Int
                     if  id == self.getID {
                         print(self.userID)
-                        let ownerID = events["event"]["owner_id"].int! as Int
+                        var ownerID: Int!
+                        ownerID = events["event"]["owner_id"].int! as Int
+                        NSUserDefaults.standardUserDefaults().setInteger(ownerID, forKey: "ownerID")
+                        NSUserDefaults.standardUserDefaults().synchronize()
                         
                         //お気に入りボタン
                         let keyInt: Int = events["event"]["id"].int as Int!
@@ -489,6 +515,8 @@ class EventsAttendViewController: UIViewController {
                             judgeTime = 0
                         }
                         
+                        let participantsArray =  events["participants"].array! as Array
+                        
                         if judgeTime == 0 {
                             //主催者かどうか判別
                             if ownerID == self.userID {
@@ -503,7 +531,6 @@ class EventsAttendViewController: UIViewController {
                                 
                             } else {
                                 // 参加済みかどうか判別
-                                let participantsArray =  events["participants"].array! as Array
                                 for participants in participantsArray{
                                     let participantsID = participants["id"].int! as Int
                                     if participantsID == self.userID {
@@ -578,9 +605,23 @@ class EventsAttendViewController: UIViewController {
                         }
                         // 人数
                         let capacity = events["event"]["capacity"].int! as Int
-                        let participant: Int? = events["event"]["participant"].int
+                        let participant: Int! = events["event"]["participant"].int
+                        if participant >= 5 {
+                            self.participantsButton.translatesAutoresizingMaskIntoConstraints = false
+                            self.view.addConstraints([
+                                NSLayoutConstraint(item: self.participantsButton, attribute: .Top,    relatedBy: .Equal, toItem: self.sanka,   attribute: .Bottom, multiplier: 1, constant: 0),
+                                NSLayoutConstraint(item: self.participantsButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width*(61/640)),
+                                NSLayoutConstraint(item: self.participantsButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/45.44)
+                                ])
+                            self.participantsButton.setTitle("\(participant) ∨", forState: UIControlState.Normal)
+
+
+                        }
+                        NSUserDefaults.standardUserDefaults().setInteger(participant, forKey: "participant")
+                        NSUserDefaults.standardUserDefaults().synchronize()
+                        
                         if judgeID == 0 {
-                            let reserved = capacity - participant!
+                            let reserved = capacity - participant
                             if reserved <= 0 {
                                 self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
                             } else {
@@ -603,14 +644,104 @@ class EventsAttendViewController: UIViewController {
                         
                         
                     }
+                    
+                }
+                
+        }
+        let UsersUrl = "https://zerocafe.herokuapp.com/api/v1/users.json"
+        Alamofire.request(.GET, UsersUrl)
+            .responseJSON { response in
+                
+                let ownerID = NSUserDefaults.standardUserDefaults().integerForKey("ownerID")
+                let json = JSON(response.result.value!)
+                print(ownerID)
+                let userArray = json["users"].array! as Array
+                for users in userArray {
+                    let id = users["user"]["id"].int! as Int
+                    if  id == ownerID {
+                        print(users["user"])
+                        self.ownerImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
+                        self.ownerImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
+                        self.ownerImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
+                        self.ownerImage.layer.masksToBounds = true
+                        self.ownerImage.layer.cornerRadius = 8.0
+                        self.myScrollView.addSubview(self.ownerImage)
+                        self.ownerImage.translatesAutoresizingMaskIntoConstraints = false
+                        self.view.addConstraints([
+                            NSLayoutConstraint(item: self.ownerImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(35/1136)),
+                            NSLayoutConstraint(item: self.ownerImage, attribute: .Left,   relatedBy: .Equal, toItem: self.kikaku, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640)),
+                            NSLayoutConstraint(item: self.ownerImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
+                            NSLayoutConstraint(item: self.ownerImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
+                            ])
+                        
+                        let ownerImageurl: String? = users["user"]["image"]["thumb"]["url"].string
+                        if ownerImageurl != nil {
+                            print(ownerImageurl!)
+                            self.ownerImage.af_setImageWithURL(NSURL(string: ownerImageurl!)!)
+                        } else {
+                            print("no image")
+                        }
+                    }
+                    
                 }
                 
         }
         
+        Alamofire.request(.GET, EventsUrl)
+            .responseJSON { response in
+                let json = JSON(response.result.value!)
+                let eventArray = json["events"].array! as Array
+                for events in eventArray {
+                    let id = events["event"]["id"].int! as Int
+                    if  id == self.getID {
+                        let participants: Int? = events["event"]["participant"].int
+                        if participants != nil {
+                            let participantsArray = events["participants"].array! as Array
+                            var count: Int = 1
+                            var pointSift: CGFloat = 0
+                            for ptcpnts in participantsArray {
+                                if count <= 5 {
+                                    self.participantsImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
+                                    self.participantsImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
+                                    self.participantsImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
+                                    self.participantsImage.layer.masksToBounds = true
+                                    self.participantsImage.layer.cornerRadius = 8.0
+                                    self.myScrollView.addSubview(self.participantsImage)
+                                    self.participantsImage.translatesAutoresizingMaskIntoConstraints = false
+                                    self.view.addConstraints([
+                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(123/1136)),
+                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Left,   relatedBy: .Equal, toItem: self.sanka, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640) + pointSift),
+                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
+                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
+                                        ])
+                                    let participantImageUrl: String? = ptcpnts["image"]["image"]["thumb"]["url"].string
+                                    if participantImageUrl != nil {
+                                        self.participantsImage.af_setImageWithURL(NSURL(string: participantImageUrl!)!)
+                                    } else {
+                                        print("no image")
+                                    }
+                                    
+                                    pointSift += self.view.bounds.width*(78/640)
+                                    count += 1
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+        }
         
     }
-    
-    
+
+    func onClickParticipantsButton(sender: UIButton){
+
+        let ParticipantsView = ParticipantsImageViewController()
+            ParticipantsView.getID = getID
+            self.navigationController?.pushViewController(ParticipantsView, animated: true)
+        
+    }
+
     func onClickStarSelectedButton(sender: UIButton){
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
@@ -645,11 +776,11 @@ class EventsAttendViewController: UIViewController {
                 defaultsEventId.removeAtIndex(index-removeCount)
                 removeCount++
             }
-
+            
         }
         defaults.setObject(defaultsEventId, forKey:"EVENT_ID")
         defaults.synchronize()
-
+        
     }
     
     
@@ -699,9 +830,8 @@ class EventsAttendViewController: UIViewController {
     
     
     
-    func onClickrezervedButton(sender: UIButton){
-        
-    }
+    func onClickrezervedButton(sender: UIButton){}
+    
     
     func willCancel(sender: UIButton){
         let cancelAlert: UIAlertController = UIAlertController(title: "キャンセル連絡をする", message: "ゼロカフェ", preferredStyle: .Alert)
@@ -730,14 +860,23 @@ class EventsAttendViewController: UIViewController {
     
     
     func onClickTellButton(sender: UIButton){
+        
+        genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
+        window = UIWindow()
+        window.frame = CGRectMake(0, 0, 0, 0)
+        window.layer.position = CGPoint(x: 0, y: 0)
+        window.backgroundColor = UIColor.redColor()
+        window.makeKeyWindow()
+        window.makeKeyAndVisible()
+        let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+        imgView.image = genreImg
+        window.addSubview(imgView)
+        
+        
         // 共有する項目
         let shareText = ""
-        
         let activityItems = [shareText]
-        
-        // 初期化処理
         let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        
         self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
@@ -745,6 +884,71 @@ class EventsAttendViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
 }
 
+
+//let animator = Animator()
+
+//func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//    // PushかPopかをアニメータークラスにセット
+//    animator.operation = operation
+//    
+//    return animator
+//    
+//}
+//
+//class Animator: NSObject, UIViewControllerAnimatedTransitioning {
+//    let animationDuration = 1.0  // 画面遷移にかける時間
+//    var operation: UINavigationControllerOperation = .Push  // 画面遷移がPushかPopかを保持するプロパティ
+//    
+//    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+//        return animationDuration
+//    }
+//    
+//    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+//        
+//        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+//        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
+//        let containerView = transitionContext.containerView()
+//        
+//        // Pushの場合、上から下に遷移。Popの場合、下から上に遷移
+//        if operation == .Push{
+//            let initialFrame = CGRectOffset(toView.bounds, 0.0, -toView.bounds.size.height)
+//            let finalFrame = toView.bounds
+//            
+//            // 画面遷移スタート時点
+//            toView.frame = initialFrame
+//            containerView!.addSubview(toView)
+//            
+//            // 画面遷移
+//            UIView.animateWithDuration(animationDuration, animations: {
+//                
+//                toView.frame = finalFrame
+//                
+//                }, completion: {
+//                    _ in
+//                    transitionContext.completeTransition(true)  // 画面遷移終了の通知
+//            })
+//            
+//        }else{
+//            let initialFrame = CGRectOffset(fromView.bounds, 0.0, 0.0)
+//            let finalFrame = CGRectOffset(fromView.bounds, 0.0, -fromView.bounds.size.height)
+//            
+//            // 画面遷移スタート時点
+//            fromView.frame = initialFrame
+//            containerView!.addSubview(toView)
+//            containerView!.insertSubview(fromView, aboveSubview: toView)
+//            
+//            // 画面遷移
+//            UIView.animateWithDuration(animationDuration, animations: {
+//                
+//                fromView.frame = finalFrame
+//                
+//                }, completion: {
+//                    _ in
+//                    transitionContext.completeTransition(true)  // 画面遷移終了の通知
+//            })
+//            
+//        }
+//    }
+//}
