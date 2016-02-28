@@ -144,11 +144,8 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     
                     for event in eventArray.enumerate(){
                         
-                        kitX = screenWidth*(15/640)
-                        
                         let eve = event.element as JSON
                         let placeDecide = eve["event"]["place"]
-                        
                         let genreImage = eve["event"]["genre"].int
                         let eventID = eve["event"]["id"].int
                         let title = eve["event"]["title"].string! as String
@@ -163,69 +160,46 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         }()
                         
                         if placeDecide == 0 {
+//                            金沢工業大学のEventViewの表示 2page
                             
                             if kitSideDecide % 2 == 0 {
-                                
+                                kitX = screenWidth*(15/640)
+                            }else{
+                                kitX = screenWidth*(332/640)
+                            }
+                            
                                 let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
                                 eventViewGenerate.layer.cornerRadius = 10
                                 
                                 self.kitVerticalSV.addSubview(eventViewGenerate)
-                                
-                            }else{
-                                kitX = screenWidth*(332/640)
-                                
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
-                                eventViewGenerate.mydelegate = self
-                                eventViewGenerate.layer.cornerRadius = 10
-                                self.kitVerticalSV.addSubview(eventViewGenerate)
-                                
+                            
+                            if kitCount % 2 == 1{
                                 kitY += screenHeight*(400/1136)
                             }
+                            
                             kitSideDecide++
                             kitCount++
-                            
-                            
-                            self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                            self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2) * 212 + 93))
-                            self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
-                            self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                             
                         }else if placeDecide == 1{
                             //                            金沢大学のEventViewの表示 2page
                             
-                            kuX = screenWidth*(15/640)
-                            
                             if kuSideDecide % 2 == 0 {
-                                
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
-                                eventViewGenerate.mydelegate = self
-                                eventViewGenerate.layer.cornerRadius = 10
-                                
-                                self.kuVerticalSV.addSubview(eventViewGenerate)
-                                
+                                kuX = screenWidth*(15/640)
                             }else{
-                                
                                 kuX = screenWidth*(332/640)
-                                
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate, tagNameString: tagName!, genreImageNum: genreImage!)
-                                eventViewGenerate.mydelegate = self
-                                eventViewGenerate.layer.cornerRadius = 10
-                                self.kuVerticalSV.addSubview(eventViewGenerate)
-                                
+                            }
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                            eventViewGenerate.mydelegate = self
+                            eventViewGenerate.layer.cornerRadius = 10
+                            
+                            self.kuVerticalSV.addSubview(eventViewGenerate)
+                            
+                            if kuCount % 2 == 1{
                                 kuY += screenHeight*(400/1136)
                             }
                             kuSideDecide++
                             kuCount++
-                            
-                            
-                            
-                            self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                            self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kuCount + 1) / 2) * 212 + 93))
-                            self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
-                            self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-                            
-                            
                         }
                         
                         //                    お気に入りページの作成
@@ -235,6 +209,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         }else{
                             favoriteX = screenWidth*(332/640)
                         }
+                        
                         let defaults = NSUserDefaults.standardUserDefaults()
                         
                         if  let _favoriteEventList = defaults.objectForKey("EVENT_ID"){
@@ -256,14 +231,23 @@ class FirstViewController: UIViewController, EventViewDelegate {
                                 }
                             }
                         }
-                        
-                        self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                        self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
-                        self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
-                        self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-                        
-                        
                     }
+                    
+                    self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                    self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2) * 212 + 93))
+                    self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+                    
+                    self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                    self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kuCount + 1) / 2) * 212 + 93))
+                    self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+                    
+                    self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+                    self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
+                    self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
+
                     
                     let views = [
                         ViewPagerElement(selectedTitleView: kitView, noSelectedTitleView: selectedKitView, mainView: self.kitVerticalSV),
