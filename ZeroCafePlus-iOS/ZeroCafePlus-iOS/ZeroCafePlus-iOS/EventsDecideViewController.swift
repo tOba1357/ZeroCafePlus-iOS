@@ -242,45 +242,71 @@ class EventsDecideViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     
     func onClickMyButton(sender: UIButton){
-        
-        if let varow: Int = friendsNumber {
-            friendsNumber = varow
-        } else {
-            friendsNumber = 0
-        }
-        
-        
-        
-        let headers = [
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        ]
+        let EventsUrl = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, EventsUrl)
+            .responseJSON { response in
+                
+                let json = JSON(response.result.value!)
+                let eventArray = json["events"].array! as Array
+                for events in eventArray {
+                    let id = events["event"]["id"].int! as Int
+                    if  id == self.getID {
+                        let capacity = events["event"]["capacity"].int! as Int
+                        let participant: Int! = events["event"]["participant"].int
+                        let reserved = capacity - participant
+                        if let varow: Int = self.friendsNumber {
+                            self.friendsNumber = varow
+                        } else {
+                            self.friendsNumber = 0
+                        }
+                        
+                        if self.friendsNumber!+1 <= reserved {
+                            let headers = [
+                                "Content-Type": "application/json",
+                                "Accept": "application/json"
+                            ]
+                            
+                            let parameters:[String:AnyObject] =
+                            [
+                                "ticket": [
+                                    "user_id": self.userID,
+                                    "event_id": self.getID,
+                                    "other_participant": self.friendsNumber
+                                    
+                                    
+                                ]
+                            ]
+                            let PostUrl = "https://zerocafe.herokuapp.com/api/v1/tickets.json"
+                            
+                            Alamofire.request(.POST, PostUrl, parameters: parameters, encoding: .JSON, headers:headers)
+                                .responseString { response in
+                                    debugPrint(response.result.value)
+                                    //"いいよぉ！"が返って来れば成功
+                                    
+                            }
+                            let myEventsAttendViewController = EventsAttendViewController()
+                            myEventsAttendViewController.getID = self.getID
+                            myEventsAttendViewController.friendsNumber = self.friendsNumber
+                            self.navigationController?.pushViewController(myEventsAttendViewController, animated: true)
 
-        let parameters:[String:AnyObject] =
-        [
-            "ticket": [
-                "user_id": userID,
-                "event_id": getID,
-                "other_participant": friendsNumber
-                
-                
-            ]
-        ]
-        let PostUrl = "https://zerocafe.herokuapp.com/api/v1/tickets.json"
+                            
+                        } else {
+                            let myAlert: UIAlertController = UIAlertController(title: "定員を超えています。", message: "", preferredStyle: .Alert)
+                            let myOkAction = UIAlertAction(title: "OK", style: .Default) { action in
+                            }
+                            myAlert.addAction(myOkAction)
+                            self.presentViewController(myAlert, animated: true, completion: nil)
+
+                        }
+                        
+                }
+        }
         
-        Alamofire.request(.POST, PostUrl, parameters: parameters, encoding: .JSON, headers:headers)
-            .responseString { response in
-                debugPrint(response.result.value)
-                //"いいよぉ！"が返って来れば成功
         }
         
         
         
         
-        let myEventsAttendViewController = EventsAttendViewController()
-        myEventsAttendViewController.getID = getID
-        myEventsAttendViewController.friendsNumber = friendsNumber
-        self.navigationController?.pushViewController(myEventsAttendViewController, animated: true)
         
         
         
