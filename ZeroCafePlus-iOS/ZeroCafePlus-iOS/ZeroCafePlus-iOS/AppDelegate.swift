@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //初回起動判定
@@ -31,15 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = viewController
             
         }
-        
-        
-        
-        //        let myFirstViewController: FirstViewController = FirstViewController()
-        //        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        //        self.window?.rootViewController = myFirstViewController
-        //        self.window?.makeKeyAndVisible()
-        
-        //        // Override point for customization after application launch.
         return true
     }
     

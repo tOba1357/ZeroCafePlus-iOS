@@ -414,7 +414,6 @@ class ForthViewController: UIViewController, EventViewDelegate {
                         self.view.addSubview(tabView)
                         tabView.translatesAutoresizingMaskIntoConstraints = false
                         self.view.addConstraints([
-                            
                             NSLayoutConstraint(
                                 item: tabView,
                                 attribute: NSLayoutAttribute.Top,
@@ -424,7 +423,6 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                 multiplier: 1.0,
                                 constant: screenWidth/40.57
                             ),
-                            // 横（固定）
                             NSLayoutConstraint(
                                 item: tabView,
                                 attribute: .Width,
@@ -435,7 +433,6 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                 constant: screenWidth
                             ),
                             
-                            // 縦（固定）
                             NSLayoutConstraint(
                                 item: tabView,
                                 attribute: .Height,

@@ -52,7 +52,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         
-        
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
         
@@ -160,7 +159,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         }()
                         
                         if placeDecide == 0 {
-//                            金沢工業大学のEventViewの表示 2page
+                            //金沢工業大学のEventViewの表示 2page
                             
                             if kitSideDecide % 2 == 0 {
                                 kitX = screenWidth*(15/640)
@@ -202,7 +201,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             kuCount++
                         }
                         
-                        //                    お気に入りページの作成
+                        //お気に入りページの作成
                         
                         if favoriteSideDecide % 2 == 0 {
                             favoriteX = screenWidth*(15/640)
