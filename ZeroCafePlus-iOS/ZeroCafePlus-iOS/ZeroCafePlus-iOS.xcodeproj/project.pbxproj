@@ -317,6 +317,26 @@
 			name = FourthView_Detail;
 			sourceTree = "<group>";
 		};
+		6FD842151C833277003621AD /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
+				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
+				98CA36FA1C81610C002E7396 /* ParticipantsImageViewController.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		6FD842161C8332AC003621AD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BA38234F1C6E1614001BFF1A /* Extension.swift */,
+				BABD6E351C61F4010018F456 /* CommonFunction.swift */,
+				BA465DE41C660D2B0068E404 /* AlertFunction.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		9B6AAB13E675EDE20D2FA0B6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,26 +536,22 @@
 		D7A6264C1C1AB359002DCEC6 /* ZeroCafePlus-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */,
 				BAB648821C760631009C8A8E /* Net */,
 				BA53843C1C7474C500DA5AEE /* TabBarController */,
-				BA38234F1C6E1614001BFF1A /* Extension.swift */,
+				98F348561C7C4BD30067B8DB /* SignUpViewController.swift */,
+				D76B28511C6470F40090DB73 /* FirstView_Detail */,
+				6FD520DC1C76F1730030DDCD /* Second_Detail */,
 				BA31F87C1C61275E00CB0AF7 /* ThirdView_Detail */,
+				6FD54C581C6485AC00A6EC41 /* FourthView_Detail */,
+				6FD842151C833277003621AD /* Events */,
 				D76B28341C60A2110090DB73 /* image */,
 				BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */,
-				D76B28511C6470F40090DB73 /* FirstView_Detail */,
-				D7A6264D1C1AB359002DCEC6 /* AppDelegate.swift */,
-				6FD520DC1C76F1730030DDCD /* Second_Detail */,
-				6FD54C581C6485AC00A6EC41 /* FourthView_Detail */,
 				D7A626531C1AB359002DCEC6 /* Main.storyboard */,
 				D7A626561C1AB359002DCEC6 /* Assets.xcassets */,
 				D7A626581C1AB359002DCEC6 /* LaunchScreen.storyboard */,
 				D7A6265B1C1AB359002DCEC6 /* Info.plist */,
-				9DD8BDA51C284E9B002F243D /* EventsAttendViewController.swift */,
-				9DD8BDA91C284F2F002F243D /* EventsDecideViewController.swift */,
-				98CA36FA1C81610C002E7396 /* ParticipantsImageViewController.swift */,
-				98F348561C7C4BD30067B8DB /* SignUpViewController.swift */,
-				BABD6E351C61F4010018F456 /* CommonFunction.swift */,
-				BA465DE41C660D2B0068E404 /* AlertFunction.swift */,
+				6FD842161C8332AC003621AD /* Extension */,
 			);
 			path = "ZeroCafePlus-iOS";
 			sourceTree = "<group>";

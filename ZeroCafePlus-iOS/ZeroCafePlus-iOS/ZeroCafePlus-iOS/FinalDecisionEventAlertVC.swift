@@ -36,12 +36,6 @@ class FinalDecisionEventAlertVC: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        //        scrollView.delegate = self
-        //        scrollView.contentSize   = CGSizeMake(0, 0)
-        //        scrollView.contentOffset = CGPointMake(0.0 , 0.0)
-        //        self.view.addSubview(scrollView)
-        
         checkGenre()
         
         let nameLabel = UILabel(frame: CGRectMake(0,0,500,60))

@@ -33,7 +33,7 @@ class EventView :UIView{
         let titleName: UILabel = UILabel(frame: CGRectMake(eventWidth*(17/300),eventHeight*(130/385),eventWidth*(283/300),eventHeight*(90/385)))
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
-        let dateName: UILabel = UILabel(frame: CGRectMake(10,110,130,50))
+        let dateName: UILabel = UILabel(frame: CGRectMake(20,110,130,50))
         dateName.numberOfLines = 2
         dateName.textAlignment = NSTextAlignment.Center
         let tagName: UILabel = UILabel(frame: CGRectMake(10,140,130,70))
@@ -81,8 +81,6 @@ class EventView :UIView{
             
         }
         
-        
-//        let genreImage = UIImage(named: "party.png")
         genreImageView = UIImageView(frame: CGRectMake(0,0,70,70))
         genreImageView.image = genreImage
         genreImageView.layer.position = CGPoint(x: eventWidth/2, y: eventHeight*(70/385))

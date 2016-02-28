@@ -23,8 +23,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         zerocafeIdText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         zerocafeIdText.text = ""
         zerocafeIdText.placeholder = "ゼロカフェID"
@@ -33,8 +31,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         zerocafeIdText.layer.position = CGPoint(x:self.view.bounds.width/2,y:self.view.bounds.height/6);
         self.view.addSubview(zerocafeIdText)
         
-        
-        
         UserNameText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         UserNameText.text = ""
         UserNameText.placeholder = "ユーザー名"
@@ -42,8 +38,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         UserNameText.borderStyle = UITextBorderStyle.RoundedRect
         UserNameText.layer.position = CGPoint(x:self.view.bounds.width/2,y:self.view.bounds.height/4);
         self.view.addSubview(UserNameText)
-        
-        
         
         PasswordText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         PasswordText.text = ""
@@ -54,9 +48,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         PasswordText.layer.position = CGPoint(x:self.view.bounds.width/2,y:self.view.bounds.height/3);
         self.view.addSubview(PasswordText)
         
-        
-        
-        
         majorText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         majorText.text = ""
         majorText.placeholder = "学科"
@@ -64,8 +55,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         majorText.borderStyle = UITextBorderStyle.RoundedRect
         majorText.layer.position = CGPoint(x:self.view.bounds.width/2,y:self.view.bounds.height/2.4);
         self.view.addSubview(majorText)
-        
-        
         
         descriptionText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         descriptionText.text = ""
@@ -76,8 +65,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         descriptionText.layer.position = CGPoint(x:self.view.bounds.width/2,y:self.view.bounds.height/2);
         self.view.addSubview(descriptionText)
         
-        
-        
         let nextButton: UIButton = UIButton(frame: CGRectMake(0,0,self.view.bounds.width/2,50))
         nextButton.backgroundColor = UIColor.orangeColor();
         nextButton.layer.masksToBounds = true
@@ -87,18 +74,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         nextButton.addTarget(self, action: "onClickLoginButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(nextButton)
         
-        
-
-        
         self.view.backgroundColor = UIColor.whiteColor()
         
     }
-    override func viewWillAppear(animated: Bool) {
-        
-        
-    }
-    
-    
     
     func onClickLoginButton(sender: UIButton){
         if (zerocafeIdText.text == "") || (UserNameText.text == "") || (PasswordText.text == "") || (majorText.text == ""){
@@ -137,10 +115,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         "password": PasswordText.text!,
                         "major": majorText.text!,
                         "description": "ここに自己紹介文が表示されます"
-                        
                     ]
                 ]
-                
             }
             let PostUrl = "https://zerocafe.herokuapp.com/api/v1/users.json"
             Alamofire.request(.POST, PostUrl, parameters: parameters, encoding: .JSON, headers:headers)
@@ -148,8 +124,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     debugPrint(response.result.value)
                     //"いいよぉ！"が返ってくれば成功
             }
-            
-            
             let GetUrl = "https://zerocafe.herokuapp.com/api/v1/users"
             Alamofire.request(.GET, GetUrl)
                 .responseJSON { response in
@@ -170,11 +144,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let SignUp_ud = NSUserDefaults.standardUserDefaults()
             SignUp_ud.setBool(true, forKey: "ViewKey")
             
-            
             let targetView: AnyObject = self.storyboard!.instantiateViewControllerWithIdentifier( "CustomTabBar" )
             self.presentViewController( targetView as! UIViewController, animated: true, completion: nil)
-            
-            
         }
     }
     
@@ -200,8 +171,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         print("text field return")
         return true
     }
-    
-    
 }
 
 
