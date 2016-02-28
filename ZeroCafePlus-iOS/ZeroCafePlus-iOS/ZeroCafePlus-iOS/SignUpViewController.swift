@@ -23,10 +23,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.whiteColor()
         
-    }
-    override func viewWillAppear(animated: Bool) {
         
         zerocafeIdText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         zerocafeIdText.text = ""
@@ -51,6 +48,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         PasswordText = UITextField(frame: CGRectMake(0,0,self.view.bounds.width/1.24,30))
         PasswordText.text = ""
         PasswordText.placeholder = "パスワード"
+        PasswordText.secureTextEntry = true
         PasswordText.delegate = self
         PasswordText.borderStyle = UITextBorderStyle.RoundedRect
         PasswordText.layer.position = CGPoint(x:self.view.bounds.width/2,y:self.view.bounds.height/3);
@@ -90,6 +88,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(nextButton)
         
         
+
+        
+        self.view.backgroundColor = UIColor.whiteColor()
+        
+    }
+    override func viewWillAppear(animated: Bool) {
         
         
     }
