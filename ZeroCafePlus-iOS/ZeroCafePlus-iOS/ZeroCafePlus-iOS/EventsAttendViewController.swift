@@ -15,7 +15,7 @@ import Social
 
 
 class EventsAttendViewController: UIViewController,UINavigationControllerDelegate  {
-
+    
     private var myScrollView:UIScrollView!
     private var name:UILabel!
     private var date: UILabel!
@@ -45,7 +45,6 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
     var friendsNumber: Int!
     let judgeKey = NSUserDefaults.standardUserDefaults()
     var userID = NSUserDefaults.standardUserDefaults().integerForKey("UserIDKey")
-    var anime: Int = 0
     let defaults = NSUserDefaults.standardUserDefaults()
     
     
@@ -56,7 +55,7 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
         super.viewDidLoad()
         
         navigationController?.delegate = self
-
+        
         
         let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButtonItem
@@ -312,9 +311,6 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
         participantsButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         participantsButton.addTarget(self, action: "onClickParticipantsButton:", forControlEvents: .TouchUpInside)
         myScrollView.addSubview(participantsButton)
-        
-        
-        
         
         
         self.view.backgroundColor = UIColor.whiteColor()
@@ -614,8 +610,8 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                                 NSLayoutConstraint(item: self.participantsButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/45.44)
                                 ])
                             self.participantsButton.setTitle("\(participant) ∨", forState: UIControlState.Normal)
-
-
+                            
+                            
                         }
                         NSUserDefaults.standardUserDefaults().setInteger(participant, forKey: "participant")
                         NSUserDefaults.standardUserDefaults().synchronize()
@@ -624,6 +620,7 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                             let reserved = capacity - participant
                             if reserved <= 0 {
                                 self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
+                                
                             } else {
                                 self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
                             }
@@ -733,15 +730,15 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
         }
         
     }
-
+    
     func onClickParticipantsButton(sender: UIButton){
-
+        
         let ParticipantsView = ParticipantsImageViewController()
-            ParticipantsView.getID = getID
-            self.navigationController?.pushViewController(ParticipantsView, animated: true)
+        ParticipantsView.getID = getID
+        self.navigationController?.pushViewController(ParticipantsView, animated: true)
         
     }
-
+    
     func onClickStarSelectedButton(sender: UIButton){
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
@@ -851,9 +848,29 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
     
     
     func onClickSankaButton(sender: UIButton){
-        let EventDecideViewController = EventsDecideViewController()
-        EventDecideViewController.getID = getID
-        self.navigationController?.pushViewController(EventDecideViewController, animated: true)
+        let EventsUrl = "https://zerocafe.herokuapp.com/api/v1/events.json"
+        Alamofire.request(.GET, EventsUrl)
+            .responseJSON { response in
+                
+                let json = JSON(response.result.value!)
+                let eventArray = json["events"].array! as Array
+                for events in eventArray {
+                    let id = events["event"]["id"].int! as Int
+                    if  id == self.getID {
+                        let capacity = events["event"]["capacity"].int! as Int
+                        let participant: Int! = events["event"]["participant"].int
+                        let reserved = capacity - participant
+                        
+                        
+                        if reserved > 0 {
+                            let EventDecideViewController = EventsDecideViewController()
+                            EventDecideViewController.getID = self.getID
+                            self.navigationController?.pushViewController(EventDecideViewController, animated: true)
+                        }
+                    }
+                }
+        }
+        
     }
     
     
@@ -892,58 +909,58 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
 //func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 //    // PushかPopかをアニメータークラスにセット
 //    animator.operation = operation
-//    
+//
 //    return animator
-//    
+//
 //}
 //
 //class Animator: NSObject, UIViewControllerAnimatedTransitioning {
 //    let animationDuration = 1.0  // 画面遷移にかける時間
 //    var operation: UINavigationControllerOperation = .Push  // 画面遷移がPushかPopかを保持するプロパティ
-//    
+//
 //    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
 //        return animationDuration
 //    }
-//    
+//
 //    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-//        
+//
 //        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
 //        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
 //        let containerView = transitionContext.containerView()
-//        
+//
 //        // Pushの場合、上から下に遷移。Popの場合、下から上に遷移
 //        if operation == .Push{
 //            let initialFrame = CGRectOffset(toView.bounds, 0.0, -toView.bounds.size.height)
 //            let finalFrame = toView.bounds
-//            
+//
 //            // 画面遷移スタート時点
 //            toView.frame = initialFrame
 //            containerView!.addSubview(toView)
-//            
+//
 //            // 画面遷移
 //            UIView.animateWithDuration(animationDuration, animations: {
-//                
+//
 //                toView.frame = finalFrame
-//                
+//
 //                }, completion: {
 //                    _ in
 //                    transitionContext.completeTransition(true)  // 画面遷移終了の通知
 //            })
-//            
+//
 //        }else{
 //            let initialFrame = CGRectOffset(fromView.bounds, 0.0, 0.0)
 //            let finalFrame = CGRectOffset(fromView.bounds, 0.0, -fromView.bounds.size.height)
-//            
+//
 //            // 画面遷移スタート時点
 //            fromView.frame = initialFrame
 //            containerView!.addSubview(toView)
 //            containerView!.insertSubview(fromView, aboveSubview: toView)
-//            
+//
 //            // 画面遷移
 //            UIView.animateWithDuration(animationDuration, animations: {
-//                
+//
 //                fromView.frame = finalFrame
-//                
+//
 //                }, completion: {
 //                    _ in
 //                    transitionContext.completeTransition(true)  // 画面遷移終了の通知
