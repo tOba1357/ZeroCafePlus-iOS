@@ -456,8 +456,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
         
         let eventAttendVC = EventsAttendViewController()
         eventAttendVC.getID = myEventID
-        eventAttendVC.modalTransitionStyle  = UIModalTransitionStyle.CoverVertical
-        presentViewController(eventAttendVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(eventAttendVC, animated: true)
     }
     
     func clickBarButton(sender: UIButton){
