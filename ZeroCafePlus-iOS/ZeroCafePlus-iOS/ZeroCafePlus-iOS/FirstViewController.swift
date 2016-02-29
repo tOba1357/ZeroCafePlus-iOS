@@ -159,7 +159,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         }()
                         
                         if placeDecide == 0 {
-                            //金沢工業大学のEventViewの表示 2page
+                            //金沢工業大学のEventViewの表示 1page
                             
                             if kitSideDecide % 2 == 0 {
                                 kitX = screenWidth*(15/640)
@@ -233,7 +233,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     }
                     
                     self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                    self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2) * 212 + 93))
+                    self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2)) * screenHeight * (385/1136) + 153)
                     self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                     

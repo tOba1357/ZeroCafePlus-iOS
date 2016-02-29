@@ -33,13 +33,13 @@ class EventView :UIView{
         let titleName: UILabel = UILabel(frame: CGRectMake(eventWidth*(17/300),eventHeight*(130/385),eventWidth*(283/300),eventHeight*(90/385)))
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
-        let dateName: UILabel = UILabel(frame: CGRectMake(20,110,130,50))
+        let dateName: UILabel = UILabel(frame: CGRectMake(eventWidth*(17/300),eventHeight*(200/385),eventWidth*(283/300),eventHeight*(90/385)))
         dateName.numberOfLines = 2
         dateName.textAlignment = NSTextAlignment.Center
-        let tagName: UILabel = UILabel(frame: CGRectMake(10,140,130,70))
+        let tagName: UILabel = UILabel(frame: CGRectMake(eventWidth*(17/300),eventHeight*(250/385),eventWidth*(283/300),eventHeight*(90/385)))
         tagName.numberOfLines = 2
         tagName.textAlignment = NSTextAlignment.Center
-        let touchButton: UIButton = UIButton(frame: CGRectMake(10,10,130,180))
+        let touchButton: UIButton = UIButton(frame: CGRectMake(0,0,eventWidth,eventHeight))
         
         titleName.text = titleNameString
         dateName.text = dateText
@@ -58,30 +58,30 @@ class EventView :UIView{
         self.addSubview(touchButton)
         
         if genreImageNum == 0 {
-            genreImage =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: 70, h: 70)
+            genreImage =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: 60, h: 60)
             
             
         } else if genreImageNum == 1 {
-            genreImage =  CommonFunction().resizingImage(imageName: "study.png", w: 70, h: 70)
+            genreImage =  CommonFunction().resizingImage(imageName: "study.png", w: 60, h: 60)
             
         } else if genreImageNum == 2 {
-            genreImage =  CommonFunction().resizingImage(imageName: "party.png", w: 70, h: 70)
+            genreImage =  CommonFunction().resizingImage(imageName: "party.png", w: 60, h: 60)
             
         } else if genreImageNum == 3 {
-            genreImage =  CommonFunction().resizingImage(imageName: "circle.png", w: 70, h: 70)
+            genreImage =  CommonFunction().resizingImage(imageName: "circle.png", w: 60, h: 60)
             
         } else if genreImageNum == 4 {
-            genreImage =  CommonFunction().resizingImage(imageName: "tournament.png", w: 70, h: 70)
+            genreImage =  CommonFunction().resizingImage(imageName: "tournament.png", w: 60, h: 60)
             
         } else if genreImageNum == 5 {
-            genreImage =  CommonFunction().resizingImage(imageName: "hobby.png", w: 70, h: 70)
+            genreImage =  CommonFunction().resizingImage(imageName: "hobby.png", w: 60, h: 60)
             
         } else if genreImageNum == 6 {
-            genreImage =  CommonFunction().resizingImage(imageName: "readbook.png", w: 70, h: 70)
+            genreImage =  CommonFunction().resizingImage(imageName: "readbook.png", w: 60, h: 60)
             
         }
         
-        genreImageView = UIImageView(frame: CGRectMake(0,0,70,70))
+        genreImageView = UIImageView(frame: CGRectMake(0,0,60,60))
         genreImageView.image = genreImage
         genreImageView.layer.position = CGPoint(x: eventWidth/2, y: eventHeight*(70/385))
         genreImageView.layer.masksToBounds = true
