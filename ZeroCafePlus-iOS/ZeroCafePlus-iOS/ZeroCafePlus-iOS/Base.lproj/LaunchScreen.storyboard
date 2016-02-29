@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +17,33 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="splash_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="AjX-zs-04D">
+                                <rect key="frame" x="-20" y="0.0" width="640" height="600"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="splash_object.png" translatesAutoresizingMaskIntoConstraints="NO" id="Aue-PY-L4O">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AjX-zs-04D" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="9Iv-wl-XxU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Aue-PY-L4O" secondAttribute="trailing" id="9K0-9T-OZx"/>
+                            <constraint firstItem="Aue-PY-L4O" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="G6E-B7-S0d"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Aue-PY-L4O" secondAttribute="bottom" id="PRO-NB-3lk"/>
+                            <constraint firstItem="Aue-PY-L4O" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="cNf-St-GVm"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="AjX-zs-04D" secondAttribute="bottom" id="jhH-th-cu7"/>
+                            <constraint firstItem="AjX-zs-04D" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="nXM-Ou-5nj"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="39" y="327"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="splash_background.png" width="640" height="1136"/>
+        <image name="splash_object.png" width="230" height="248"/>
+    </resources>
 </document>
