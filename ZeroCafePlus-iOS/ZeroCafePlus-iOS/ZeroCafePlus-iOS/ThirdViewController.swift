@@ -37,6 +37,8 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
     
     let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         makeView()
@@ -217,7 +219,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
                 "description" : self.eventExposition,
                 "belonging" : "\(eventBelonging)",
                 "entry_fee" : 0,
-                "owner_id" : 1,
+                "owner_id" : defaults.objectForKey("UserIDKey") as! Int,
                 "dive_join" : eventDiveJoin,
                 "start_time" : "\(self.eventDate[0])-\(self.eventDate[1])-\(self.eventDate[2])T\(self.eventStartTime)",
                 "end_time" : "\(self.eventDate[0])-\(self.eventDate[1])-\(self.eventDate[2])T\(self.eventEndTime)",

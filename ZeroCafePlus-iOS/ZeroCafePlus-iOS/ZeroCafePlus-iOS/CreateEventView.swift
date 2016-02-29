@@ -345,16 +345,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         party_sImg = CommonFunction().resizingImage(imageName: "SelectParty.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
     }
     
-    //--TextField--
-    func textFieldDidBeginEditing(textField: UITextField){
-        print("textFieldDidBeginEditing:" + textField.text!)
-    }
-    
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        print("textFieldShouldEndEditing:" + textField.text!)
-        return true
-    }
-    
+    //--TextField--    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
         var tmpStr = textField.text! as NSString
         tmpStr = tmpStr.stringByReplacingCharactersInRange(range, withString: string)
@@ -370,10 +361,6 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     }
     
     //--TextView--
-    func textViewDidChange(textView: UITextView) {
-        print("textViewDidChange : \(textView.text)");
-    }
-    
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         print("textViewShouldBeginEditing : \(textView.text)");
         txtActiveView = textView
@@ -386,10 +373,6 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         detailTextNum = tmpStr.length
         detailAlertLabel.text = "\(detailTextNum)/100"
-        return true
-    }
-    func textViewShouldEndEditing(textView: UITextView) -> Bool {
-        print("textViewShouldEndEditing : \(textView.text)");
         return true
     }
     
