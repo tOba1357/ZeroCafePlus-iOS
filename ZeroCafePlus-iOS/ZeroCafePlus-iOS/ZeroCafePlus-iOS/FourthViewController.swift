@@ -265,7 +265,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return eve["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                    let eventViewGenerate:EventView2 = EventView2(frame:CGRectMake(myX,myY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
                                     self.willJoinVerticalSV.addSubview(eventViewGenerate)
@@ -286,7 +286,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return eve["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate = EventView2(frame:CGRectMake(myX,myY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                    let eventViewGenerate = EventView2(frame:CGRectMake(myX,myY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
                                     self.willJoinVerticalSV.addSubview(eventViewGenerate)
@@ -319,7 +319,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return planEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage)
+                                    let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
                                     
@@ -339,7 +339,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return planEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate2 = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                    let eventViewGenerate2 = EventView2(frame:CGRectMake(planX,planY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate2.mydelegate = self
                                     eventViewGenerate2.layer.cornerRadius = 10
                                     self.planVerticalSV.addSubview(eventViewGenerate2)
@@ -370,7 +370,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return endEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                    let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
                                     self.joinedVerticalSV.addSubview(eventViewGenerate)
@@ -389,7 +389,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                             return endEvCount["event"]["category_tag"].string! as String
                                         }
                                     }()
-                                    let eventViewGenerate3 = EventView2(frame:CGRectMake(planX,planY, screenWidth/2.1192, 200),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                    let eventViewGenerate3 = EventView2(frame:CGRectMake(planX,planY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate3.mydelegate = self
                                     eventViewGenerate3.tag = 3
                                     eventViewGenerate3.layer.cornerRadius = 10
