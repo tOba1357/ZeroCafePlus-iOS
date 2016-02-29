@@ -23,6 +23,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     private var cancelUpdate: UIButton!
     private var saveUpdate: UIButton!
     private var titleLabel: UILabel!
+    private var changeImage :UIImage!
     var now = 0
     
     override func viewDidLoad() {
@@ -146,45 +147,23 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         if currentName.text != "" && currentProfile.text != "" {
             
-            //            let data:NSData = UIImagePNGRepresentation(test)!
-            //            var dataString = data.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-            //
-            //
-            //            let headers = [
-            //                "Content-Type": "application/json",
-            //                "Accept": "application/json"
-            //            ]
-            //
-            //            let params:[String:AnyObject] =
-            //            [
-            //                "user": [
-            //                    "name": String(UTF8String: currentName.text!)!,
-            //                    "description": String(currentProfile.text),
-            //                    "image": "base64data:image/png;base64,\(dataString))"
-            //
-            //                ]
-            //            ]
-            let datas:NSData = UIImagePNGRepresentation(profileImage.image!)!
-            let dataString = datas.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-            let dataArray = "\(dataString)".componentsSeparatedByString("\n")
-            var convertData = ""
-            
-            for data in dataArray{
-                convertData += data
-            }
             
             let headers = [
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             ]
-            let params:[String:AnyObject] =
-            [
-                "user": [
-                    "name": String(UTF8String: currentName.text!)!,
-                    "description": String(currentProfile.text),
-                    "image": "base64data:image/png;base64,\(convertData)"
-                ]
-            ]
+            var params:[String:Dictionary] = ["user":["initial":"value"]]
+
+            params["user"]!["name"] = String(UTF8String: currentName.text!)
+            params["user"]!["description"] = String(currentProfile.text)
+            
+            if changeImage != nil{
+                let datas:NSData = UIImagePNGRepresentation(changeImage)!
+                let dataString = datas.base64EncodedStringWithOptions([])
+                params["user"]!["image"] = "base64data:image/png;base64,\(dataString)"
+            }
+            params["user"]!["initial"] = nil
+
             let url = "https://zerocafe.herokuapp.com/api/v1/users/\(userId.objectForKey("UserIDKey") as! Int)"
             Alamofire.request(.PUT, url, parameters: params, encoding: .JSON, headers:headers)
                 .responseString { response in
@@ -219,6 +198,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo: [String: AnyObject]) {
         if didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] != nil {
             profileImage.image = didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] as? UIImage
+            changeImage = didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage] as? UIImage
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
