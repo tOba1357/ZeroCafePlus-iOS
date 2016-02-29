@@ -22,12 +22,20 @@ class DayView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(frame:CGRect,year:Int,month:Int,day:Int,weekday:Int){
+    init(frame:CGRect,year:Int,month:Int,day:Int,weekday:Int,var eventBool:Bool,listeventsData:[String]){
         
         checkDateStr = String(format:"%04d%02d%02d",year,month,day)
         super.init(frame: frame)
         
         let nowDate = CommonFunction().nowDateData()
+        
+        let cirView = UIView(
+            frame: CGRectMake(
+                0,
+                0,
+                self.frame.width,
+                self.frame.height)
+        )
         
         let dayWidth:CGFloat = frame.size.width
         let dayHeight:CGFloat = frame.size.height
@@ -63,7 +71,22 @@ class DayView: UIView {
             dayButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xFFF8DC)
             dayButton.addTarget(self, action: "makeAlert:", forControlEvents:.TouchUpInside)
         }
+        self.addSubview(cirView)
         self.addSubview(dayButton)
+        
+        for listevent in listeventsData{
+            if Int(listevent) == day{
+                eventBool = false
+            }
+        }
+        
+        if eventBool{
+            let cirShapeLayer = CAShapeLayer()
+            cirShapeLayer.fillColor = CommonFunction().UIColorFromRGB(rgbValue: 0x33CCFF).CGColor
+            cirShapeLayer.path = UIBezierPath(ovalInRect: CGRect(x: self.frame.width/12, y: self.frame.width/12, width: self.frame.width/9, height: self.frame.height/9)).CGPath
+            cirView.layer.addSublayer(cirShapeLayer)
+        }
+        
     }
     
     func makeAlert(sender: UIButton){
