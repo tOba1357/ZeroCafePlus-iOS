@@ -12,7 +12,7 @@ class CustomTabBarController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().tintColor = CommonFunction().UIColorFromRGB(rgbValue: 0xf39800)
+        UITabBar.appearance().tintColor = UIColor.hexStr("#f39800", alpha: 1.0)
     }
     
     override func didReceiveMemoryWarning() {

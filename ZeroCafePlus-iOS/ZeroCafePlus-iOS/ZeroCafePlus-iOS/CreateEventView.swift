@@ -80,16 +80,16 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         let titleLabel = UILabel(frame: CGRectMake(0,self.frame.size.height*(160/1136),self.frame.width/4*3,self.frame.height*(28/1136)))
         titleLabel.text = "イベント名(18文字以内)"
-        titleLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        titleLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         titleLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         titleLabel.sizeToFit()
         
         titleTextField = UITextField(frame: CGRectMake(0,self.frame.height*(212/1136),self.frame.width,self.frame.height*(56/1136)))
         titleTextField.layer.borderWidth = 0.75
-        titleTextField.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
+        titleTextField.layer.borderColor = UIColor.hexStr("#808080", alpha: 1.0).CGColor
         titleTextField.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         titleTextField.textAlignment = NSTextAlignment.Left
-        titleTextField.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        titleTextField.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         titleTextField.layer.cornerRadius = 13.5
         titleTextField.delegate = self
         
@@ -103,7 +103,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         detailLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         
         detailTextView = UITextView(frame: CGRectMake(0,self.frame.size.height*(376/1136),self.frame.width,self.frame.height*(264/1136)))
-        detailTextView.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
+        detailTextView.layer.borderColor = UIColor.hexStr("#808080", alpha: 1.0).CGColor
         detailTextView.layer.borderWidth = 0.75
         detailTextView.layer.cornerRadius = 27
         detailTextView.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
@@ -118,7 +118,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         let genreLabel = UILabel(frame: CGRectMake(0,self.frame.size.height*(696/1136),self.frame.width/4*3,self.frame.height*(28/1136)))
         genreLabel.text = "ジャンル"
-        genreLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        genreLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         genreLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         genreLabel.sizeToFit()
         
@@ -132,7 +132,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         let hobyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         hobyLabel.text = "趣味"
         hobyLabel.textAlignment = NSTextAlignment.Center
-        hobyLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        hobyLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         hobyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
@@ -145,7 +145,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         let studyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         studyLabel.text = "勉強会"
         studyLabel.textAlignment = NSTextAlignment.Center
-        studyLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        studyLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         studyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
@@ -158,7 +158,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         let sakuruLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         sakuruLabel.text = "サークル"
         sakuruLabel.textAlignment = NSTextAlignment.Center
-        sakuruLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        sakuruLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         sakuruLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
@@ -171,7 +171,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         let tournamentLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         tournamentLabel.text = "大会"
         tournamentLabel.textAlignment = NSTextAlignment.Center
-        tournamentLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        tournamentLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         tournamentLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
@@ -184,7 +184,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         let readBookLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         readBookLabel.text = "読書会"
         readBookLabel.textAlignment = NSTextAlignment.Center
-        readBookLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        readBookLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         readBookLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         
         genreBtnPos += genreHobyBtn.frame.size.width+self.frame.size.width*(20/1136)
@@ -197,7 +197,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         let partyLabel = UILabel(frame: CGRectMake(genreBtnPos,self.frame.size.height*(760/1136)+genreHobyBtn.frame.size.height,genreHobyBtn.frame.size.width,self.frame.height*(20/1136)))
         partyLabel.text = "パーティー"
         partyLabel.textAlignment = NSTextAlignment.Center
-        partyLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        partyLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         partyLabel.font = UIFont.systemFontOfSize(self.frame.height*(20/1136))
         partyLabel.sizeToFit()
         
@@ -205,7 +205,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         myButton.layer.masksToBounds = true
         myButton.layer.cornerRadius = 20.0
         myButton.setTitle("次へ", forState: .Normal)
-        myButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xf39800)
+        myButton.backgroundColor = UIColor.hexStr("#f39800", alpha: 1.0)
         myButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
         myButton.layer.position = CGPoint(x: self.frame.width/2, y:self.frame.height/10*8.5)
         

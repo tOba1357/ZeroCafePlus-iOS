@@ -59,7 +59,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         let thirdTitle:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         thirdTitle.textAlignment = NSTextAlignment.Center
         thirdTitle.font = UIFont.boldSystemFontOfSize(21)
-        thirdTitle.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        thirdTitle.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         thirdTitle.text = "イベントを企画する"
         thirdTitle.layer.position = CGPointMake(self.view.frame.size.width/2, barHeight+thirdTitle.frame.size.height/2)
         
