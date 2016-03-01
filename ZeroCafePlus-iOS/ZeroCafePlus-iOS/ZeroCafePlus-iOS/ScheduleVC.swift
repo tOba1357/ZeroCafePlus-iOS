@@ -52,7 +52,7 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         label.textAlignment = NSTextAlignment.Center
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0xFFFFFF)
+        label.textColor = UIColor.hexStr("#FFFFFF", alpha: 1.0)
         label.text = "イベントを企画する"
         self.navigationItem.titleView = label
         

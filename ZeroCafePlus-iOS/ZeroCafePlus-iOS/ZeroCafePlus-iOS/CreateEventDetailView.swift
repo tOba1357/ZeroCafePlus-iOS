@@ -57,77 +57,76 @@ class CreateEventDetailView: UIView,UITextFieldDelegate,UIPickerViewDataSource, 
         assetsLabel.text = "持ち物（任意）"
         assetsLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         assetsLabel.textAlignment = NSTextAlignment.Left
-        assetsLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        assetsLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         assetsLabel.sizeToFit()
         
         assetText = UITextField(frame: CGRectMake(0,self.frame.height*(162/1136),self.frame.width,self.frame.height*(56/1136)))
         assetText.text = ""
         assetText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
-        assetText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        assetText.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         assetText.placeholder = "例）熱意"
         assetText.layer.cornerRadius = 13.5
         assetText.delegate = self
         assetText.layer.borderWidth = 0.75
-        assetText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
+        assetText.layer.borderColor = UIColor.hexStr("#808080", alpha: 1.0).CGColor
         
         let numLabel = UILabel(frame: CGRectMake(0,self.frame.height*(286/1136),self.frame.width,self.frame.height*(28/1136)))
         numLabel.text = "定員"
         numLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         numLabel.textAlignment = NSTextAlignment.Left
-        numLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        numLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         numLabel.sizeToFit()
         
         numText = UITextField(frame: CGRectMake(0,self.frame.height*(338/1136),self.frame.width,self.frame.height*(56/1136)))
         numText.text = "2人"
         numText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
-        numText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        numText.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         numText.layer.cornerRadius = 13.5
         numText.inputView = pickerView
         numText.inputAccessoryView = toolBar
         numText.delegate = self
         numText.layer.borderWidth = 0.75
-        numText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
+        numText.layer.borderColor = UIColor.hexStr("#808080", alpha: 1.0).CGColor
         
         let checkbox = CTCheckbox()
         checkbox.frame = CGRectMake(0,self.frame.height*(446/1136),self.frame.width/5,self.frame.height/10)
         checkbox.checkboxColor = UIColor.blackColor()
         checkbox.addTarget(self, action: "checked:", forControlEvents: .ValueChanged)
         checkbox.checkboxSideLength = 22
-        checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Normal)
-        checkbox.setColor(CommonFunction().UIColorFromRGB(rgbValue: 0xFF8010), forControlState: .Disabled)
+        checkbox.setColor(UIColor.hexStr("#FF8010", alpha: 1.0), forControlState: .Normal)
+        checkbox.setColor(UIColor.hexStr("#FF8010", alpha: 1.0), forControlState: .Disabled)
         
         let jumpInLabel = UILabel(frame: CGRectMake(checkbox.frame.size.width,self.frame.height*(484/1136),self.frame.width/2,self.frame.height*(28/1136)))
         jumpInLabel.text = "途中参加ＯＫ"
         jumpInLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         jumpInLabel.textAlignment = NSTextAlignment.Left
-        jumpInLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        jumpInLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         jumpInLabel.sizeToFit()
         
         let tagLabel = UILabel(frame: CGRectMake(0,self.frame.height*(602/1136),self.frame.width,self.frame.height*(28/1136)))
         tagLabel.text = "タグ　※検索で引っかかりやすくなるよ！"
         tagLabel.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
         tagLabel.textAlignment = NSTextAlignment.Left
-        tagLabel.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        tagLabel.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         tagLabel.sizeToFit()
         
         tagText = UITextField(frame: CGRectMake(0,self.frame.height*(654/1136),self.frame.width,self.frame.height*(56/1136)))
         tagText.text = ""
         tagText.font = UIFont.systemFontOfSize(self.frame.height*(28/1136))
-        tagText.textColor = CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A)
+        tagText.textColor = UIColor.hexStr("#1A1A1A", alpha: 1.0)
         tagText.placeholder = "　#祭り #花火"
         tagText.layer.cornerRadius = 13.5
         tagText.delegate = self
         tagText.layer.borderWidth = 0.75
-        tagText.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0x808080).CGColor
+        tagText.layer.borderColor = UIColor.hexStr("#808080", alpha: 1.0).CGColor
         
         let makeButton = UIButton (frame: CGRectMake(0,0,self.frame.width/3,self.frame.height/15))
         makeButton.layer.masksToBounds = true
         makeButton.layer.cornerRadius = 20.0
         makeButton.setTitle("決定", forState: .Normal)
-        makeButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xf39800)
+        makeButton.backgroundColor = UIColor.hexStr("#f39800", alpha: 1.0)
         makeButton.addTarget(self, action: "onClickMakeButton:", forControlEvents: .TouchUpInside)
         makeButton.layer.position = CGPointMake(self.frame.width/2, self.frame.height/6*5)
-        
         
         self.addSubview(assetsLabel)
         self.addSubview(assetText)

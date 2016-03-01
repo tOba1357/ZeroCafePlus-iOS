@@ -27,7 +27,7 @@ class MonthView: UIView ,DayViewDelegate{
     init(frame: CGRect,year:Int,month:Int) {
         super.init(frame:frame)
         self.layer.borderWidth = 1
-        self.layer.borderColor = CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3).CGColor
+        self.layer.borderColor = UIColor.hexStr("#D3D3D3", alpha: 1.0).CGColor
         var eventBool = true
         var listeventsData:[String] = []
         var nowDate:[String] = CommonFunction().nowDateData()
@@ -89,13 +89,13 @@ class MonthView: UIView ,DayViewDelegate{
                     
                     for i in 0...7{
                         let vertLine = UILabel(frame: CGRectMake(frame.size.width/7*CGFloat(i),0,1.5,frame.size.height))
-                        vertLine.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3)
+                        vertLine.backgroundColor = UIColor.hexStr("#D3D3D3", alpha: 1.0)
                         self.addSubview(vertLine)
                     }
                     
                     for i in 1...5{
                         let horiLine = UILabel(frame: CGRectMake(0,frame.size.width/6*CGFloat(i),frame.size.width,1.5))
-                        horiLine.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3)
+                        horiLine.backgroundColor = UIColor.hexStr("#D3D3D3", alpha: 1.0)
                         self.addSubview(horiLine)
                     }
                 }

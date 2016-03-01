@@ -44,7 +44,7 @@ class DayView: UIView {
         dayButton.setTitle("\(day)", forState: .Normal)
         dayButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         dayButton.titleLabel?.font = UIFont.systemFontOfSize(10)
-        dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0xD3D3D3), forState: .Normal)
+        dayButton.setTitleColor(UIColor.hexStr("#D3D3D3", alpha: 1.0), forState: .Normal)
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
@@ -53,22 +53,22 @@ class DayView: UIView {
         if weekday == 1 || nsNowDate!.holiday() != nil
         {
             //日曜日 or 祝日
-            dayButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xF5F5F5)
-            dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0x808080), forState: .Normal)
+            dayButton.backgroundColor = UIColor.hexStr("#F5F5F5", alpha: 1.0)
+            dayButton.setTitleColor(UIColor.hexStr("#808080", alpha: 1.0), forState: .Normal)
         }
         else if year > Int(nowDate[0]) ||
             (year == Int(nowDate[0]) && month > Int(nowDate[1])) ||
             (year == Int(nowDate[0]) && month == Int(nowDate[1]) && day > Int(nowDate[2]))
         {
             //今日以降
-            dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A), forState: .Normal)
+            dayButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
             dayButton.addTarget(self, action: "makeAlert:", forControlEvents:.TouchUpInside)
         }else if
             year == Int(nowDate[0]) && month == Int(nowDate[1]) && day == Int(nowDate[2])
         {
             //今日
-            dayButton.setTitleColor(CommonFunction().UIColorFromRGB(rgbValue: 0x1A1A1A), forState: .Normal)
-            dayButton.backgroundColor = CommonFunction().UIColorFromRGB(rgbValue: 0xFFF8DC)
+            dayButton.setTitleColor(UIColor.hexStr("#1A1A1A", alpha: 1.0), forState: .Normal)
+            dayButton.backgroundColor = UIColor.hexStr("#FFF8DC", alpha: 1.0)
             dayButton.addTarget(self, action: "makeAlert:", forControlEvents:.TouchUpInside)
         }
         self.addSubview(cirView)
@@ -82,7 +82,7 @@ class DayView: UIView {
         
         if eventBool{
             let cirShapeLayer = CAShapeLayer()
-            cirShapeLayer.fillColor = CommonFunction().UIColorFromRGB(rgbValue: 0x33CCFF).CGColor
+            cirShapeLayer.fillColor = UIColor.hexStr("#33CCFF", alpha: 1.0).CGColor
             cirShapeLayer.path = UIBezierPath(ovalInRect: CGRect(x: self.frame.width/12, y: self.frame.width/12, width: self.frame.width/9, height: self.frame.height/9)).CGPath
             cirView.layer.addSublayer(cirShapeLayer)
         }
