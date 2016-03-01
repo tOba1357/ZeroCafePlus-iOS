@@ -244,8 +244,29 @@ class ForthViewController: UIViewController, EventViewDelegate {
                             self.nameLabel.text = self.user_name
                             let userImage: String? = user["user"]["image"]["thumb"]["url"].string
                             if userImage != nil {
-                                self.profileImage.af_setImageWithURL(NSURL(string: userImage!)!)
+                                let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                let session = NSURLSession(configuration: sessionConfig)
+                                let url = NSURL(string:userImage!)
+                                let task = session.dataTaskWithURL(url!) {
+                                    (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                    guard let getData = data else {
+                                        session.invalidateAndCancel()
+                                        return
+                                    }
+                                    let globalQueu =
+                                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                    dispatch_async(globalQueu) {
+                                        let img = UIImage(data: getData)
+                                        dispatch_async(dispatch_get_main_queue()) {
+                                            self.profileImage.image = img
+                                        }
+                                    }
+                                }
+                                task.resume()
                             }
+//                            if userImage != nil {
+//                                self.profileImage.af_setImageWithURL(NSURL(string: userImage!)!)
+//                            }
                             
                             let plan_ev = user["attend_events"].array! as Array
                             for attendEvCount in plan_ev.enumerate() {
@@ -448,7 +469,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                     }
                 }
         }
-
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
