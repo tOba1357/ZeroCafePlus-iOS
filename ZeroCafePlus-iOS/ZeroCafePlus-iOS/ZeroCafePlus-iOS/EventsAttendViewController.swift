@@ -323,6 +323,8 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
         if let viewcntrs = viewControllers {
             viewControllers = viewcntrs
             if indexOfArray((viewControllers)!, searchObject: self) == nil {
+                self.navigationController?.popToRootViewControllerAnimated(true)
+
                 genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
                 window = UIWindow()
                 window.frame = CGRectMake(0, 0, 0, 0)
@@ -532,16 +534,14 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                                     if participantsID == self.userID {
                                         judgeID = 1
                                     }
-                                    if judgeID == 1 {
-                                        let keyIDInt: Int = events["event"]["id"].int as Int!
-                                        let keyID: String = String(keyIDInt)
-                                        
-                                        if let FriendsNumber = self.friendsNumber {
+                                }
+                                    if NSUserDefaults.standardUserDefaults().boolForKey("\(self.getID)w") {
+                                       if let FriendsNumber = self.friendsNumber {
                                             
-                                            NSUserDefaults.standardUserDefaults().setInteger(FriendsNumber, forKey: keyID)
+                                            NSUserDefaults.standardUserDefaults().setInteger(FriendsNumber, forKey: "\(self.getID)")
                                             NSUserDefaults.standardUserDefaults().synchronize()
                                         }
-                                        let Number = NSUserDefaults.standardUserDefaults().integerForKey(keyID)
+                                        let Number = NSUserDefaults.standardUserDefaults().integerForKey("\(self.getID)")
                                         self.reservedButton.setTitle("予約済み 友だち +\(Number)", forState: UIControlState.Normal)
                                         
                                         self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
@@ -551,11 +551,8 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                                             NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
                                             NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
                                             ])
-                                    }
-                                    
-                                }
-                                if judgeID == 0 {
-                                    self.sankaButton.translatesAutoresizingMaskIntoConstraints = false
+                                    } else {
+                                self.sankaButton.translatesAutoresizingMaskIntoConstraints = false
                                     self.view.addConstraints([
                                         NSLayoutConstraint(item: self.sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
                                         NSLayoutConstraint(item: self.sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),

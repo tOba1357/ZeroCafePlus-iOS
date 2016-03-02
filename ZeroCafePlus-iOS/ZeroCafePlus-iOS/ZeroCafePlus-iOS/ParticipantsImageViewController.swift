@@ -39,38 +39,10 @@ class ParticipantsImageViewController: UIViewController {
         starImage2 = CommonFunction().resizingImage(imageName: "star_selected.png", w: self.view.bounds.width/17.30, h: self.view.bounds.height/30.70)
 
         
-//        let myButton = UIButton()
-//        myButton.frame = CGRectMake(0,self.view.bounds.height*(120/1136),200,40)
-//        myButton.backgroundColor = UIColor.redColor()
-//        myButton.setTitle("ボタン(通常)", forState: UIControlState.Normal)
-//        myButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-//        myButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
-//        self.view.addSubview(myButton)
         
 
         self.view.backgroundColor = UIColor.whiteColor()
     }
-//    override func viewWillDisappear(animated: Bool) {
-//        var viewControllers = self.navigationController?.viewControllers
-//        if let viewcntrs = viewControllers {
-//            viewControllers = viewcntrs
-//            if indexOfArray((viewControllers)!, searchObject: self) == nil {
-//                genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
-//                window = UIWindow()
-//                window.frame = CGRectMake(0, 0, 0, 0)
-//                window.layer.position = CGPoint(x: 0, y: 0)
-//                window.backgroundColor = UIColor.redColor()
-//                window.makeKeyWindow()
-//                window.makeKeyAndVisible()
-//                
-//                
-//                let imgView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
-//                imgView.image = genreImg
-//                window.addSubview(imgView)
-//            }
-//            super.viewWillDisappear(animated)
-//        }
-//    }
 
     override func viewDidDisappear(animated: Bool) {
         
