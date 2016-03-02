@@ -29,6 +29,7 @@ class AlertFunction: AnyObject {
     }
     
     func hidePendingAlert(avc:UIAlertController) -> Void {
+        
         avc.dismissViewControllerAnimated(false, completion: nil)
     }
 }

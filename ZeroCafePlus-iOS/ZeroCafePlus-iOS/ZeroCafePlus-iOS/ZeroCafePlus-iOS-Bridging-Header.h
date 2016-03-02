@@ -10,5 +10,6 @@
 #define ZeroCafePlus_iOS_Bridging_Header_h
 
 #import "CTCheckbox.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif /* ZeroCafePlus_iOS_Bridging_Header_h */
