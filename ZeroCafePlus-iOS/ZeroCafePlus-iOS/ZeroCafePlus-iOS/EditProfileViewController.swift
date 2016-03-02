@@ -24,6 +24,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     private var saveUpdate: UIButton!
     private var titleLabel: UILabel!
     private var changeImage :UIImage!
+    var waitAC:UIAlertController!
     var now = 0
     
     override func viewDidLoad() {
@@ -143,17 +144,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     func createUserView(sender:UIButton){
+        presentWaitAlertAction()
         let userId = NSUserDefaults.standardUserDefaults()
         
         if currentName.text != "" && currentProfile.text != "" {
-            
             
             let headers = [
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             ]
             var params:[String:Dictionary] = ["user":["initial":"value"]]
-
+            
             params["user"]!["name"] = String(UTF8String: currentName.text!)
             params["user"]!["description"] = String(currentProfile.text)
             
@@ -163,7 +164,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 params["user"]!["image"] = "base64data:image/png;base64,\(dataString)"
             }
             params["user"]!["initial"] = nil
-
+            
             let url = "https://zerocafe.herokuapp.com/api/v1/users/\(userId.objectForKey("UserIDKey") as! Int)"
             Alamofire.request(.PUT, url, parameters: params, encoding: .JSON, headers:headers)
                 .responseString { response in
@@ -171,7 +172,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             }
             let fv = ForthViewController()
             fv.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
-            dismissViewControllerAnimated(true, completion: nil)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.dismissWaitAlertAction()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
         }else {}
     }
     
@@ -226,6 +232,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             return true
         }
         return false
+    }
+    
+    func presentWaitAlertAction(){
+        waitAC = AlertFunction().displayPendingAlert()
+        self.presentViewController(waitAC, animated: true, completion: nil)
+    }
+    
+    func dismissWaitAlertAction(){
+        AlertFunction().hidePendingAlert(waitAC)
     }
     
     override func didReceiveMemoryWarning() {
