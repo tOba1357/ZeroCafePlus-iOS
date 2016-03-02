@@ -53,11 +53,17 @@ class ForthViewController: UIViewController, EventViewDelegate {
     private var selectedplanView:UIView!
     private var selectedjoinedView :UIView!
     private var horizontalSV: UIScrollView!
-    
+    private var planCount:Int!
+    private var willJoinCount:Int!
+    private var joinedCount: Int!
+    private var tabView: ViewPager2!
+    var views:[ViewPagerElement2]!
     var getID: Int!
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        self.tabView = nil
+        views = nil
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -74,6 +80,9 @@ class ForthViewController: UIViewController, EventViewDelegate {
         selectedplanView = UIView()
         selectedjoinedView = UIView()
         view.backgroundColor = UIColor.whiteColor()
+        planCount = 0
+        willJoinCount = 0
+        joinedCount = 0
         
         profileLabel = UILabel(frame: CGRectMake(0,0,screenWidth/1.2,screenHeight/4))
         profileLabel.layer.position = CGPoint(x: screenWidth/2, y: screenHeight/2.7)
@@ -222,10 +231,10 @@ class ForthViewController: UIViewController, EventViewDelegate {
                 if response.result.isSuccess {
                     let json = JSON(response.result.value!)
                     let users = json["users"].array! as Array
-                    var myX :CGFloat = 6
-                    var myY :CGFloat = 6
-                    var planX :CGFloat = 6
-                    var planY :CGFloat = 6
+                    var myX :CGFloat = screenWidth*(15/640)
+                    var myY :CGFloat = screenWidth*(15/640)
+                    var planX :CGFloat = screenWidth*(15/640)
+                    var planY :CGFloat = screenWidth*(15/640)
                     let userId = NSUserDefaults.standardUserDefaults()
                     for user in users {
                         let user_id = user["user"]["id"].int!
@@ -251,7 +260,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                             
                             let plan_ev = user["attend_events"].array! as Array
                             for attendEvCount in plan_ev.enumerate() {
-                                
+                                self.willJoinCount = plan_ev.count
                                 let sideDecide = attendEvCount.index % 2
                                 if sideDecide == 0 {
                                     let eve = attendEvCount.element as JSON
@@ -272,7 +281,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     eventViewGenerate.layer.cornerRadius = 10
                                     self.willJoinVerticalSV.addSubview(eventViewGenerate)
                                     
-                                    myX = screenWidth/1.96319018
+                                    myX = screenWidth*(332/640)
                                 }else{
                                     
                                     let eve = attendEvCount.element as JSON
@@ -293,22 +302,16 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     eventViewGenerate.layer.cornerRadius = 10
                                     self.willJoinVerticalSV.addSubview(eventViewGenerate)
                                     
-                                    myX = 6
-                                    myY += 206
+                                    myX = screenWidth*(15/640)
+                                    myY += screenHeight*(400/1136)
                                 }
-                                
-                                self.willJoinVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
-                                self.willJoinVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((plan_ev.count + 3) / 2) * 212 + 93))
-                                self.willJoinVerticalSV.contentOffset = CGPointMake(0, -50)
-                                self.willJoinVerticalSV.backgroundColor = UIColor.whiteColor()
                             }
-                            
                             
                             let planning_ev = user["planning_events"].array! as Array
                             for (index,planEvCount) in planning_ev.enumerate() {
-                                let eveCount = planEvCount.count
+                                self.planCount = planEvCount.count
                                 if  index % 2 == 0 {
-                                    planX = 6
+                                    planX = screenWidth*(15/640)
                                     let eventID = planEvCount["event"]["id"].int
                                     let genreImage = planEvCount["event"]["genre"].int! as Int
                                     let title = planEvCount["event"]["title"].string! as String
@@ -324,11 +327,10 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     let eventViewGenerate = EventView2(frame:CGRectMake(planX,planY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id: eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage)
                                     eventViewGenerate.mydelegate = self
                                     eventViewGenerate.layer.cornerRadius = 10
-                                    
                                     self.planVerticalSV.addSubview(eventViewGenerate)
                                     
                                 }else{
-                                    planX = screenWidth/1.96319018
+                                    planX = screenWidth*(332/640)
                                     let eventID = planEvCount["event"]["id"].int
                                     let genreImage = planEvCount["event"]["genre"].int
                                     let title = planEvCount["event"]["title"].string! as String
@@ -346,20 +348,16 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     eventViewGenerate2.layer.cornerRadius = 10
                                     self.planVerticalSV.addSubview(eventViewGenerate2)
                                     
-                                    planY += 206
+                                    planY += screenHeight*(400/1136)
                                 }
-                                
-                                self.planVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
-                                self.planVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 4) / 2) * 212 + 93))
-                                self.planVerticalSV.contentOffset = CGPointMake(0, -50)
-                                self.planVerticalSV.backgroundColor = UIColor.whiteColor()
+
                             }
                             
                             let end_ev = user["end_events"].array! as Array
                             for (index,endEvCount) in end_ev.enumerate() {
-                                let eveCount = endEvCount.count
+                                 self.joinedCount = endEvCount.count
                                 if index % 2 == 0{
-                                    planX = 6
+                                    planX = screenWidth*(15/640)
                                     let eventID = endEvCount["event"]["id"].int
                                     let genreImage = endEvCount["event"]["genre"].int
                                     let title = endEvCount["event"]["title"].string! as String
@@ -378,7 +376,7 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     self.joinedVerticalSV.addSubview(eventViewGenerate)
                                     
                                 }else{
-                                    planX = screenWidth/1.96319018
+                                    planX = screenWidth*(332/640)
                                     let eventID = endEvCount["event"]["id"].int
                                     let genreImage = endEvCount["event"]["genre"].int
                                     let title = endEvCount["event"]["title"].string! as String
@@ -397,59 +395,68 @@ class ForthViewController: UIViewController, EventViewDelegate {
                                     eventViewGenerate3.layer.cornerRadius = 10
                                     self.joinedVerticalSV.addSubview(eventViewGenerate3)
                                     
-                                    planY += 206
+                                    planY += screenHeight*(400/1136)
                                 }
-                                self.joinedVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
-                                self.joinedVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((eveCount + 4) / 2) * 212 + 93))
-                                self.joinedVerticalSV.contentOffset = CGPointMake(0, -50)
-                                self.joinedVerticalSV.backgroundColor = UIColor.whiteColor()
-                                
                             }
                         }
-                        let views = [
-                            ViewPagerElement2(selectedTitleView: self.willJoinView, noSelectedTitleView: self.selectedwillJoinView, mainView: self.willJoinVerticalSV),
-                            ViewPagerElement2(selectedTitleView: self.planView, noSelectedTitleView: self.selectedplanView, mainView: self.planVerticalSV),
-                            ViewPagerElement2(selectedTitleView: self.joinedView, noSelectedTitleView: self.selectedjoinedView, mainView: self.joinedVerticalSV)
-                        ]
-                        let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
-                        let tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: views)
-                        self.view.addSubview(tabView)
-                        tabView.translatesAutoresizingMaskIntoConstraints = false
-                        self.view.addConstraints([
-                            NSLayoutConstraint(
-                                item: tabView,
-                                attribute: NSLayoutAttribute.Top,
-                                relatedBy: NSLayoutRelation.Equal,
-                                toItem: self.profileLabel,
-                                attribute: NSLayoutAttribute.Bottom,
-                                multiplier: 1.0,
-                                constant: screenWidth/40.57
-                            ),
-                            NSLayoutConstraint(
-                                item: tabView,
-                                attribute: .Width,
-                                relatedBy: .Equal,
-                                toItem: nil,
-                                attribute: .Width,
-                                multiplier: 1.0,
-                                constant: screenWidth
-                            ),
-                            
-                            NSLayoutConstraint(
-                                item: tabView,
-                                attribute: .Height,
-                                relatedBy: .Equal,
-                                toItem: nil,
-                                attribute: .Height,
-                                multiplier: 1.0,
-                                constant: screenHeight/1.9
-                                
-                            )]
-                        )
-                        
+                      }
                     }
-                }
-        }
+                    self.willJoinVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                    self.willJoinVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.willJoinCount + 4) / 2) * 212 + 93))
+                    self.willJoinVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.willJoinVerticalSV.backgroundColor = UIColor.whiteColor()
+                    
+                    self.planVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                    self.planVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.planCount + 4) / 2) * 212 + 93))
+                    self.planVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.planVerticalSV.backgroundColor = UIColor.whiteColor()
+                    
+                    self.joinedVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+                    self.joinedVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.joinedCount + 4) / 2) * 212 + 93))
+                    self.joinedVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.joinedVerticalSV.backgroundColor = UIColor.whiteColor()
+                    
+                    self.views = [
+                        ViewPagerElement2(selectedTitleView: self.willJoinView, noSelectedTitleView: self.selectedwillJoinView, mainView: self.willJoinVerticalSV),
+                        ViewPagerElement2(selectedTitleView: self.planView, noSelectedTitleView: self.selectedplanView, mainView: self.planVerticalSV),
+                        ViewPagerElement2(selectedTitleView: self.joinedView, noSelectedTitleView: self.selectedjoinedView, mainView: self.joinedVerticalSV)
+                    ]
+                    let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
+                    self.tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: self.views)
+                    self.view.addSubview(self.tabView)
+                    self.tabView.translatesAutoresizingMaskIntoConstraints = false
+                    self.view.addConstraints([
+                        NSLayoutConstraint(
+                            item: self.tabView,
+                            attribute: NSLayoutAttribute.Top,
+                            relatedBy: NSLayoutRelation.Equal,
+                            toItem: self.profileLabel,
+                            attribute: NSLayoutAttribute.Bottom,
+                            multiplier: 1.0,
+                            constant: screenWidth/40.57
+                        ),
+                        NSLayoutConstraint(
+                            item: self.tabView,
+                            attribute: .Width,
+                            relatedBy: .Equal,
+                            toItem: nil,
+                            attribute: .Width,
+                            multiplier: 1.0,
+                            constant: screenWidth
+                        ),
+                        
+                        NSLayoutConstraint(
+                            item: self.tabView,
+                            attribute: .Height,
+                            relatedBy: .Equal,
+                            toItem: nil,
+                            attribute: .Height,
+                            multiplier: 1.0,
+                            constant: screenHeight/1.9
+                            
+                        )]
+                    )
+          }
     }
     
     func pushMyButton(myEventID:Int) {
