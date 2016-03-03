@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		6F36351B1C60C18D009401B7 /* profile_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F36351A1C60C18D009401B7 /* profile_edit.png */; };
-		6F8FC4CD1C6DA5E600C838CD /* SelectCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4CC1C6DA5E600C838CD /* SelectCircle.png */; };
-		6F8FC4D11C6DA5ED00C838CD /* SelectGame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D01C6DA5ED00C838CD /* SelectGame.png */; };
-		6F8FC4D31C6DA5F400C838CD /* SelectHobby.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D21C6DA5F400C838CD /* SelectHobby.png */; };
-		6F8FC4D51C6DA5FE00C838CD /* SelectJobHunt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D41C6DA5FD00C838CD /* SelectJobHunt.png */; };
-		6F8FC4D71C6DA60700C838CD /* SelectParty.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D61C6DA60700C838CD /* SelectParty.png */; };
-		6F8FC4D91C6DA60E00C838CD /* SelectReadbook.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4D81C6DA60E00C838CD /* SelectReadbook.png */; };
-		6F8FC4DB1C6DA61600C838CD /* SelectStudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4DA1C6DA61600C838CD /* SelectStudy.png */; };
+		6F3AC3161C886F2700974539 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3151C886F2700974539 /* circle.png */; };
+		6F3AC3181C886F2D00974539 /* party.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3171C886F2D00974539 /* party.png */; };
+		6F3AC31A1C886F3100974539 /* jobhunt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3191C886F3100974539 /* jobhunt.png */; };
+		6F3AC31C1C886F3600974539 /* study.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC31B1C886F3600974539 /* study.png */; };
+		6F3AC31E1C886F3B00974539 /* tournament.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC31D1C886F3B00974539 /* tournament.png */; };
+		6F3AC3201C886F4000974539 /* readbook.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC31F1C886F4000974539 /* readbook.png */; };
+		6F3AC3221C886F4600974539 /* hobby.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3211C886F4600974539 /* hobby.png */; };
+		6F3AC3241C886FA800974539 /* selectedTournament.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3231C886FA800974539 /* selectedTournament.png */; };
+		6F3AC3261C886FAE00974539 /* selectedReadbook.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3251C886FAE00974539 /* selectedReadbook.png */; };
+		6F3AC3281C886FB300974539 /* selectedStudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3271C886FB300974539 /* selectedStudy.png */; };
+		6F3AC32A1C886FBB00974539 /* selectedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC3291C886FBB00974539 /* selectedCircle.png */; };
+		6F3AC32C1C886FC200974539 /* selectedParty.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC32B1C886FC200974539 /* selectedParty.png */; };
+		6F3AC32E1C886FC900974539 /* selectedHobby.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC32D1C886FC900974539 /* selectedHobby.png */; };
+		6F3AC3301C886FCF00974539 /* selectedJobhunt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AC32F1C886FCF00974539 /* selectedJobhunt.png */; };
 		6F8FC4E41C6DA9CA00C838CD /* search_Aa.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4E31C6DA9CA00C838CD /* search_Aa.png */; };
 		6F8FC4E81C6DA9D200C838CD /* search_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FC4E71C6DA9D200C838CD /* search_calendar.png */; };
 		6FCC98941C2677B0009B9C69 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */; };
-		6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */; };
 		6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC98971C269ECB009B9C69 /* twitter-icon.png */; };
 		6FD520E01C76F1B30030DDCD /* SearchReslutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD520DF1C76F1B30030DDCD /* SearchReslutViewController.swift */; };
 		6FD54C451C6476A600A6EC41 /* ViewPager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD54C441C6476A600A6EC41 /* ViewPager2.swift */; };
@@ -36,13 +42,6 @@
 		BA2F0AD81C2858090007A49D /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0AD51C2858090007A49D /* MonthView.swift */; };
 		BA2F0ADE1C288FAA0007A49D /* ZeroCafePlus-iOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */; };
 		BA31F8441C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA31F8431C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift */; };
-		BA31F85E1C61201400CB0AF7 /* hobby.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8501C61201400CB0AF7 /* hobby.png */; };
-		BA31F8601C61201400CB0AF7 /* party.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8521C61201400CB0AF7 /* party.png */; };
-		BA31F8621C61201400CB0AF7 /* readbook.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8541C61201400CB0AF7 /* readbook.png */; };
-		BA31F8641C61201400CB0AF7 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8561C61201400CB0AF7 /* circle.png */; };
-		BA31F8661C61201400CB0AF7 /* study.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F8581C61201400CB0AF7 /* study.png */; };
-		BA31F8681C61201400CB0AF7 /* jobhunt.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85A1C61201400CB0AF7 /* jobhunt.png */; };
-		BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */ = {isa = PBXBuildFile; fileRef = BA31F85C1C61201400CB0AF7 /* tournament.png */; };
 		BA3823501C6E1614001BFF1A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38234F1C6E1614001BFF1A /* Extension.swift */; };
 		BA465DE51C660D2B0068E404 /* AlertFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA465DE41C660D2B0068E404 /* AlertFunction.swift */; };
 		BA5384391C74748A00DA5AEE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5384381C74748A00DA5AEE /* CustomTabBarController.swift */; };
@@ -131,17 +130,23 @@
 /* Begin PBXFileReference section */
 		349F285AC7FB4BBFF4B5E51F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F36351A1C60C18D009401B7 /* profile_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_edit.png; sourceTree = "<group>"; };
-		6F8FC4CC1C6DA5E600C838CD /* SelectCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectCircle.png; sourceTree = "<group>"; };
-		6F8FC4D01C6DA5ED00C838CD /* SelectGame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectGame.png; sourceTree = "<group>"; };
-		6F8FC4D21C6DA5F400C838CD /* SelectHobby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectHobby.png; sourceTree = "<group>"; };
-		6F8FC4D41C6DA5FD00C838CD /* SelectJobHunt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectJobHunt.png; sourceTree = "<group>"; };
-		6F8FC4D61C6DA60700C838CD /* SelectParty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectParty.png; sourceTree = "<group>"; };
-		6F8FC4D81C6DA60E00C838CD /* SelectReadbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectReadbook.png; sourceTree = "<group>"; };
-		6F8FC4DA1C6DA61600C838CD /* SelectStudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SelectStudy.png; sourceTree = "<group>"; };
+		6F3AC3151C886F2700974539 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+		6F3AC3171C886F2D00974539 /* party.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = party.png; sourceTree = "<group>"; };
+		6F3AC3191C886F3100974539 /* jobhunt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jobhunt.png; sourceTree = "<group>"; };
+		6F3AC31B1C886F3600974539 /* study.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = study.png; sourceTree = "<group>"; };
+		6F3AC31D1C886F3B00974539 /* tournament.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tournament.png; sourceTree = "<group>"; };
+		6F3AC31F1C886F4000974539 /* readbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = readbook.png; sourceTree = "<group>"; };
+		6F3AC3211C886F4600974539 /* hobby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hobby.png; sourceTree = "<group>"; };
+		6F3AC3231C886FA800974539 /* selectedTournament.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedTournament.png; sourceTree = "<group>"; };
+		6F3AC3251C886FAE00974539 /* selectedReadbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedReadbook.png; sourceTree = "<group>"; };
+		6F3AC3271C886FB300974539 /* selectedStudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedStudy.png; sourceTree = "<group>"; };
+		6F3AC3291C886FBB00974539 /* selectedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedCircle.png; sourceTree = "<group>"; };
+		6F3AC32B1C886FC200974539 /* selectedParty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedParty.png; sourceTree = "<group>"; };
+		6F3AC32D1C886FC900974539 /* selectedHobby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedHobby.png; sourceTree = "<group>"; };
+		6F3AC32F1C886FCF00974539 /* selectedJobhunt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedJobhunt.png; sourceTree = "<group>"; };
 		6F8FC4E31C6DA9CA00C838CD /* search_Aa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_Aa.png; sourceTree = "<group>"; };
 		6F8FC4E71C6DA9D200C838CD /* search_calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_calendar.png; sourceTree = "<group>"; };
 		6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		6FCC98971C269ECB009B9C69 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
 		6FD520DF1C76F1B30030DDCD /* SearchReslutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReslutViewController.swift; sourceTree = "<group>"; };
 		6FD54C441C6476A600A6EC41 /* ViewPager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPager2.swift; sourceTree = "<group>"; };
@@ -160,13 +165,6 @@
 		BA2F0AD51C2858090007A49D /* MonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		BA2F0ADD1C288E620007A49D /* ZeroCafePlus-iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZeroCafePlus-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA31F8431C611DD700CB0AF7 /* FinalDecisionEventAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalDecisionEventAlertVC.swift; sourceTree = "<group>"; };
-		BA31F8501C61201400CB0AF7 /* hobby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hobby.png; path = imageFile/genre/hobby.png; sourceTree = "<group>"; };
-		BA31F8521C61201400CB0AF7 /* party.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = party.png; path = imageFile/genre/party.png; sourceTree = "<group>"; };
-		BA31F8541C61201400CB0AF7 /* readbook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = readbook.png; path = imageFile/genre/readbook.png; sourceTree = "<group>"; };
-		BA31F8561C61201400CB0AF7 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.png; path = imageFile/genre/circle.png; sourceTree = "<group>"; };
-		BA31F8581C61201400CB0AF7 /* study.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = study.png; path = imageFile/genre/study.png; sourceTree = "<group>"; };
-		BA31F85A1C61201400CB0AF7 /* jobhunt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jobhunt.png; path = imageFile/genre/jobhunt.png; sourceTree = "<group>"; };
-		BA31F85C1C61201400CB0AF7 /* tournament.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tournament.png; path = imageFile/genre/tournament.png; sourceTree = "<group>"; };
 		BA38234F1C6E1614001BFF1A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BA465DE41C660D2B0068E404 /* AlertFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFunction.swift; sourceTree = "<group>"; };
 		BA5384381C74748A00DA5AEE /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 				6FD54C5B1C64860C00A6EC41 /* ViewPagerTab2.swift */,
 				6FD54C441C6476A600A6EC41 /* ViewPager2.swift */,
 				6FCC98931C2677B0009B9C69 /* EditProfileViewController.swift */,
-				6FCC98951C267906009B9C69 /* EventsDetailViewController.swift */,
 			);
 			name = FourthView_Detail;
 			sourceTree = "<group>";
@@ -331,20 +328,20 @@
 		BA31F84E1C611FFE00CB0AF7 /* genre */ = {
 			isa = PBXGroup;
 			children = (
-				6F8FC4CC1C6DA5E600C838CD /* SelectCircle.png */,
-				6F8FC4D01C6DA5ED00C838CD /* SelectGame.png */,
-				6F8FC4D21C6DA5F400C838CD /* SelectHobby.png */,
-				6F8FC4D41C6DA5FD00C838CD /* SelectJobHunt.png */,
-				6F8FC4D61C6DA60700C838CD /* SelectParty.png */,
-				6F8FC4D81C6DA60E00C838CD /* SelectReadbook.png */,
-				6F8FC4DA1C6DA61600C838CD /* SelectStudy.png */,
-				BA31F8501C61201400CB0AF7 /* hobby.png */,
-				BA31F8521C61201400CB0AF7 /* party.png */,
-				BA31F8541C61201400CB0AF7 /* readbook.png */,
-				BA31F8561C61201400CB0AF7 /* circle.png */,
-				BA31F8581C61201400CB0AF7 /* study.png */,
-				BA31F85A1C61201400CB0AF7 /* jobhunt.png */,
-				BA31F85C1C61201400CB0AF7 /* tournament.png */,
+				6F3AC3291C886FBB00974539 /* selectedCircle.png */,
+				6F3AC32B1C886FC200974539 /* selectedParty.png */,
+				6F3AC32F1C886FCF00974539 /* selectedJobhunt.png */,
+				6F3AC3231C886FA800974539 /* selectedTournament.png */,
+				6F3AC3251C886FAE00974539 /* selectedReadbook.png */,
+				6F3AC3271C886FB300974539 /* selectedStudy.png */,
+				6F3AC32D1C886FC900974539 /* selectedHobby.png */,
+				6F3AC3151C886F2700974539 /* circle.png */,
+				6F3AC3171C886F2D00974539 /* party.png */,
+				6F3AC3191C886F3100974539 /* jobhunt.png */,
+				6F3AC31B1C886F3600974539 /* study.png */,
+				6F3AC31D1C886F3B00974539 /* tournament.png */,
+				6F3AC31F1C886F4000974539 /* readbook.png */,
+				6F3AC3211C886F4600974539 /* hobby.png */,
 			);
 			name = genre;
 			sourceTree = "<group>";
@@ -669,48 +666,48 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA31F8681C61201400CB0AF7 /* jobhunt.png in Resources */,
 				BABD6E491C6209260018F456 /* tabbar_icon-01.png in Resources */,
 				BABD6E561C6209260018F456 /* tabbar_icon-04@2x.png in Resources */,
-				BA31F85E1C61201400CB0AF7 /* hobby.png in Resources */,
-				6F8FC4D11C6DA5ED00C838CD /* SelectGame.png in Resources */,
 				BAB64ACA1C83FBAE00A3A983 /* zero_icon_ios_80x80.png in Resources */,
+				6F3AC31E1C886F3B00974539 /* tournament.png in Resources */,
 				BABD6E551C6209260018F456 /* tabbar_icon-04.png in Resources */,
-				BA31F8621C61201400CB0AF7 /* readbook.png in Resources */,
 				D76B282B1C60A1F80090DB73 /* event_detail_add_friend.png in Resources */,
 				D76B28311C60A1F80090DB73 /* event_detail_rounded.png in Resources */,
 				D76B282C1C60A1F80090DB73 /* event_detail_calendar.png in Resources */,
 				D76B28301C60A1F80090DB73 /* event_detail_rounded_gray.png in Resources */,
-				6F8FC4D91C6DA60E00C838CD /* SelectReadbook.png in Resources */,
+				6F3AC31C1C886F3600974539 /* study.png in Resources */,
+				6F3AC3201C886F4000974539 /* readbook.png in Resources */,
 				6F36351B1C60C18D009401B7 /* profile_edit.png in Resources */,
 				98EC0B401C64089500185416 /* star_selected.png in Resources */,
 				BAB64ACC1C83FBAE00A3A983 /* zero_icon_ios_120x120.png in Resources */,
+				6F3AC3221C886F4600974539 /* hobby.png in Resources */,
+				6F3AC3301C886FCF00974539 /* selectedJobhunt.png in Resources */,
 				6FD7D57D1C8566DC00320AAB /* profile_camera.png in Resources */,
 				BABD6E4E1C6209260018F456 /* tabbar_icon-02@2x.png in Resources */,
-				6F8FC4D31C6DA5F400C838CD /* SelectHobby.png in Resources */,
 				6FCC98981C269ECB009B9C69 /* twitter-icon.png in Resources */,
 				BAB64ACD1C83FBAE00A3A983 /* zero_icon_ios_180x180.png in Resources */,
-				BA31F8661C61201400CB0AF7 /* study.png in Resources */,
 				BAB64AD11C83FD3300A3A983 /* splash_background.png in Resources */,
 				BAB64ACB1C83FBAE00A3A983 /* zero_icon_ios_87x87.png in Resources */,
-				6F8FC4D51C6DA5FE00C838CD /* SelectJobHunt.png in Resources */,
-				6F8FC4CD1C6DA5E600C838CD /* SelectCircle.png in Resources */,
+				6F3AC31A1C886F3100974539 /* jobhunt.png in Resources */,
+				6F3AC3241C886FA800974539 /* selectedTournament.png in Resources */,
+				6F3AC3181C886F2D00974539 /* party.png in Resources */,
 				D7A6265A1C1AB359002DCEC6 /* LaunchScreen.storyboard in Resources */,
-				6F8FC4D71C6DA60700C838CD /* SelectParty.png in Resources */,
 				BABD6E4A1C6209260018F456 /* tabbar_icon-01@2x.png in Resources */,
 				D7A626571C1AB359002DCEC6 /* Assets.xcassets in Resources */,
+				6F3AC32C1C886FC200974539 /* selectedParty.png in Resources */,
 				D76B282D1C60A1F80090DB73 /* event_detail_clock.png in Resources */,
 				D76B282F1C60A1F80090DB73 /* event_detail_rounded_blue.png in Resources */,
 				D76B28331C60A1F80090DB73 /* star.png in Resources */,
-				6F8FC4DB1C6DA61600C838CD /* SelectStudy.png in Resources */,
-				BA31F86A1C61201400CB0AF7 /* tournament.png in Resources */,
 				BAB64AC91C83FBAE00A3A983 /* zero_icon_ios_58x58.png in Resources */,
 				BAB64AD21C83FD3300A3A983 /* splash_object.png in Resources */,
-				BA31F8601C61201400CB0AF7 /* party.png in Resources */,
 				BABD6E4D1C6209260018F456 /* tabbar_icon-02.png in Resources */,
+				6F3AC3261C886FAE00974539 /* selectedReadbook.png in Resources */,
 				BABD6E511C6209260018F456 /* tabbar_icon-03.png in Resources */,
-				BA31F8641C61201400CB0AF7 /* circle.png in Resources */,
+				6F3AC3161C886F2700974539 /* circle.png in Resources */,
+				6F3AC32A1C886FBB00974539 /* selectedCircle.png in Resources */,
 				6F8FC4E41C6DA9CA00C838CD /* search_Aa.png in Resources */,
+				6F3AC32E1C886FC900974539 /* selectedHobby.png in Resources */,
+				6F3AC3281C886FB300974539 /* selectedStudy.png in Resources */,
 				D7A626551C1AB359002DCEC6 /* Main.storyboard in Resources */,
 				D76B28321C60A1F80090DB73 /* event_detail_tag.png in Resources */,
 				BABD6E521C6209260018F456 /* tabbar_icon-03@2x.png in Resources */,
@@ -818,7 +815,6 @@
 				BABD6E361C61F4010018F456 /* CommonFunction.swift in Sources */,
 				D7A626501C1AB359002DCEC6 /* FirstViewController.swift in Sources */,
 				9DD8BDAA1C284F2F002F243D /* EventsDecideViewController.swift in Sources */,
-				6FCC98961C267906009B9C69 /* EventsDetailViewController.swift in Sources */,
 				D76B284E1C6469050090DB73 /* EventView.swift in Sources */,
 				BAE34F6A1C28F2DA0029D6B9 /* CTCheckbox.m in Sources */,
 				D76B28421C63D60C0090DB73 /* ViewPager.swift in Sources */,
