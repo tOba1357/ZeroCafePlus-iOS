@@ -320,29 +320,29 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
     
     func setImage(){
         
-        hobyImg = CommonFunction().resizingImage(imageName: "hobby.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        hobyImg = CommonFunction().resizingImage(imageName: "selectedHobby.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        hoby_sImg = CommonFunction().resizingImage(imageName: "SelectHobby.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        hoby_sImg = CommonFunction().resizingImage(imageName: "hobby.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        studyImg = CommonFunction().resizingImage(imageName: "study.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        studyImg = CommonFunction().resizingImage(imageName: "selectedStudy.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        study_sImg = CommonFunction().resizingImage(imageName: "SelectStudy.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        study_sImg = CommonFunction().resizingImage(imageName: "study.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        sakuruImg = CommonFunction().resizingImage(imageName: "circle.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        sakuruImg = CommonFunction().resizingImage(imageName: "selectedCircle.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        sakuru_sImg = CommonFunction().resizingImage(imageName: "SelectCircle.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        sakuru_sImg = CommonFunction().resizingImage(imageName: "circle.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        tournamentImg = CommonFunction().resizingImage(imageName: "tournament.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        tournamentImg = CommonFunction().resizingImage(imageName: "selectedGame.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        tournament_sImg = CommonFunction().resizingImage(imageName: "SelectGame.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        tournament_sImg = CommonFunction().resizingImage(imageName: "tournament.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        readBookImg = CommonFunction().resizingImage(imageName: "readbook.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        readBookImg = CommonFunction().resizingImage(imageName: "selectedReadbook.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        readBook_sImg = CommonFunction().resizingImage(imageName: "SelectReadbook.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        readBook_sImg = CommonFunction().resizingImage(imageName: "readbook.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        partyImg = CommonFunction().resizingImage(imageName: "party.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        partyImg = CommonFunction().resizingImage(imageName: "selectedParty.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        party_sImg = CommonFunction().resizingImage(imageName: "SelectParty.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        party_sImg = CommonFunction().resizingImage(imageName: "party.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
     }
     
     //--TextField--    
