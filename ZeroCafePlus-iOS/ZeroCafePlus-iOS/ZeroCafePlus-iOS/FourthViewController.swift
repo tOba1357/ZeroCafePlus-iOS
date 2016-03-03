@@ -124,9 +124,10 @@ class ForthViewController: UIViewController, EventViewDelegate {
         profileImage.layer.cornerRadius = 8.0
         self.view.addSubview(profileImage)
         
-        willJoinVerticalSV = UIScrollView()
-        planVerticalSV = UIScrollView()
-        joinedVerticalSV = UIScrollView()
+        let eventListSVFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
+        willJoinVerticalSV = UIScrollView(frame: eventListSVFrame)
+        planVerticalSV = UIScrollView(frame: eventListSVFrame)
+        joinedVerticalSV = UIScrollView(frame: eventListSVFrame)
         
         willJoinVerticalSV.pagingEnabled = false
         planVerticalSV.pagingEnabled = false
@@ -218,8 +219,16 @@ class ForthViewController: UIViewController, EventViewDelegate {
         nonjoinedButton.textColor = UIColor.hexStr("#ff8010", alpha: 1.0)
         selectedjoinedView.addSubview(nonjoinedButton)
         
-        
+        self.views = [
+            ViewPagerElement2(selectedTitleView: self.willJoinView, noSelectedTitleView: self.selectedwillJoinView, mainView: self.willJoinVerticalSV),
+            ViewPagerElement2(selectedTitleView: self.planView, noSelectedTitleView: self.selectedplanView, mainView: self.planVerticalSV),
+            ViewPagerElement2(selectedTitleView: self.joinedView, noSelectedTitleView: self.selectedjoinedView, mainView: self.joinedVerticalSV)
+        ]
+        let frame = CGRect(x: 0, y: 300, width: self.view.frame.width, height: self.view.frame.height - 10)
+        self.tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: self.views)
+        self.view.addSubview(self.tabView)
     }
+    
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
@@ -401,61 +410,51 @@ class ForthViewController: UIViewController, EventViewDelegate {
                         }
                       }
                     }
-                    self.willJoinVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
                     self.willJoinVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.willJoinCount + 4) / 2) * 212 + 93))
                     self.willJoinVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.willJoinVerticalSV.backgroundColor = UIColor.whiteColor()
                     
-                    self.planVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
                     self.planVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.planCount + 4) / 2) * 212 + 93))
                     self.planVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.planVerticalSV.backgroundColor = UIColor.whiteColor()
                     
-                    self.joinedVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/1.6)
                     self.joinedVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.joinedCount + 4) / 2) * 212 + 93))
                     self.joinedVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.joinedVerticalSV.backgroundColor = UIColor.whiteColor()
-                    
-                    self.views = [
-                        ViewPagerElement2(selectedTitleView: self.willJoinView, noSelectedTitleView: self.selectedwillJoinView, mainView: self.willJoinVerticalSV),
-                        ViewPagerElement2(selectedTitleView: self.planView, noSelectedTitleView: self.selectedplanView, mainView: self.planVerticalSV),
-                        ViewPagerElement2(selectedTitleView: self.joinedView, noSelectedTitleView: self.selectedjoinedView, mainView: self.joinedVerticalSV)
-                    ]
-                    let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
-                    self.tabView = ViewPager2(frame: frame, tabHeigh: screenHeight/11, views: self.views)
-                    self.view.addSubview(self.tabView)
-                    self.tabView.translatesAutoresizingMaskIntoConstraints = false
-                    self.view.addConstraints([
-                        NSLayoutConstraint(
-                            item: self.tabView,
-                            attribute: NSLayoutAttribute.Top,
-                            relatedBy: NSLayoutRelation.Equal,
-                            toItem: self.profileLabel,
-                            attribute: NSLayoutAttribute.Bottom,
-                            multiplier: 1.0,
-                            constant: screenWidth/40.57
-                        ),
-                        NSLayoutConstraint(
-                            item: self.tabView,
-                            attribute: .Width,
-                            relatedBy: .Equal,
-                            toItem: nil,
-                            attribute: .Width,
-                            multiplier: 1.0,
-                            constant: screenWidth
-                        ),
-                        
-                        NSLayoutConstraint(
-                            item: self.tabView,
-                            attribute: .Height,
-                            relatedBy: .Equal,
-                            toItem: nil,
-                            attribute: .Height,
-                            multiplier: 1.0,
-                            constant: screenHeight/1.9
-                            
-                        )]
-                    )
+                
+//                    self.tabView.translatesAutoresizingMaskIntoConstraints = false
+//                    self.view.addConstraints([
+//                        NSLayoutConstraint(
+//                            item: self.tabView,
+//                            attribute: NSLayoutAttribute.Top,
+//                            relatedBy: NSLayoutRelation.Equal,
+//                            toItem: self.profileLabel,
+//                            attribute: NSLayoutAttribute.Bottom,
+//                            multiplier: 1.0,
+//                            constant: screenWidth/40.57
+//                        ),
+//                        NSLayoutConstraint(
+//                            item: self.tabView,
+//                            attribute: .Width,
+//                            relatedBy: .Equal,
+//                            toItem: nil,
+//                            attribute: .Width,
+//                            multiplier: 1.0,
+//                            constant: screenWidth
+//                        ),
+//                        
+//                        NSLayoutConstraint(
+//                            item: self.tabView,
+//                            attribute: .Height,
+//                            relatedBy: .Equal,
+//                            toItem: nil,
+//                            attribute: .Height,
+//                            multiplier: 1.0,
+//                            constant: screenHeight/1.9
+//                            
+//                        )]
+//                    )
+                
           }
     }
     
