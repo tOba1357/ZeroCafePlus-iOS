@@ -332,7 +332,7 @@ class CreateEventView: UIView,UITextFieldDelegate,UITextViewDelegate,UIScrollVie
         
         sakuru_sImg = CommonFunction().resizingImage(imageName: "circle.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
-        tournamentImg = CommonFunction().resizingImage(imageName: "selectedGame.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
+        tournamentImg = CommonFunction().resizingImage(imageName: "selectedTournament.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
         tournament_sImg = CommonFunction().resizingImage(imageName: "tournament.png", w: (self.frame.size.width-self.frame.size.width*(100/1136))/6, h: (self.frame.size.width-self.frame.size.width*(100/1136))/6)
         
