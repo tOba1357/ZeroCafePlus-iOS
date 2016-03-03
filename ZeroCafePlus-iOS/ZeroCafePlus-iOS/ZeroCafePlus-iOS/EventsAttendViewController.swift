@@ -671,6 +671,26 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                         let ownerImageurl: String? = users["user"]["image"]["thumb"]["url"].string
                         if ownerImageurl != nil {
                             print(ownerImageurl!)
+                            let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                            let session = NSURLSession(configuration: sessionConfig)
+                            let url = NSURL(string:ownerImageurl!)
+                            let task = session.dataTaskWithURL(url!) {
+                                (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                guard let getData = data else {
+                                    session.invalidateAndCancel()
+                                    return
+                                }
+                                let globalQueu =
+                                dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                dispatch_async(globalQueu) {
+                                    let img = UIImage(data: getData)
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        self.ownerImage.image = img
+                                    }
+                                }
+                            }
+                            task.resume()
+
                             self.ownerImage.af_setImageWithURL(NSURL(string: ownerImageurl!)!)
                         } else {
                             print("no image")
@@ -710,6 +730,25 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                                         ])
                                     let participantImageUrl: String? = ptcpnts["image"]["image"]["thumb"]["url"].string
                                     if participantImageUrl != nil {
+                                        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                        let session = NSURLSession(configuration: sessionConfig)
+                                        let url = NSURL(string:participantImageUrl!)
+                                        let task = session.dataTaskWithURL(url!) {
+                                            (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                            guard let getData = data else {
+                                                session.invalidateAndCancel()
+                                                return
+                                            }
+                                            let globalQueu =
+                                            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                            dispatch_async(globalQueu) {
+                                                let img = UIImage(data: getData)
+                                                dispatch_async(dispatch_get_main_queue()) {
+                                                    self.participantsImage.image = img
+                                                }
+                                            }
+                                        }
+                                        task.resume()
                                         self.participantsImage.af_setImageWithURL(NSURL(string: participantImageUrl!)!)
                                     } else {
                                         print("no image")

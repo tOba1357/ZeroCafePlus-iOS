@@ -106,6 +106,27 @@ class ParticipantsImageViewController: UIViewController {
                                         ])
                                     let participantImageUrl: String? = ptcpnts["image"]["image"]["thumb"]["url"].string
                                     if participantImageUrl != nil {
+                                        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                        let session = NSURLSession(configuration: sessionConfig)
+                                        let url = NSURL(string:participantImageUrl!)
+                                        let task = session.dataTaskWithURL(url!) {
+                                            (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                            guard let getData = data else {
+                                                session.invalidateAndCancel()
+                                                return
+                                            }
+                                            let globalQueu =
+                                            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                            dispatch_async(globalQueu) {
+                                                let img = UIImage(data: getData)
+                                                dispatch_async(dispatch_get_main_queue()) {
+                                                    self.participantsImage.image = img
+                                                }
+                                            }
+                                        }
+                                        task.resume()
+                                        
+                                        
                                         self.participantsImage.af_setImageWithURL(NSURL(string: participantImageUrl!)!)
                                     } else {
                                         print("no image")
