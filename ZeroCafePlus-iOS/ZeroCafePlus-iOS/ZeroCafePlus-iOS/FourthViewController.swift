@@ -69,6 +69,9 @@ class ForthViewController: UIViewController, EventViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButtonItem
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         let screenSize: CGSize = UIScreen.mainScreen().bounds.size
         let screenWidth = screenSize.width
@@ -139,36 +142,11 @@ class ForthViewController: UIViewController, EventViewDelegate {
         self.view.addSubview(self.tabView)
         tabView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addConstraints([
-            NSLayoutConstraint(
-                item: self.tabView,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: self.profileLabel,
-                attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: screenWidth/40.57
-            ),
-            NSLayoutConstraint(
-                item: self.tabView,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: screenWidth
-            ),
-            
-            NSLayoutConstraint(
-                item: self.tabView,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: screenHeight/1.9
-                
-            )]
-        )
+            NSLayoutConstraint(item: self.tabView,
+attribute: NSLayoutAttribute.Top,relatedBy: NSLayoutRelation.Equal,toItem: self.profileLabel,attribute: NSLayoutAttribute.Bottom,multiplier: 1.0,constant: screenWidth/40.57),
+            NSLayoutConstraint(item: self.tabView,attribute: .Width,relatedBy: .Equal,toItem: nil,attribute: .Width,multiplier: 1.0,constant: screenWidth),
+            NSLayoutConstraint(item: self.tabView,attribute: .Height,relatedBy: .Equal,toItem: nil,attribute: .Height,multiplier: 1.0,constant: screenHeight/1.9)
+            ])
         
         willJoinVerticalSV.pagingEnabled = false
         planVerticalSV.pagingEnabled = false
@@ -442,23 +420,21 @@ class ForthViewController: UIViewController, EventViewDelegate {
                         }
                       }
                     }
-                    self.willJoinVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.willJoinCount + 4) / 2) * 212 + 93))
+                    self.willJoinVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((self.willJoinCount + 4) / 2) * 212 + 93))
                     self.willJoinVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.willJoinVerticalSV.backgroundColor = UIColor.whiteColor()
                     
-                    self.planVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.planCount + 4) / 2) * 212 + 93))
+                    self.planVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((self.planCount + 4) / 2) * 212 + 93))
                     self.planVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.planVerticalSV.backgroundColor = UIColor.whiteColor()
                     
-                    self.joinedVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((self.joinedCount + 4) / 2) * 212 + 93))
+                    self.joinedVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((self.joinedCount + 4) / 2) * 212 + 93))
                     self.joinedVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.joinedVerticalSV.backgroundColor = UIColor.whiteColor()
-                    
             }
     }
     
     func pushMyButton(myEventID:Int) {
-        
         let eventAttendVC = EventsAttendViewController()
         eventAttendVC.getID = myEventID
         self.navigationController?.pushViewController(eventAttendVC, animated: true)
