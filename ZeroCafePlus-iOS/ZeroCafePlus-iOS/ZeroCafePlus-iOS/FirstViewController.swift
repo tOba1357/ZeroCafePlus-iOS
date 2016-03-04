@@ -27,11 +27,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
     private var kuVerticalSV: UIScrollView!
     private var favoriteVerticalSV: UIScrollView!
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,9 +139,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     var favoriteSideDecide = 0
                     var favoriteCount = 0
                     
-                    if self.favoriteVerticalSV != nil {
-                        self.removeAllSubviews(self.favoriteVerticalSV)
-                    }
+
                     for event in eventArray.enumerate(){
                         
                         let eve = event.element as JSON
@@ -250,6 +243,20 @@ class FirstViewController: UIViewController, EventViewDelegate {
                 }
         }
 
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if self.favoriteVerticalSV != nil {
+            self.removeAllSubviews(self.favoriteVerticalSV)
+        }
+        if self.kitVerticalSV != nil {
+            self.removeAllSubviews(self.kitVerticalSV)
+        }
+        if self.kuVerticalSV != nil {
+            self.removeAllSubviews(self.kuVerticalSV)
+        }
     }
     
     func removeAllSubviews(parentView: UIView){
