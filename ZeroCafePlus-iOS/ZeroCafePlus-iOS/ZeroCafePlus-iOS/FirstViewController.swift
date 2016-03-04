@@ -26,7 +26,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
     private var kitVerticalSV: UIScrollView!
     private var kuVerticalSV: UIScrollView!
     private var favoriteVerticalSV: UIScrollView!
-    //    private var horizontalSV: UIScrollView!
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -138,7 +137,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     var kuY :CGFloat = screenHeight*(12/1136)
                     var favoriteX :CGFloat = screenWidth*(12/640)
                     var favoriteY :CGFloat = screenHeight*(12/1136)
-                    
                     var kitSideDecide = 0
                     var kitCount = 0
                     var kuSideDecide = 0
@@ -146,6 +144,9 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     var favoriteSideDecide = 0
                     var favoriteCount = 0
                     
+                    if self.favoriteVerticalSV != nil {
+                        self.removeAllSubviews(self.favoriteVerticalSV)
+                    }
                     for event in eventArray.enumerate(){
                         
                         let eve = event.element as JSON
@@ -185,7 +186,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             kitCount++
                             
                         }else if placeDecide == 1{
-                            //                            金沢大学のEventViewの表示 2page
+                            //金沢大学のEventViewの表示 2page
                             
                             if kuSideDecide % 2 == 0 {
                                 kuX = screenWidth*(12/640)
@@ -232,15 +233,15 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             }
                         }
                     }
-                    self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2)) * screenHeight * (335/1136) + 153)
+                    self.kitVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((kitCount + 1) / 2)) * screenHeight * (335/1136) + 153)
                     self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                     
-                    self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kuCount + 1) / 2) * 212 + 93))
+                    self.kuVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((kuCount + 1) / 2) * 212 + 93))
                     self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                     
-                    self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
+                    self.favoriteVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
                     self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
 
@@ -248,16 +249,20 @@ class FirstViewController: UIViewController, EventViewDelegate {
                     print("通信失敗")
                 }
         }
-        
-        
+
+    }
+    
+    func removeAllSubviews(parentView: UIView){
+        let subviews = parentView.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
     }
     
     func pushMyButton(myEventID:Int) {
         
-        print("success")
         let eventAttendVC = storyboard!.instantiateViewControllerWithIdentifier("EventsAttendViewController") as? EventsAttendViewController
         eventAttendVC!.getID = myEventID
-        print("")
         self.navigationController?.pushViewController(eventAttendVC!, animated: true)
     }
 }
