@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDelegate,
-                            CreateEventDelegate, CheckCalenderDelegate, ScheduleDelegate,CreateEventDetailDelegate, FinalDecisionEventAlertDelegate{
+CreateEventDelegate, CheckCalenderDelegate, ScheduleDelegate,CreateEventDetailDelegate, FinalDecisionEventAlertDelegate{
     
     let scrollView = UIScrollView()
     var createEvetView :CreateEventView!
@@ -33,6 +33,8 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
     var eventMenberNum:Int!
     var eventTag:String!
     
+    var pushCount = 0
+    
     var waitAC:UIAlertController!
     
     let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
@@ -41,6 +43,10 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        scrollView.delegate = self
+        self.view.addSubview(scrollView)
+
         makeView()
     }
     
@@ -49,12 +55,13 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
     }
     
     func makeView(){
-        scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        scrollView.delegate = self
         
         scrollView.contentSize   = CGSizeMake(0, 0)
         scrollView.contentOffset = CGPointMake(0.0 , 0.0)
-        self.view.addSubview(scrollView)
+        
+        for subview in scrollView.subviews {
+            subview.removeFromSuperview()
+        }
         
         let thirdTitle:UILabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         thirdTitle.textAlignment = NSTextAlignment.Center
@@ -71,14 +78,17 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         
         scrollView.addSubview(thirdTitle)
         scrollView.addSubview(createEvetView)
-
+        
     }
     
     func createEventNameExposition() {
-        checkCalenderView = CheckCalenderView(frame: CGRectMake(self.view.frame.size.width*(46/640), displayHeight, scrollView.frame.size.width-self.view.frame.size.width*(92/640), displayHeight))
-        checkCalenderView.checkCalenderDelegate = self
-        nextScroll(self.view.frame.size.height,count: 2)
-        scrollView.addSubview(checkCalenderView)
+        if pushCount == 0{
+            checkCalenderView = CheckCalenderView(frame: CGRectMake(self.view.frame.size.width*(46/640), displayHeight, scrollView.frame.size.width-self.view.frame.size.width*(92/640), displayHeight))
+            checkCalenderView.checkCalenderDelegate = self
+            nextScroll(self.view.frame.size.height,count: 2)
+            scrollView.addSubview(checkCalenderView)
+            pushCount++
+        }
     }
     
     func checkedCalender(checkDate:[String]){
@@ -89,7 +99,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
     func createSheduleWindow(){
         self.view.backgroundColor = UIColor.grayColor()
         self.view.userInteractionEnabled = false
-
+        
         alertWindow = UIWindow()
         alertWindow.frame = CGRectMake(barHeight, barHeight, myBoundSize.width-barHeight*2, myBoundSize.height-barHeight*2)
         alertWindow.backgroundColor = UIColor.grayColor()
@@ -119,19 +129,22 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         UIView.animateWithDuration(0.2, animations: {
             self.tabBarController?.tabBar.hidden = false
         })
-
+        
         self.view.userInteractionEnabled = true
         self.view.backgroundColor = UIColor.whiteColor()
-
+        
         switch btnTag{
         case 1:
             resignKeyWindow(alertWindow)
         case 2:
-            resignKeyWindow(alertWindow)
-            nextScroll(self.view.frame.size.height,count: 3)
-            createEventDetailView = CreateEventDetailView(frame: CGRectMake(self.view.frame.size.width*(46/640), displayHeight*2, scrollView.frame.size.width-self.view.frame.size.width*(92/640),displayHeight))
-            createEventDetailView.createEventDetailDelegate = self
-            scrollView.addSubview(createEventDetailView)
+            if pushCount == 1 {
+                resignKeyWindow(alertWindow)
+                createEventDetailView = CreateEventDetailView(frame: CGRectMake(self.view.frame.size.width*(46/640), displayHeight*2, scrollView.frame.size.width-self.view.frame.size.width*(92/640),displayHeight))
+                createEventDetailView.createEventDetailDelegate = self
+                nextScroll(self.view.frame.size.height,count: 3)
+                scrollView.addSubview(createEventDetailView)
+                pushCount++
+            }
         default:
             break
         }
@@ -152,7 +165,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         
         self.view.backgroundColor = UIColor.grayColor()
         self.view.userInteractionEnabled = false
-
+        
         alertWindow = UIWindow()
         alertWindow.frame = CGRectMake(barHeight, barHeight, myBoundSize.width-barHeight*2, myBoundSize.height-barHeight*2)
         alertWindow.backgroundColor = UIColor.grayColor()
@@ -177,7 +190,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
             finalDecisionEventAlertVC.eventDiveJoin = eventDiveJoin
             finalDecisionEventAlertVC.eventMenberNum = eventMenberNum
             finalDecisionEventAlertVC.eventTag = eventTag
-
+            
             alertWindow.rootViewController = finalDecisionEventAlertVC
         }
         
@@ -199,14 +212,15 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         case 2:
             resignKeyWindow(alertWindow)
             pushCreateEventJson()
+            pushCount = 0
         default:
             break
         }
     }
-
+    
     
     func pushCreateEventJson(){
-    
+        
         let headers = [
             "Content-Type": "application/json",
             "Accept": "application/json"
@@ -234,12 +248,6 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON, headers:headers)
-            .responseString { response in
-                debugPrint(response.result.value)
-        }
-        for subview in self.view.subviews {
-            subview.removeFromSuperview()
-        }
         makeView()
     }
     
@@ -247,7 +255,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         waitAC = AlertFunction().displayPendingAlert()
         self.presentViewController(waitAC, animated: true, completion: nil)
     }
-
+    
     func dismissWaitAlertAction(){
         AlertFunction().hidePendingAlert(waitAC)
     }
@@ -263,7 +271,7 @@ class ThirdViewController: UIViewController, UIScrollViewDelegate, UITabBarDeleg
         scrollView.contentSize = CGSizeMake(0, nextPosY*count)
         scrollView.setContentOffset(CGPointMake(0, nextPosY*(count-1)), animated: true)
     }
-
+    
     func makeKeyAndVisible(myWindow:UIWindow) {
         myWindow.backgroundColor = UIColor.clearColor()
         myWindow.alpha = 0
