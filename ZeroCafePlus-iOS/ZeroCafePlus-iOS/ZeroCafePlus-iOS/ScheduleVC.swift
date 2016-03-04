@@ -38,7 +38,11 @@ class ScheduleVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    
         for i in 11...21{
             let iStr = String(format:"%2d",i)
             pickHour.append(iStr)
