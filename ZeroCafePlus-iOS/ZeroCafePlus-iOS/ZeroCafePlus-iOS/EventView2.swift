@@ -28,7 +28,8 @@ class EventView2: UIView {
         let endData = getDateTime(endDateString)
         let dateText = "\(startData[1])/\(startData[2])\n\(startData[3]):\(startData[4])~\(endData[3]):\(endData[4])"
         
-        let titleName: UILabel = UILabel(frame: CGRectMake(10,60,130,70))
+        let titleName: UILabel = UILabel(frame: CGRectMake(0,0,130,70))
+        titleName.layer.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         titleName.numberOfLines = 2
         titleName.textAlignment = NSTextAlignment.Center
         let dateName: UILabel = UILabel(frame: CGRectMake(10,110,130,50))
