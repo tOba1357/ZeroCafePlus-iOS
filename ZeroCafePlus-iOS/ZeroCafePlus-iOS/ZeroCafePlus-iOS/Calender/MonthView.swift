@@ -56,7 +56,6 @@ class MonthView: UIView ,DayViewDelegate{
                             let moreDateData = startTimeArray[0].componentsSeparatedByString("-")
                             listeventsData.append(moreDateData[2])
                         }
-                        print(listeventsData)
                     }
                     
                     if lastday != nil {
@@ -70,8 +69,7 @@ class MonthView: UIView ,DayViewDelegate{
                             let frame:CGRect = CGRectMake(x,y,self.dayWidth,self.dayHeight)
                             
                             if Int(nowDate[0]) > year ||
-                                (Int(nowDate[0]) == year && Int(nowDate[1]) > month) ||
-                                (Int(nowDate[0]) == year && Int(nowDate[1]) == month && Int(nowDate[2]) >= (i+1))
+                                (Int(nowDate[0]) == year && Int(nowDate[1]) > month)
                             {
                                 eventBool = false
                             }
