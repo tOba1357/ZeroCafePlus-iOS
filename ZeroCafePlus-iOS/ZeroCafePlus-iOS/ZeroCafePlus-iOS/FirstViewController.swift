@@ -36,12 +36,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
         let kitView = UIView()
         let kuView = UIView()
         let favoriteView = UIView()
@@ -56,15 +50,6 @@ class FirstViewController: UIViewController, EventViewDelegate {
         navigationItem.backBarButtonItem = backButtonItem
         
         self.view.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
-        
-        kitVerticalSV = UIScrollView()
-        kuVerticalSV = UIScrollView()
-        favoriteVerticalSV = UIScrollView()
-        
-        kitVerticalSV.pagingEnabled = false
-        kuVerticalSV.pagingEnabled = false
-        favoriteVerticalSV.pagingEnabled = false
-        
         
         kitLabel = UILabel(frame: CGRectMake(0,0,screenWidth/3,screenHeight/13))
         kitLabel.layer.position.x = screenWidth/3.3
@@ -113,26 +98,46 @@ class FirstViewController: UIViewController, EventViewDelegate {
         nonSelectedFavoriteLabel.font = UIFont.systemFontOfSize(20)
         nonSelectedFavoriteLabel.textColor = UIColor.hexStr("B3B3B3", alpha: 1.0)
         selectedFavoriteView.addSubview(nonSelectedFavoriteLabel)
+
+        let eventListSVFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        kitVerticalSV = UIScrollView(frame: eventListSVFrame)
+        kuVerticalSV = UIScrollView(frame: eventListSVFrame)
+        favoriteVerticalSV = UIScrollView(frame: eventListSVFrame)
+        kitVerticalSV.pagingEnabled = false
+        kuVerticalSV.pagingEnabled = false
+        favoriteVerticalSV.pagingEnabled = false
         
+        let views = [
+            ViewPagerElement(selectedTitleView: kitView, noSelectedTitleView: selectedKitView, mainView: self.kitVerticalSV),
+            ViewPagerElement(selectedTitleView: kuView, noSelectedTitleView: selectedKuView, mainView: self.kuVerticalSV),
+            ViewPagerElement(selectedTitleView: favoriteView, noSelectedTitleView: selectedFavoriteView, mainView: self.favoriteVerticalSV)
+        ]
+        let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
+        let tabView = ViewPager(frame: frame, tabHeigh: screenHeight/11, views: views)
+        self.view.addSubview(tabView)
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         let url = "https://zerocafe.herokuapp.com/api/v1/events.json"
         Alamofire.request(.GET, url)
             .responseJSON { response in
                 if response.result.isSuccess {
-                    print("通信成功")
-                    
                     let json = JSON(response.result.value!)
-                    debugPrint(response.result.value)
-                    
                     let eventArray = json["events"].array! as Array
-                    print("持ってきたもの:",eventArray)
                     
-                    var kitX :CGFloat = 6
-                    var kitY :CGFloat = 6
-                    var kuX :CGFloat = 6
-                    var kuY :CGFloat = 6
-                    var favoriteX :CGFloat = 6
-                    var favoriteY :CGFloat = 6
+                    var kitX :CGFloat = screenWidth*(12/640)
+                    var kitY :CGFloat = screenHeight*(12/1136)
+                    var kuX :CGFloat = screenWidth*(12/640)
+                    var kuY :CGFloat = screenHeight*(12/1136)
+                    var favoriteX :CGFloat = screenWidth*(12/640)
+                    var favoriteY :CGFloat = screenHeight*(12/1136)
                     
                     var kitSideDecide = 0
                     var kitCount = 0
@@ -162,19 +167,18 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             //金沢工業大学のEventViewの表示 1page
                             
                             if kitSideDecide % 2 == 0 {
-                                kitX = screenWidth*(15/640)
+                                kitX = screenWidth*(12/640)
                             }else{
-                                kitX = screenWidth*(332/640)
+                                kitX = screenWidth*(324/640)
                             }
                             
-                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                let eventViewGenerate:EventView = EventView(frame:CGRectMake(kitX,kitY, screenWidth*(300/640), screenHeight*(335/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                 eventViewGenerate.mydelegate = self
-                                eventViewGenerate.layer.cornerRadius = 10
-                                
+                                eventViewGenerate.layer.cornerRadius = screenWidth/80
                                 self.kitVerticalSV.addSubview(eventViewGenerate)
                             
                             if kitCount % 2 == 1{
-                                kitY += screenHeight*(400/1136)
+                                kitY += screenHeight*(347/1136)
                             }
                             
                             kitSideDecide++
@@ -184,46 +188,43 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             //                            金沢大学のEventViewの表示 2page
                             
                             if kuSideDecide % 2 == 0 {
-                                kuX = screenWidth*(15/640)
+                                kuX = screenWidth*(12/640)
                             }else{
-                                kuX = screenWidth*(332/640)
+                                kuX = screenWidth*(324/640)
                             }
-                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth*(300/640), screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                            let eventViewGenerate:EventView = EventView(frame:CGRectMake(kuX,kuY, screenWidth*(300/640), screenHeight*(335/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                             eventViewGenerate.mydelegate = self
-                            eventViewGenerate.layer.cornerRadius = 10
-                            
+                            eventViewGenerate.layer.cornerRadius = screenWidth/80
                             self.kuVerticalSV.addSubview(eventViewGenerate)
                             
                             if kuCount % 2 == 1{
-                                kuY += screenHeight*(400/1136)
+                                kuY += screenHeight*(347/1136)
                             }
                             kuSideDecide++
                             kuCount++
                         }
                         
                         //お気に入りページの作成
-                        
                         if favoriteSideDecide % 2 == 0 {
-                            favoriteX = screenWidth*(15/640)
+                            favoriteX = screenWidth*(12/640)
                         }else{
-                            favoriteX = screenWidth*(332/640)
+                            favoriteX = screenWidth*(324/640)
                         }
                         
                         let defaults = NSUserDefaults.standardUserDefaults()
                         
                         if  let _favoriteEventList = defaults.objectForKey("EVENT_ID"){
                             var favoriteEventIdList = _favoriteEventList as! [Int]
-                            
                             for (key,_) in favoriteEventIdList.enumerate(){
                                 if favoriteEventIdList[key] == eventID {
-                                    let eventViewGenerate:EventView = EventView(frame:CGRectMake(favoriteX,favoriteY, screenWidth*(300/640),screenHeight*(385/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
+                                    print(favoriteEventIdList[key])
+                                    let eventViewGenerate:EventView = EventView(frame:CGRectMake(favoriteX,favoriteY, screenWidth*(300/640),screenHeight*(335/1136)),titleNameString: title,id:eventID!, startDateString: startDate, endDateString: endDate,tagNameString: tagName!, genreImageNum: genreImage!)
                                     eventViewGenerate.mydelegate = self
-                                    eventViewGenerate.layer.cornerRadius = 10
-                                    
+                                    eventViewGenerate.layer.cornerRadius = screenWidth/80
                                     self.favoriteVerticalSV.addSubview(eventViewGenerate)
                                     
                                     if favoriteCount % 2 == 1 {
-                                        favoriteY += screenHeight*(400/1136)
+                                        favoriteY += screenHeight*(347/1136)
                                     }
                                     favoriteSideDecide++
                                     favoriteCount++
@@ -231,31 +232,18 @@ class FirstViewController: UIViewController, EventViewDelegate {
                             }
                         }
                     }
-                    
-                    self.kitVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                    self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2)) * screenHeight * (385/1136) + 153)
+                    self.kitVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kitCount + 1) / 2)) * screenHeight * (335/1136) + 153)
                     self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                     
-                    self.kuVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
                     self.kuVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((kuCount + 1) / 2) * 212 + 93))
                     self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                     
-                    self.favoriteVerticalSV.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
                     self.favoriteVerticalSV.contentSize = CGSizeMake(self.view.frame.width, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
                     self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
 
-                    
-                    let views = [
-                        ViewPagerElement(selectedTitleView: kitView, noSelectedTitleView: selectedKitView, mainView: self.kitVerticalSV),
-                        ViewPagerElement(selectedTitleView: kuView, noSelectedTitleView: selectedKuView, mainView: self.kuVerticalSV),
-                        ViewPagerElement(selectedTitleView: favoriteView, noSelectedTitleView: selectedFavoriteView, mainView: self.favoriteVerticalSV)
-                    ]
-                    let frame = CGRect(x: 0, y: 10, width: self.view.frame.width, height: self.view.frame.height - 10)
-                    let tabView = ViewPager(frame: frame, tabHeigh: screenHeight/11, views: views)
-                    self.view.addSubview(tabView)
                 }else {
                     print("通信失敗")
                 }
