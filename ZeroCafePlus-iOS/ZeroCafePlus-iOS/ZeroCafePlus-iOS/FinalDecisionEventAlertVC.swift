@@ -35,7 +35,10 @@ class FinalDecisionEventAlertVC: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         checkGenre()
         
         let nameLabel = UILabel(frame: CGRectMake(0,0,500,60))
