@@ -324,7 +324,7 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
             viewControllers = viewcntrs
             if indexOfArray((viewControllers)!, searchObject: self) == nil {
                 self.navigationController?.popToRootViewControllerAnimated(true)
-
+                
                 genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: 100, h: 99)
                 window = UIWindow()
                 window.frame = CGRectMake(0, 0, 0, 0)
@@ -370,173 +370,176 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
     override func viewWillAppear(animated: Bool) {
         var judgeID: Int = 0
         let EventsUrl = "https://zerocafe.herokuapp.com/api/v1/events.json"
-        Alamofire.request(.GET, EventsUrl)
-            .responseJSON { response in
-                
-                let json = JSON(response.result.value!)
-                let eventArray = json["events"].array! as Array
-                for events in eventArray {
-                    let id = events["event"]["id"].int! as Int
-                    if  id == self.getID {
-                        print(self.userID)
-                        var ownerID: Int!
-                        ownerID = events["event"]["owner_id"].int! as Int
-                        NSUserDefaults.standardUserDefaults().setInteger(ownerID, forKey: "ownerID")
-                        NSUserDefaults.standardUserDefaults().synchronize()
-                        
-                        //お気に入りボタン
-                        let keyInt: Int = events["event"]["id"].int as Int!
-                        let key: String = String(keyInt)
-                        
-                        if self.judgeKey.boolForKey(key) {
-                            self.starSelectedButton = UIButton()
-                            self.starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
-                            self.starSelectedButton.setBackgroundImage(self.starImage2, forState: UIControlState.Normal);
-                            self.starSelectedButton.setTitle("", forState: UIControlState.Normal)
-                            self.starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-                            self.starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-                            self.starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
-                            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starSelectedButton)
-                        } else {
-                            self.starButton = UIButton()
-                            self.starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
-                            self.starButton.setBackgroundImage(self.starImage1, forState: UIControlState.Normal);
-                            self.starButton.setTitle("", forState: UIControlState.Normal)
-                            self.starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-                            self.starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
-                            self.starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
-                            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starButton)
+        
+            
+            Alamofire.request(.GET, EventsUrl)
+                .responseJSON { response in
+                    
+                    let json = JSON(response.result.value!)
+                    let eventArray = json["events"].array! as Array
+                    var kimela = 0
+                    for events in eventArray {
+                        let id = events["event"]["id"].int! as Int
+                        if  id == self.getID {
+                            kimela = 1
                             
-                        }
-                        
-                        
-                        //genreicon
-                        self.EventGenre = events["event"]["genre"].int! as Int
-                        if self.EventGenre == 0 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            var ownerID: Int!
+                            ownerID = events["event"]["owner_id"].int! as Int
+                            print("mada = \(ownerID)")
+                            //お気に入りボタン
+                            let keyInt: Int = events["event"]["id"].int as Int!
+                            let key: String = String(keyInt)
                             
-                            
-                        } else if self.EventGenre == 1 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#AF2E84", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-                            
-                        } else if self.EventGenre == 2 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#22B573", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-                            
-                        } else if self.EventGenre == 3 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#F28831", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-                            
-                        } else if self.EventGenre == 4 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-                            
-                        } else if self.EventGenre == 5 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("##EFEDE8", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-                            
-                        } else if self.EventGenre == 6 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFDA3E", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
-                            
-                        }
-                        
-                        self.window = UIWindow()
-                        self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
-                        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
-                        self.window.backgroundColor = UIColor.clearColor()
-                        self.window.makeKeyWindow()
-                        self.window.makeKeyAndVisible()
-                        let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
-                        imgView.image = self.genreImg
-                        self.window.addSubview(imgView)
-                        
-                        
-                        
-                        // タイトル
-                        self.name.text = events["event"]["title"].string! as String
-                        
-                        //日付・時間 配列取得
-                        let startTime = events["event"]["start_time"].string! as String
-                        let startArray = startTime.componentsSeparatedByString("T")
-                        
-                        // 日付
-                        let date_formatter: NSDateFormatter = NSDateFormatter()
-                        date_formatter.locale     = NSLocale(localeIdentifier: "ja")
-                        date_formatter.dateFormat = "yyyy/MM/dd"
-                        let change_date:NSDate = date_formatter.dateFromString(startArray[0])!
-                        let weekdays: Array  = ["", "日", "月", "火", "水", "木", "金", "土"]
-                        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-                        let comps = calendar.components([.Year, .Month, .Day, .Weekday] , fromDate:  change_date)
-                        date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
-                        print(date_formatter.stringFromDate(change_date))
-                        self.date.text = date_formatter.stringFromDate(change_date)
-                        self.date.sizeToFit()
-                        
-                        // 時間
-                        let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
-                        let endTime = events["event"]["end_time"].string! as String
-                        let endArray = endTime.componentsSeparatedByString("T")
-                        let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
-                        self.time.text = "\(startMinute) ~ \(endMinute)"
-                        self.time.sizeToFit()
-                        //eventと現在時刻を比較
-                        let dateFormat: NSDateFormatter = NSDateFormatter()
-                        dateFormat.locale = NSLocale(localeIdentifier: "ja")
-                        dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
-                        let time: String = "\(startArray[0]) \(endMinute)"
-                        let eventTime: NSDate = dateFormat.dateFromString(time)!
-                        print(dateFormat.stringFromDate(eventTime))
-                        print(eventTime)
-                        let now: NSDate = NSDate()
-                        let NowDateFormat = NSDateFormatter()
-                        NowDateFormat.locale = NSLocale(localeIdentifier: "ja")
-                        NowDateFormat.timeStyle = .ShortStyle
-                        NowDateFormat.dateStyle = .ShortStyle
-                        let nowstr: String = NowDateFormat.stringFromDate(now) // -> 2014/06/24 11:14
-                        print(nowstr)
-                        let NowTime: NSDate = dateFormat.dateFromString(nowstr)!
-                        print(NowTime)
-                        
-                        var judgeTime: Int
-                        
-                        if (eventTime.compare(NowTime) == NSComparisonResult.OrderedDescending){
-                            print("- イベントをやる前")
-                            judgeTime = 0
-                        }else if (eventTime.compare(NowTime) == NSComparisonResult.OrderedAscending){
-                            print("- イベントをやった後")
-                            judgeTime = 1
-                        }else{
-                            print("- 同じ")
-                            judgeTime = 0
-                        }
-                        
-                        let participantsArray =  events["participants"].array! as Array
-                        
-                        if judgeTime == 0 {
-                            //主催者かどうか判別
-                            if ownerID == self.userID {
-                                self.cancelButton.translatesAutoresizingMaskIntoConstraints = false
-                                self.view.addConstraints([
-                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
-                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
-                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
-                                    NSLayoutConstraint(item: self.cancelButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
-                                    ])
-                                
-                                
+                            if self.judgeKey.boolForKey(key) {
+                                self.starSelectedButton = UIButton()
+                                self.starSelectedButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+                                self.starSelectedButton.setBackgroundImage(self.starImage2, forState: UIControlState.Normal);
+                                self.starSelectedButton.setTitle("", forState: UIControlState.Normal)
+                                self.starSelectedButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                                self.starSelectedButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+                                self.starSelectedButton.addTarget(self, action: "onClickStarSelectedButton:", forControlEvents: .TouchUpInside)
+                                self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starSelectedButton)
                             } else {
-                                // 参加済みかどうか判別
-                                for participants in participantsArray{
-                                    let participantsID = participants["id"].int! as Int
-                                    if participantsID == self.userID {
-                                        judgeID = 1
+                                self.starButton = UIButton()
+                                self.starButton.frame = CGRectMake(0,0,self.view.bounds.width/17.30,self.view.bounds.height/30.70)
+                                self.starButton.setBackgroundImage(self.starImage1, forState: UIControlState.Normal);
+                                self.starButton.setTitle("", forState: UIControlState.Normal)
+                                self.starButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                                self.starButton.titleLabel?.font = UIFont.boldSystemFontOfSize(self.view.bounds.height/37.86)
+                                self.starButton.addTarget(self, action: "onClickStarButton:", forControlEvents: .TouchUpInside)
+                                self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starButton)
+                                
+                            }
+                            
+                            
+                            //genreicon
+                            self.EventGenre = events["event"]["genre"].int! as Int
+                            if self.EventGenre == 0 {
+                                self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
+                                self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                
+                                
+                            } else if self.EventGenre == 1 {
+                                self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#E8DCC8", alpha: 1.0)
+                                self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                
+                            } else if self.EventGenre == 2 {
+                                self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#42C187", alpha: 1.0)
+                                self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                
+                            } else if self.EventGenre == 3 {
+                                self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
+                                self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                
+                            } else if self.EventGenre == 4 {
+                                self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00CAE5", alpha: 1.0)
+                                self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                
+                            } else if self.EventGenre == 5 {
+                                self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#C64479", alpha: 1.0)
+                                self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                
+                            } else if self.EventGenre == 6 {
+                                self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFD93B", alpha: 1.0)
+                                self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                
+                            }
+                            
+                            self.window = UIWindow()
+                            self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
+                            self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/11)
+                            self.window.backgroundColor = UIColor.clearColor()
+                            self.window.makeKeyWindow()
+                            self.window.makeKeyAndVisible()
+                            let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
+                            imgView.image = self.genreImg
+                            self.window.addSubview(imgView)
+
+                            
+                            
+                            
+                            // タイトル
+                            self.name.text = events["event"]["title"].string! as String
+                            
+                            //日付・時間 配列取得
+                            let startTime = events["event"]["start_time"].string! as String
+                            let startArray = startTime.componentsSeparatedByString("T")
+                            
+                            // 日付
+                            let date_formatter: NSDateFormatter = NSDateFormatter()
+                            date_formatter.locale     = NSLocale(localeIdentifier: "ja")
+                            date_formatter.dateFormat = "yyyy/MM/dd"
+                            let change_date:NSDate = date_formatter.dateFromString(startArray[0])!
+                            let weekdays: Array  = ["", "日", "月", "火", "水", "木", "金", "土"]
+                            let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                            let comps = calendar.components([.Year, .Month, .Day, .Weekday] , fromDate:  change_date)
+                            date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
+                            print(date_formatter.stringFromDate(change_date))
+                            self.date.text = date_formatter.stringFromDate(change_date)
+                            self.date.sizeToFit()
+                            
+                            // 時間
+                            let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
+                            let endTime = events["event"]["end_time"].string! as String
+                            let endArray = endTime.componentsSeparatedByString("T")
+                            let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
+                            self.time.text = "\(startMinute) ~ \(endMinute)"
+                            self.time.sizeToFit()
+                            //eventと現在時刻を比較
+                            let dateFormat: NSDateFormatter = NSDateFormatter()
+                            dateFormat.locale = NSLocale(localeIdentifier: "ja")
+                            dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
+                            let time: String = "\(startArray[0]) \(endMinute)"
+                            let eventTime: NSDate = dateFormat.dateFromString(time)!
+                            print(dateFormat.stringFromDate(eventTime))
+                            print(eventTime)
+                            let now: NSDate = NSDate()
+                            let NowDateFormat = NSDateFormatter()
+                            NowDateFormat.locale = NSLocale(localeIdentifier: "ja")
+                            NowDateFormat.timeStyle = .ShortStyle
+                            NowDateFormat.dateStyle = .ShortStyle
+                            let nowstr: String = NowDateFormat.stringFromDate(now) // -> 2014/06/24 11:14
+                            print(nowstr)
+                            let NowTime: NSDate = dateFormat.dateFromString(nowstr)!
+                            print(NowTime)
+                            
+                            var judgeTime: Int
+                            
+                            if (eventTime.compare(NowTime) == NSComparisonResult.OrderedDescending){
+                                print("- イベントをやる前")
+                                judgeTime = 0
+                            }else if (eventTime.compare(NowTime) == NSComparisonResult.OrderedAscending){
+                                print("- イベントをやった後")
+                                judgeTime = 1
+                            }else{
+                                print("- 同じ")
+                                judgeTime = 0
+                            }
+                            
+                            let participantsArray =  events["participants"].array! as Array
+                            
+                            if judgeTime == 0 {
+                                //主催者かどうか判別
+                                if ownerID == self.userID {
+                                    self.cancelButton.translatesAutoresizingMaskIntoConstraints = false
+                                    self.view.addConstraints([
+                                        NSLayoutConstraint(item: self.cancelButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                        NSLayoutConstraint(item: self.cancelButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                        NSLayoutConstraint(item: self.cancelButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                        NSLayoutConstraint(item: self.cancelButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                        ])
+                                    
+                                    
+                                } else {
+                                    // 参加済みかどうか判別
+                                    for participants in participantsArray{
+                                        let participantsID = participants["id"].int! as Int
+                                        if participantsID == self.userID {
+                                            judgeID = 1
+                                        }
                                     }
-                                }
                                     if NSUserDefaults.standardUserDefaults().boolForKey("\(self.getID)w") {
-                                       if let FriendsNumber = self.friendsNumber {
+                                        if let FriendsNumber = self.friendsNumber {
                                             
                                             NSUserDefaults.standardUserDefaults().setInteger(FriendsNumber, forKey: "\(self.getID)")
                                             NSUserDefaults.standardUserDefaults().synchronize()
@@ -552,219 +555,676 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                                             NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
                                             ])
                                     } else {
-                                self.sankaButton.translatesAutoresizingMaskIntoConstraints = false
-                                    self.view.addConstraints([
-                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
-                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
-                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
-                                        NSLayoutConstraint(item: self.sankaButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
-                                        ])
-                                    
-                                }
-                            }
-                            
-                            
-                        } else {
-                            self.reservedButton.setTitle("参加済み", forState: UIControlState.Normal)
-                            
-                            self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
-                            self.view.addConstraints([
-                                NSLayoutConstraint(item: self.reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
-                                NSLayoutConstraint(item: self.reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
-                                NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
-                                NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
-                                ])
-                            
-                        }
-                        
-                        // イベント説明
-                        self.content.text = "\(events["event"]["description"].string! as String)"
-                        let attributedText = NSMutableAttributedString(string: self.content.text!)
-                        let paragraphStyle = NSMutableParagraphStyle()
-                        paragraphStyle.lineSpacing = self.view.bounds.height/25.24
-                        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
-                        self.content.attributedText = attributedText
-                        
-                        self.content.numberOfLines = 0
-                        self.content.sizeToFit()
-                        
-                        
-                        // タグ
-                        let JugementTag: String? = events["event"]["category_tag"].string
-                        if var TagText = JugementTag {
-                            TagText = TagText.stringByReplacingOccurrencesOfString("#", withString: " #")
-                            self.tag.text = TagText
-                            self.tag.sizeToFit()
-                        }
-                        // 人数
-                        let capacity = events["event"]["capacity"].int! as Int
-                        let participant: Int! = events["event"]["participant"].int
-                        if participant >= 5 {
-                            self.participantsButton.translatesAutoresizingMaskIntoConstraints = false
-                            self.view.addConstraints([
-                                NSLayoutConstraint(item: self.participantsButton, attribute: .Top,    relatedBy: .Equal, toItem: self.sanka,   attribute: .Bottom, multiplier: 1, constant: 0),
-                                NSLayoutConstraint(item: self.participantsButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width*(61/640)),
-                                NSLayoutConstraint(item: self.participantsButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/45.44)
-                                ])
-                            self.participantsButton.setTitle("\(participant) ∨", forState: UIControlState.Normal)
-                            
-                            
-                        }
-                        NSUserDefaults.standardUserDefaults().setInteger(participant, forKey: "participant")
-                        NSUserDefaults.standardUserDefaults().synchronize()
-                        
-                        if judgeID == 0 {
-                            let reserved = capacity - participant
-                            if reserved <= 0 {
-                                self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
-                                
-                            } else {
-                                self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
-                            }
-                            
-                        }
-                        //スクロールサイズ
-                        if ownerID == self.userID {
-                            self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
-                            
-                        }
-                        if  judgeID == 0 {
-                            self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
-                            
-                        } else {
-                            self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
-                            
-                        }
-                        
-                        
-                    }
-                    
-                }
-                
-        }
-        let UsersUrl = "https://zerocafe.herokuapp.com/api/v1/users.json"
-        Alamofire.request(.GET, UsersUrl)
-            .responseJSON { response in
-                
-                let ownerID = NSUserDefaults.standardUserDefaults().integerForKey("ownerID")
-                let json = JSON(response.result.value!)
-                print(ownerID)
-                let userArray = json["users"].array! as Array
-                for users in userArray {
-                    let id = users["user"]["id"].int! as Int
-                    if  id == ownerID {
-                        print(users["user"])
-                        self.ownerImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
-                        self.ownerImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
-                        self.ownerImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
-                        self.ownerImage.layer.masksToBounds = true
-                        self.ownerImage.layer.cornerRadius = 8.0
-                        self.myScrollView.addSubview(self.ownerImage)
-                        self.ownerImage.translatesAutoresizingMaskIntoConstraints = false
-                        self.view.addConstraints([
-                            NSLayoutConstraint(item: self.ownerImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(35/1136)),
-                            NSLayoutConstraint(item: self.ownerImage, attribute: .Left,   relatedBy: .Equal, toItem: self.kikaku, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640)),
-                            NSLayoutConstraint(item: self.ownerImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
-                            NSLayoutConstraint(item: self.ownerImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
-                            ])
-                        
-                        let ownerImageurl: String? = users["user"]["image"]["thumb"]["url"].string
-                        if ownerImageurl != nil {
-                            print(ownerImageurl!)
-                            let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-                            let session = NSURLSession(configuration: sessionConfig)
-                            let url = NSURL(string:ownerImageurl!)
-                            let task = session.dataTaskWithURL(url!) {
-                                (data: NSData?, response: NSURLResponse?, error: NSError?) in
-                                guard let getData = data else {
-                                    session.invalidateAndCancel()
-                                    return
-                                }
-                                let globalQueu =
-                                dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-                                dispatch_async(globalQueu) {
-                                    let img = UIImage(data: getData)
-                                    dispatch_async(dispatch_get_main_queue()) {
-                                        self.ownerImage.image = img
+                                        self.sankaButton.translatesAutoresizingMaskIntoConstraints = false
+                                        self.view.addConstraints([
+                                            NSLayoutConstraint(item: self.sankaButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                            NSLayoutConstraint(item: self.sankaButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                            NSLayoutConstraint(item: self.sankaButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                            NSLayoutConstraint(item: self.sankaButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                            ])
+                                        
                                     }
                                 }
+                                
+                                
+                            } else {
+                                self.reservedButton.setTitle("参加済み", forState: UIControlState.Normal)
+                                
+                                self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
+                                self.view.addConstraints([
+                                    NSLayoutConstraint(item: self.reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                    NSLayoutConstraint(item: self.reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                    NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                    NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                    ])
+                                
                             }
-                            task.resume()
-
-                            self.ownerImage.af_setImageWithURL(NSURL(string: ownerImageurl!)!)
-                        } else {
-                            print("no image")
-                        }
-                    }
-                    
-                }
-                
-        }
-        
-        Alamofire.request(.GET, EventsUrl)
-            .responseJSON { response in
-                let json = JSON(response.result.value!)
-                let eventArray = json["events"].array! as Array
-                for events in eventArray {
-                    let id = events["event"]["id"].int! as Int
-                    if  id == self.getID {
-                        let participants: Int? = events["event"]["participant"].int
-                        if participants != nil {
-                            let participantsArray = events["participants"].array! as Array
-                            var count: Int = 1
-                            var pointSift: CGFloat = 0
-                            for ptcpnts in participantsArray {
-                                if count <= 5 {
-                                    self.participantsImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
-                                    self.participantsImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
-                                    self.participantsImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
-                                    self.participantsImage.layer.masksToBounds = true
-                                    self.participantsImage.layer.cornerRadius = 8.0
-                                    self.myScrollView.addSubview(self.participantsImage)
-                                    self.participantsImage.translatesAutoresizingMaskIntoConstraints = false
-                                    self.view.addConstraints([
-                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(123/1136)),
-                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Left,   relatedBy: .Equal, toItem: self.sanka, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640) + pointSift),
-                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
-                                        NSLayoutConstraint(item: self.participantsImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
-                                        ])
-                                    let participantImageUrl: String? = ptcpnts["image"]["image"]["thumb"]["url"].string
-                                    if participantImageUrl != nil {
-                                        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-                                        let session = NSURLSession(configuration: sessionConfig)
-                                        let url = NSURL(string:participantImageUrl!)
-                                        let task = session.dataTaskWithURL(url!) {
-                                            (data: NSData?, response: NSURLResponse?, error: NSError?) in
-                                            guard let getData = data else {
-                                                session.invalidateAndCancel()
-                                                return
+                            
+                            // イベント説明
+                            self.content.text = "\(events["event"]["description"].string! as String)"
+                            let attributedText = NSMutableAttributedString(string: self.content.text!)
+                            let paragraphStyle = NSMutableParagraphStyle()
+                            paragraphStyle.lineSpacing = self.view.bounds.height/25.24
+                            attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+                            self.content.attributedText = attributedText
+                            
+                            self.content.numberOfLines = 0
+                            self.content.sizeToFit()
+                            
+                            
+                            // タグ
+                            let JugementTag: String? = events["event"]["category_tag"].string
+                            if var TagText = JugementTag {
+                                TagText = TagText.stringByReplacingOccurrencesOfString("#", withString: " #")
+                                self.tag.text = TagText
+                                self.tag.sizeToFit()
+                            }
+                            // 人数
+                            let capacity = events["event"]["capacity"].int! as Int
+                            let participant: Int! = events["event"]["participant"].int
+                            if participant >= 5 {
+                                self.participantsButton.translatesAutoresizingMaskIntoConstraints = false
+                                self.view.addConstraints([
+                                    NSLayoutConstraint(item: self.participantsButton, attribute: .Top,    relatedBy: .Equal, toItem: self.sanka,   attribute: .Bottom, multiplier: 1, constant: 0),
+                                    NSLayoutConstraint(item: self.participantsButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width*(61/640)),
+                                    NSLayoutConstraint(item: self.participantsButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/45.44)
+                                    ])
+                                self.participantsButton.setTitle("\(participant) ∨", forState: UIControlState.Normal)
+                                
+                                
+                            }
+                            NSUserDefaults.standardUserDefaults().setInteger(participant, forKey: "participant")
+                            NSUserDefaults.standardUserDefaults().synchronize()
+                            
+                            if judgeID == 0 {
+                                let reserved = capacity - participant
+                                if reserved <= 0 {
+                                    self.sankaButton.setTitle("参加する   満席", forState: UIControlState.Normal)
+                                    
+                                } else {
+                                    self.sankaButton.setTitle("参加する  残り\(reserved)席", forState: UIControlState.Normal)
+                                }
+                                
+                            }
+                            //スクロールサイズ
+                            if ownerID == self.userID {
+                                self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
+                                
+                            }
+                            if  judgeID == 0 {
+                                self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
+                                
+                            } else {
+                                self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11)
+                                
+                            }
+                            
+                            let UsersUrl = "https://zerocafe.herokuapp.com/api/v1/users.json"
+                            
+                            Alamofire.request(.GET, UsersUrl)
+                                .responseJSON { response in
+                                    
+                                    print("\(ownerID) = ownerid")
+                                    let json = JSON(response.result.value!)
+                                    let userArray = json["users"].array! as Array
+                                    for users in userArray {
+                                        let id = users["user"]["id"].int! as Int
+                                        if  id == ownerID {
+                                            print(users["user"])
+                                            self.ownerImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
+                                            self.ownerImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
+                                            self.ownerImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
+                                            self.ownerImage.layer.masksToBounds = true
+                                            self.ownerImage.layer.cornerRadius = 8.0
+                                            self.myScrollView.addSubview(self.ownerImage)
+                                            self.ownerImage.translatesAutoresizingMaskIntoConstraints = false
+                                            self.view.addConstraints([
+                                                NSLayoutConstraint(item: self.ownerImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(35/1136)),
+                                                NSLayoutConstraint(item: self.ownerImage, attribute: .Left,   relatedBy: .Equal, toItem: self.kikaku, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640)),
+                                                NSLayoutConstraint(item: self.ownerImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
+                                                NSLayoutConstraint(item: self.ownerImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
+                                                ])
+                                            
+                                            let ownerImageurl: String? = users["user"]["image"]["thumb"]["url"].string
+                                            if ownerImageurl != nil {
+                                                print(ownerImageurl!)
+                                                let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                                let session = NSURLSession(configuration: sessionConfig)
+                                                let url = NSURL(string:ownerImageurl!)
+                                                let task = session.dataTaskWithURL(url!) {
+                                                    (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                                    guard let getData = data else {
+                                                        session.invalidateAndCancel()
+                                                        return
+                                                    }
+                                                    let globalQueu =
+                                                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                                    dispatch_async(globalQueu) {
+                                                        let img = UIImage(data: getData)
+                                                        dispatch_async(dispatch_get_main_queue()) {
+                                                            self.ownerImage.image = img
+                                                        }
+                                                    }
+                                                }
+                                                task.resume()
+                                                
+                                                self.ownerImage.af_setImageWithURL(NSURL(string: ownerImageurl!)!)
+                                            } else {
+                                                print("no image")
                                             }
-                                            let globalQueu =
-                                            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-                                            dispatch_async(globalQueu) {
-                                                let img = UIImage(data: getData)
-                                                dispatch_async(dispatch_get_main_queue()) {
-                                                    self.participantsImage.image = img
+                                        }
+                                        
+                                    }
+                                    
+                            }
+
+                        
+                        }
+                        
+                    }
+                    if kimela == 0 {
+                        self.view.addConstraints([
+                            NSLayoutConstraint(item: self.sanka, attribute: .Top,    relatedBy: .Equal, toItem: self.FriendTellButton,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/6.38),
+                            NSLayoutConstraint(item: self.sanka, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                            NSLayoutConstraint(item: self.sanka, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: 0)
+                            ])
+
+                        var judge_planning = 0
+                        let UsersUrl = "https://zerocafe.herokuapp.com/api/v1/users.json"
+                        Alamofire.request(.GET, UsersUrl)
+                            .responseJSON { response in
+                                
+                                let json = JSON(response.result.value!)
+                                let userArray = json["users"].array! as Array
+                                for users in userArray {
+                                    let id = users["user"]["id"].int! as Int
+                                    
+                                    if self.userID == id {
+                                        
+                                        let planed_eventArrray: Array? = users["planning_events"].array
+                                        if planed_eventArrray != nil {
+                                            for planed in planed_eventArrray! {
+                                                let planed_id = planed["event"]["id"].int! as Int
+                                                
+                                                if planed_id == self.getID {
+                                                    judge_planning = 1
+                                                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "judgeAll")
+                                                    var ownerID: Int!
+                                                    ownerID = planed["event"]["owner_id"].int! as Int
+                                                    print("\(ownerID) = kimela")
+                                                    
+                                                    //genreicon
+                                                    self.EventGenre = planed["event"]["genre"].int! as Int
+                                                    if self.EventGenre == 0 {
+                                                        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
+                                                        self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                        
+                                                        
+                                                    } else if self.EventGenre == 1 {
+                                                        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#E8DCC8", alpha: 1.0)
+                                                        self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                        
+                                                    } else if self.EventGenre == 2 {
+                                                        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#42C187", alpha: 1.0)
+                                                        self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                        
+                                                    } else if self.EventGenre == 3 {
+                                                        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
+                                                        self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                        
+                                                    } else if self.EventGenre == 4 {
+                                                        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00CAE5", alpha: 1.0)
+                                                        self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                        
+                                                    } else if self.EventGenre == 5 {
+                                                        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#C64479", alpha: 1.0)
+                                                        self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                        
+                                                    } else if self.EventGenre == 6 {
+                                                        self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFD93B", alpha: 1.0)
+                                                        self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                        
+                                                    }
+                                                    
+                                                    self.window = UIWindow()
+                                                    self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
+                                                    self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/11)
+                                                    self.window.backgroundColor = UIColor.clearColor()
+                                                    self.window.makeKeyWindow()
+                                                    self.window.makeKeyAndVisible()
+                                                    let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
+                                                    imgView.image = self.genreImg
+                                                    self.window.addSubview(imgView)
+                                                    
+                                                    // タイトル
+                                                    self.name.text = planed["event"]["title"].string! as String
+                                                    
+                                                    //日付・時間 配列取得
+                                                    let startTime = planed["event"]["start_time"].string! as String
+                                                    let startArray = startTime.componentsSeparatedByString("T")
+                                                    
+                                                    // 日付
+                                                    let date_formatter: NSDateFormatter = NSDateFormatter()
+                                                    date_formatter.locale     = NSLocale(localeIdentifier: "ja")
+                                                    date_formatter.dateFormat = "yyyy/MM/dd"
+                                                    let change_date:NSDate = date_formatter.dateFromString(startArray[0])!
+                                                    let weekdays: Array  = ["", "日", "月", "火", "水", "木", "金", "土"]
+                                                    let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                                                    let comps = calendar.components([.Year, .Month, .Day, .Weekday] , fromDate:  change_date)
+                                                    date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
+                                                    print(date_formatter.stringFromDate(change_date))
+                                                    self.date.text = date_formatter.stringFromDate(change_date)
+                                                    self.date.sizeToFit()
+                                                    
+                                                    // 時間
+                                                    let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
+                                                    let endTime = planed["event"]["end_time"].string! as String
+                                                    let endArray = endTime.componentsSeparatedByString("T")
+                                                    let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
+                                                    self.time.text = "\(startMinute) ~ \(endMinute)"
+                                                    self.time.sizeToFit()
+                                                    //eventと現在時刻を比較
+                                                    let dateFormat: NSDateFormatter = NSDateFormatter()
+                                                    dateFormat.locale = NSLocale(localeIdentifier: "ja")
+                                                    dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
+                                                    let time: String = "\(startArray[0]) \(endMinute)"
+                                                    let eventTime: NSDate = dateFormat.dateFromString(time)!
+                                                    print(dateFormat.stringFromDate(eventTime))
+                                                    print(eventTime)
+                                                    let now: NSDate = NSDate()
+                                                    let NowDateFormat = NSDateFormatter()
+                                                    NowDateFormat.locale = NSLocale(localeIdentifier: "ja")
+                                                    NowDateFormat.timeStyle = .ShortStyle
+                                                    NowDateFormat.dateStyle = .ShortStyle
+                                                    let nowstr: String = NowDateFormat.stringFromDate(now) // -> 2014/06/24 11:14
+                                                    print(nowstr)
+                                                    let NowTime: NSDate = dateFormat.dateFromString(nowstr)!
+                                                    print(NowTime)
+                                                    
+                                                    
+                                                    
+                                                    self.reservedButton.setTitle("参加済み", forState: UIControlState.Normal)
+                                                    
+                                                    self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
+                                                    self.view.addConstraints([
+                                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                                        NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                                        ])
+                                                    
+                                                    
+                                                    
+                                                    // イベント説明
+                                                    self.content.text = "\(planed["event"]["description"].string! as String)"
+                                                    let attributedText = NSMutableAttributedString(string: self.content.text!)
+                                                    let paragraphStyle = NSMutableParagraphStyle()
+                                                    paragraphStyle.lineSpacing = self.view.bounds.height/25.24
+                                                    attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+                                                    self.content.attributedText = attributedText
+                                                    
+                                                    self.content.numberOfLines = 0
+                                                    self.content.sizeToFit()
+                                                    
+                                                    
+                                                    // タグ
+                                                    let JugementTag: String? = planed["event"]["category_tag"].string
+                                                    if var TagText = JugementTag {
+                                                        TagText = TagText.stringByReplacingOccurrencesOfString("#", withString: " #")
+                                                        self.tag.text = TagText
+                                                        self.tag.sizeToFit()
+                                                    }
+                                                    
+                                                    self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11-self.view.bounds.height*(100/1136))
+                                                    
+                                                    let UsersUrl = "https://zerocafe.herokuapp.com/api/v1/users.json"
+                                                    
+                                                    Alamofire.request(.GET, UsersUrl)
+                                                        .responseJSON { response in
+                                                            
+                                                            print("\(ownerID) = ownerid")
+                                                            let json = JSON(response.result.value!)
+                                                            let userArray = json["users"].array! as Array
+                                                            for users in userArray {
+                                                                let id = users["user"]["id"].int! as Int
+                                                                if  id == ownerID {
+                                                                    print(users["user"])
+                                                                    self.ownerImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
+                                                                    self.ownerImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
+                                                                    self.ownerImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
+                                                                    self.ownerImage.layer.masksToBounds = true
+                                                                    self.ownerImage.layer.cornerRadius = 8.0
+                                                                    self.myScrollView.addSubview(self.ownerImage)
+                                                                    self.ownerImage.translatesAutoresizingMaskIntoConstraints = false
+                                                                    self.view.addConstraints([
+                                                                        NSLayoutConstraint(item: self.ownerImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(35/1136)),
+                                                                        NSLayoutConstraint(item: self.ownerImage, attribute: .Left,   relatedBy: .Equal, toItem: self.kikaku, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640)),
+                                                                        NSLayoutConstraint(item: self.ownerImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
+                                                                        NSLayoutConstraint(item: self.ownerImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
+                                                                        ])
+                                                                    
+                                                                    let ownerImageurl: String? = users["user"]["image"]["thumb"]["url"].string
+                                                                    if ownerImageurl != nil {
+                                                                        print(ownerImageurl!)
+                                                                        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                                                        let session = NSURLSession(configuration: sessionConfig)
+                                                                        let url = NSURL(string:ownerImageurl!)
+                                                                        let task = session.dataTaskWithURL(url!) {
+                                                                            (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                                                            guard let getData = data else {
+                                                                                session.invalidateAndCancel()
+                                                                                return
+                                                                            }
+                                                                            let globalQueu =
+                                                                            dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                                                            dispatch_async(globalQueu) {
+                                                                                let img = UIImage(data: getData)
+                                                                                dispatch_async(dispatch_get_main_queue()) {
+                                                                                    self.ownerImage.image = img
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        task.resume()
+                                                                        
+                                                                        self.ownerImage.af_setImageWithURL(NSURL(string: ownerImageurl!)!)
+                                                                    } else {
+                                                                        print("no image")
+                                                                    }
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                    }
+
+                                                    
+                                                    
                                                 }
                                             }
                                         }
-                                        task.resume()
-                                        self.participantsImage.af_setImageWithURL(NSURL(string: participantImageUrl!)!)
-                                    } else {
-                                        print("no image")
+                                        let attended_eventArray: Array? = users["attend_events"].array
+                                        if judge_planning == 0 {
+                                            if attended_eventArray != nil {
+                                                for attended in attended_eventArray! {
+                                                    let attended_id = attended["event"]["id"].int! as Int
+                                                    if self.getID == attended_id {
+                                                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "judgeAll")
+                                                        var ownerID: Int!
+                                                        ownerID = attended["event"]["owner_id"].int! as Int
+                                                        //genreicon
+                                                        self.EventGenre = attended["event"]["genre"].int! as Int
+                                                        if self.EventGenre == 0 {
+                                                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
+                                                            self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                            
+                                                            
+                                                        } else if self.EventGenre == 1 {
+                                                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#E8DCC8", alpha: 1.0)
+                                                            self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                            
+                                                        } else if self.EventGenre == 2 {
+                                                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#42C187", alpha: 1.0)
+                                                            self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                            
+                                                        } else if self.EventGenre == 3 {
+                                                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
+                                                            self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                            
+                                                        } else if self.EventGenre == 4 {
+                                                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00CAE5", alpha: 1.0)
+                                                            self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                            
+                                                        } else if self.EventGenre == 5 {
+                                                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#C64479", alpha: 1.0)
+                                                            self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                            
+                                                        } else if self.EventGenre == 6 {
+                                                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFD93B", alpha: 1.0)
+                                                            self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
+                                                            
+                                                        }
+                                                        
+                                                        self.window = UIWindow()
+                                                        self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
+                                                        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/11)
+                                                        self.window.backgroundColor = UIColor.clearColor()
+                                                        self.window.makeKeyWindow()
+                                                        self.window.makeKeyAndVisible()
+                                                        let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
+                                                        imgView.image = self.genreImg
+                                                        self.window.addSubview(imgView)
+                                                        
+                                                        // タイトル
+                                                        self.name.text = attended["event"]["title"].string! as String
+                                                        
+                                                        //日付・時間 配列取得
+                                                        let startTime = attended["event"]["start_time"].string! as String
+                                                        let startArray = startTime.componentsSeparatedByString("T")
+                                                        
+                                                        // 日付
+                                                        let date_formatter: NSDateFormatter = NSDateFormatter()
+                                                        date_formatter.locale     = NSLocale(localeIdentifier: "ja")
+                                                        date_formatter.dateFormat = "yyyy/MM/dd"
+                                                        let change_date:NSDate = date_formatter.dateFromString(startArray[0])!
+                                                        let weekdays: Array  = ["", "日", "月", "火", "水", "木", "金", "土"]
+                                                        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                                                        let comps = calendar.components([.Year, .Month, .Day, .Weekday] , fromDate:  change_date)
+                                                        date_formatter.dateFormat = "yyyy / MM / dd (\(weekdays[comps.weekday]))"
+                                                        print(date_formatter.stringFromDate(change_date))
+                                                        self.date.text = date_formatter.stringFromDate(change_date)
+                                                        self.date.sizeToFit()
+                                                        
+                                                        // 時間
+                                                        let startMinute = startArray[1].substringToIndex(startArray[1].startIndex.advancedBy(5))
+                                                        let endTime = attended["event"]["end_time"].string! as String
+                                                        let endArray = endTime.componentsSeparatedByString("T")
+                                                        let endMinute = endArray[1].substringToIndex(endArray[1].startIndex.advancedBy(5))
+                                                        self.time.text = "\(startMinute) ~ \(endMinute)"
+                                                        self.time.sizeToFit()
+                                                        //eventと現在時刻を比較
+                                                        let dateFormat: NSDateFormatter = NSDateFormatter()
+                                                        dateFormat.locale = NSLocale(localeIdentifier: "ja")
+                                                        dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
+                                                        let time: String = "\(startArray[0]) \(endMinute)"
+                                                        let eventTime: NSDate = dateFormat.dateFromString(time)!
+                                                        print(dateFormat.stringFromDate(eventTime))
+                                                        print(eventTime)
+                                                        let now: NSDate = NSDate()
+                                                        let NowDateFormat = NSDateFormatter()
+                                                        NowDateFormat.locale = NSLocale(localeIdentifier: "ja")
+                                                        NowDateFormat.timeStyle = .ShortStyle
+                                                        NowDateFormat.dateStyle = .ShortStyle
+                                                        let nowstr: String = NowDateFormat.stringFromDate(now)
+                                                        print(nowstr)
+                                                        let NowTime: NSDate = dateFormat.dateFromString(nowstr)!
+                                                        print(NowTime)
+                                                        
+                                                        
+                                                        //                                        let participantsArray =  attended["participants"].array! as Array
+                                                        //
+                                                        
+                                                        self.reservedButton.setTitle("参加済み", forState: UIControlState.Normal)
+                                                        
+                                                        self.reservedButton.translatesAutoresizingMaskIntoConstraints = false
+                                                        self.view.addConstraints([
+                                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Top,    relatedBy: .Equal, toItem: self.tag,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/20.65),
+                                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+                                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Right,   relatedBy: .Equal, toItem: self.view, attribute: .Right,   multiplier: 1, constant: -self.view.bounds.width/10.49),
+                                                            NSLayoutConstraint(item: self.reservedButton, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height/18.93)
+                                                            ])
+                                                        
+                                                        
+                                                        
+                                                        // イベント説明
+                                                        self.content.text = "\(attended["event"]["description"].string! as String)"
+                                                        let attributedText = NSMutableAttributedString(string: self.content.text!)
+                                                        let paragraphStyle = NSMutableParagraphStyle()
+                                                        paragraphStyle.lineSpacing = self.view.bounds.height/25.24
+                                                        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+                                                        self.content.attributedText = attributedText
+                                                        
+                                                        self.content.numberOfLines = 0
+                                                        self.content.sizeToFit()
+                                                        
+                                                        
+                                                        // タグ
+                                                        let JugementTag: String? = attended["event"]["category_tag"].string
+                                                        if var TagText = JugementTag {
+                                                            TagText = TagText.stringByReplacingOccurrencesOfString("#", withString: " #")
+                                                            self.tag.text = TagText
+                                                            self.tag.sizeToFit()
+                                                        }
+                                                        self.myScrollView.contentSize = CGSizeMake(self.view.frame.width, self.view.bounds.height/2.09 + self.name.bounds.height + self.date.bounds.height + self.time.bounds.height + self.content.bounds.height + self.tag.bounds.height + self.view.bounds.height/18.93 + self.FriendTellButton.bounds.height + self.view.bounds.height/11-self.view.bounds.height*(100/1136))
+                                                        
+                                                        let UsersUrl = "https://zerocafe.herokuapp.com/api/v1/users.json"
+                                                        
+                                                        Alamofire.request(.GET, UsersUrl)
+                                                            .responseJSON { response in
+                                                                
+                                                                print("\(ownerID) = ownerid")
+                                                                let json = JSON(response.result.value!)
+                                                                let userArray = json["users"].array! as Array
+                                                                for users in userArray {
+                                                                    let id = users["user"]["id"].int! as Int
+                                                                    if  id == ownerID {
+                                                                        print(users["user"])
+                                                                        self.ownerImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
+                                                                        self.ownerImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
+                                                                        self.ownerImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
+                                                                        self.ownerImage.layer.masksToBounds = true
+                                                                        self.ownerImage.layer.cornerRadius = 8.0
+                                                                        self.myScrollView.addSubview(self.ownerImage)
+                                                                        self.ownerImage.translatesAutoresizingMaskIntoConstraints = false
+                                                                        self.view.addConstraints([
+                                                                            NSLayoutConstraint(item: self.ownerImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(35/1136)),
+                                                                            NSLayoutConstraint(item: self.ownerImage, attribute: .Left,   relatedBy: .Equal, toItem: self.kikaku, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640)),
+                                                                            NSLayoutConstraint(item: self.ownerImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
+                                                                            NSLayoutConstraint(item: self.ownerImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
+                                                                            ])
+                                                                        
+                                                                        let ownerImageurl: String? = users["user"]["image"]["thumb"]["url"].string
+                                                                        if ownerImageurl != nil {
+                                                                            print(ownerImageurl!)
+                                                                            let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                                                            let session = NSURLSession(configuration: sessionConfig)
+                                                                            let url = NSURL(string:ownerImageurl!)
+                                                                            let task = session.dataTaskWithURL(url!) {
+                                                                                (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                                                                guard let getData = data else {
+                                                                                    session.invalidateAndCancel()
+                                                                                    return
+                                                                                }
+                                                                                let globalQueu =
+                                                                                dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                                                                dispatch_async(globalQueu) {
+                                                                                    let img = UIImage(data: getData)
+                                                                                    dispatch_async(dispatch_get_main_queue()) {
+                                                                                        self.ownerImage.image = img
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            task.resume()
+                                                                            
+                                                                            self.ownerImage.af_setImageWithURL(NSURL(string: ownerImageurl!)!)
+                                                                        } else {
+                                                                            print("no image")
+                                                                        }
+                                                                    }
+                                                                    
+                                                                }
+                                                                
+                                                        }
+
+                                                        
+                                                    }
+                                                    
+                                                }
+                                            }
+                                        }
                                     }
                                     
-                                    pointSift += self.view.bounds.width*(78/640)
-                                    count += 1
+                                    
                                     
                                 }
-                            }
-                        }
+
                         
                     }
-                }
-        }
+            }
+            //////////////////
+            
+            //            line.translatesAutoresizingMaskIntoConstraints = false
+            //            self.view.addConstraints([
+            //                NSLayoutConstraint(item: line, attribute: .Top,    relatedBy: .Equal, toItem: FriendTellButton,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/32.46),
+            //                NSLayoutConstraint(item: line, attribute: .Left,   relatedBy: .Equal, toItem: name, attribute: .Left,   multiplier: 1, constant: 0),
+            //                NSLayoutConstraint(item: line, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: 0),
+            //                NSLayoutConstraint(item: line, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: 0)
+            //                ])
+            //
+            //
+            //            kikaku.translatesAutoresizingMaskIntoConstraints = false
+            //            self.view.addConstraints([
+            //                NSLayoutConstraint(item: kikaku, attribute: .Top,    relatedBy: .Equal, toItem: FriendTellButton,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/12.62),
+            //                NSLayoutConstraint(item: kikaku, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: self.view.bounds.width/10.49),
+            //                NSLayoutConstraint(item: kikaku, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: 0)
+            //                ])
+            //
+            //
+            //            sanka.translatesAutoresizingMaskIntoConstraints = false
+            //            self.view.addConstraints([
+            //                NSLayoutConstraint(item: sanka, attribute: .Top,    relatedBy: .Equal, toItem: FriendTellButton,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height/6.38),
+            //                NSLayoutConstraint(item: sanka, attribute: .Left,   relatedBy: .Equal, toItem: self.view, attribute: .Left,   multiplier: 1, constant: 0),
+            //                NSLayoutConstraint(item: sanka, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: 0)
+            //                ])
+            
+            
         
+            }
+        
+            Alamofire.request(.GET, EventsUrl)
+                .responseJSON { response in
+                    let json = JSON(response.result.value!)
+                    let eventArray = json["events"].array! as Array
+                    for events in eventArray {
+                        let id = events["event"]["id"].int! as Int
+                        if  id == self.getID {
+                            let participants: Int? = events["event"]["participant"].int
+                            if participants != nil {
+                                let participantsArray = events["participants"].array! as Array
+                                var count: Int = 1
+                                var pointSift: CGFloat = 0
+                                for ptcpnts in participantsArray {
+                                    if count <= 5 {
+                                        self.participantsImage = UIImageView(image: UIImage(named: "twitter-icon.png"))
+                                        self.participantsImage.frame = CGRectMake(0, 0, self.view.bounds.width/5.6, self.view.bounds.height/5.6)
+                                        self.participantsImage.layer.position = CGPoint(x: self.view.bounds.width/5.981, y: self.view.bounds.height/5.947)
+                                        self.participantsImage.layer.masksToBounds = true
+                                        self.participantsImage.layer.cornerRadius = 8.0
+                                        self.myScrollView.addSubview(self.participantsImage)
+                                        self.participantsImage.translatesAutoresizingMaskIntoConstraints = false
+                                        self.view.addConstraints([
+                                            NSLayoutConstraint(item: self.participantsImage, attribute: .Top,    relatedBy: .Equal, toItem: self.line,   attribute: .Bottom, multiplier: 1, constant: self.view.bounds.height*(123/1136)),
+                                            NSLayoutConstraint(item: self.participantsImage, attribute: .Left,   relatedBy: .Equal, toItem: self.sanka, attribute: .Right,   multiplier: 1, constant: self.view.bounds.width*(25/640) + pointSift),
+                                            NSLayoutConstraint(item: self.participantsImage, attribute: .Width,   relatedBy: .Equal, toItem: nil, attribute: .Width,   multiplier: 1, constant: self.view.bounds.width*(65/640)),
+                                            NSLayoutConstraint(item: self.participantsImage, attribute: .Height, relatedBy: .Equal, toItem: nil,   attribute: .Height, multiplier: 1, constant: self.view.bounds.height*(65/1136))
+                                            ])
+                                        let participantImageUrl: String? = ptcpnts["image"]["image"]["thumb"]["url"].string
+                                        if participantImageUrl != nil {
+                                            let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+                                            let session = NSURLSession(configuration: sessionConfig)
+                                            let url = NSURL(string:participantImageUrl!)
+                                            let task = session.dataTaskWithURL(url!) {
+                                                (data: NSData?, response: NSURLResponse?, error: NSError?) in
+                                                guard let getData = data else {
+                                                    session.invalidateAndCancel()
+                                                    return
+                                                }
+                                                let globalQueu =
+                                                dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                                                dispatch_async(globalQueu) {
+                                                    let img = UIImage(data: getData)
+                                                    dispatch_async(dispatch_get_main_queue()) {
+                                                        self.participantsImage.image = img
+                                                    }
+                                                }
+                                            }
+                                            task.resume()
+                                            self.participantsImage.af_setImageWithURL(NSURL(string: participantImageUrl!)!)
+                                        } else {
+                                            print("no image")
+                                        }
+                                        
+                                        pointSift += self.view.bounds.width*(78/640)
+                                        count += 1
+                                        
+                                    }
+                                }
+                            }
+                            
+                    
+                        }
+                    
+                    
+            }
+        }
     }
     
     func onClickParticipantsButton(sender: UIButton){
@@ -940,68 +1400,3 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
 }
 
 
-//let animator = Animator()
-
-//func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//    // PushかPopかをアニメータークラスにセット
-//    animator.operation = operation
-//
-//    return animator
-//
-//}
-//
-//class Animator: NSObject, UIViewControllerAnimatedTransitioning {
-//    let animationDuration = 1.0  // 画面遷移にかける時間
-//    var operation: UINavigationControllerOperation = .Push  // 画面遷移がPushかPopかを保持するプロパティ
-//
-//    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-//        return animationDuration
-//    }
-//
-//    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-//
-//        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
-//        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
-//        let containerView = transitionContext.containerView()
-//
-//        // Pushの場合、上から下に遷移。Popの場合、下から上に遷移
-//        if operation == .Push{
-//            let initialFrame = CGRectOffset(toView.bounds, 0.0, -toView.bounds.size.height)
-//            let finalFrame = toView.bounds
-//
-//            // 画面遷移スタート時点
-//            toView.frame = initialFrame
-//            containerView!.addSubview(toView)
-//
-//            // 画面遷移
-//            UIView.animateWithDuration(animationDuration, animations: {
-//
-//                toView.frame = finalFrame
-//
-//                }, completion: {
-//                    _ in
-//                    transitionContext.completeTransition(true)  // 画面遷移終了の通知
-//            })
-//
-//        }else{
-//            let initialFrame = CGRectOffset(fromView.bounds, 0.0, 0.0)
-//            let finalFrame = CGRectOffset(fromView.bounds, 0.0, -fromView.bounds.size.height)
-//
-//            // 画面遷移スタート時点
-//            fromView.frame = initialFrame
-//            containerView!.addSubview(toView)
-//            containerView!.insertSubview(fromView, aboveSubview: toView)
-//
-//            // 画面遷移
-//            UIView.animateWithDuration(animationDuration, animations: {
-//
-//                fromView.frame = finalFrame
-//
-//                }, completion: {
-//                    _ in
-//                    transitionContext.completeTransition(true)  // 画面遷移終了の通知
-//            })
-//            
-//        }
-//    }
-//}

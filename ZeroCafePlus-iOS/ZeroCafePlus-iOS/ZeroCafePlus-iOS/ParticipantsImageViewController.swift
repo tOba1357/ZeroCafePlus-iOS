@@ -174,48 +174,47 @@ class ParticipantsImageViewController: UIViewController {
                         
                         
                         //genreicon
-                        self.EventGenre = events["event"]["genre"].int! as Int
                         if self.EventGenre == 0 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#D9E021", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "jobhunt.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
                             
                             
                         } else if self.EventGenre == 1 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#AF2E84", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#E8DCC8", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "study.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
                             
                         } else if self.EventGenre == 2 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#22B573", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#42C187", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
                             
                         } else if self.EventGenre == 3 {
                             self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
                             
                         } else if self.EventGenre == 4 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00C2CC", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#00CAE5", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "tournament.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
                             
                         } else if self.EventGenre == 5 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("##EFEDE8", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#C64479", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "hobby.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
                             
                         } else if self.EventGenre == 6 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFDA3E", alpha: 1.0)
-                            self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FFD93B", alpha: 1.0)
+                            self.genreImg =  CommonFunction().resizingImage(imageName: "readbook.png", w: self.view.frame.size.width*(105/640), h: self.view.frame.size.height*(105/1136))
                             
                         }
                         
                         self.window = UIWindow()
                         self.window.frame = CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136))
-                        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/12.5)
+                        self.window.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.frame.height/11)
                         self.window.backgroundColor = UIColor.clearColor()
                         self.window.makeKeyWindow()
                         self.window.makeKeyAndVisible()
                         let imgView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width*(105/640), self.view.frame.size.height*(105/1136)))
                         imgView.image = self.genreImg
                         self.window.addSubview(imgView)
-                    }
+                   }
                 }
         }
     }
