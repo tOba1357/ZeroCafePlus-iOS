@@ -25,7 +25,7 @@ class EventView :UIView{
         myEventID = id
         self.backgroundColor = UIColor.whiteColor()
         self.layer.borderColor = UIColor.hexStr("#BABABA", alpha: 1.0).CGColor
-        self.layer.borderWidth = 1.3
+        self.layer.borderWidth = 0.9
         
         let weekdays: Array  = ["閏","日", "月", "火", "水", "木", "金", "土"]
         let startData = getDateTime(startDateString)
@@ -38,7 +38,7 @@ class EventView :UIView{
         titleName.numberOfLines = 2
         titleName.sizeToFit()
         titleName.layer.position = CGPoint(x: self.frame.width/2, y: self.frame.height*(140/335))
-        titleName.font = UIFont.systemFontOfSize(14)
+        titleName.font = UIFont.systemFontOfSize(15)
         titleName.textAlignment = NSTextAlignment.Center
         
         dateName = UILabel(frame: CGRectMake(0,0,self.frame.width*(200/300),self.frame.height*(20/335)))
@@ -96,15 +96,11 @@ class EventView :UIView{
         genreImageView.layer.masksToBounds = true
         genreImageView.layer.cornerRadius = 10.0
         self.addSubview(genreImageView)
-        
     }
     
     func onClickMyButton(sender: UIButton) {
-        
         print("success")
-        
         self.mydelegate?.pushMyButton(myEventID)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
