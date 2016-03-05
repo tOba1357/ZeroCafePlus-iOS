@@ -49,7 +49,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         kitLabel.layer.position.x = screenWidth/3.3
         kitLabel.layer.position.y = screenHeight/15
         kitLabel.text = "工大"
-        kitLabel.font = UIFont.systemFontOfSize(20)
+        kitLabel.font = UIFont.systemFontOfSize(16)
         kitLabel.textColor = UIColor.hexStr("1A1A1A", alpha: 1.0)
         kitView.addSubview(kitLabel)
         
@@ -57,7 +57,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         nonSelectedKitLabel.layer.position.x = screenWidth/3.3
         nonSelectedKitLabel.layer.position.y = screenHeight/15
         nonSelectedKitLabel.text = "工大"
-        nonSelectedKitLabel.font = UIFont.systemFontOfSize(20)
+        nonSelectedKitLabel.font = UIFont.systemFontOfSize(16)
         nonSelectedKitLabel.textColor = UIColor.hexStr("B3B3B3", alpha: 1.0)
         selectedKitView.addSubview(nonSelectedKitLabel)
         
@@ -65,7 +65,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         kuLabel.layer.position.x = screenWidth/3.8
         kuLabel.layer.position.y = screenHeight/15
         kuLabel.text = "金大"
-        kuLabel.font = UIFont.systemFontOfSize(20)
+        kuLabel.font = UIFont.systemFontOfSize(16)
         kuLabel.textColor = UIColor.hexStr("1A1A1A", alpha: 1.0)
         kuView.addSubview(kuLabel)
         
@@ -73,7 +73,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         nonSelectedKuLabel.layer.position.x = screenWidth/3.8
         nonSelectedKuLabel.layer.position.y = screenHeight/15
         nonSelectedKuLabel.text = "金大"
-        nonSelectedKuLabel.font = UIFont.systemFontOfSize(20)
+        nonSelectedKuLabel.font = UIFont.systemFontOfSize(16)
         nonSelectedKuLabel.textColor = UIColor.hexStr("B3B3B3", alpha: 1.0)
         selectedKuView.addSubview(nonSelectedKuLabel)
         
@@ -81,7 +81,7 @@ class FirstViewController: UIViewController, EventViewDelegate {
         favoriteLabel.layer.position.x = screenWidth/5
         favoriteLabel.layer.position.y = screenHeight/15
         favoriteLabel.text = "お気に入り"
-        favoriteLabel.font = UIFont.systemFontOfSize(20)
+        favoriteLabel.font = UIFont.systemFontOfSize(16)
         favoriteLabel.textColor = UIColor.hexStr("1A1A1A", alpha: 1.0)
         favoriteView.addSubview(favoriteLabel)
         
@@ -89,10 +89,10 @@ class FirstViewController: UIViewController, EventViewDelegate {
         nonSelectedFavoriteLabel.layer.position.x = screenWidth/5
         nonSelectedFavoriteLabel.layer.position.y = screenHeight/15
         nonSelectedFavoriteLabel.text = "お気に入り"
-        nonSelectedFavoriteLabel.font = UIFont.systemFontOfSize(20)
+        nonSelectedFavoriteLabel.font = UIFont.systemFontOfSize(16)
         nonSelectedFavoriteLabel.textColor = UIColor.hexStr("B3B3B3", alpha: 1.0)
         selectedFavoriteView.addSubview(nonSelectedFavoriteLabel)
-
+        
         let eventListSVFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         kitVerticalSV = UIScrollView(frame: eventListSVFrame)
         kuVerticalSV = UIScrollView(frame: eventListSVFrame)

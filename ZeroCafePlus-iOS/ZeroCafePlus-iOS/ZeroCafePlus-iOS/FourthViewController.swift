@@ -60,13 +60,6 @@ class ForthViewController: UIViewController, EventViewDelegate {
     var views:[ViewPagerElement2]!
     var getID: Int!
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabView = nil
-        views = nil
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -432,6 +425,27 @@ attribute: NSLayoutAttribute.Top,relatedBy: NSLayoutRelation.Equal,toItem: self.
                     self.joinedVerticalSV.contentOffset = CGPointMake(0, -50)
                     self.joinedVerticalSV.backgroundColor = UIColor.whiteColor()
             }
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if willJoinVerticalSV != nil{
+        removeAllSubviews(willJoinVerticalSV)
+        }
+        if planVerticalSV != nil {
+        removeAllSubviews(planVerticalSV)
+        }
+        if joinedVerticalSV != nil {
+        removeAllSubviews(joinedVerticalSV)
+        }
+    }
+    
+    func removeAllSubviews(parentView: UIView){
+        let subviews = parentView.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
     }
     
     func pushMyButton(myEventID:Int) {

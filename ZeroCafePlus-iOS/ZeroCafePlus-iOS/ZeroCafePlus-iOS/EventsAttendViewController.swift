@@ -426,7 +426,7 @@ class EventsAttendViewController: UIViewController,UINavigationControllerDelegat
                             self.genreImg =  CommonFunction().resizingImage(imageName: "party.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                             
                         } else if self.EventGenre == 3 {
-                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#FF7F00", alpha: 1.0)
+                            self.navigationController?.navigationBar.barTintColor = UIColor.hexStr("#F28831", alpha: 1.0)
                             self.genreImg =  CommonFunction().resizingImage(imageName: "circle.png", w: self.view.frame.size.width*(75/640), h: self.view.frame.size.height*(75/1136))
                             
                         } else if self.EventGenre == 4 {
