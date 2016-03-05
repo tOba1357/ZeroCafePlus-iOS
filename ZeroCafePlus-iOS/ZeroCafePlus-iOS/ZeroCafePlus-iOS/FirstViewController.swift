@@ -227,15 +227,15 @@ class FirstViewController: UIViewController, EventViewDelegate {
                         }
                     }
                     self.kitVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((kitCount + 1) / 2)) * screenHeight * (335/1136) + 153)
-                    self.kitVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.kitVerticalSV.contentOffset = CGPointMake(0, 0)
                     self.kitVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                     
                     self.kuVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((kuCount + 1) / 2) * 212 + 93))
-                    self.kuVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.kuVerticalSV.contentOffset = CGPointMake(0, 0)
                     self.kuVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
                     
                     self.favoriteVerticalSV.contentSize = CGSizeMake(screenWidth, CGFloat(((favoriteCount + 1) / 2) * 212 + 93))
-                    self.favoriteVerticalSV.contentOffset = CGPointMake(0, -50)
+                    self.favoriteVerticalSV.contentOffset = CGPointMake(0, 0)
                     self.favoriteVerticalSV.backgroundColor = UIColor.hexStr("#F0ECE2", alpha: 1.0)
 
                 }else {
